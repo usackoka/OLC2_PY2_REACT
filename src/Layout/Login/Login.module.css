@@ -1,0 +1,35 @@
+/* MP Login page styles */
+.authWrapper {
+  min-height: auto;
+  position: relative;
+}
+
+@media (min-width: 992px) {
+  .authWrapper {
+    min-height: 100vh;
+  }
+}
+
+.authWrapper .authBox {
+  max-width: 400px;
+  width: 90%;
+  margin: 10% 0;
+}
+
+.authWrapper .authBox .logo {
+  text-align: center;
+}
+
+.authWrapper #recoverform {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .authWrapper {
+    min-height: auto;
+  }
+}
+
+.authWrapper .authBox .logo, .authWrapper .authBox .logo span .rounded-circle {
+  margin-bottom: 1em;
+}

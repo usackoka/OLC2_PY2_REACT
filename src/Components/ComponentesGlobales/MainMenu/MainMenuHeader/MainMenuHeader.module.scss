@@ -1,0 +1,22 @@
+// Styles for Main Menu
+// get MP Global Variables & Helpers
+@import "../../../../assets/scss/_variables.scss";
+
+//Left side menu branding header --------------
+.navBarHeader{
+  margin-bottom: 2rem;
+  padding: 1.25rem 0;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+    }
+  }
+
+.logoText{
+  width: 100%;
+  padding-left: 1.25rem !important;
+  text-align: center;
+}
+
+.togglerIcon{color: $mp-white; font-size: $mp-font-size-small;}

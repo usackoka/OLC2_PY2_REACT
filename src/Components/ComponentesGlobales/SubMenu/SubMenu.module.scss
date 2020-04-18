@@ -1,0 +1,16 @@
+/* sub menu */
+
+// get MP Global Variables & Helpers
+@import "../../../assets/scss/_variables.scss";
+
+.rightColNav{
+  text-align: right;
+  > a{
+    color: $mp-dark-grey;
+    margin-bottom: .5em;
+  }
+}
+
+.navItemName{
+  margin-right: 1em;
+}

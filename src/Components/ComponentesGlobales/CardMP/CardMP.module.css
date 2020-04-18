@@ -1,0 +1,75 @@
+.cardMP,
+.cardMPFooter.plainFooter {
+  -webkit-border-top-right-radius: 0;
+  -webkit-border-bottom-right-radius: 0.5rem;
+  -webkit-border-bottom-left-radius: 0.5rem;
+  -webkit-border-top-left-radius: 0;
+  -moz-border-radius-topright: 0;
+  -moz-border-radius-bottomright: 0.5rem;
+  -moz-border-radius-bottomleft: 0.5rem;
+  -moz-border-radius-topleft: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  border-top-left-radius: 0;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+
+.cardMP {
+  -webkit-box-shadow: 2px 2px 4px 0px rgba(94, 92, 94, 0.1);
+  -moz-box-shadow: 2px 2px 4px 0px rgba(94, 92, 94, 0.1);
+  box-shadow: 2px 2px 4px 0px rgba(94, 92, 94, 0.1);
+}
+
+.cardMPHeader {
+  background: #fff;
+  color: #aeaeae;
+  font-weight: 700;
+}
+
+.cardMPHeader .navItem {
+  font-weight: 400;
+}
+
+.cardMPHeader .navItem .navLink {
+  color: #b4b5b5;
+  padding: 0 .5rem 0 0;
+}
+
+.cardMPHeader .navItem .navLink:after {
+  content: " | ";
+  color: #6a7a8c;
+  float: right;
+  margin: 0 0 0 .5rem;
+}
+
+.cardMPHeader .navItem .navLink.active,
+.cardMPHeader .navItem .show > .navLink {
+  color: #4a729e;
+  background-color: transparent;
+}
+
+.cardMPHeader .navItem:last-child .navLink:after {
+  content: "";
+}
+
+.cardMPBody h4.cardMPTitle {
+  font-size: 1.572rem;
+  font-weight: 500;
+}
+
+.cardMPBody .btn-secondary {
+  padding: .5rem 2rem;
+}
+
+.cardMPFooter {
+  font-size: 0.9rem;
+}
+
+.cardMPFooter.plainFooter {
+  background: #fff;
+  border-top: none;
+  text-align: center;
+}

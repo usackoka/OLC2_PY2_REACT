@@ -1,7 +1,5 @@
 import React, { Fragment } from "react";
-import styles from "./Home.module.scss";
-import { Col, Row, Navbar, Nav, Button, Form, FormControl, Container } from "react-bootstrap";
-import { Route } from "react-router-dom";
+import { Navbar, Container } from "react-bootstrap";
 import ViewHome from "../../views/ViewHome/ViewHome";
 
 const homeLayout = props => {

@@ -1,10 +1,11 @@
 import React, { Fragment, useState } from "react";
 import { Tabs, Tab, Row, Col, Button } from "react-bootstrap";
 import JSharpCompiler from "../../Components/JSharpCompiler" ;
+import Code3DExecution from "../../Components/Code3DExecution"
 
 const Index = (props) => {
 
-  const [key, setKey] = useState('trad');
+  const [key, setKey] = useState('exec');
 
   return (
     <Fragment>
@@ -12,7 +13,6 @@ const Index = (props) => {
       <br></br>
       <Tabs
         id="controlled-tab-example"
-        bg = "dark"
         activeKey={key}
         onSelect={(k) => setKey(k)}
       >
@@ -22,6 +22,7 @@ const Index = (props) => {
         </Tab>
         <Tab eventKey="exec" title="3D Execution">
           <br></br>
+          <Code3DExecution/>
         </Tab>
       </Tabs>
 

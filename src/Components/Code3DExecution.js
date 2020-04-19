@@ -8,24 +8,14 @@ const Index = (props) => {
   return (
     <Fragment>
       <Row>
-        <Col>
-          <CodeMirror
-            options={{
-              mode: "javascript",
-              theme: "monokai",
-              lineNumbers: true,
-              keymap: "sublime",
-            }}
-            onChange={(editor, data, value) => {}}
-          />
-        </Col>
-
         <Col xs="auto">
           <Button variant="success" fixed="bottom">
-            {"Traducir"}
+            {"Ejecutar"}
           </Button>
         </Col>
+      </Row>
 
+      <Row>
         <Col>
           <CodeMirror
             options={{
@@ -38,23 +28,18 @@ const Index = (props) => {
           />
         </Col>
       </Row>
-      
-      <br></br>
-      {/*======================== TABLAS DE RESULTADOS ===============================*/}
+        
+    <br></br>
       <Row>
         <Col>
-          <Tabs
-            id="controlled-tab-example"
-            activeKey={key}
-            onSelect={(k) => setKey(k)}
-          >
-            <Tab eventKey="tabla" title="Tabla de Símbolos">
-              <br></br>
-            </Tab>
-            <Tab eventKey="errores" title="Tabla de Errores">
-              <br></br>
-            </Tab>
-          </Tabs>
+          <CodeMirror
+            options={{
+              theme: "material",
+              lineNumbers: true,
+              keymap: "sublime",
+            }}
+            onChange={(editor, data, value) => {}}
+          />
         </Col>
       </Row>
     </Fragment>

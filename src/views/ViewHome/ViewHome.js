@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
-import { Tabs, Tab, Row, Col, Button } from "react-bootstrap";
+import { Tabs, Tab } from "react-bootstrap";
 import JSharpCompiler from "../../Components/JSharpCompiler" ;
-import Code3DExecution from "../../Components/Code3DExecution"
+import Code3DExecution from "../../Components/Code3DExecution/Code3DExecution"
 
 const Index = (props) => {
 
@@ -25,7 +25,7 @@ const Index = (props) => {
           <Code3DExecution/>
         </Tab>
       </Tabs>
-
+    
     </Fragment>
   );
 };

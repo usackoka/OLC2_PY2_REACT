@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { Tabs, Tab } from "react-bootstrap";
-import JSharpCompiler from "../../Components/JSharpCompiler" ;
+import JSharpCompiler from "../../Components/JSharpCompiler/JSharpCompiler" ;
 import Code3DExecution from "../../Components/Code3DExecution/Code3DExecution"
 
 const Index = (props) => {

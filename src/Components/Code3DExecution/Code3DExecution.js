@@ -4,15 +4,13 @@ import { Row, Col, Button, Container } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 
 const Index = (props) => {
-  const valoresStack = [
-    {
-      index: 1,
-      value: 1,
-    },
-    {
-      index: 2,
-      value: 2,
-    },
+  var txtEntrada;
+
+  var valoresStack = [
+  ];
+
+  var valoresHeap = [
+
   ];
 
   const columnsStack = [
@@ -41,11 +39,15 @@ const Index = (props) => {
     },
   ];
 
+  const clickEjecutar = async e => {
+    console.log(txtEntrada.getValue());
+  };
+
   return (
     <Container fluid>
       <Row>
         <Col xs="auto">
-          <Button variant="success" fixed="bottom">
+          <Button variant="success" fixed="bottom" onClick={clickEjecutar}>
             {"Ejecutar"}
           </Button>
         </Col>
@@ -54,45 +56,36 @@ const Index = (props) => {
       <br></br>
       <Row>
         <Col md="6">
-          <CodeMirror className="test"
+          <CodeMirror
+            className="test"
+            editorDidMount={(editor) => {
+              txtEntrada = editor;
+            }}
             options={{
               mode: "pascal",
               theme: "material",
               lineNumbers: true,
               keymap: "sublime",
-              
             }}
             onChange={(editor, data, value) => {}}
           />
         </Col>
         {/*=================== tablas heap y stack ======================*/}
         <Col>
-        <h3>Stack</h3>
+          <h3>Stack</h3>
           <BootstrapTable
             keyField="tbStack"
             data={valoresStack}
             columns={columnsStack}
-            striped
-            hover
-            condensed
-            insertRow
-            deleteRow
-            search
           ></BootstrapTable>
         </Col>
         <Col>
-        <h3>Heap</h3>
-            <BootstrapTable
-                keyField="tbStack"
-                data={valoresStack}
-                columns={columnsHeap}
-                striped
-                hover
-                condensed
-                insertRow
-                deleteRow
-                search
-            ></BootstrapTable>
+          <h3>Heap</h3>
+          <BootstrapTable
+            keyField="tbStack"
+            data={valoresHeap}
+            columns={columnsHeap}
+          ></BootstrapTable>
         </Col>
       </Row>
 

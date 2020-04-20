@@ -90,7 +90,8 @@ export class AST {
 
         try {
             this.pilaRetornos.push(this.lineaActual);
-            //this.lineaActual = this.etiquetas.get(idCall);
+            const c = this.etiquetas.get(idCall);
+            this.lineaActual = c == undefined?0:c;
         } catch (error) {
             this.lineaActual ++;
             console.log(error);
@@ -101,7 +102,8 @@ export class AST {
         if(!this.etiquetas.has(idETQ)){
             console.log("No se encontró la etiqueta: "+idETQ);
         }
-        //this.lineaActual = this.etiquetas.get(idETQ);
+        const c = this.etiquetas.get(idETQ);
+        this.lineaActual = c == undefined? 0:c;
     }
 
     public getStack(index:number):number{
@@ -136,16 +138,18 @@ export class AST {
     public getTemporal(id:string):number{
         id = id.toLowerCase();
         if(this.temporales.has(id)){
-            //return this.temporales.get(id);
+            const c = this.temporales.get(id);
+            return c == undefined?0:c;
         }else{
             console.error("No existe el temporal: "+id);
+            return 0;
         }
-        return 0;
     }   
   
     public ejecutarRet(){ 
         if(this.pilaRetornos.length>0){
-            //this.lineaActual = this.pilaRetornos.pop();
+            const c = this.pilaRetornos.pop();
+            this.lineaActual = c == undefined?0:c;
         }
     } 
 

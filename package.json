@@ -33,11 +33,11 @@
     "typescript": "^3.8.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start && tsc -w",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "jison": "jison src/interprete/interprete.jison && move interprete.js src/interprete"
+    "jison": "jison src/interprete/interprete.jison && move .\\interprete.js .\\src\\interprete\\"
   },
   "eslintConfig": {
     "extends": "react-app"

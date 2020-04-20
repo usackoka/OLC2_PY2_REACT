@@ -3,6 +3,7 @@ import { UnControlled as CodeMirror } from "react-codemirror2";
 import { Row, Col, Button, Container } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 
+
 const Index = (props) => {
   var txtEntrada;
 
@@ -10,7 +11,6 @@ const Index = (props) => {
   ];
 
   var valoresHeap = [
-
   ];
 
   const columnsStack = [
@@ -40,6 +40,7 @@ const Index = (props) => {
   ];
 
   const clickEjecutar = async e => {
+    if(!txtEntrada) return null;
     console.log(txtEntrada.getValue());
   };
 
@@ -67,7 +68,9 @@ const Index = (props) => {
               lineNumbers: true,
               keymap: "sublime",
             }}
-            onChange={(editor, data, value) => {}}
+            onChange={(editor, data, value) => {
+              txtEntrada = txtEntrada?txtEntrada:editor;
+            }}
           />
         </Col>
         {/*=================== tablas heap y stack ======================*/}

@@ -42,8 +42,8 @@ export class Asignacion extends Nodo4D{
                 break;
             default:
                 console.log("NO EXISTE EL OPERADOR: "+this.operador+" ASIGNACION.TS");
-                return null;
         }
+        return -1;
     }
 
     public IGUAL(arbol:AST){

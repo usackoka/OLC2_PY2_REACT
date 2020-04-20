@@ -13,7 +13,7 @@ export class JMP extends Nodo4D{
     
     getValor(arbol:AST): number {
         arbol.ejecutarETQ(this.idETQ);
-        return null;
+        return -1;
     }
 
     getTraduccion(arbol:AST): string {

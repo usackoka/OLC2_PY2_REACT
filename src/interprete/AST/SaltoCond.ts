@@ -55,7 +55,7 @@ export class SaltoCond extends Nodo4D {
                 }
                 break;
         }
-        return null;
+        return -1;
     }
 
     public getTraduccion(arbol: AST): string {
@@ -86,6 +86,6 @@ export class SaltoCond extends Nodo4D {
                 arbol.addTraduccion("JLE " + this.idETQ + "\n");
                 return "";
         }
-        return null;
+        return "";
     }
 }

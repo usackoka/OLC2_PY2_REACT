@@ -8,12 +8,11 @@ export class Primitivo extends Nodo4D{
 
     constructor(fila:number, columna:number, valorString:string, valorNumber:number) {
         super();
+        this.valorNumber = -1;
         if(valorString==""){
             this.valorNumber = valorNumber;
-            this.valorString = "";
-        }else{
-            this.valorString = valorString;
         }
+        this.valorString = valorString;
         this.fila = fila;
         this.columna = columna;
     }

@@ -14,7 +14,7 @@ export class ETQ4D extends Nodo4D{
     }
 
     getValor(arbol:AST):number{
-        return null;
+        return -1;
     } 
 
     getTraduccion(arbol:AST):string{ 

@@ -32,7 +32,7 @@ export class Print extends Nodo4D{
                 break;
         }
         arbol.mensajes.push(x);
-        return null;
+        return -1;
     }
 
     public getTraduccion(arbol:AST):string{

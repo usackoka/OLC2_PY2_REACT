@@ -13,7 +13,7 @@ export class R4D extends Nodo4D{
     
     getValor(arbol:AST): number {
         arbol.ejecutarRet();
-        return null;
+        return -1;
     }
 
     getTraduccion(arbol:AST): string {

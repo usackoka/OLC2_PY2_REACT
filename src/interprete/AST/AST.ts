@@ -17,32 +17,14 @@ export class AST {
     lineaActual:number;
     pilaRetornos:Array<number>;
     ignorarInstrucciones:boolean;
-
-    //================ variables debugger
-    pausarEjecucion:boolean;
-    lineaToCursor:number;
-    toCursor:boolean;
-    stop:boolean;
-    next:boolean;
-    lineaEjecutando:Number;
     //===================================
-
-    //========== variables chapus del debugger
-    idsTemporales:Array<string>;
-    valoresTemporales:Array<number>;
-    //========================================
 
     //============== variables traduccion assembler =
     traduccion:string;
+    temporalesAssembler:Array<string>;
     //==============================================
 
     public constructor() {
-        //=================== inicializacion de variables debugger
-        this.lineaToCursor = 0;
-        this.toCursor = false;
-        this.stop = false;
-        this.pausarEjecucion = false;
-        this.next = false;
         //========================================================
         this.nodos = [];
         this.mensajes = [];
@@ -52,12 +34,7 @@ export class AST {
         this.stack = [];
         this.ignorarInstrucciones = false;
         this.heap = [];
-        this.lineaActual = 0;   
-        this.lineaEjecutando = 0; 
-
-        //======= chapus
-        this.valoresTemporales = [];
-        this.idsTemporales = [];
+        this.lineaActual = 0;
 
         //inicializo P Y H
         this.temporales.set("p",0);
@@ -65,6 +42,7 @@ export class AST {
         
         //====================
         this.traduccion = "";
+        this.temporalesAssembler = [];
     }
 
     public ejecutar():void {
@@ -83,8 +61,6 @@ export class AST {
         //ejecuto top down declaraciones y llamadas
         while (this.lineaActual < this.nodos.length) {
             let nodo:Nodo4D = this.nodos[this.lineaActual];
-
-            this.lineaEjecutando = nodo.fila;
             
             if(nodo instanceof ETQ4D){
                 if((<ETQ4D>nodo).proc){
@@ -100,47 +76,11 @@ export class AST {
                 this.lineaActual ++;
             }
             else{
-                this.validarDebugger(nodo.fila);
                 nodo.getValor(this);
                 this.lineaActual++;
-                if(this.pausarEjecucion){
-                    break;
-                }
             }
         }
-        this.almacenarTemporales(); //unicamente para este tipo TypeScript ya que no me dejaba ver el map del lado del cliente
     }
-
-    public validarDebugger(linea:Number){
-        //pregunto si le dio stop
-        if(this.stop){
-            return;
-        }
-
-        //si viene next
-        if(this.next){
-            this.pausarEjecucion = true;
-            this.next = false; 
-        }  
-  
-        //si viene run to cursor
-        if(this.toCursor && linea==this.lineaToCursor){
-            this.pausarEjecucion = true;
-            this.toCursor = false; 
-        } 
-    } 
-
-    public almacenarTemporales(){ 
-        this.valoresTemporales = [];
-        this.idsTemporales = [];
-
-        for (let entry of Array.from(this.temporales.entries())) {
-            let key = entry[0];
-            let value = entry[1]; 
-            this.idsTemporales.push(key);      
-            this.valoresTemporales.push(value);
-        }    
-    }  
 
     public ejecutarCall(idCall:string){
         if(!this.etiquetas.has(idCall)){
@@ -149,9 +89,8 @@ export class AST {
         }
 
         try {
-            let lineaMovible:number = this.etiquetas.get(idCall);
             this.pilaRetornos.push(this.lineaActual);
-            this.lineaActual = lineaMovible;
+            //this.lineaActual = this.etiquetas.get(idCall);
         } catch (error) {
             this.lineaActual ++;
             console.log(error);
@@ -162,7 +101,7 @@ export class AST {
         if(!this.etiquetas.has(idETQ)){
             console.log("No se encontró la etiqueta: "+idETQ);
         }
-        this.lineaActual = this.etiquetas.get(idETQ);
+        //this.lineaActual = this.etiquetas.get(idETQ);
     }
 
     public getStack(index:number):number{
@@ -197,16 +136,16 @@ export class AST {
     public getTemporal(id:string):number{
         id = id.toLowerCase();
         if(this.temporales.has(id)){
-            return this.temporales.get(id);
+            //return this.temporales.get(id);
         }else{
             console.error("No existe el temporal: "+id);
-            return 0;
         }
+        return 0;
     }   
   
     public ejecutarRet(){ 
         if(this.pilaRetornos.length>0){
-            this.lineaActual = this.pilaRetornos.pop();
+            //this.lineaActual = this.pilaRetornos.pop();
         }
     } 
 
@@ -251,8 +190,6 @@ export class AST {
     public addTraduccion(trad:string){
         this.traduccion += trad+"\n";
     }
-
-    temporalesAssembler:Array<string>;
 
     public addTemporalASM(temporal:string){
         if(this.temporalesAssembler.indexOf(temporal)==-1){

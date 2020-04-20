@@ -13,7 +13,7 @@ export class Call4D extends Nodo4D{
     
     getValor(arbol:AST):number { 
         arbol.ejecutarCall(this.idCall);
-        return null;
+        return -1;
     }
 
     getTraduccion(arbol:AST):string {

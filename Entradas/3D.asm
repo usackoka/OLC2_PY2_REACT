@@ -46,3 +46,63 @@ l3:
     - Tabla de simbolos
     - Reporte de AST 
     - Reporte heap y stack 
+
+
+if x != 1 goto Lf
+if y != 1 goto Lf
+goto Lv
+Lf:
+tOutput = 0
+goto Lx
+Lv:
+tOutput = 1
+Lx:
+
+String Lf = getNextEtq();
+String Lv = getNextEtq();
+String lx = getNextEtq();
+String tOutput = getNextTemp();
+
+print("if "+E1.result+" != 1 goto "+Lf);
+print("if "+E2.result+" != 1 goto "+Lf);
+print("goto "+Lv);
+print(Lf+":");
+print(tOutput+" = 0");
+print("goto "+Lx);
+print(Lv+":");
+print(tOutput+" = 1");
+print(Lx+":");
+
+LOGICA.result = tOutput;
+
+if x == 1 goto Lv
+if y == 1 goto Lv
+Lf:
+tOutput = 0
+goto Lx
+Lv:
+tOutput = 1
+Lx:
+
+String Lf = getNextEtq();
+String Lv = getNextEtq();
+String lx = getNextEtq();
+String tOutput = getNextTemp();
+
+print("if "+E1.result+" == 1 goto "+Lv);
+print("if "+E2.result+" == 1 goto "+Lv);
+print(Lf+":");
+print(tOutput+" = 0");
+print("goto "+Lx);
+print(Lv+":");
+print(tOutput+" = 1");
+print(Lx+":");
+
+LOGICA.result = tOutput;
+
+--- DO while
+
+String Lv = getNextEtq();
+print(Lv+":");
+
+print("if "+E.result+" == 1 goto "+Lv);

@@ -43,6 +43,7 @@ const Index = (props) => {
   ];
 
   const clickEjecutar = async e => {
+    console.log("Ejecutando interprete")
     if(!txtEntrada) return null;
 
     interprete.ast = new AST();
@@ -53,7 +54,6 @@ const Index = (props) => {
       salida += element.toString();
     });
     txtSalida.setValue(salida);
-    console.log(salida);
   };
 
   return (

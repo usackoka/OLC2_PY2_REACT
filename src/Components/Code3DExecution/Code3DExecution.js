@@ -117,12 +117,14 @@ const Index = (props) => {
               value={txtSalida.value}
               label="Salida 3D"
               multiline
-              rows={5}
+              rows={10}
               fullWidth
               variant="outlined"
             />
         </Col>
       </Row>
+      <br></br>
+      <br></br>
     </Container>
   );
 };

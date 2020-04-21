@@ -49,12 +49,17 @@ l1:
 if (1==c) goto l3;
 goto l4;
 l3:
-print(%c,1);
+print("%i",1);
 goto l5;
 l2:
 l4:
-print(%c,0);
+print("%i",0);
 l5:
+
+call test;
+proc test begin
+print("%i",50);
+end test;
 
 ------------------------------------
 if(a*b+y>z && a!=0){
@@ -114,3 +119,21 @@ public int y(){
     }
     return 0;
 }
+
+----------------------------------------
+print("[")
+i = 0
+L1:
+if i < size goto L2
+goto l3
+l2:
+print(a[i])
+i = i + 1
+goto L1
+l3:
+print("]")
+
+p = 0;
+stack[p] = 45;
+t1 = stack[p];
+print("%i",t1);

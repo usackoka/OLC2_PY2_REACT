@@ -53,6 +53,8 @@ const Index = (props) => {
     ast.mensajes.forEach(element => {
       salida += element.toString();
     });
+
+    if(!txtSalida) return null;
     txtSalida.setValue(salida);
   };
 

@@ -10,13 +10,13 @@ digito = [0-9]
 %%
 \s+                   /* skip whitespace */
 //============================== ESTADOS =================================
-"/*"                {this.begin("COMENT_MULTI");}
-<COMENT_MULTI>"*/"  %{this.begin('INITIAL');%}
+"#*"                {this.begin("COMENT_MULTI");}
+<COMENT_MULTI>"*#"  %{this.begin('INITIAL');%}
 <COMENT_MULTI>.                {}
 <COMENT_MULTI>[\t\r\n\f]      {}
 //-----------------------------------------------------------------------
 //-------------------------- Comentario multilinea ---------------------
-"//"                {this.begin("COMENT_SIMPLE");}
+"#"                {this.begin("COMENT_SIMPLE");}
 <COMENT_SIMPLE>[\r\n]   %{this.begin('INITIAL');%}
 <COMENT_SIMPLE>.     {}
 <COMENT_SIMPLE>[\t\f]      {}
@@ -27,18 +27,13 @@ digito = [0-9]
 //----Reservadas----->
 "stack"                                           return 'res_stack'
 "heap"                                            return 'res_heap'
-"jne"                                             return 'res_jne'
-"je"                                              return 'res_je'
-"jg"                                              return 'res_jg'
-"jl"                                              return 'res_jl'
-"jge"                                             return 'res_jge'
-"jle"                                             return 'res_jle'
-"jmp"                                             return 'res_jmp'
+"if"                                                return 'res_if'
+"goto"                                             return 'res_goto'
 "print"                                           return 'res_print'
+"proc"                                           return 'res_proc'
 "begin"                                           return 'res_begin'
 "end"                                             return 'res_end'
 "call"                                            return 'res_call'
-"$_in_value"                                      return 'res_in_value'
 "%c"                                              return 'tipoC'
 "%e"                                              return 'tipoE'
 "%d"                                              return 'tipoD'
@@ -47,8 +42,11 @@ digito = [0-9]
 {digito}+"."{digito}+                             return 'double'
 {digito}+                                         return 'int'
 //-----------------------------------------------------------------------
+"["                                               return '['
+"]"                                               return ']'
 ","                                               return ','
 ":"                                               return ':'
+":"                                               return ';'
 "("                                               return '('
 ")"                                               return ')'
 "%"                                               return '%'
@@ -57,6 +55,12 @@ digito = [0-9]
 "*"                                               return '*'
 "/"                                               return '/'
 "="                                               return '='
+"=="                                              return '=='
+"!="                                                return '!='
+">"                                                 return '>'
+">="                                                 return '>='
+"<"                                                 return '<'
+"<="                                                 return '<='
 //-----------------------------------------------------------------------
 <<EOF>>                                           return 'EOF'
 . %{console.log("FILA: " + (yylloc.first_line) + " COL: " + (yylloc.first_column) + " Lexico " + "Caracter Invalido cerca de: \""+ yytext + "\""); %}
@@ -87,30 +91,30 @@ S : LIST_BLOCK EOF{
 ;
 
 LIST_BLOCK : LIST_BLOCK BLOCK
-    | BLOCK
+    | BLOCK 
 ;
 
 BLOCK : PROCEDURE_BEGIN
     | PROCEDURE_END
-    | ASIGNACION
-    | NATIVAS
+    | ASIGNACION ';'
+    | NATIVAS ';'
     | ETQ
     | SALTO_CONDICIONAL
     | SALTO_INCONDICIONAL
 ;
 
-PROCEDURE_BEGIN : res_begin ',' ',' ',' id {
-    exports.ast.addNewETQ($5,@1.first_line, @1.first_column, true);
+PROCEDURE_BEGIN : res_proc id res_begin {
+    exports.ast.addNewETQ($2,@1.first_line, @1.first_column, true);
 }
 ;
 
-PROCEDURE_END : res_end ',' ',' ',' id {
-    exports.ast.addNewR4D($5,@1.first_line, @1.first_column);
+PROCEDURE_END : res_end id {
+    exports.ast.addNewR4D($2,@1.first_line, @1.first_column);
 }
 ;
 
 /*
-PROCEDURE : res_begin ',' ',' ',' id
+PROCEDURE : res_proc ',' ',' ',' id
             LIST_BLOCK
             res_end ',' ',' ',' id
             {
@@ -121,32 +125,35 @@ PROCEDURE : res_begin ',' ',' ',' id
 ;
 */
 
-ASIGNACION : OPERADOR ',' PUEDE_VALOR PUEDE_VALOR DIRECCION {
-    exports.ast.addNewAsignacion($1,$3,$4,$5,@2.first_line,@2.first_column);
+ASIGNACION : res_stack '[' PRIMITIVO ']' '=' PRIMITIVO {
+        exports.ast.addNewAsignacion("stack","=",$3,$6);
+}
+    | res_heap '[' PRIMITIVO ']' '=' PRIMITIVO {
+        exports.ast.addNewAsignacion("heap","=",$3,$6);
+}
+    | id '=' res_heap '[' PRIMITIVO ']' {
+        exports.ast.addNewAsignacion($1,"=","heap",$5);
+}
+    | id '=' res_stack '[' PRIMITIVO ']' {
+        exports.ast.addNewAsignacion($1,"=","stack",$5);
+}
+    | id '=' PRIMITIVO {
+        exports.ast.addNewAsignacion($1,"=",$3);
+}
+    | id '=' PRIMITIVO OPERADOR PRIMITIVO {
+        exports.ast.addNewAsignacion($1,$4,$3,$5);
 }
 ;
 
-OPERADOR : '+' {$$="+";} | '-' {$$="-";} | '*' {$$="*";} | '%' {$$="%";} | '/' {$$="/";} | '=' {$$="=";}
-;
-
-DIRECCION : res_stack {$$="stack";}
-    | res_heap {$$="heap";}
-    | id {$$=$1;}
-;
-
-PUEDE_VALOR : PRIMITIVO ',' {$$=$1;}
-    | res_stack ',' {$$="stack";}
-    | res_heap ','{$$="heap";}
-    | ',' {$$ = "";}
+OPERADOR : '+' {$$="+";} | '-' {$$="-";} | '*' {$$="*";} | '%' {$$="%";} | '/' {$$="/";}
 ;
 
 NATIVAS : res_print '(' PARAMETRO ',' PRIMITIVO ')'{
     exports.ast.addNewPrint($3,$5,@1.first_line,@1.first_column);
 }
-    | res_call ',' ',' ',' id{
-        exports.ast.addNewCall4D($5,@1.first_line,@1.first_column);
+    | res_call id{
+        exports.ast.addNewCall4D($2,@1.first_line,@1.first_column);
     }
-    | res_call ',' ',' ',' res_in_value
 ;
 
 PARAMETRO : tipoC{
@@ -188,17 +195,17 @@ PRIMITIVO : int{
     }
 ;
 
-SALTO_CONDICIONAL : SALTO ',' PRIMITIVO ',' PRIMITIVO ',' id
+SALTO_CONDICIONAL : res_if '(' PRIMITIVO SALTO PRIMITIVO ')' res_goto id
 {
-    exports.ast.addNewCondicional($1,$3,$5,$7,@2.first_line, @2.first_column);
+    exports.ast.addNewCondicional($4,$3,$5,$8,@2.first_line, @2.first_column);
 }
 ;
 
-SALTO : res_je {$$="je";} | res_jne {$$="jne";} | res_jg {$$="jg";} | res_jl {$$="jl";} | res_jge {$$="jge";} | res_jle {$$="jle";}
+SALTO : '==' {$$="==";} | '!=' {$$="!=";} | '>' {$$=">";} | '<' {$$="<";} | '>=' {$$=">=";} | '<=' {$$="<=";}
 ;
 
-SALTO_INCONDICIONAL : res_jmp ',' ',' ',' id {
-    exports.ast.addNewJMP($5,@1.first_line, @1.first_column);
+SALTO_INCONDICIONAL : res_goto id {
+    exports.ast.addNewJMP($2,@1.first_line, @1.first_column);
 }
 ;
 

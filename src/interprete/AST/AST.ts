@@ -175,7 +175,7 @@ export class AST {
         this.nodos.push(new Print(cadena, expresion,fila, columna));
     }
 
-    public addNewAsignacion(operador:string, valor1:Object, valor2:Object, direccion:string, fila:number, columna:number){
+    public addNewAsignacion(operador:string, valor1:string, valor2:Object, direccion:object, fila:number, columna:number){
         this.nodos.push(new Asignacion(operador, valor1, valor2, direccion, fila, columna));
     }
 

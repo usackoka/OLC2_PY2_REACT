@@ -24,32 +24,32 @@ export class SaltoCond extends Nodo4D {
         //console.log(this.salto+" "+number1+" == "+number2);
 
         switch (this.salto) {
-            case "je":
+            case "==":
                 if (number1 == number2) {
                     arbol.ejecutarETQ(this.idETQ);
                 }
                 break;
-            case "jne":
+            case "!=":
                 if (number1 != number2) {
                     arbol.ejecutarETQ(this.idETQ);
                 }
                 break;
-            case "jg":
+            case ">":
                 if (number1 > number2) {
                     arbol.ejecutarETQ(this.idETQ);
                 }
                 break;
-            case "jl":
+            case "<":
                 if (number1 < number2) {
                     arbol.ejecutarETQ(this.idETQ);
                 }
                 break;
-            case "jge":
+            case ">=":
                 if (number1 >= number2) {
                     arbol.ejecutarETQ(this.idETQ);
                 }
                 break;
-            case "jle":
+            case "<=":
                 if (number1 <= number2) {
                     arbol.ejecutarETQ(this.idETQ);
                 }

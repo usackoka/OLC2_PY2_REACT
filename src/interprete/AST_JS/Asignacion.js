@@ -16,7 +16,7 @@ exports.__esModule = true;
 var Nodo4D_1 = require("./Nodo4D");
 var Asignacion = /** @class */ (function (_super) {
     __extends(Asignacion, _super);
-    function Asignacion(operador, valor1, valor2, direccion, fila, columna) {
+    function Asignacion(direccion, operador, valor1, valor2, fila, columna) {
         var _this = _super.call(this) || this;
         _this.fila = fila;
         _this.columna = columna;
@@ -63,6 +63,18 @@ var Asignacion = /** @class */ (function (_super) {
             arbol.setTemporal(this.direccion, this.getIndexStruct(arbol));
         }
     };
+    Asignacion.prototype.getIndexStruct = function (arbol) {
+        if (this.valor1.toString() === "stack") {
+            return arbol.getStack(this.getValorStruct(arbol));
+        }
+        else if (this.valor1.toString() === "heap") {
+            return arbol.getHeap(this.getValorStruct(arbol));
+        }
+        return this.valor1.getValor(arbol);
+    };
+    Asignacion.prototype.getValorStruct = function (arbol) {
+        return this.valor2.getValor(arbol);
+    };
     Asignacion.prototype.SUB = function (arbol) {
         var number1 = this.valor1.getValor(arbol);
         var number2 = this.valor2.getValor(arbol);
@@ -92,18 +104,6 @@ var Asignacion = /** @class */ (function (_super) {
         var number2 = this.valor2.getValor(arbol);
         var result = number1 * number2;
         arbol.setTemporal(this.direccion, result);
-    };
-    Asignacion.prototype.getIndexStruct = function (arbol) {
-        if (this.valor1.toString() == "stack") {
-            return arbol.getStack(this.getValorStruct(arbol));
-        }
-        else if (this.valor1.toString() == "heap") {
-            return arbol.getHeap(this.getValorStruct(arbol));
-        }
-        return this.valor1.getValor(arbol);
-    };
-    Asignacion.prototype.getValorStruct = function (arbol) {
-        return this.valor2.getValor(arbol);
     };
     //======================== TRADUCCION ASSEMBLER =================================
     Asignacion.prototype.getTraduccion = function (arbol) {

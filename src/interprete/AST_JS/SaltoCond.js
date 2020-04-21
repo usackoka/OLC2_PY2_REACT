@@ -31,32 +31,32 @@ var SaltoCond = /** @class */ (function (_super) {
         var number2 = this.valor2.getValor(arbol);
         //console.log(this.salto+" "+number1+" == "+number2);
         switch (this.salto) {
-            case "je":
+            case "==":
                 if (number1 == number2) {
                     arbol.ejecutarETQ(this.idETQ);
                 }
                 break;
-            case "jne":
+            case "!=":
                 if (number1 != number2) {
                     arbol.ejecutarETQ(this.idETQ);
                 }
                 break;
-            case "jg":
+            case ">":
                 if (number1 > number2) {
                     arbol.ejecutarETQ(this.idETQ);
                 }
                 break;
-            case "jl":
+            case "<":
                 if (number1 < number2) {
                     arbol.ejecutarETQ(this.idETQ);
                 }
                 break;
-            case "jge":
+            case ">=":
                 if (number1 >= number2) {
                     arbol.ejecutarETQ(this.idETQ);
                 }
                 break;
-            case "jle":
+            case "<=":
                 if (number1 <= number2) {
                     arbol.ejecutarETQ(this.idETQ);
                 }

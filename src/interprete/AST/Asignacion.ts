@@ -9,7 +9,7 @@ export class Asignacion extends Nodo4D{
     valor2:Object;
     direccion:string;
 
-    public constructor(operador:string, valor1:Object, valor2:Object, direccion:string,
+    public constructor(direccion:string, operador:string, valor1:Object, valor2:Object,
         fila:number, columna:number){
         super();
         this.fila = fila;
@@ -58,6 +58,19 @@ export class Asignacion extends Nodo4D{
         }
     }
 
+    public getIndexStruct(arbol:AST):number{
+        if(this.valor1.toString() === "stack"){
+            return arbol.getStack(this.getValorStruct(arbol));
+        }else if(this.valor1.toString() === "heap"){
+            return arbol.getHeap(this.getValorStruct(arbol));
+        }
+        return (<Nodo4D>this.valor1).getValor(arbol);
+    }
+
+    public getValorStruct(arbol:AST):number{
+        return (<Nodo4D>this.valor2).getValor(arbol);
+    }
+
     public SUB(arbol:AST){
         let number1:number = (<Nodo4D>this.valor1).getValor(arbol);
         let number2:number = (<Nodo4D>this.valor2).getValor(arbol);
@@ -91,19 +104,6 @@ export class Asignacion extends Nodo4D{
         let number2:number = (<Nodo4D>this.valor2).getValor(arbol);
         let result:number = number1*number2;
         arbol.setTemporal(this.direccion,result);
-    }
-
-    public getIndexStruct(arbol:AST):number{
-        if(this.valor1.toString() === "stack"){
-            return arbol.getStack(this.getValorStruct(arbol));
-        }else if(this.valor1.toString() === "heap"){
-            return arbol.getHeap(this.getValorStruct(arbol));
-        }
-        return (<Nodo4D>this.valor1).getValor(arbol);
-    }
-
-    public getValorStruct(arbol:AST):number{
-        return (<Nodo4D>this.valor2).getValor(arbol);
     }
 
     //======================== TRADUCCION ASSEMBLER =================================

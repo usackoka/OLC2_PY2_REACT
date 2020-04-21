@@ -40,17 +40,20 @@ if(3>b && 1==c){
     print(0)
 }
 
-if 3>b goto l1
-goto l2
+
+b = 1;
+c = 1;
+if (3>b) goto l1;
+goto l2;
 l1:
-if 1==c goto l3
-goto l4
+if (1==c) goto l3;
+goto l4;
 l3:
-print(1)
-goto l5
+print(%c,1);
+goto l5;
 l2:
 l4:
-print(0)
+print(%c,0);
 l5:
 
 ------------------------------------

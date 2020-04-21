@@ -54,8 +54,8 @@ digito = [0-9]
 "-"                                               return '-'
 "*"                                               return '*'
 "/"                                               return '/'
-"=="                                              return '=='
 "="                                               return '='
+"=="                                              return '=='
 "!="                                                return '!='
 ">"                                                 return '>'
 ">="                                                 return '>='
@@ -70,8 +70,6 @@ digito = [0-9]
 %%
 /lex
 %{
-    const { AST } = require("./AST_JS/AST");
-    const { Primitivo }= require("./AST_JS/Primitivo");
 %}
 
 %define parse.error verbose
@@ -85,8 +83,6 @@ digito = [0-9]
 %% /* Definición de la gramática */
 
 S : LIST_BLOCK EOF{
-    //return new AST.AST();
-    return exports.ast;
 }
 ;
 
@@ -99,105 +95,67 @@ BLOCK : PROCEDURE_BEGIN
     | ASIGNACION ';'
     | NATIVAS ';'
     | ETQ
-    | SALTO_CONDICIONAL ';'
-    | SALTO_INCONDICIONAL ';'
+    | SALTO_CONDICIONAL
+    | SALTO_INCONDICIONAL
 ;
 
 PROCEDURE_BEGIN : res_proc id res_begin {
-    exports.ast.addNewETQ($2,@1.first_line, @1.first_column, true);
 }
 ;
 
 PROCEDURE_END : res_end id {
-    exports.ast.addNewR4D($2,@1.first_line, @1.first_column);
 }
 ;
-
-/*
-PROCEDURE : res_proc ',' ',' ',' id
-            LIST_BLOCK
-            res_end ',' ',' ',' id
-            {
-                $$ = new Procedure.Procedure($5,$6,@1.first_column, @1.first_line);
-                //ast.addNewETQ($5,@1.first_column, @1.first_line, true);
-                //ast.addNewR4D($5,@1.first_column, @1.first_line);
-            }
-;
-*/
 
 ASIGNACION : res_stack '[' PRIMITIVO ']' '=' PRIMITIVO {
-        exports.ast.addNewAsignacion("stack","=",$3,$6);
 }
     | res_heap '[' PRIMITIVO ']' '=' PRIMITIVO {
-        exports.ast.addNewAsignacion("heap","=",$3,$6);
 }
     | id '=' res_heap '[' PRIMITIVO ']' {
-        exports.ast.addNewAsignacion($1,"=","heap",$5);
 }
     | id '=' res_stack '[' PRIMITIVO ']' {
-        exports.ast.addNewAsignacion($1,"=","stack",$5);
 }
     | id '=' PRIMITIVO {
-        exports.ast.addNewAsignacion($1,"=",$3);
 }
     | id '=' PRIMITIVO OPERADOR PRIMITIVO {
-        exports.ast.addNewAsignacion($1,$4,$3,$5);
 }
 ;
 
 OPERADOR : '+' {$$="+";} | '-' {$$="-";} | '*' {$$="*";} | '%' {$$="%";} | '/' {$$="/";}
 ;
 
-NATIVAS : res_print '(' PARAMETRO ',' PRIMITIVO ')'{
-    exports.ast.addNewPrint($3,$5,@1.first_line,@1.first_column);
-}
+NATIVAS : res_print '(' PARAMETRO ',' PRIMITIVO ')'{}
     | res_call id{
-        exports.ast.addNewCall4D($2,@1.first_line,@1.first_column);
+
     }
 ;
 
 PARAMETRO : tipoC{
-    $$ = "%c";
 }
     | tipoD{
-        $$ = "%d";
     }
     | tipoE{
-        $$ = "%e";
     }
 ;
 
-ETQ : id ':'{
-    $$ = exports.ast.addNewETQ($1,@1.first_line, @1.first_column, false);
-}
+ETQ : id ':'{}
 ;
 
 PRIMITIVO : int{
-    var p = new Primitivo(@1.first_line, @1.first_column,"", Number($1));
-    $$ = p;
 }
     | double{
-        var p = new Primitivo(@1.first_line, @1.first_column,"",Number($1));
-        $$ = p;
     }
     | '-' double {
-        var p = new Primitivo(@1.first_line, @1.first_column,"",-(Number($2)));
-        $$ = p;
     }
     | id
     {
-        var p = new Primitivo(@1.first_line, @1.first_column, $1,0);
-        $$ = p;
     }
     | '-' int {
-        var p = new Primitivo(@1.first_line, @1.first_column,"", -(Number($2)));
-        $$ = p;
     }
 ;
 
 SALTO_CONDICIONAL : res_if '(' PRIMITIVO SALTO PRIMITIVO ')' res_goto id
 {
-    exports.ast.addNewCondicional($4,$3,$5,$8,@2.first_line, @2.first_column);
 }
 ;
 
@@ -205,10 +163,7 @@ SALTO : '==' {$$="==";} | '!=' {$$="!=";} | '>' {$$=">";} | '<' {$$="<";} | '>='
 ;
 
 SALTO_INCONDICIONAL : res_goto id {
-    exports.ast.addNewJMP($2,@1.first_line, @1.first_column);
 }
 ;
 
 %%
-
-exports.ast = new AST();

@@ -94,9 +94,9 @@ export class Asignacion extends Nodo4D{
     }
 
     public getIndexStruct(arbol:AST):number{
-        if(this.valor1.toString() == "stack"){
+        if(this.valor1.toString() === "stack"){
             return arbol.getStack(this.getValorStruct(arbol));
-        }else if(this.valor1.toString() == "heap"){
+        }else if(this.valor1.toString() === "heap"){
             return arbol.getHeap(this.getValorStruct(arbol));
         }
         return (<Nodo4D>this.valor1).getValor(arbol);

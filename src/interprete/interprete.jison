@@ -66,8 +66,8 @@ digito = [0-9]
 %%
 /lex
 %{
-    const { AST } = require("./AST/AST");
-    const { Primitivo }= require("./AST/Primitivo");
+    const { AST } = require("./AST_JS/AST");
+    const { Primitivo }= require("./AST_JS/Primitivo");
 %}
 
 %define parse.error verbose

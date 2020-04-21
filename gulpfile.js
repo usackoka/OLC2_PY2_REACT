@@ -9,7 +9,7 @@ gulp.task('typescript', () => {
     noImplicitAny: true
  }));
     // Destino del proyecto compilado
-    return tsResult.js.pipe(gulp.dest('./dist/interprete/AST'));
+    return tsResult.js.pipe(gulp.dest('./src/interprete/AST_JS'));
 });
 
 // Task para observar los cambios al proyecto

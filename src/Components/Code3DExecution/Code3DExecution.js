@@ -3,9 +3,12 @@ import { UnControlled as CodeMirror } from "react-codemirror2";
 import { Row, Col, Button, Container } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import "./Code3DExecution.css";
+import { AST } from "../../interprete/AST/AST";
+var interprete = require('../../interprete/interprete')
 
 const Index = (props) => {
   var txtEntrada;
+  var txtSalida;
 
   var valoresStack = [
   ];
@@ -41,7 +44,16 @@ const Index = (props) => {
 
   const clickEjecutar = async e => {
     if(!txtEntrada) return null;
-    console.log(txtEntrada.getValue());
+
+    interprete.ast = new AST();
+    let ast = interprete.parser.parse(txtEntrada.getValue())
+    ast.ejecutar();
+    let salida = "";
+    ast.mensajes.forEach(element => {
+      salida += element.toString();
+    });
+    txtSalida.setValue(salida);
+    console.log(salida);
   };
 
   return (
@@ -96,12 +108,18 @@ const Index = (props) => {
       <Row>
         <Col>
           <CodeMirror
+            className="test"
+            editorDidMount={(editor) => {
+              txtSalida = editor;
+            }}
             options={{
               theme: "material",
               lineNumbers: true,
               keymap: "sublime",
             }}
-            onChange={(editor, data, value) => {}}
+            onChange={(editor, data, value) => {
+              txtSalida = txtSalida?txtSalida:editor;
+            }}
           />
         </Col>
       </Row>

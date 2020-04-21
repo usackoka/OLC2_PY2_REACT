@@ -376,8 +376,8 @@ parse: function parse(input) {
     return true;
 }};
 
-    const { AST } = require("./AST/AST");
-    const { Primitivo }= require("./AST/Primitivo");
+    const { AST } = require("./AST_JS/AST");
+    const { Primitivo }= require("./AST_JS/Primitivo");
 
     // var ast = new AST.AST();
 

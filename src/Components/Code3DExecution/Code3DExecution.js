@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { UnControlled as CodeMirror } from "react-codemirror2";
 import { Row, Col, Button, Container } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import "./Code3DExecution.css";
 import { AST } from "../../interprete/AST/AST";
+import TextField from '@material-ui/core/TextField';
 var interprete = require('../../interprete/interprete')
 
 const Index = (props) => {
   var txtEntrada;
-  var txtSalida;
+  const [txtSalida, setTxtSalida] = useState({
+    value:''
+  });
 
   var valoresStack = [
   ];
@@ -55,7 +58,7 @@ const Index = (props) => {
     });
 
     if(!txtSalida) return null;
-    txtSalida.setValue(salida);
+    setTxtSalida({value:salida});
   };
 
   return (
@@ -109,20 +112,15 @@ const Index = (props) => {
       <br></br>
       <Row>
         <Col>
-          <CodeMirror
-            className="test"
-            editorDidMount={(editor) => {
-              txtSalida = editor;
-            }}
-            options={{
-              theme: "material",
-              lineNumbers: true,
-              keymap: "sublime",
-            }}
-            onChange={(editor, data, value) => {
-              txtSalida = txtSalida?txtSalida:editor;
-            }}
-          />
+          <TextField
+              id="txtSalida"
+              value={txtSalida.value}
+              label="Salida 3D"
+              multiline
+              rows={5}
+              fullWidth
+              variant="outlined"
+            />
         </Col>
       </Row>
     </Container>

@@ -59,7 +59,7 @@ l5:
 call test;
 proc test begin
 print("%i",50);
-end test;
+end test
 
 ------------------------------------
 if(a*b+y>z && a!=0){

@@ -34,9 +34,9 @@ digito = [0-9]
 "begin"                                           return 'res_begin'
 "end"                                             return 'res_end'
 "call"                                            return 'res_call'
-"%c"                                              return 'tipoC'
-"%e"                                              return 'tipoE'
-"%d"                                              return 'tipoD'
+"\"%c\""                                              return 'tipoC'
+"\"%i\""                                              return 'tipoI'
+"\"%d\""                                              return 'tipoD'
 //-----------------------------------------------------------------------
 ({letras}|"_")({letras}+|{digito}*|"_")*          return 'id'
 {digito}+"."{digito}+                             return 'double'
@@ -162,7 +162,7 @@ PARAMETRO : tipoC{
     | tipoD{
         $$ = "%d";
     }
-    | tipoE{
+    | tipoI{
         $$ = "%e";
     }
 ;

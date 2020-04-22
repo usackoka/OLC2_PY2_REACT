@@ -137,3 +137,6 @@ p = 0;
 stack[p] = 45;
 t1 = stack[p];
 print("%i",t1);
+
+-----------------------------------------------
+14. La asignación puede contener los operadores de aumento y decremento +=?

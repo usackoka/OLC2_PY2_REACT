@@ -140,3 +140,8 @@ print("%i",t1);
 
 -----------------------------------------------
 14. La asignación puede contener los operadores de aumento y decremento +=?
+14. Pueden venir reasignaciones en el ámbito global?
+14. Hay que validar que las variables globales, constantes y var se reasignen sólo con ':='?
+27. El $ aún seguirá? o de igual forma que el initialize se pasa únicamente para arreglos con valores primitivos y estrcturas con primitivos?
+
+

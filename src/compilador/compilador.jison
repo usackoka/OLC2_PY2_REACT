@@ -25,11 +25,11 @@ digito = [0-9]
 
 //-----------------------------------------------------------------------
 //----Reservadas----->
-"im'*'t"                            return 'res_im'*'t'
+"import"                            return 'res_import'
 
 "private"                           return 'res_private'
 "public"                            return 'res_public'
-"void"                              return 'void'
+"void"                              return 'res_void'
 
 "var"                               return 'res_var'
 "const"                             return 'res_const'
@@ -54,6 +54,8 @@ digito = [0-9]
 "break"                             return 'res_break'
 "continue"                          return 'res_continue'
 "return"                            return 'res_return'
+
+"strc"                              return 'res_strc'
 
 "print"                             return 'res_print'
 
@@ -85,7 +87,7 @@ digito = [0-9]
 "%"                                               return '%'
 "++"                                               return '++'
 "+"                                               return '+'
-"-"                                               return '--'
+"--"                                               return '--'
 "-"                                               return '-'
 "*"                                               return '*'
 "/"                                               return '/'
@@ -118,9 +120,21 @@ digito = [0-9]
 %%
 /lex
 %{
-    const { AST } = require("./AST_JS/AST");
-    const { Primitivo }= require("./AST_JS/Primitivo");
 %}
+
+/* operator associations and precedence */
+%left '||'
+%left '&&'
+%left '==='
+%left '!=' '=='
+%left '>' '>=' '<' '<='
+%left '+' '-'
+%left '*' '/' '%'
+%right Ttypecast
+%left '^^'
+%right '!' UTmenos UTmas '++' '--'
+%left Tincremento Tdecremento
+%left '(' ')'
 
 %define parse.error verbose
 %option bison-locations
@@ -132,10 +146,13 @@ digito = [0-9]
 
 %% /* Definición de la gramática */
 
-S : DECLARACIONES EOF
+S : PUEDE_IMPORT DECLARACIONES EOF
     {
-        principal.setNodos(a);
     }
+;
+
+PUEDE_IMPORT : res_import LISTA_ID PUEDE_SEMICOLON
+    |
 ;
 
 DECLARACIONES: DECLARACIONES DECLARACION
@@ -149,37 +166,46 @@ DECLARACIONES: DECLARACIONES DECLARACION
 DECLARACION : FUNCION
     {
     }
-    | SENTENCIA
-    {
-    }
-    | INSTRUCCION ';'
+    | DECLARACION_VARIABLE PUEDE_SEMICOLON
     {
     }
 ;
 
-VARIABLE : id '=' E 
-    {
-    }
-    | ACCESO_ESTRUCTURA2 '=' E 
+DECLARACION_VARIABLE : TIPO_VAR id ':' '=' E
+    | TIPO LISTA_ID '=' E
+    | TIPO LISTA_ID
+;
+
+LISTA_ID : LISTA_ID ',' id 
+    | id
+;
+
+TIPO_VAR : res_var
+    | res_const
+    | res_global
+;
+
+TIPO : TYPE '[' ']'
+    | TYPE 
+;
+
+TYPE : res_integer
+    | res_double
+    | res_char
+    | res_boolean
+    | res_void
+    | id
+;
+
+ASIGNACION_VARIABLE : id '=' E 
     {
     }
 ;
 
-FUNCION : id '=' res_function '(' PARAMETROS1 ')' '{' BLOQUES '}'
-    {
-    }
-    | id '=' '(' PARAMETROS ')' '=' '>' '{' BLOQUES '}'
-    {
-    }
-    | id '=' E '=' '>' '{' BLOQUES '}'
-    {
-    }
-    | id '=' '(' id '=' E ')' '=' '>' '{' BLOQUES '}'
-    {
-    }
+FUNCION : TIPO id '(' PARAMETROS ')' '{' BLOQUES '}'
 ;
 
-PARAMETROS1 : LISTA_PARAMETROS
+PARAMETROS : LISTA_PARAMETROS
     {
     }
     | /* empty */
@@ -187,26 +213,10 @@ PARAMETROS1 : LISTA_PARAMETROS
     }
 ;
 
-PARAMETROS : PARAMETRO ',' LISTA_PARAMETROS
+LISTA_PARAMETROS : LISTA_PARAMETROS ',' TIPO id
     {
     }
-    | /* empty */
-    {
-    }
-;
-
-LISTA_PARAMETROS : LISTA_PARAMETROS ',' PARAMETRO
-    {
-    }
-    | PARAMETRO
-    {
-    }
-;
-
-PARAMETRO : id 
-    {
-    }
-    | id '=' E
+    | TIPO id
     {
     }
 ;
@@ -219,16 +229,22 @@ BLOQUES : LISTA_BLOQUES
     }
 ;
 
-LISTA_BLOQUES : LISTA_BLOQUES INSTRUCCION ';'
+LISTA_BLOQUES : LISTA_BLOQUES INSTRUCCION PUEDE_SEMICOLON
     {
     }
     | LISTA_BLOQUES SENTENCIA
+    {
+    } 
+    | LISTA_BLOQUES DECLARACION_VARIABLE PUEDE_SEMICOLON 
     {
     }
     | SENTENCIA 
     {
     }
-    | INSTRUCCION ';'
+    | INSTRUCCION PUEDE_SEMICOLON
+    {
+    }
+    | DECLARACION_VARIABLE PUEDE_SEMICOLON
     {
     }
 ;
@@ -248,6 +264,17 @@ SENTENCIA : IF
     | FOR
     {
     }
+    | TRY_CATCH
+    {
+    }
+    | NATIVAS PUEDE_SEMICOLON
+    {
+    }
+;
+
+NATIVAS : res_print '(' E ')' 
+    {
+    }
 ;
 
 INSTRUCCION : res_break
@@ -259,7 +286,7 @@ INSTRUCCION : res_break
     | LLAMADA
     {
     }
-    | VARIABLE
+    | ASIGNACION_VARIABLE
     {
     }
     | RETURN
@@ -267,12 +294,18 @@ INSTRUCCION : res_break
     }
 ;
 
-RETURN : res_return '(' E ')'
+RETURN : res_return E
     {
     }
     | res_return
     {
     }
+    | res_throw NEW_EXCEPTION
+    {
+    }
+;
+
+TRY_CATCH : res_try '{' BLOQUES '}' res_catch '(' EXCEPTION id ')' '{' BLOQUES '}'
 ;
 
 IF : res_if '(' E ')' '{' BLOQUES '}'
@@ -296,7 +329,7 @@ WHILE : res_while '(' E ')' '{' BLOQUES '}'
     }
 ;
 
-DOWHILE : res_do '{' BLOQUES '}' res_while '(' E ')' ';'
+DOWHILE : res_do '{' BLOQUES '}' res_while '(' E ')' PUEDE_SEMICOLON
     {
     }
 ;
@@ -338,12 +371,6 @@ PARAMETROS_LLAMADA : LISTA_LLAMADA
 LISTA_LLAMADA : LISTA_LLAMADA ',' E
     {
     }
-    | LISTA_LLAMADA ',' res_default
-    {
-    }
-    | res_default
-    {
-    }
     | E
     {
     }
@@ -364,26 +391,29 @@ E : CONSTANTE
     | '(' E ')'
     {
     }
-    | ACCESO_ESTRUCTURA
+    | LIST_ACCESO
     {
     }
+; 
+
+LIST_ACCESO : LIST_ACCESO '.' ACCESO 
+    | ACCESO
 ;
 
-ACCESO_ESTRUCTURA2 : id '[' E ']'
+ACCESO : id '.' 
     {
     }
-;
-
-
-ACCESO_ESTRUCTURA : id
-    {
-    }
-    | ACCESO_ESTRUCTURA '[' E ']'
+    | id '[' E ']'
     {
     }
 ;
 
 LLAMADA : id '(' PARAMETROS_LLAMADA ')'
+    {
+    }
+;
+
+NEW_EXCEPTION := res_strc EXCEPTION '(' ')'
     {
     }
 ;
@@ -419,13 +449,19 @@ BINARIA : ARITMETICA
     }
 ;
 
-UNARIA: '-' E
+UNARIA: '-' E %prec UTmenos
     {
     }
     | '!' E
     {
     }
-    | '+' E
+    | '+' E %prec UTmas
+    {
+    }
+    | E '++' %prec Tincremento
+    {
+    }
+    | E '--' %prec Tdecremento
     {
     }
 ;
@@ -476,9 +512,21 @@ RELACIONAL : E '<' E
     | E '==' E
     {
     }
+    | E '===' E
+    {
+    }
     | E '!=' E
     {
     }
 ;
 
-ex'*'ts.ast = new AST();
+EXCEPTION : res_ae
+    | res_iobe
+    | res_ue
+    | res_npe
+    | res_ice
+    | res_hoe
+    | res_soe
+;
+
+PUEDE_SEMICOLON : ';' | ;

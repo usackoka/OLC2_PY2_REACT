@@ -76,6 +76,12 @@ digito = [0-9]
 
 "null"                              return 'res_null'
 
+//-----------------------------------------------------------------------
+\"([^\"\n\\\\]|\\\"|\\)*\"  					  return 'string'
+\'([^'\n\t]|'\n'|'\t'|'\0'|'\"')?\'               return 'char'
+({letras}|"_")({letras}+|{digito}*|"_")*          return 'id'
+{digito}+"."{digito}+                             return 'double'
+{digito}+                                         return 'int'
 //----------------------------------------------------------------------
 //----------------------------------------------------------------------
 "."     return '.'
@@ -109,12 +115,6 @@ digito = [0-9]
 "^^"                         return '^^'
 "^"                         return '^'
 //-----------------------------------------------------------------------
-({letras}|"_")({letras}+|{digito}*|"_")*          return 'id'
-{digito}+"."{digito}+                             return 'double'
-{digito}+                                         return 'int'
-\"([^\"\n\\\\]|\\\"|\\)*\"  					  return 'string'
-\'([^'\n\t]|'\n'|'\t'|'\0'|'\"')?\'               return 'char'
-//-----------------------------------------------------------------------
 //-----------------------------------------------------------------------
 <<EOF>>                                           return 'EOF'
 . %{console.log("FILA: " + (yylloc.first_line) + " COL: " + (yylloc.first_column) + " Lexico " + "Caracter Invalido cerca de: \""+ yytext + "\""); %}
@@ -127,17 +127,19 @@ digito = [0-9]
 %}
 
 /* operator associations and precedence */
+%left '='
+%left '.'
+%left '++' '--'
+%left '^'
 %left '||'
 %left '&&'
-%left '==='
-%left '!=' '=='
-%left '>' '>=' '<' '<='
+%left '!=' '==' '==='
+%nonassoc '>' '>=' '<' '<='
 %left '+' '-'
 %left '*' '/' '%'
 %right Ttypecast
 %left '^^'
-%right '!' UTmenos UTmas '++' '--'
-%left Tincremento Tdecremento
+%right '!' UTmenos UTmas 
 
 %define parse.error verbose
 %option bison-locations
@@ -223,9 +225,7 @@ TYPE : res_integer
     | id
 ;
 
-ASIGNACION_VARIABLE : id '=' E 
-    {
-    }
+ASIGNACION_VARIABLE : id '=' E
 ;
 
 PARAMETROS : LISTA_PARAMETROS
@@ -501,6 +501,9 @@ CONSTANTE : int
     | string
     {
     }
+    | char
+    {
+    }
 ;
 
 BINARIA : ARITMETICA
@@ -523,10 +526,10 @@ UNARIA: '-' E %prec UTmenos
     | '+' E %prec UTmas
     {
     }
-    | E '++' %prec Tincremento
+    | E '++'
     {
     }
-    | E '--' %prec Tdecremento
+    | E '--'
     {
     }
 ;

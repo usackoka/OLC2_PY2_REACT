@@ -37,7 +37,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "jison": "jison src/interprete/interprete.jison && jison src/compilador/compilador.jison && move .\\interprete.js .\\src\\interprete\\ && move .\\compilador.js .\\src\\compilador\\"
+    "jisonint":"jison src/interprete/interprete.jison && move .\\interprete.js .\\src\\interprete\\",
+    "jison": "jison src/compilador/compilador.jison &&  move .\\compilador.js .\\src\\compilador\\"
   },
   "eslintConfig": {
     "extends": "react-app"

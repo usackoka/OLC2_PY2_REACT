@@ -1,6 +1,7 @@
 import prueba, prueba2;
 
 const PI := 3.1416
+Char n1 = 'c';
 char n1,n2,n3,n4;
 double n1,n2,n3 = 4;
 var id := 23;
@@ -50,26 +51,9 @@ eSTRUctura[] funcion1(eSTRUctura[] parametro1, Double[] parametro2){
     return null;
 }
 
-void test(){
-    charcad = var1.toUpperCase().toLowerCase().charAt(0); 
-
-    //forma de definir arreglos1
-    Double arreglo1 = {1.0,2.0,3.0,4.0,5.0,6.0}
-
-    //forma de definir arreglos2
-    Integer[] vale = strc Integer[6];
-
-    var nodo := strc Nodo();
-    nodo.siguiente = strc Nodo();
-    nodo.siguiente.valor = "Hola cosita bonita"
-    nodo.siguiente.arregloValores[5] = "Hola";
-
-    return strc Nodo[5];
-}
-
 void testSentencias(){
     while(true){
-        print('while simple')
+        print("while simple")
     }
 
     global c := '4'
@@ -90,4 +74,39 @@ void testSentencias(){
         a = a+1;
         print(a)
     }
+
+    switch('a'){
+        case 'j':
+            print("J")
+            break;
+        case 'L':
+            print("L")
+        case 'm':
+            PRINT("M O L")
+        default:
+            print("def")
+    }
 }
+
+void test(){
+    charcad = var1.toUpperCase().toLowerCase().charAt(0); 
+
+    //forma de definir arreglos1
+    Double arreglo1 = {1.0,2.0,3.0,4.0,5.0,6.0}
+
+    //forma de definir arreglos2
+    Integer[] vale = strc Integer[6];
+
+    var nodo := strc Nodo();
+    nodo.siguiente = strc Nodo();
+    nodo.siguiente.valor = "Hola"
+    nodo.siguiente.arregloValores[5] = "Hola";
+
+    return strc Nodo[5];
+}
+
+Double func(){
+    print("func1()")
+}
+
+double n = 3.0

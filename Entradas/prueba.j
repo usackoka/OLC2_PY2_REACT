@@ -1,4 +1,4 @@
-import prueba;
+import prueba, prueba2;
 
 const PI := 3.1416
 char n1,n2,n3,n4;
@@ -9,6 +9,18 @@ global varGlobal := "string";
 String varString = "String";
 Integer a = 5;
 Integer b = a++;  
+
+Define Estudiante as[
+    Integer edad,
+    String cadena = "Hola"
+]
+
+Define Nodo as[
+    String[] arregloValores = null,
+    Nodo siguiente = null,
+    Nodo anterior = null,
+    String valor
+];
 
 void sinParametros(){
     log("Hola")
@@ -28,5 +40,54 @@ void log(String msg, CHAR[] varchar1) {
         }
     }catch(ArithmeticException e){
         print(e.message)
+    }
+    return;
+}
+
+eSTRUctura[] funcion1(eSTRUctura[] parametro1, Double[] parametro2){
+    Global var1 := "Cadena";
+    String cadena = var1.toUpperCase().toLowerCase();
+    return null;
+}
+
+void test(){
+    charcad = var1.toUpperCase().toLowerCase().charAt(0); 
+
+    //forma de definir arreglos1
+    Double arreglo1 = {1.0,2.0,3.0,4.0,5.0,6.0}
+
+    //forma de definir arreglos2
+    Integer[] vale = strc Integer[6];
+
+    var nodo := strc Nodo();
+    nodo.siguiente = strc Nodo();
+    nodo.siguiente.valor = "Hola cosita bonita"
+    nodo.siguiente.arregloValores[5] = "Hola";
+
+    return strc Nodo[5];
+}
+
+void testSentencias(){
+    while(true){
+        print('while simple')
+    }
+
+    global c := '4'
+    c = '9'
+
+    for(Integer i=0; i<10; i++){
+        print(i)
+    }
+
+    for( ; ;){
+        // Valido, al no tener condición de salida esto genera un ciclo infinito
+        Print("Hola");
+        Break;
+    }
+
+    Integer a = 0;
+    for(;a<3;){
+        a = a+1;
+        print(a)
     }
 }

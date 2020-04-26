@@ -35,6 +35,9 @@ digito = [0-9]
 "const"                             return 'res_const'
 "global"                            return 'res_global'
 
+"define"                            return 'res_define'
+"as"                                return 'res_as'
+
 "integer"                           return 'res_integer'
 "double"                            return 'res_double'
 "char"                              return 'res_char'
@@ -75,6 +78,7 @@ digito = [0-9]
 
 //----------------------------------------------------------------------
 //----------------------------------------------------------------------
+"."     return '.'
 "["                                               return '['
 "]"                                               return ']'
 "("                                               return '('
@@ -134,7 +138,6 @@ digito = [0-9]
 %left '^^'
 %right '!' UTmenos UTmas '++' '--'
 %left Tincremento Tdecremento
-%left '(' ')'
 
 %define parse.error verbose
 %option bison-locations
@@ -146,13 +149,9 @@ digito = [0-9]
 
 %% /* Definición de la gramática */
 
-S : PUEDE_IMPORT DECLARACIONES EOF
+S : DECLARACIONES EOF
     {
     }
-;
-
-PUEDE_IMPORT : res_import LISTA_ID PUEDE_SEMICOLON
-    |
 ;
 
 DECLARACIONES: DECLARACIONES DECLARACION
@@ -167,6 +166,33 @@ DECLARACION : FUNCION
     {
     }
     | DECLARACION_VARIABLE PUEDE_SEMICOLON
+    {
+    }
+    | DECLARACION_STRUCT PUEDE_SEMICOLON
+    |
+    {
+    }
+    | res_import LISTA_ID PUEDE_SEMICOLON
+    {
+    }
+;
+
+DECLARACION_STRUCT : res_define id res_as '[' LISTA_ATRIBUTOS ']'
+;
+
+LISTA_ATRIBUTOS : LISTA_ATRIBUTOS ',' ATRIBUTO
+    | ATRIBUTO
+;
+
+ATRIBUTO : TIPO id 
+    {
+    }
+    | TIPO id '=' E
+    {
+    }
+;
+
+FUNCION : TIPO id '(' PARAMETROS ')' '{' BLOQUES '}' 
     {
     }
 ;
@@ -193,16 +219,13 @@ TYPE : res_integer
     | res_double
     | res_char
     | res_boolean
-    | res_void
+    | res_void 
     | id
 ;
 
 ASIGNACION_VARIABLE : id '=' E 
     {
     }
-;
-
-FUNCION : TIPO id '(' PARAMETROS ')' '{' BLOQUES '}'
 ;
 
 PARAMETROS : LISTA_PARAMETROS
@@ -334,9 +357,28 @@ DOWHILE : res_do '{' BLOQUES '}' res_while '(' E ')' PUEDE_SEMICOLON
     }
 ;
 
-FOR : res_for '(' id res_in E ')' '{' BLOQUES '}'
+FOR : res_for '(' INICIO_FOR ';' CONDICION_FOR ';' FIN_FOR ')' '{' BLOQUES '}'
     {
     }
+;
+
+INICIO_FOR : id '=' E
+    {
+    }
+    | TIPO id '=' E
+    {
+    }
+    |
+    {
+    }
+;
+
+CONDICION_FOR : E
+    |
+;
+
+FIN_FOR : E
+    |
 ;
 
 SWITCH : res_switch '(' E ')' '{' LISTA_CASOS DEFAULT '}'
@@ -360,7 +402,7 @@ DEFAULT : res_default ':' BLOQUES
     }
 ;
 
-PARAMETROS_LLAMADA : LISTA_LLAMADA
+PARAMETROS_LLAMADA : LISTA_E
     {
     }
     | /* empty */
@@ -368,7 +410,7 @@ PARAMETROS_LLAMADA : LISTA_LLAMADA
     }
 ;
 
-LISTA_LLAMADA : LISTA_LLAMADA ',' E
+LISTA_E : LISTA_E ',' E
     {
     }
     | E
@@ -385,25 +427,48 @@ E : CONSTANTE
     | UNARIA
     {
     }
-    | LLAMADA
-    {
-    }
     | '(' E ')'
     {
     }
     | LIST_ACCESO
     {
     }
+    | E_ARREGLO
+    {
+    }
+    | NEW_STRUCT 
+    {
+    }
 ; 
 
+NEW_STRUCT : res_strc id '(' ')'
+    {
+    }
+;
+
+E_ARREGLO : res_strc TYPE '[' E ']'
+    {
+    }
+    | '{' LISTA_E '}'
+    {
+    }
+;
+
+//============================= ACCESOS DEL LADO DE LA EXPRESION
 LIST_ACCESO : LIST_ACCESO '.' ACCESO 
     | ACCESO
 ;
 
-ACCESO : id '.' 
+ACCESO : id
+    {
+    }
+    | LLAMADA
     {
     }
     | id '[' E ']'
+    {
+    }
+    | LLAMADA '[' E ']'
     {
     }
 ;

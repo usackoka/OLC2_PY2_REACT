@@ -15,7 +15,7 @@ gulp.task('typescript', () => {
 // Task para observar los cambios al proyecto
 gulp.task('watch', () => {
     // Observar proyecto
-    gulp.watch('./*.ts', gulp.series('typescript'));
+    gulp.watch('./src/interprete/AST/*.ts', gulp.series('typescript'));
 });
 
 // Trigger a los tasks

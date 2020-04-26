@@ -1,6 +1,4 @@
 %lex
-%{
-%}
 %options case-insensitive
 %locations
 letras = [A-Za-zÑñ]
@@ -77,9 +75,9 @@ digito = [0-9]
 "null"                              return 'res_null'
 
 //-----------------------------------------------------------------------
+({letras}|"_")({letras}+|{digito}*|"_")*          return 'id'
 \"([^\"\n\\\\]|\\\"|\\)*\"  					  return 'string'
 \'([^'\n\t]|'\n'|'\t'|'\0'|'\"')?\'               return 'char'
-({letras}|"_")({letras}+|{digito}*|"_")*          return 'id'
 {digito}+"."{digito}+                             return 'double'
 {digito}+                                         return 'int'
 //----------------------------------------------------------------------
@@ -121,13 +119,10 @@ digito = [0-9]
 //-----------------------------------------------------------------------
 //---------------------------SINTACTICO----------------------------------
 //-----------------------------------------------------------------------
-%%
 /lex
-%{
-%}
 
 /* operator associations and precedence */
-%left '='
+%right '='
 %left '.'
 %left '++' '--'
 %left '^'
@@ -140,12 +135,7 @@ digito = [0-9]
 %right Ttypecast
 %left '^^'
 %right '!' UTmenos UTmas 
-
-%define parse.error verbose
-%option bison-locations
-%{
-    // var ast = new AST.AST();
-%}
+%left '[' ']'
 
 %start S
 
@@ -179,53 +169,115 @@ DECLARACION : FUNCION
     }
 ;
 
+//=================== STRUCTS ==========================
+
 DECLARACION_STRUCT : res_define id res_as '[' LISTA_ATRIBUTOS ']'
+    {
+
+    }
 ;
 
-LISTA_ATRIBUTOS : LISTA_ATRIBUTOS ',' ATRIBUTO
+LISTA_ATRIBUTOS : LISTA_ATRIBUTOS ',' ATRIBUTO 
+    {
+
+    }
     | ATRIBUTO
-;
+    {
 
-ATRIBUTO : TIPO id 
-    {
-    }
-    | TIPO id '=' E
-    {
     }
 ;
 
-FUNCION : TIPO id '(' PARAMETROS ')' '{' BLOQUES '}' 
+ATRIBUTO : TIPO_DATO id 
     {
+    }
+    | TIPO_DATO id '=' E
+    {
+    }
+;
+
+///============================================================
+
+FUNCION : TIPO_DATO id '(' PARAMETROS ')' '{' BLOQUES '}' 
+    {
+    }
+    | res_void id '(' PARAMETROS ')' '{' BLOQUES '}' 
+    {
+
     }
 ;
 
 DECLARACION_VARIABLE : TIPO_VAR id ':' '=' E
-    | TIPO LISTA_ID '=' E
-    | TIPO LISTA_ID
+    {
+
+    }
+    | TIPO_DATO LISTA_ID '=' E
+    {
+
+    }
+    | TIPO_DATO LISTA_ID
+    {
+
+    }
 ;
 
 LISTA_ID : LISTA_ID ',' id 
+    {
+
+    }
     | id
+    {
+
+    }
 ;
 
 TIPO_VAR : res_var
+    {
+    }
     | res_const
+    {
+    }
     | res_global
+    {
+    }
 ;
 
-TIPO : TYPE '[' ']'
+TIPO_DATO : TYPE '[' ']' 
+    {
+    }
     | TYPE 
+    {
+    }
 ;
 
 TYPE : res_integer
     | res_double
     | res_char
     | res_boolean
-    | res_void 
     | id
 ;
 
 ASIGNACION_VARIABLE : id '=' E
+    {
+
+    }
+    | id LIST_ACCESO1 '=' E
+    {
+
+    }
+;
+
+LIST_ACCESO1: '.' id
+    {
+    }
+    | '.' id '[' E ']'
+    {
+    }
+    | LIST_ACCESO1 '.' id '[' E ']'
+    {
+    }
+    | LIST_ACCESO1 '.' id 
+    {
+    }
 ;
 
 PARAMETROS : LISTA_PARAMETROS
@@ -236,10 +288,10 @@ PARAMETROS : LISTA_PARAMETROS
     }
 ;
 
-LISTA_PARAMETROS : LISTA_PARAMETROS ',' TIPO id
+LISTA_PARAMETROS : LISTA_PARAMETROS ',' TIPO_DATO id
     {
     }
-    | TIPO id
+    | TIPO_DATO id
     {
     }
 ;
@@ -252,16 +304,16 @@ BLOQUES : LISTA_BLOQUES
     }
 ;
 
-LISTA_BLOQUES : LISTA_BLOQUES INSTRUCCION PUEDE_SEMICOLON
+LISTA_BLOQUES : LISTA_BLOQUES BLOQUE
     {
     }
-    | LISTA_BLOQUES SENTENCIA
+    | BLOQUE
     {
-    } 
-    | LISTA_BLOQUES DECLARACION_VARIABLE PUEDE_SEMICOLON 
-    {
+
     }
-    | SENTENCIA 
+;
+
+BLOQUE : SENTENCIA 
     {
     }
     | INSTRUCCION PUEDE_SEMICOLON
@@ -365,7 +417,7 @@ FOR : res_for '(' INICIO_FOR ';' CONDICION_FOR ';' FIN_FOR ')' '{' BLOQUES '}'
 INICIO_FOR : id '=' E
     {
     }
-    | TIPO id '=' E
+    | TIPO_DATO id '=' E
     {
     }
     |

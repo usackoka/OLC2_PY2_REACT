@@ -24,6 +24,8 @@ Define Nodo as[
 ];
 
 void sinParametros(){
+    var n := n1.n2()[4];
+    n1.n2.siguiente[0] = 9;
     log("Hola")
     hola = fun1(3);
 }
@@ -46,8 +48,9 @@ void log(String msg, CHAR[] varchar1) {
 }
 
 eSTRUctura[] funcion1(eSTRUctura[] parametro1, Double[] parametro2){
-    Global var1 := "Cadena";
+    Nodo siguiente = null;
     String cadena = var1.toUpperCase().toLowerCase();
+    Global var1 := "Cadena";
     return null;
 }
 

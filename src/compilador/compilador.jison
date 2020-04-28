@@ -82,6 +82,7 @@ digito = [0-9]
 {digito}+                                         return 'int'
 //----------------------------------------------------------------------
 //----------------------------------------------------------------------
+"$"         return '$'
 "."     return '.'
 "["                                               return '['
 "]"                                               return ']'
@@ -120,6 +121,9 @@ digito = [0-9]
 //---------------------------SINTACTICO----------------------------------
 //-----------------------------------------------------------------------
 /lex
+%{
+    const { Principal } = require("./AST_JS/Principal");
+%}
 
 /* operator associations and precedence */
 %right '='
@@ -143,19 +147,23 @@ digito = [0-9]
 
 S : DECLARACIONES EOF
     {
+        return exports.principal;
     }
 ;
 
 DECLARACIONES: DECLARACIONES DECLARACION
     {
+        exports.principal.nodos.push($2);
     }
     | DECLARACION
     {
+        exports.principal.nodos.push($1);
     }
 ;
 
 DECLARACION : FUNCION
     {
+        $$ = $1;
     }
     | DECLARACION_VARIABLE PUEDE_SEMICOLON
     {
@@ -250,10 +258,20 @@ TIPO_DATO : TYPE '[' ']'
 ;
 
 TYPE : res_integer
+    {
+    }
     | res_double
+    {
+    }
     | res_char
+    {
+    }
     | res_boolean
+    {
+    }
     | id
+    {
+    }
 ;
 
 ASIGNACION_VARIABLE : id '=' E
@@ -381,6 +399,8 @@ RETURN : res_return E
 ;
 
 TRY_CATCH : res_try '{' BLOQUES '}' res_catch '(' EXCEPTION id ')' '{' BLOQUES '}'
+    {
+    }
 ;
 
 IF : res_if '(' E ')' '{' BLOQUES '}'
@@ -454,11 +474,31 @@ DEFAULT : res_default ':' BLOQUES
     }
 ;
 
-PARAMETROS_LLAMADA : LISTA_E
+PARAMETROS_LLAMADA : LISTA_PAR
     {
     }
     | /* empty */
     {
+    }
+;
+
+LISTA_PAR : LISTA_PAR ',' PAR 
+    {
+
+    }
+    | PAR
+    {
+
+    }
+;
+
+PAR : '$' E 
+    {
+
+    }
+    | E 
+    {
+
     }
 ;
 
@@ -650,3 +690,6 @@ EXCEPTION : res_ae
 ;
 
 PUEDE_SEMICOLON : ';' | ;
+%%
+
+exports.principal = new Principal();

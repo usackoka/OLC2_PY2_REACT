@@ -27,7 +27,8 @@ void sinParametros(){
     var n := n1.n2()[4];
     n1.n2.siguiente[0] = 9;
     log("Hola")
-    hola = fun1(3);
+    hola = fun1(3)
+    hol = fun1($parametro1,$parametro2)
 }
 
 Double[] areaCirculo(Double radio) { 
@@ -113,3 +114,5 @@ Double func(){
 }
 
 double n = 3.0
+
+Integer n2 = b++ + (-3);

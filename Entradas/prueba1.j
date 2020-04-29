@@ -1,3 +1,4 @@
 void Principal(){
-    print("Hola Mundo!")
+    print(505)
+    //print("Hola Mundo!")
 }

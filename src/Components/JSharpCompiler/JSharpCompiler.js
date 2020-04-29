@@ -2,9 +2,16 @@ import React, { Fragment, useState } from "react";
 import { UnControlled as CodeMirror } from "react-codemirror2";
 import { Tabs, Tab, Row, Col, Button } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
+import { Principal } from "../../compilador/AST_JS/Principal";
+import TextField from '@material-ui/core/TextField';
 
 const Index = (props) => {
+
+  var txtEntrada;
   const [key, setKey] = useState("tabla");
+  const [txtSalida, setTxtSalida] = useState({
+    value:''
+  });
 
   var valoresSimbolos = [
   ]
@@ -65,37 +72,57 @@ const Index = (props) => {
     },
   ];
 
+  const clickEjecutar = async e => {
+    var compilador = require("../../compilador/compilador")
+    console.log("Ejecutando compilador")
+    if(!txtEntrada){
+      console.log("No se encontró la instancia de codeMirror")
+      return null;
+    }
+    compilador.principal = new Principal();
+    let ast = compilador.parser.parse(txtEntrada.getValue())
+    let salida = ast.run();
+
+    if(!txtSalida) return null;
+    setTxtSalida({value:salida});
+  };
+
   return (
     <Fragment>
       <Row>
         <Col>
           <CodeMirror
+            editorDidMount={(editor) => {
+              txtEntrada = editor;
+            }}
             options={{
               mode: "javascript",
               theme: "monokai",
               lineNumbers: true,
               keymap: "sublime",
             }}
-            onChange={(editor, data, value) => {}}
+            onChange={(editor, data, value) => {
+              txtEntrada = txtEntrada?txtEntrada:editor;
+            }}
           />
         </Col>
 
         <Col xs="auto">
-          <Button variant="success" fixed="bottom">
+          <Button variant="success" fixed="bottom" onClick={clickEjecutar}>
             {"Traducir"}
           </Button>
         </Col>
 
         <Col>
-          <CodeMirror
-            options={{
-              mode: "pascal",
-              theme: "material",
-              lineNumbers: true,
-              keymap: "sublime",
-            }}
-            onChange={(editor, data, value) => {}}
-          />
+          <TextField
+              id="txtSalida"
+              value={txtSalida.value}
+              label="Salida 3D"
+              multiline
+              rows={14}
+              fullWidth
+              variant="outlined"
+            />
         </Col>
       </Row>
       

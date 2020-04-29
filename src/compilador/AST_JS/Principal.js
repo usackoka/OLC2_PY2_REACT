@@ -2,6 +2,7 @@
 exports.__esModule = true;
 var Entorno_1 = require("./Entorno");
 var Token_1 = require("./Token");
+var Print_1 = require("./Sentencias/Print");
 var Principal = /** @class */ (function () {
     function Principal() {
         this.entorno = new Entorno_1.Entorno(null, this);
@@ -33,8 +34,6 @@ var Principal = /** @class */ (function () {
         this.nodos.forEach(function (nodo) {
             nodo.getTraduccion(_this.entorno);
         });
-        //traduzco llamda al main()
-        this.addCall("principal");
         /**
          * Agrego los métodos nativos
          * Como métodos para imprimir string, casteo de enteros y potencia
@@ -46,6 +45,9 @@ var Principal = /** @class */ (function () {
         this.QuemadaString2();
         this.QuemadaEntero();
         this.QuemadaPotencia();
+        this.addComentario("======================= EJECUCION DEL MAIN ========================");
+        //traduzco llamda al main()
+        this.addCall("principal");
         return this.traduccion;
     };
     //=================================== METODOS DE TRADUCCIÓN
@@ -74,7 +76,7 @@ var Principal = /** @class */ (function () {
         this.traduccion += "if (" + condicion + " < " + value + ") goto " + etiqueta + ";\n";
     };
     Principal.prototype.addNoIgual = function (condicion, value, etiqueta) {
-        this.traduccion += "if (" + condicion + " != " + value + ") goto " + etiqueta + ";\n";
+        this.traduccion += "if (" + condicion + " <> " + value + ") goto " + etiqueta + ";\n";
     };
     Principal.prototype.addMayorQue = function (condicion, value, etiqueta) {
         this.traduccion += "if (" + condicion + " > " + value + ") goto " + etiqueta + ";\n";
@@ -116,10 +118,23 @@ var Principal = /** @class */ (function () {
         this.traduccion += "H = H + 1;\n";
     };
     Principal.prototype.addProc = function (idProc) {
-        this.traduccion += "proc " + idProc + " begin;\n";
+        this.traduccion += "proc " + idProc + " begin\n";
     };
     Principal.prototype.addEnd = function (idProc) {
-        this.traduccion += "end " + idProc + ";\n";
+        this.traduccion += "end \n";
+    };
+    Principal.prototype.addPrint = function (TIPO_PRINT, value) {
+        switch (TIPO_PRINT) {
+            case Print_1.Print.State.CHAR:
+                this.traduccion += "print(\"%c\"," + value + ");\n";
+                break;
+            case Print_1.Print.State.DOUBLE:
+                this.traduccion += "print(\"%d\"," + value + ");\n";
+                break;
+            case Print_1.Print.State.INTEGER:
+                this.traduccion += "print(\"%i\"," + value + ");\n";
+                break;
+        }
     };
     Principal.prototype.QuemadaString = function () {
         var t1 = this.getTemp();
@@ -148,15 +163,15 @@ var Principal = /** @class */ (function () {
         this.addNoIgual(t3, 1, nodecimal);
         this.addValorOperacion(t2, t2, "+", 1);
         this.addGetHeap(t3, t2);
-        this.addTraduccion("print(\"%d\"," + t3 + ")");
+        this.addPrint(Print_1.Print.State.DOUBLE, t3);
         this.addValorOperacion(t2, t2, "+", "1");
         this.addGoto(l3);
         this.addETQ(nodecimal);
-        this.addTraduccion("print(\"%c\"," + t3 + ")\n");
+        this.addPrint(Print_1.Print.State.CHAR, t3);
         this.addValorOperacion(t2, t2, "+", "1");
         this.addGoto(l3);
         this.addETQ(l1);
-        this.addTraduccion("print(\"%c\"," + 10 + ")\n");
+        this.addPrint(Print_1.Print.State.CHAR, 10);
         this.addEnd("nativa_imprimir_string");
     };
     Principal.prototype.QuemadaString2 = function () {
@@ -180,7 +195,7 @@ var Principal = /** @class */ (function () {
         this.addIgualQue(t3, "3", l1);
         this.addGoto(l2);
         this.addETQ(l2);
-        this.addTraduccion("print(\"%c\"," + t3 + ")\n");
+        this.addPrint(Print_1.Print.State.CHAR, t3);
         this.addValorOperacion(t2, t2, "+", "1");
         this.addGoto(l3);
         this.addETQ(l1);

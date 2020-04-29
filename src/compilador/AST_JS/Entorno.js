@@ -4,6 +4,7 @@ var Entorno = /** @class */ (function () {
     function Entorno(padre, principal) {
         this.size = 0;
         this.padre = padre;
+        this.primerTemporal = 0;
         this.temporalesUsados = [];
         //guardo principal en el padre, para poder hacer uso de los métodos de traducción.
         this.principal = principal ? principal : null;
@@ -11,6 +12,7 @@ var Entorno = /** @class */ (function () {
         if (padre != null) {
             this.temporalesUsados = padre.temporalesUsados;
             this.size += padre.size;
+            this.primerTemporal = padre.primerTemporal;
         }
     }
     Entorno.prototype.addTempUsed = function (id) {
@@ -28,6 +30,12 @@ var Entorno = /** @class */ (function () {
     //Recorro mis padres, hasta llegar al entorno superior, el cual su padre es null
     Entorno.prototype.getEntornoGlobal = function () {
         return this.padre == null ? this : this.padre.getEntornoGlobal();
+    };
+    Entorno.prototype.getContadorTemporales = function () {
+        return this.getEntornoGlobal().principal.contadorTemporales;
+    };
+    Entorno.prototype.addPrint = function (TIPO_PRINT, value) {
+        this.getEntornoGlobal().principal.addPrint(TIPO_PRINT, value);
     };
     Entorno.prototype.addComentario = function (cadena) {
         this.getEntornoGlobal().principal.addComentario(cadena);

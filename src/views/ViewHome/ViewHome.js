@@ -5,7 +5,7 @@ import Code3DExecution from "../../Components/Code3DExecution/Code3DExecution";
 
 const Index = (props) => {
 
-  const [key, setKey] = useState('exec');
+  const [key, setKey] = useState('trad');
 
   return (
     <Fragment>

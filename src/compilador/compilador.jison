@@ -125,6 +125,7 @@ digito = [0-9]
     const { Principal } = require("./AST_JS/Principal");
 
     //expresiones
+    const { Expresion } = require("./AST_JS/Expresion");
     const { Funcion } = require("./AST_JS/Expresiones/Funcion");
     const { Parametro } = require("./AST_JS/Expresiones/Parametro");
     const { Primitivo } = require("./AST_JS/Expresiones/Primitivo");

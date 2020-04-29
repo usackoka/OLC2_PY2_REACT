@@ -1,6 +1,7 @@
 import { Nodo } from './Nodo'
 import { Entorno } from './Entorno';
 import { Token } from './Token';
+import { Print } from './Sentencias/Print';
 
 export class Principal {
     nodos: Array<Nodo>;
@@ -48,9 +49,6 @@ export class Principal {
             nodo.getTraduccion(this.entorno);
         });
 
-        //traduzco llamda al main()
-        this.addCall("principal");
-
         /**
          * Agrego los métodos nativos
          * Como métodos para imprimir string, casteo de enteros y potencia
@@ -62,6 +60,10 @@ export class Principal {
         this.QuemadaString2();
         this.QuemadaEntero();
         this.QuemadaPotencia();
+
+        this.addComentario("======================= EJECUCION DEL MAIN ========================");
+        //traduzco llamda al main()
+        this.addCall("principal");
 
         return this.traduccion;
     }
@@ -100,7 +102,7 @@ export class Principal {
     }
     
     public addNoIgual(condicion:string,value:Object, etiqueta:string){
-        this.traduccion += "if ("+condicion+" != "+value+") goto "+etiqueta+";\n";
+        this.traduccion += "if ("+condicion+" <> "+value+") goto "+etiqueta+";\n";
     }
     
     public addMayorQue(condicion:string,value:Object, etiqueta:string){
@@ -156,11 +158,25 @@ export class Principal {
     }
     
     public addProc(idProc:string){
-        this.traduccion += "proc "+idProc+" begin;\n";
+        this.traduccion += "proc "+idProc+" begin\n";
     }
     
     public addEnd(idProc:string){
-        this.traduccion += "end "+idProc + ";\n";
+        this.traduccion += "end \n";
+    }
+
+    public addPrint(TIPO_PRINT:Print.State, value:Object){
+        switch(TIPO_PRINT){
+            case Print.State.CHAR:
+                this.traduccion += "print(\"%c\","+value+");\n";
+                break;
+            case Print.State.DOUBLE:
+                this.traduccion += "print(\"%d\","+value+");\n";
+                break;
+            case Print.State.INTEGER:
+                this.traduccion += "print(\"%i\","+value+");\n";
+                break;
+        }
     }
     
     public QuemadaString(){
@@ -186,15 +202,15 @@ export class Principal {
         this.addNoIgual(t3, 1, nodecimal);
         this.addValorOperacion(t2, t2, "+", 1);
         this.addGetHeap(t3, t2);
-        this.addTraduccion("print(\"%d\","+t3+")");
+        this.addPrint(Print.State.DOUBLE,t3);
         this.addValorOperacion(t2, t2, "+", "1");
         this.addGoto(l3);
         this.addETQ(nodecimal);
-        this.addTraduccion("print(\"%c\","+t3+")\n");
+        this.addPrint(Print.State.CHAR,t3);
         this.addValorOperacion(t2, t2, "+", "1");
         this.addGoto(l3);
         this.addETQ(l1);
-        this.addTraduccion("print(\"%c\"," + 10 + ")\n");
+        this.addPrint(Print.State.CHAR,10);
         this.addEnd("nativa_imprimir_string");
     }
     
@@ -217,7 +233,7 @@ export class Principal {
         this.addIgualQue(t3,"3",l1);
         this.addGoto(l2);
         this.addETQ(l2);
-        this.addTraduccion("print(\"%c\","+t3+")\n");
+        this.addPrint(Print.State.CHAR,t3);
         this.addValorOperacion(t2, t2, "+", "1");
         this.addGoto(l3);
         this.addETQ(l1);

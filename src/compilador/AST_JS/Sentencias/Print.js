@@ -77,15 +77,15 @@ var Print = /** @class */ (function (_super) {
                 entorno.addComentario("================= fin impresion boolean ================");
                 break;
             case Expresion_1.Expresion.State.INTEGER:
-                entorno.addTraduccion("print(\"%i\"," + tImpresion + ")\n");
+                entorno.addPrint(Print.State.INTEGER, tImpresion);
                 if (this.salto) {
-                    entorno.addTraduccion("print(\"%c\",10)\n");
+                    entorno.addPrint(Print.State.CHAR, 10);
                 }
                 break;
             case Expresion_1.Expresion.State.DOUBLE:
-                entorno.addTraduccion("print(\"%d\"," + tImpresion + ")\n");
+                entorno.addPrint(Print.State.DOUBLE, tImpresion);
                 if (this.salto) {
-                    entorno.addTraduccion("print(%c,10)\n");
+                    entorno.addPrint(Print.State.CHAR, 10);
                 }
                 break;
         }
@@ -93,4 +93,13 @@ var Print = /** @class */ (function (_super) {
     };
     return Print;
 }(Sentencia_1.Sentencia));
+exports.Print = Print;
+(function (Print) {
+    var State;
+    (function (State) {
+        State[State["INTEGER"] = 0] = "INTEGER";
+        State[State["CHAR"] = 1] = "CHAR";
+        State[State["DOUBLE"] = 2] = "DOUBLE";
+    })(State = Print.State || (Print.State = {}));
+})(Print = exports.Print || (exports.Print = {}));
 exports.Print = Print;

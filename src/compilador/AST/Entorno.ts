@@ -1,14 +1,17 @@
 import { Principal } from "./Principal";
+import { Print } from "./Sentencias/Print";
 
 export class Entorno {
     principal:Principal;
     padre:Entorno;
     size:number;
     temporalesUsados:Array<String>;
+    primerTemporal:number;
 
     public constructor(padre:Entorno, principal?:Principal){
         this.size = 0;
         this.padre = padre;
+        this.primerTemporal = 0;
         this.temporalesUsados = [];
         //guardo principal en el padre, para poder hacer uso de los métodos de traducción.
         this.principal=principal?principal:null;
@@ -17,6 +20,7 @@ export class Entorno {
         if (padre!=null) {
             this.temporalesUsados = padre.temporalesUsados;
             this.size += padre.size;
+            this.primerTemporal = padre.primerTemporal;
         }
     }
 
@@ -38,6 +42,14 @@ export class Entorno {
     //Recorro mis padres, hasta llegar al entorno superior, el cual su padre es null
     getEntornoGlobal():Entorno{
         return this.padre==null?this:this.padre.getEntornoGlobal();
+    }
+
+    public getContadorTemporales():number{
+        return this.getEntornoGlobal().principal.contadorTemporales;
+    }
+
+    public addPrint(TIPO_PRINT:Print.State,value:Object){
+        this.getEntornoGlobal().principal.addPrint(TIPO_PRINT,value);
     }
 
     public addComentario(cadena:string){

@@ -2,10 +2,29 @@
 exports.__esModule = true;
 var Entorno = /** @class */ (function () {
     function Entorno(padre, principal) {
+        this.size = 0;
         this.padre = padre;
+        this.temporalesUsados = [];
         //guardo principal en el padre, para poder hacer uso de los métodos de traducción.
         this.principal = principal ? principal : null;
+        //si existe el padre, sumo el tamaño al entorno
+        if (padre != null) {
+            this.temporalesUsados = padre.temporalesUsados;
+            this.size += padre.size;
+        }
     }
+    Entorno.prototype.addTempUsed = function (id) {
+        if (!this.temporalesUsados.includes(id)) {
+            this.temporalesUsados.push(id);
+        }
+    };
+    /**
+     * ===============================================================================================================
+     * ===============================================================================================================
+     * ===============================================================================================================
+     * ===============================================================================================================
+     * ===============================================================================================================
+     */
     //Recorro mis padres, hasta llegar al entorno superior, el cual su padre es null
     Entorno.prototype.getEntornoGlobal = function () {
         return this.padre == null ? this : this.padre.getEntornoGlobal();

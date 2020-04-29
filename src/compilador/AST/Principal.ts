@@ -26,10 +26,30 @@ export class Principal {
     public run():string{
         this.traduccion = "";
 
+        //declaracion de temporales usados
+        this.addComentario("=========== DECLARACION DE TEMPORALES USADOS ");
+        this.traduccion += "var t0";
+        let aux:number = 0;
+        for(let i=1; i<this.contadorTemporales+1; i++){
+            if(aux=20){
+                this.traduccion += "\n";
+                aux = 0;
+            }
+            this.traduccion += ", t"+i+""
+            aux++;
+        }
+        this.traduccion += ";\n\n"
+
+        this.addComentario("============= DECLARACION DE ESTRUCTURAS Y VARIABLES DE CONTROL");
+        this.traduccion += "var P,H;\nvar stack[];\nvar heap[];\n\n" 
+
         //traduzco cada nodo encontrado
         this.nodos.forEach(nodo => {
             nodo.getTraduccion(this.entorno);
         });
+
+        //traduzco llamda al main()
+        this.addCall("principal");
 
         /**
          * Agrego los métodos nativos
@@ -166,15 +186,15 @@ export class Principal {
         this.addNoIgual(t3, 1, nodecimal);
         this.addValorOperacion(t2, t2, "+", 1);
         this.addGetHeap(t3, t2);
-        this.addTraduccion("print(%d,"+t3+")");
+        this.addTraduccion("print(\"%d\","+t3+")");
         this.addValorOperacion(t2, t2, "+", "1");
         this.addGoto(l3);
         this.addETQ(nodecimal);
-        this.addTraduccion("print(%c,"+t3+")\n");
+        this.addTraduccion("print(\"%c\","+t3+")\n");
         this.addValorOperacion(t2, t2, "+", "1");
         this.addGoto(l3);
         this.addETQ(l1);
-        this.addTraduccion("print(%c," + 10 + ")\n");
+        this.addTraduccion("print(\"%c\"," + 10 + ")\n");
         this.addEnd("nativa_imprimir_string");
     }
     
@@ -197,7 +217,7 @@ export class Principal {
         this.addIgualQue(t3,"3",l1);
         this.addGoto(l2);
         this.addETQ(l2);
-        this.addTraduccion("print(%c,"+t3+")\n");
+        this.addTraduccion("print(\"%c\","+t3+")\n");
         this.addValorOperacion(t2, t2, "+", "1");
         this.addGoto(l3);
         this.addETQ(l1);

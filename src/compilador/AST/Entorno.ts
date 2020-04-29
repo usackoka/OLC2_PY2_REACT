@@ -3,12 +3,37 @@ import { Principal } from "./Principal";
 export class Entorno {
     principal:Principal;
     padre:Entorno;
+    size:number;
+    temporalesUsados:Array<String>;
 
     public constructor(padre:Entorno, principal?:Principal){
+        this.size = 0;
         this.padre = padre;
+        this.temporalesUsados = [];
         //guardo principal en el padre, para poder hacer uso de los métodos de traducción.
         this.principal=principal?principal:null;
+
+        //si existe el padre, sumo el tamaño al entorno
+        if (padre!=null) {
+            this.temporalesUsados = padre.temporalesUsados;
+            this.size += padre.size;
+        }
     }
+
+    public addTempUsed(id:string) {
+        if (!this.temporalesUsados.includes(id))
+        {
+            this.temporalesUsados.push(id);
+        }
+    }
+
+    /**
+     * ===============================================================================================================
+     * ===============================================================================================================
+     * ===============================================================================================================
+     * ===============================================================================================================
+     * ===============================================================================================================
+     */
 
     //Recorro mis padres, hasta llegar al entorno superior, el cual su padre es null
     getEntornoGlobal():Entorno{

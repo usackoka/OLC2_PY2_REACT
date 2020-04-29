@@ -22,3 +22,16 @@ var Expresion = /** @class */ (function (_super) {
     return Expresion;
 }(Nodo_1.Nodo));
 exports.Expresion = Expresion;
+(function (Expresion) {
+    var State;
+    (function (State) {
+        State[State["STRING"] = 0] = "STRING";
+        State[State["INTEGER"] = 1] = "INTEGER";
+        State[State["DOUBLE"] = 2] = "DOUBLE";
+        State[State["BOOLEAN"] = 3] = "BOOLEAN";
+        State[State["CHAR"] = 4] = "CHAR";
+        State[State["NULL"] = 5] = "NULL";
+        State[State["VOID"] = 6] = "VOID";
+    })(State = Expresion.State || (Expresion.State = {}));
+})(Expresion = exports.Expresion || (exports.Expresion = {}));
+exports.Expresion = Expresion;

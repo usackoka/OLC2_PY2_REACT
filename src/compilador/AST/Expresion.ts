@@ -15,6 +15,7 @@ export namespace Expresion
         DOUBLE,
         BOOLEAN,
         CHAR,
-        NULL
+        NULL,
+        VOID
     }
 }

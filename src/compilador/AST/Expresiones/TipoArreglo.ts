@@ -1,19 +1,20 @@
 import { Entorno } from "../Entorno";
 import { Expresion } from "../Expresion";
-import { Sentencia } from "../Sentencia";
 
-export class Print extends Sentencia{
+export class TipoArreglo extends Expresion{
 
-    expresion:Expresion;
-
-    public constructor(expresion:Expresion, fila:number, columna:number){
+    public constructor(TIPO:Object, fila:number, columna:number){
         super();
-        this.expresion = expresion;
+        this.TIPO = TIPO;
         this.fila = fila;
         this.columna = columna;
     }
 
     public getTraduccion(entorno:Entorno):string{
         return "";
+    }
+
+    public getTipo(entorno:Entorno):Object{
+        return this;
     }
 }

@@ -123,6 +123,16 @@ digito = [0-9]
 /lex
 %{
     const { Principal } = require("./AST_JS/Principal");
+
+    //expresiones
+    const { Funcion } = require("./AST_JS/Expresiones/Funcion");
+    const { Parametro } = require("./AST_JS/Expresiones/Parametro");
+    const { Primitivo } = require("./AST_JS/Expresiones/Primitivo");
+    const { TipoArreglo } = require("./AST_JS/Expresiones/TipoArreglo");
+
+    //sentencias
+    const { Print } = require("./AST_JS/Sentencias/Print");
+
 %}
 
 /* operator associations and precedence */
@@ -163,6 +173,7 @@ DECLARACIONES: DECLARACIONES DECLARACION
 
 DECLARACION : FUNCION
     {
+        $$ = $1;
     }
     | DECLARACION_VARIABLE PUEDE_SEMICOLON
     {
@@ -206,10 +217,11 @@ ATRIBUTO : TIPO_DATO id
 
 FUNCION : TIPO_DATO id '(' PARAMETROS ')' '{' BLOQUES '}' 
     {
+        $$ = new Funcion($1, $2, $4, $7, @2.first_line,@2.first_column);
     }
     | res_void id '(' PARAMETROS ')' '{' BLOQUES '}' 
     {
-
+        $$ = new Funcion(Expresion.State.VOID, $2, $4, $7, @2.first_line,@2.first_column);
     }
 ;
 
@@ -250,26 +262,33 @@ TIPO_VAR : res_var
 
 TIPO_DATO : TYPE '[' ']' 
     {
+        $$ = new TipoArreglo($1,@2.first_line,@2.first_column);
     }
     | TYPE 
     {
+        $$ = $1;
     }
 ;
 
 TYPE : res_integer
     {
+        $$ = Expresion.State.INTEGER;
     }
     | res_double
     {
+        $$ = Expresion.State.DOUBLE;
     }
     | res_char
     {
+        $$ = Expresion.State.CHAR;
     }
     | res_boolean
     {
+        $$ = Expresion.State.BOOLEAN;
     }
     | id
     {
+        $$ = $1;
     }
 ;
 
@@ -299,33 +318,49 @@ LIST_ACCESO1: '.' id
 
 PARAMETROS : LISTA_PARAMETROS
     {
+        $$ = $1;
     }
     | /* empty */
     {
+        $$ = null;
     }
 ;
 
 LISTA_PARAMETROS : LISTA_PARAMETROS ',' TIPO_DATO id
     {
+        var lista = $1;
+        lista.push(new Parametro($3,$4,@4.first_line,@4.first_column));
+        $$ = lista;
     }
     | TIPO_DATO id
     {
+        var lista = [];
+        lista.push(new Parametro($1,$2,@2.first_line,@2.first_column));
+        $$ = lista;
     }
 ;
 
 BLOQUES : LISTA_BLOQUES
     {
+        $$ = $1;
     }
     | /* empty */
     {
+        $$ = null;
     }
 ;
 
 LISTA_BLOQUES : LISTA_BLOQUES BLOQUE
     {
+        var lista = $1;
+        lista.push($2);
+        $$ = lista;
     }
     | BLOQUE
     {
+        var lista = [];
+        lista.push($1);
+        $$ = lista;
     }
 ;
 
@@ -359,10 +394,6 @@ SENTENCIA : IF
     | TRY_CATCH
     {
     }
-    | NATIVAS PUEDE_SEMICOLON
-    {
-        $$ = $1;
-    }
 ;
 
 NATIVAS : res_print '(' E ')' 
@@ -385,6 +416,10 @@ INSTRUCCION : res_break
     }
     | RETURN
     {
+    }
+    | NATIVAS
+    {
+        $$ = $1;
     }
 ;
 

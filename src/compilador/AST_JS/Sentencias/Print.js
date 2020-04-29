@@ -13,23 +13,19 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
-var Expresion_1 = require("../Expresion");
-var Primitivo = /** @class */ (function (_super) {
-    __extends(Primitivo, _super);
-    function Primitivo(value, TIPO, fila, columna) {
+var Sentencia_1 = require("../Sentencia");
+var Print = /** @class */ (function (_super) {
+    __extends(Print, _super);
+    function Print(expresion, fila, columna) {
         var _this = _super.call(this) || this;
-        _this.value = value;
-        _this.TIPO = TIPO;
+        _this.expresion = expresion;
         _this.fila = fila;
         _this.columna = columna;
         return _this;
     }
-    Primitivo.prototype.getTraduccion = function (entorno) {
+    Print.prototype.getTraduccion = function (entorno) {
         return "";
     };
-    Primitivo.prototype.getTipo = function (entorno) {
-        return null;
-    };
-    return Primitivo;
-}(Expresion_1.Expresion));
-exports.Primitivo = Primitivo;
+    return Print;
+}(Sentencia_1.Sentencia));
+exports.Print = Print;

@@ -14,22 +14,23 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var Expresion_1 = require("../Expresion");
-var Primitivo = /** @class */ (function (_super) {
-    __extends(Primitivo, _super);
-    function Primitivo(value, TIPO, fila, columna) {
+var Parametro = /** @class */ (function (_super) {
+    __extends(Parametro, _super);
+    function Parametro(TIPO, id, fila, columna) {
         var _this = _super.call(this) || this;
-        _this.value = value;
+        _this.id = id;
         _this.TIPO = TIPO;
         _this.fila = fila;
         _this.columna = columna;
+        _this.value = null;
         return _this;
     }
-    Primitivo.prototype.getTraduccion = function (entorno) {
+    Parametro.prototype.getTraduccion = function (entorno) {
         return "";
     };
-    Primitivo.prototype.getTipo = function (entorno) {
-        return null;
+    Parametro.prototype.getTipo = function (entorno) {
+        return this.TIPO;
     };
-    return Primitivo;
+    return Parametro;
 }(Expresion_1.Expresion));
-exports.Primitivo = Primitivo;
+exports.Parametro = Parametro;

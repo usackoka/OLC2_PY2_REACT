@@ -163,7 +163,6 @@ DECLARACIONES: DECLARACIONES DECLARACION
 
 DECLARACION : FUNCION
     {
-        $$ = $1;
     }
     | DECLARACION_VARIABLE PUEDE_SEMICOLON
     {
@@ -327,12 +326,12 @@ LISTA_BLOQUES : LISTA_BLOQUES BLOQUE
     }
     | BLOQUE
     {
-
     }
 ;
 
 BLOQUE : SENTENCIA 
     {
+        $$ = $1;
     }
     | INSTRUCCION PUEDE_SEMICOLON
     {
@@ -362,11 +361,13 @@ SENTENCIA : IF
     }
     | NATIVAS PUEDE_SEMICOLON
     {
+        $$ = $1;
     }
 ;
 
 NATIVAS : res_print '(' E ')' 
     {
+        $$ = new Print($3,@1.first_line,@1.first_column);
     }
 ;
 
@@ -512,6 +513,7 @@ LISTA_E : LISTA_E ',' E
 
 E : CONSTANTE    
     {
+        $$ = $1;
     }
     | BINARIA
     {
@@ -577,24 +579,31 @@ NEW_EXCEPTION := res_strc EXCEPTION '(' ')'
 
 CONSTANTE : int
     {
+        $$ = new Primitivo(Number($1),Expresion.State.INTEGER,@1.first_line,@1.first_column);
     }
     | res_true
     {
+        $$ = new Primitivo(true,Expresion.State.BOOLEAN,@1.first_line,@1.first_column);
     }
     | res_false
     {
+        $$ = new Primitivo(true,Expresion.State.FALSE,@1.first_line,@1.first_column);
     }
     | double
     {
+        $$ = new Primitivo(Number($1),Expresion.State.DOUBLE,@1.first_line,@1.first_column);
     }
     | res_null
     {
+        $$ = new Primitivo(null,Expresion.State.NULL,@1.first_line,@1.first_column);
     }
     | string
     {
+        $$ = new Primitivo($1,Expresion.State.STRING,@1.first_line,@1.first_column);
     }
     | char
     {
+        $$ = new Primitivo($1,Expresion.State.CHAR,@1.first_line,@1.first_column);
     }
 ;
 

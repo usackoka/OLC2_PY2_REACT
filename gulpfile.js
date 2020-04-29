@@ -6,10 +6,22 @@ gulp.task('typescript', () => {
     // Seleccionar todos los archivos .ts
     var tsResult = gulp.src('./src/compilador/AST/*.ts')
     .pipe(ts({
-    noImplicitAny: true
- }));
+        noImplicitAny: true
+    }));
+    // Seleccionar todos los archivos .ts
+    var tsResult2 = gulp.src('./src/compilador/AST/Expresiones/*.ts')
+    .pipe(ts({
+        noImplicitAny: true
+    }));
+    // Seleccionar todos los archivos .ts
+    var tsResult3 = gulp.src('./src/compilador/AST/Sentencias/*.ts')
+    .pipe(ts({
+        noImplicitAny: true
+    }));
     // Destino del proyecto compilado
-    return tsResult.js.pipe(gulp.dest('./src/compilador/AST_JS'));
+    tsResult.js.pipe(gulp.dest('./src/compilador/AST_JS'));
+    tsResult2.js.pipe(gulp.dest('./src/compilador/AST_JS/Expresiones'));
+    return tsResult3.js.pipe(gulp.dest('./src/compilador/AST_JS/Sentencias'));
 });
 
 // Task para observar los cambios al proyecto

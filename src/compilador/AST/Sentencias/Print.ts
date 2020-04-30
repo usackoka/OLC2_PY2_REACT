@@ -78,6 +78,8 @@ export class Print extends Sentencia{
                     entorno.addPrint(Print.State.CHAR,10);
                 }
                 break;
+            default:
+                entorno.addError("Print","No soportado TIPO: "+TIPO,this.fila,this.columna);
         }
 
         return "";

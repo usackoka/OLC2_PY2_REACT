@@ -371,9 +371,11 @@ BLOQUE : SENTENCIA
     }
     | INSTRUCCION PUEDE_SEMICOLON
     {
+        $$ = $1;
     }
     | DECLARACION_VARIABLE PUEDE_SEMICOLON
     {
+        $$ = $1;
     }
 ;
 
@@ -411,12 +413,15 @@ INSTRUCCION : res_break
     }
     | LLAMADA
     {
+        $$ = $1;
     }
     | ASIGNACION_VARIABLE
     {
+        $$ = $1;
     }
     | RETURN
     {
+        $$ = $1;
     }
     | NATIVAS
     {
@@ -553,21 +558,27 @@ E : CONSTANTE
     }
     | BINARIA
     {
+        $$ = $1;
     }
     | UNARIA
     {
+        $$ = $1;
     }
     | '(' E ')'
     {
+        $$ = $2;
     }
     | LIST_ACCESO
     {
+        $$ = $1;
     }
     | E_ARREGLO
     {
+        $$ = $1;
     }
     | NEW_STRUCT 
     {
+        $$ = $1;
     }
 ; 
 

@@ -93,12 +93,12 @@ case 2: case 3:
         exports.principal.nodos.push($$[$0]);
     
 break;
-case 4: case 25: case 30: case 37: case 41: case 45: case 60: case 92:
+case 4: case 25: case 30: case 37: case 41: case 45: case 57: case 58: case 59: case 60: case 92:
 
         this.$ = $$[$0];
     
 break;
-case 5: case 7: case 8: case 12: case 13: case 21: case 22: case 23: case 33: case 34: case 35: case 36: case 46: case 47: case 48: case 49: case 50: case 51: case 52: case 53: case 55: case 56: case 57: case 58: case 59: case 61: case 62: case 63: case 64: case 65: case 66: case 67: case 68: case 69: case 70: case 71: case 72: case 73: case 74: case 79: case 80: case 81: case 82: case 83: case 84: case 85: case 90: case 91: case 93: case 94: case 95: case 96: case 97: case 98: case 99: case 100: case 101: case 104: case 105: case 106: case 107: case 108: case 109: case 117: case 118: case 119: case 120: case 121: case 122: case 123: case 124: case 125: case 126: case 127: case 128: case 129: case 130: case 131: case 132: case 133: case 134: case 135: case 136: case 137: case 138: case 139: case 140:
+case 5: case 7: case 8: case 12: case 13: case 21: case 22: case 23: case 33: case 34: case 35: case 36: case 48: case 49: case 50: case 51: case 52: case 53: case 55: case 56: case 61: case 62: case 63: case 64: case 65: case 66: case 67: case 68: case 69: case 70: case 71: case 72: case 73: case 74: case 79: case 80: case 81: case 82: case 83: case 84: case 85: case 90: case 91: case 93: case 94: case 95: case 96: case 97: case 98: case 99: case 100: case 101: case 104: case 105: case 106: case 107: case 108: case 109: case 117: case 118: case 119: case 120: case 121: case 122: case 123: case 124: case 125: case 126: case 127: case 128: case 129: case 130: case 131: case 132: case 133: case 134: case 135: case 136: case 137: case 138: case 139: case 140:
 
     
 break;
@@ -173,6 +173,11 @@ case 44:
         var lista = [];
         lista.push($$[$0]);
         this.$ = lista;
+    
+break;
+case 46: case 47:
+
+        this.$ = $$[$0-1];
     
 break;
 case 54:

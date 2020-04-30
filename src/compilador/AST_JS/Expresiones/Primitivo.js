@@ -43,11 +43,11 @@ var Primitivo = /** @class */ (function (_super) {
                 caracteres = this.getCaracteres(caracteres);
                 var retorno = entorno.getTemp();
                 entorno.addValor(retorno, "H");
-                for (var caracter in caracteres) {
+                caracteres.forEach(function (caracter) {
                     entorno.addComentario("ascii: " + String.fromCharCode(Number(caracter)));
                     entorno.addValorEnHeap("H", caracter);
                     entorno.incH();
-                }
+                });
                 entorno.addComentario("ascii: eos");
                 entorno.addValorEnHeap("H", "3");
                 entorno.incH();
@@ -73,7 +73,7 @@ var Primitivo = /** @class */ (function (_super) {
         }
     };
     Primitivo.prototype.getTipo = function (entorno) {
-        return null;
+        return this.TIPO;
     };
     Primitivo.prototype.trimComillas = function (cadena) {
         if (cadena.length > 1) {

@@ -3,6 +3,7 @@ exports.__esModule = true;
 var Entorno_1 = require("./Entorno");
 var Token_1 = require("./Token");
 var Print_1 = require("./Sentencias/Print");
+var Funcion_1 = require("./Expresiones/Funcion");
 var Principal = /** @class */ (function () {
     function Principal() {
         this.entorno = new Entorno_1.Entorno(null, this);
@@ -29,10 +30,24 @@ var Principal = /** @class */ (function () {
         }
         this.traduccion += ";\n\n";
         this.addComentario("============= DECLARACION DE ESTRUCTURAS Y VARIABLES DE CONTROL");
-        this.traduccion += "var P,H;\nvar stack[];\nvar heap[];\n\n";
-        //traduzco cada nodo encontrado
+        this.traduccion += "var P,H;\nvar stack[];\nvar heap[];\n";
+        this.traduccion += "P = 0;\nH = 0\n\n";
+        //traduzco cada nodo encontrado menos las funciones
         this.nodos.forEach(function (nodo) {
-            nodo.getTraduccion(_this.entorno);
+            if (!(nodo instanceof Funcion_1.Funcion)) {
+                nodo.getTraduccion(_this.entorno);
+            }
+        });
+        //traduzco llamda al main()
+        this.addComentario("======================= EJECUCION DEL MAIN ========================");
+        this.addCall("Principal");
+        //traduzco las funciones
+        var etqFinPrograma = this.getETQ();
+        this.addGoto(etqFinPrograma);
+        this.nodos.forEach(function (nodo) {
+            if (nodo instanceof Funcion_1.Funcion) {
+                nodo.getTraduccion(_this.entorno);
+            }
         });
         /**
          * Agrego los métodos nativos
@@ -45,9 +60,9 @@ var Principal = /** @class */ (function () {
         this.QuemadaString2();
         this.QuemadaEntero();
         this.QuemadaPotencia();
-        this.addComentario("======================= EJECUCION DEL MAIN ========================");
-        //traduzco llamda al main()
-        this.addCall("principal");
+        //FIN DEL PROGRAMA
+        this.addETQ(etqFinPrograma);
+        this.addComentario("==================== FIN DEL PROGRAMA =========================");
         return this.traduccion;
     };
     //=================================== METODOS DE TRADUCCIÓN
@@ -56,6 +71,7 @@ var Principal = /** @class */ (function () {
     };
     Principal.prototype.addError = function (lexema, mensaje, fila, columna) {
         this.erroresSemanticos.push(new Token_1.Token(lexema, "Error Semántico", mensaje, fila, columna));
+        console.log(lexema + "-" + mensaje + "-" + fila + "-" + columna);
     };
     Principal.prototype.addTraduccion = function (cadena) {
         this.traduccion += cadena;

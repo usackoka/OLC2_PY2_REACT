@@ -2,6 +2,7 @@ import { Nodo } from './Nodo'
 import { Entorno } from './Entorno';
 import { Token } from './Token';
 import { Print } from './Sentencias/Print';
+import { Funcion } from './Expresiones/Funcion';
 
 export class Principal {
     nodos: Array<Nodo>;
@@ -42,11 +43,27 @@ export class Principal {
         this.traduccion += ";\n\n"
 
         this.addComentario("============= DECLARACION DE ESTRUCTURAS Y VARIABLES DE CONTROL");
-        this.traduccion += "var P,H;\nvar stack[];\nvar heap[];\n\n" 
+        this.traduccion += "var P,H;\nvar stack[];\nvar heap[];\n";
+        this.traduccion += "P = 0;\nH = 0\n\n"
 
-        //traduzco cada nodo encontrado
+        //traduzco cada nodo encontrado menos las funciones
         this.nodos.forEach(nodo => {
-            nodo.getTraduccion(this.entorno);
+            if(!(nodo instanceof Funcion)){
+                nodo.getTraduccion(this.entorno);
+            }
+        });
+
+        //traduzco llamda al main()
+        this.addComentario("======================= EJECUCION DEL MAIN ========================");
+        this.addCall("Principal");
+
+        //traduzco las funciones
+        let etqFinPrograma = this.getETQ();
+        this.addGoto(etqFinPrograma);
+        this.nodos.forEach(nodo => {
+            if(nodo instanceof Funcion){
+                nodo.getTraduccion(this.entorno);
+            }
         });
 
         /**
@@ -61,9 +78,9 @@ export class Principal {
         this.QuemadaEntero();
         this.QuemadaPotencia();
 
-        this.addComentario("======================= EJECUCION DEL MAIN ========================");
-        //traduzco llamda al main()
-        this.addCall("principal");
+        //FIN DEL PROGRAMA
+        this.addETQ(etqFinPrograma);
+        this.addComentario("==================== FIN DEL PROGRAMA =========================");
 
         return this.traduccion;
     }
@@ -75,6 +92,7 @@ export class Principal {
     
     public addError(lexema:string,mensaje:string, fila:number, columna:number){
         this.erroresSemanticos.push(new Token(lexema,"Error Semántico",mensaje,fila,columna));
+        console.log(lexema+"-"+mensaje+"-"+fila+"-"+columna);
     }
     
     public addTraduccion(cadena:string){

@@ -28,6 +28,8 @@ gulp.task('typescript', () => {
 gulp.task('watch', () => {
     // Observar proyecto
     gulp.watch('./src/compilador/AST/*.ts', gulp.series('typescript'));
+    gulp.watch('./src/compilador/AST/Expresiones/*.ts', gulp.series('typescript'));
+    gulp.watch('./src/compilador/AST/Sentencias/*.ts', gulp.series('typescript'));
 });
 
 // Trigger a los tasks

@@ -33,11 +33,11 @@ export class Primitivo extends Expresion{
                 caracteres = this.getCaracteres(caracteres);
                 var retorno:string = entorno.getTemp();
                 entorno.addValor(retorno,"H");
-                for (const caracter in caracteres) {
+                caracteres.forEach(caracter=>{
                     entorno.addComentario("ascii: "+String.fromCharCode(Number(caracter)));
                     entorno.addValorEnHeap("H",caracter);
                     entorno.incH();
-                }
+                });
                 entorno.addComentario("ascii: eos");
                 entorno.addValorEnHeap("H","3");
                 entorno.incH();
@@ -64,7 +64,7 @@ export class Primitivo extends Expresion{
     }
 
     public getTipo(entorno:Entorno):Object{
-        return null;
+        return this.TIPO;
     }
 
     public trimComillas(cadena:string):string{

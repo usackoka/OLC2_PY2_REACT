@@ -11,4 +11,7 @@ void Principal(){
     print(false)
     print("Ultimo")
     print(true)
+
+    print("===== EXPRESIONES =====")
+    print("Esto debería de dar 14: "+((5)+2)*2)
 }

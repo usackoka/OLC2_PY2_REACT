@@ -130,6 +130,7 @@ digito = [0-9]
     const { Parametro } = require("./AST_JS/Expresiones/Parametro");
     const { Primitivo } = require("./AST_JS/Expresiones/Primitivo");
     const { TipoArreglo } = require("./AST_JS/Expresiones/TipoArreglo");
+    const { Aritmetica } = require("./AST_JS/Expresiones/Aritmetica");
 
     //sentencias
     const { Print } = require("./AST_JS/Sentencias/Print");
@@ -656,12 +657,15 @@ CONSTANTE : int
 
 BINARIA : ARITMETICA
     {
+        $$ = $1;
     }
     | LOGICA
     {
+        $$ = $1;
     }
     | RELACIONAL
     {
+        $$ = $1;
     }
 ;
 
@@ -684,21 +688,27 @@ UNARIA: '-' E %prec UTmenos
 
 ARITMETICA : E '+' E
     {
+        $$ = new Aritmetica(Aritmetica.TYPE.SUMA,$1,$3,@2.first_line,@2.first_column);
     }
     | E '-' E
     {
+        $$ = new Aritmetica(Aritmetica.TYPE.RESTA,$1,$3,@2.first_line,@2.first_column);
     }
     | E '*' E
     {
+        $$ = new Aritmetica(Aritmetica.TYPE.MULTIPLICACION,$1,$3,@2.first_line,@2.first_column);
     }
     | E '/' E
     {
+        $$ = new Aritmetica(Aritmetica.TYPE.DIVISION,$1,$3,@2.first_line,@2.first_column);
     }
     | E '^^' E
     {
+        $$ = new Aritmetica(Aritmetica.TYPE.POTENCIA,$1,$3,@2.first_line,@2.first_column);
     }
     | E '%' E
     {
+        $$ = new Aritmetica(Aritmetica.TYPE.MODULAR,$1,$3,@2.first_line,@2.first_column);
     }
 ;
 

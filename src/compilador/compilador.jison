@@ -634,7 +634,7 @@ CONSTANTE : int
     }
     | res_false
     {
-        $$ = new Primitivo(true,Expresion.State.FALSE,@1.first_line,@1.first_column);
+        $$ = new Primitivo(false,Expresion.State.BOOLEAN,@1.first_line,@1.first_column);
     }
     | double
     {

@@ -45,7 +45,7 @@ export class Primitivo extends Expresion{
                 return retorno;
             case Expresion.State.CHAR:
                 entorno.addComentario("============== Guardando valor en heap char ======================");
-                let charac:string = this.value.toString().charAt(0);
+                let charac:string = this.value.toString().charAt(1);
                 retorno = entorno.getTemp();
                 entorno.addValor(retorno,"H");
                 let ascii:number = charac.charCodeAt(0);

@@ -60,8 +60,8 @@ export class Print extends Sentencia{
                 p2.getTraduccion(entorno);
                 entorno.addGoto(l3);
                 entorno.addETQ(l2);
-                p = new Primitivo("false",Expresion.State.STRING, this.fila, this.columna);
-                p2 = new Print(p,this.fila, this.columna);
+                var p:Primitivo = new Primitivo("false",Expresion.State.STRING, this.fila, this.columna);
+                var p2:Print = new Print(p,this.fila, this.columna);
                 p2.getTraduccion(entorno);
                 entorno.addETQ(l3);
                 entorno.addComentario("================= fin impresion boolean ================");

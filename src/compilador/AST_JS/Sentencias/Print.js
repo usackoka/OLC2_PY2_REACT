@@ -70,8 +70,8 @@ var Print = /** @class */ (function (_super) {
                 p2.getTraduccion(entorno);
                 entorno.addGoto(l3);
                 entorno.addETQ(l2);
-                p = new Primitivo_1.Primitivo("false", Expresion_1.Expresion.State.STRING, this.fila, this.columna);
-                p2 = new Print(p, this.fila, this.columna);
+                var p = new Primitivo_1.Primitivo("false", Expresion_1.Expresion.State.STRING, this.fila, this.columna);
+                var p2 = new Print(p, this.fila, this.columna);
                 p2.getTraduccion(entorno);
                 entorno.addETQ(l3);
                 entorno.addComentario("================= fin impresion boolean ================");

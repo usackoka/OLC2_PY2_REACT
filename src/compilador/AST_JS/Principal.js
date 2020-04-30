@@ -15,23 +15,9 @@ var Principal = /** @class */ (function () {
     }
     Principal.prototype.run = function () {
         var _this = this;
-        this.traduccion = "";
-        //declaracion de temporales usados
-        this.addComentario("=========== DECLARACION DE TEMPORALES USADOS ");
-        this.traduccion += "var t0";
-        var aux = 0;
-        for (var i = 1; i < this.contadorTemporales + 1; i++) {
-            if (aux = 20) {
-                this.traduccion += "\n";
-                aux = 0;
-            }
-            this.traduccion += ", t" + i + "";
-            aux++;
-        }
-        this.traduccion += ";\n\n";
         this.addComentario("============= DECLARACION DE ESTRUCTURAS Y VARIABLES DE CONTROL");
         this.traduccion += "var P,H;\nvar stack[];\nvar heap[];\n";
-        this.traduccion += "P = 0;\nH = 0\n\n";
+        this.traduccion += "P = 0;\nH = 0;\n\n";
         //traduzco cada nodo encontrado menos las funciones
         this.nodos.forEach(function (nodo) {
             if (!(nodo instanceof Funcion_1.Funcion)) {
@@ -63,11 +49,24 @@ var Principal = /** @class */ (function () {
         //FIN DEL PROGRAMA
         this.addETQ(etqFinPrograma);
         this.addComentario("==================== FIN DEL PROGRAMA =========================");
-        return this.traduccion;
+        //declaracion de temporales usados
+        var trad = "";
+        trad += "var t0";
+        var aux = 0;
+        for (var i = 1; i < this.contadorTemporales + 1; i++) {
+            if (aux > 20) {
+                trad += "\n";
+                aux = 0;
+            }
+            trad += ", t" + i + "";
+            aux++;
+        }
+        trad += ";\n\n";
+        return trad + "\n" + this.traduccion;
     };
     //=================================== METODOS DE TRADUCCIÓN
     Principal.prototype.addComentario = function (cadena) {
-        this.traduccion += "#*" + cadena + "*#\n";
+        this.traduccion += "#* //" + cadena + "*#\n";
     };
     Principal.prototype.addError = function (lexema, mensaje, fila, columna) {
         this.erroresSemanticos.push(new Token_1.Token(lexema, "Error Semántico", mensaje, fila, columna));

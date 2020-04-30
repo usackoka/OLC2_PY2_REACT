@@ -26,25 +26,9 @@ export class Principal {
     }
 
     public run():string{
-        this.traduccion = "";
-
-        //declaracion de temporales usados
-        this.addComentario("=========== DECLARACION DE TEMPORALES USADOS ");
-        this.traduccion += "var t0";
-        let aux:number = 0;
-        for(let i=1; i<this.contadorTemporales+1; i++){
-            if(aux=20){
-                this.traduccion += "\n";
-                aux = 0;
-            }
-            this.traduccion += ", t"+i+""
-            aux++;
-        }
-        this.traduccion += ";\n\n"
-
         this.addComentario("============= DECLARACION DE ESTRUCTURAS Y VARIABLES DE CONTROL");
         this.traduccion += "var P,H;\nvar stack[];\nvar heap[];\n";
-        this.traduccion += "P = 0;\nH = 0\n\n"
+        this.traduccion += "P = 0;\nH = 0;\n\n"
 
         //traduzco cada nodo encontrado menos las funciones
         this.nodos.forEach(nodo => {
@@ -82,12 +66,27 @@ export class Principal {
         this.addETQ(etqFinPrograma);
         this.addComentario("==================== FIN DEL PROGRAMA =========================");
 
-        return this.traduccion;
+        
+        //declaracion de temporales usados
+        let trad:string = "";
+        trad += "var t0";
+        let aux:number = 0;
+        for(let i=1; i<this.contadorTemporales+1; i++){
+            if(aux>20){
+                trad += "\n";
+                aux = 0;
+            }
+            trad += ", t"+i+""
+            aux++;
+        }
+        trad += ";\n\n"
+
+        return trad+"\n"+this.traduccion;
     }
 
     //=================================== METODOS DE TRADUCCIÓN
     public addComentario(cadena:string){
-        this.traduccion += "#*"+cadena+"*#\n";
+        this.traduccion += "#* //"+cadena+"*#\n";
     }
     
     public addError(lexema:string,mensaje:string, fila:number, columna:number){

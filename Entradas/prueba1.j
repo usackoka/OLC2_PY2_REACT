@@ -15,3 +15,15 @@ void Principal(){
     print("===== EXPRESIONES =====")
     print("Esto debería de dar 14: "+((5)+2)*2)
 }
+
+void Principal(){
+    print(c2)
+    f1(5)
+    print(c2)
+    f1(4)
+    print(c2)
+}
+
+void f1(Integer n1){
+    global c2 := n1;
+}

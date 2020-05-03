@@ -13,7 +13,7 @@ void Principal(){
     print(true)
 
     print("===== EXPRESIONES =====")
-    print("Esto debería de dar 14: "+((5)+2)*2)
+    print("Esto debería de dar 14: "+(((5)+2)*2))
 }
 
 void Principal(){

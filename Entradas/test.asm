@@ -1,11 +1,11 @@
-#*=========== DECLARACION DE TEMPORALES USADOS *#
-var t0;
+var t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21
+, t22, t23, t24, t25, t26;
+
 
 #*============= DECLARACION DE ESTRUCTURAS Y VARIABLES DE CONTROL*#
 var P,H;
 var stack[];
 var heap[];
-
 P = 0;
 H = 0;
 
@@ -64,7 +64,7 @@ t3 = t2+1;
 stack[t3] = t1;
 #*cambio real de ambito*#
 P = P+2;
-call nativa_imprimir_string2;
+call nativa_imprimir_string;
 P = P-2;
 #*======= fin llamada impresion cadena =======*#
 L1:

@@ -131,9 +131,14 @@ digito = [0-9]
     const { Primitivo } = require("./AST_JS/Expresiones/Primitivo");
     const { TipoArreglo } = require("./AST_JS/Expresiones/TipoArreglo");
     const { Aritmetica } = require("./AST_JS/Expresiones/Aritmetica");
+    const { Relacional } = require("./AST_JS/Expresiones/Relacional")
+    const { Logica } = require("./AST_JS/Expresiones/Logica")
+    const { Unario } = require("./AST_JS/Expresiones/Unario")
 
     //sentencias
     const { Print } = require("./AST_JS/Sentencias/Print");
+    const { If } = require("./AST_JS/Sentencias/If");
+    const { Else } = require("./AST_JS/Sentencias/Else");
 
 %}
 
@@ -382,6 +387,7 @@ BLOQUE : SENTENCIA
 
 SENTENCIA : IF
     {
+        $$ = $1;
     }
     | SWITCH
     {
@@ -448,17 +454,21 @@ TRY_CATCH : res_try '{' BLOQUES '}' res_catch '(' EXCEPTION id ')' '{' BLOQUES '
 
 IF : res_if '(' E ')' '{' BLOQUES '}'
     {
+        $$ = new If($3,$6,null,@1.first_line,@1.first_column);
     }
     | res_if '(' E ')' '{' BLOQUES '}' ELSE
     {
+        $$ = new If($3,$6,$8,@1.first_line,@1.first_column);
     }
 ;
 
 ELSE : res_else IF
     {
+        $$ = $2;
     }
     | res_else '{' BLOQUES '}'
     {
+        $$ = new Else($3,@1.first_line,@1.first_column);
     }
 ;
 
@@ -671,18 +681,23 @@ BINARIA : ARITMETICA
 
 UNARIA: '-' E %prec UTmenos
     {
+        $$ = new Unario(Unario.TYPE.MENOS,$2,@1.first_line,@1.first_column);
     }
     | '!' E
     {
+        $$ = new Unario(Unario.TYPE.NOT,$2,@1.first_line,@1.first_column);
     }
     | '+' E %prec UTmas
     {
+        $$ = new Unario(Unario.TYPE.MAS,$2,@1.first_line,@1.first_column);
     }
     | E '++'
     {
+        $$ = new Unario(Unario.TYPE.MASMAS,$1,@2.first_line,@2.first_column);
     }
     | E '--'
     {
+        $$ = new Unario(Unario.TYPE.MENOSMENOS,$1,@2.first_line,@2.first_column);
     }
 ;
 
@@ -714,35 +729,45 @@ ARITMETICA : E '+' E
 
 LOGICA : E '||' E
     {
+        $$ = new Logica(Logica.TYPE.OR,$1,$3,@2.first_line,@2.first_column);
     }
     | E '&&' E
     {
+        $$ = new Logica(Logica.TYPE.AND,$1,$3,@2.first_line,@2.first_column);
     }
     | E '^' E
     {
+        $$ = new Logica(Logica.TYPE.XOR,$1,$3,@2.first_line,@2.first_column);
     }
 ;
 
 RELACIONAL : E '<' E
     {
+        $$ = new Relacional(Relacional.TYPE.MENORQUE,$1,$3,@2.first_line,@2.first_column);
     }
     | E '<=' E
     {
+        $$ = new Relacional(Relacional.TYPE.MENORIGUAL,$1,$3,@2.first_line,@2.first_column);
     }
     | E '>' E
     {
+        $$ = new Relacional(Relacional.TYPE.MAYORQUE,$1,$3,@2.first_line,@2.first_column);
     }
     | E '>=' E
     {
+        $$ = new Relacional(Relacional.TYPE.MAYORIGUAL,$1,$3,@2.first_line,@2.first_column);
     }
     | E '==' E
     {
+        $$ = new Relacional(Relacional.TYPE.IGUAL,$1,$3,@2.first_line,@2.first_column);
     }
     | E '===' E
     {
+        $$ = new Relacional(Relacional.TYPE.IGUAL_REFERENCIA,$1,$3,@2.first_line,@2.first_column);
     }
     | E '!=' E
     {
+        $$ = new Relacional(Relacional.TYPE.DIFERENTE,$1,$3,@2.first_line,@2.first_column);
     }
 ;
 

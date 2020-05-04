@@ -93,12 +93,12 @@ case 2: case 3:
         exports.principal.nodos.push($$[$0]);
     
 break;
-case 4: case 25: case 30: case 37: case 41: case 45: case 57: case 58: case 59: case 60: case 92: case 93: case 94: case 96: case 97: case 98: case 117: case 118: case 119:
+case 4: case 25: case 30: case 37: case 41: case 45: case 48: case 57: case 58: case 59: case 60: case 67: case 92: case 93: case 94: case 96: case 97: case 98: case 117: case 118: case 119:
 
         this.$ = $$[$0];
     
 break;
-case 5: case 7: case 8: case 12: case 13: case 21: case 22: case 23: case 33: case 34: case 35: case 36: case 48: case 49: case 50: case 51: case 52: case 53: case 55: case 56: case 61: case 62: case 63: case 64: case 65: case 66: case 67: case 68: case 69: case 70: case 71: case 72: case 73: case 74: case 79: case 80: case 81: case 82: case 83: case 84: case 85: case 90: case 91: case 99: case 100: case 101: case 104: case 105: case 106: case 107: case 108: case 109: case 120: case 121: case 122: case 123: case 124: case 131: case 132: case 133: case 134: case 135: case 136: case 137: case 138: case 139: case 140:
+case 5: case 7: case 8: case 12: case 13: case 21: case 22: case 23: case 33: case 34: case 35: case 36: case 49: case 50: case 51: case 52: case 53: case 55: case 56: case 61: case 62: case 63: case 64: case 69: case 70: case 71: case 72: case 73: case 74: case 79: case 80: case 81: case 82: case 83: case 84: case 85: case 90: case 91: case 99: case 100: case 101: case 104: case 105: case 106: case 107: case 108: case 109:
 
     
 break;
@@ -185,6 +185,21 @@ case 54:
         this.$ = new Print($$[$0-1],_$[$0-3].first_line,_$[$0-3].first_column);
     
 break;
+case 65:
+
+        this.$ = new If($$[$0-4],$$[$0-1],null,_$[$0-6].first_line,_$[$0-6].first_column);
+    
+break;
+case 66:
+
+        this.$ = new If($$[$0-5],$$[$0-2],$$[$0],_$[$0-7].first_line,_$[$0-7].first_column);
+    
+break;
+case 68:
+
+        this.$ = new Else($$[$0-1],_$[$0-3].first_line,_$[$0-3].first_column);
+    
+break;
 case 110:
 
         this.$ = new Primitivo(Number($$[$0]),Expresion.State.INTEGER,_$[$0].first_line,_$[$0].first_column);
@@ -220,6 +235,31 @@ case 116:
         this.$ = new Primitivo($$[$0],Expresion.State.CHAR,_$[$0].first_line,_$[$0].first_column);
     
 break;
+case 120:
+
+        this.$ = new Unario(Unario.TYPE.MENOS,$$[$0],_$[$0-1].first_line,_$[$0-1].first_column);
+    
+break;
+case 121:
+
+        this.$ = new Unario(Unario.TYPE.NOT,$$[$0],_$[$0-1].first_line,_$[$0-1].first_column);
+    
+break;
+case 122:
+
+        this.$ = new Unario(Unario.TYPE.MAS,$$[$0],_$[$0-1].first_line,_$[$0-1].first_column);
+    
+break;
+case 123:
+
+        this.$ = new Unario(Unario.TYPE.MASMAS,$$[$0-1],_$[$0].first_line,_$[$0].first_column);
+    
+break;
+case 124:
+
+        this.$ = new Unario(Unario.TYPE.MENOSMENOS,$$[$0-1],_$[$0].first_line,_$[$0].first_column);
+    
+break;
 case 125:
 
         this.$ = new Aritmetica(Aritmetica.TYPE.SUMA,$$[$0-2],$$[$0],_$[$0-1].first_line,_$[$0-1].first_column);
@@ -248,6 +288,56 @@ break;
 case 130:
 
         this.$ = new Aritmetica(Aritmetica.TYPE.MODULAR,$$[$0-2],$$[$0],_$[$0-1].first_line,_$[$0-1].first_column);
+    
+break;
+case 131:
+
+        this.$ = new Logica(Logica.TYPE.OR,$$[$0-2],$$[$0],_$[$0-1].first_line,_$[$0-1].first_column);
+    
+break;
+case 132:
+
+        this.$ = new Logica(Logica.TYPE.AND,$$[$0-2],$$[$0],_$[$0-1].first_line,_$[$0-1].first_column);
+    
+break;
+case 133:
+
+        this.$ = new Logica(Logica.TYPE.XOR,$$[$0-2],$$[$0],_$[$0-1].first_line,_$[$0-1].first_column);
+    
+break;
+case 134:
+
+        this.$ = new Relacional(Relacional.TYPE.MENORQUE,$$[$0-2],$$[$0],_$[$0-1].first_line,_$[$0-1].first_column);
+    
+break;
+case 135:
+
+        this.$ = new Relacional(Relacional.TYPE.MENORIGUAL,$$[$0-2],$$[$0],_$[$0-1].first_line,_$[$0-1].first_column);
+    
+break;
+case 136:
+
+        this.$ = new Relacional(Relacional.TYPE.MAYORQUE,$$[$0-2],$$[$0],_$[$0-1].first_line,_$[$0-1].first_column);
+    
+break;
+case 137:
+
+        this.$ = new Relacional(Relacional.TYPE.MAYORIGUAL,$$[$0-2],$$[$0],_$[$0-1].first_line,_$[$0-1].first_column);
+    
+break;
+case 138:
+
+        this.$ = new Relacional(Relacional.TYPE.IGUAL,$$[$0-2],$$[$0],_$[$0-1].first_line,_$[$0-1].first_column);
+    
+break;
+case 139:
+
+        this.$ = new Relacional(Relacional.TYPE.IGUAL_REFERENCIA,$$[$0-2],$$[$0],_$[$0-1].first_line,_$[$0-1].first_column);
+    
+break;
+case 140:
+
+        this.$ = new Relacional(Relacional.TYPE.DIFERENTE,$$[$0-2],$$[$0],_$[$0-1].first_line,_$[$0-1].first_column);
     
 break;
 }
@@ -410,9 +500,14 @@ parse: function parse(input) {
     const { Primitivo } = require("./AST_JS/Expresiones/Primitivo");
     const { TipoArreglo } = require("./AST_JS/Expresiones/TipoArreglo");
     const { Aritmetica } = require("./AST_JS/Expresiones/Aritmetica");
+    const { Relacional } = require("./AST_JS/Expresiones/Relacional")
+    const { Logica } = require("./AST_JS/Expresiones/Logica")
+    const { Unario } = require("./AST_JS/Expresiones/Unario")
 
     //sentencias
     const { Print } = require("./AST_JS/Sentencias/Print");
+    const { If } = require("./AST_JS/Sentencias/If");
+    const { Else } = require("./AST_JS/Sentencias/Else");
 
 
 

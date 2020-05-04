@@ -1,19 +1,19 @@
 void Principal(){
-    print(505)
-    print("Hola Mundo!")
-    print('O');
-    print('S');
-    print('C');
-    print('A');
-    print('R');
-    print(15.25)
-    print("Primero")
-    print(false)
-    print("Ultimo")
-    print(true)
-
-    print("===== EXPRESIONES =====")
     print("Esto debería de dar 14: "+(((5)+2)*2))
+
+    if(45>6){
+        print("Primer if correcto!");
+    }else{
+        print("Malo el if :c");
+    }
+
+    if(3 == 5){
+        print("Malo segundo if")
+    }else if(3.0 == 5){
+        print("Malísimo segundo if")
+    }else{
+        print("Bueno el segundo if!!")
+    }
 }
 
 void Principal(){

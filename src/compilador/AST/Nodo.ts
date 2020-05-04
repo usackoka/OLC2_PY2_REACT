@@ -14,5 +14,12 @@ export abstract class Nodo {
         this.columna = 0;
     }
 
+    public copiarEtiquetas(nodo:Nodo){
+        this.etqRetorno = nodo.etqRetorno;
+        this.etqContinue =nodo.etqContinue;
+        this.nombreFuncion = nodo.nombreFuncion;
+        this.etqBreak = nodo.etqBreak;
+    }
+
     public abstract getTraduccion(entorno:Entorno): string;
 }

@@ -139,6 +139,8 @@ digito = [0-9]
     const { Print } = require("./AST_JS/Sentencias/Print");
     const { If } = require("./AST_JS/Sentencias/If");
     const { Else } = require("./AST_JS/Sentencias/Else");
+    const { Continue } = require("./AST_JS/Sentencias/Continue");
+    const { Break } = require("./AST_JS/Sentencias/Break");
 
 %}
 
@@ -184,13 +186,15 @@ DECLARACION : FUNCION
     }
     | DECLARACION_VARIABLE PUEDE_SEMICOLON
     {
+        $$ = $1;
     }
     | DECLARACION_STRUCT PUEDE_SEMICOLON
-    |
     {
+        $$ = $1;
     }
     | res_import LISTA_ID PUEDE_SEMICOLON
     {
+        $$ = $1;
     }
 ;
 
@@ -414,9 +418,11 @@ NATIVAS : res_print '(' E ')'
 
 INSTRUCCION : res_break
     {
+        $$ = new Break(@1.first_line,@1.first_column);
     }
     | res_continue
     {
+        $$ = new Continue(@1.first_line,@1.first_column);
     }
     | LLAMADA
     {
@@ -426,7 +432,7 @@ INSTRUCCION : res_break
     {
         $$ = $1;
     }
-    | RETURN
+    | RETURN ';'
     {
         $$ = $1;
     }

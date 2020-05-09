@@ -1,18 +1,21 @@
 import { Principal } from "./Principal";
 import { Print } from "./Sentencias/Print";
+import { Simbolo } from "./Simbolo";
 
 export class Entorno {
     principal:Principal;
     padre:Entorno;
     size:number;
-    temporalesUsados:Array<String>;
     primerTemporal:number;
+    temporalesUsados:Array<String>;
+    tbs:Map<string,Simbolo>;
 
     public constructor(padre:Entorno, principal?:Principal){
         this.size = 0;
         this.padre = padre;
         this.primerTemporal = 0;
         this.temporalesUsados = [];
+        this.tbs = new Map();
         //guardo principal en el padre, para poder hacer uso de los métodos de traducción.
         this.principal=principal?principal:null;
 
@@ -28,6 +31,18 @@ export class Entorno {
         if (!this.temporalesUsados.includes(id))
         {
             this.temporalesUsados.push(id);
+        }
+    }
+
+    public addSimbolo(id:string, s:Simbolo, entorno:Entorno, fila:number, columna:number) {
+        id = id.toLowerCase();
+        s.posicion = this.size;
+        s.fila = fila;
+        s.columna = columna;
+        if (!this.tbs.has(id))
+        {
+            this.tbs.set(id, s);
+            this.size++;
         }
     }
 

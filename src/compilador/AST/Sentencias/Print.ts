@@ -20,8 +20,6 @@ export class Print extends Sentencia{
         var TIPO:Object = this.expresion.getTipo(entorno);
         var tImpresion:string = this.expresion.getTraduccion(entorno);
 
-        console.log("print con tipo: "+TIPO)
-
         switch(TIPO){
             case Expresion.State.STRING:
             case Expresion.State.CHAR:
@@ -81,7 +79,6 @@ export class Print extends Sentencia{
                 }
                 return;
             default:
-                console.log("default: "+TIPO)
                 entorno.addError("Print","No soportado TIPO: "+TIPO,this.fila,this.columna);
                 return;
         }

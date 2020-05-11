@@ -134,6 +134,7 @@ digito = [0-9]
     const { Relacional } = require("./AST_JS/Expresiones/Relacional")
     const { Logica } = require("./AST_JS/Expresiones/Logica")
     const { Unario } = require("./AST_JS/Expresiones/Unario")
+    const { Llamada } = require("./AST_JS/Expresiones/Llamada")
 
     //sentencias
     const { Print } = require("./AST_JS/Sentencias/Print");
@@ -143,6 +144,7 @@ digito = [0-9]
     const { Break } = require("./AST_JS/Sentencias/Break");
     const { Declaracion } = require("./AST_JS/Sentencias/Declaracion");
     const { Reasignacion } = require("./AST_JS/Sentencias/Reasignacion");
+    const { ParametroLlamada } = require("./AST_JS/Sentencias/ParametroLlamada");
 
 %}
 
@@ -344,7 +346,7 @@ PARAMETROS : LISTA_PARAMETROS
     }
     | /* empty */
     {
-        $$ = null;
+        $$ = [];
     }
 ;
 
@@ -551,29 +553,35 @@ DEFAULT : res_default ':' BLOQUES
 
 PARAMETROS_LLAMADA : LISTA_PAR
     {
+        $$ = $1;
     }
     | /* empty */
     {
+        $$ = [];
     }
 ;
 
 LISTA_PAR : LISTA_PAR ',' PAR 
     {
-
+        var list = $1;
+        list.push($3)
+        $$ = list;
     }
     | PAR
     {
-
+        var list = [];
+        list.push($1)
+        $$ = list;
     }
 ;
 
 PAR : '$' E 
     {
-
+        $$ = new ParametroLlamada($2,true)
     }
     | E 
     {
-
+        $$ = new ParametroLlamada($1,false)
     }
 ;
 
@@ -660,6 +668,7 @@ ACCESO : id
 
 LLAMADA : id '(' PARAMETROS_LLAMADA ')'
     {
+        $$ = new Llamada($1,$3,@1.first_line,@1.first_column)
     }
 ;
 

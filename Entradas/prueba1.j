@@ -24,6 +24,11 @@ void Principal(){
     print(i)
     i = 71;
     print(i)
+    func1()
+}
+
+void func1(){
+    print("Desde func1() ya puedes ir a dormir :v")
 }
 
 void f1(Integer n1){

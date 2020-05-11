@@ -29,7 +29,6 @@ var Print = /** @class */ (function (_super) {
     Print.prototype.getTraduccion = function (entorno) {
         var TIPO = this.expresion.getTipo(entorno);
         var tImpresion = this.expresion.getTraduccion(entorno);
-        console.log("print con tipo: " + TIPO);
         switch (TIPO) {
             case Expresion_1.Expresion.State.STRING:
             case Expresion_1.Expresion.State.CHAR:
@@ -90,7 +89,6 @@ var Print = /** @class */ (function (_super) {
                 }
                 return;
             default:
-                console.log("default: " + TIPO);
                 entorno.addError("Print", "No soportado TIPO: " + TIPO, this.fila, this.columna);
                 return;
         }

@@ -1,7 +1,6 @@
 import { Entorno } from "../Entorno";
 import { Sentencia } from "../Sentencia";
 import { Expresion } from "../Expresion";
-import { Simbolo } from "../Simbolo";
 
 export class Reasignacion extends Sentencia{
 

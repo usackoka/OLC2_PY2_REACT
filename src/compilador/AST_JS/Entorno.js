@@ -39,7 +39,7 @@ var Entorno = /** @class */ (function () {
     Entorno.prototype.getTipo = function (id, fila, columna) {
         id = id.toLowerCase();
         if (this.tbs.has(id)) {
-            return this.tbs.get(id).tipo.toString();
+            return this.tbs.get(id).tipo;
         }
         else {
             if (this.padre == null) {

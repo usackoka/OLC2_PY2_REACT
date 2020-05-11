@@ -51,11 +51,11 @@ export class Entorno {
         }
     }
 
-    public getTipo(id:string,fila:number,columna:number):string{
+    public getTipo(id:string,fila:number,columna:number):Object{
         id = id.toLowerCase();
         if (this.tbs.has(id))
         {
-            return this.tbs.get(id).tipo.toString();
+            return this.tbs.get(id).tipo;
         }
         else {
             if (this.padre==null) {

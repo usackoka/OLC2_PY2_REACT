@@ -43,7 +43,7 @@ var Entorno = /** @class */ (function () {
         }
         else {
             if (this.padre == null) {
-                this.addError("GetValor", "No existe la variable: " + id, fila, columna);
+                this.addError("getTipo", "No existe la variable: " + id, fila, columna);
                 return "-1";
             }
             else {
@@ -58,7 +58,7 @@ var Entorno = /** @class */ (function () {
         }
         else {
             if (this.padre == null) {
-                this.addError("GetValor", "No existe la variable: " + id, fila, columna);
+                this.addError("isConst", "No existe la variable: " + id, fila, columna);
                 return true;
             }
             else {

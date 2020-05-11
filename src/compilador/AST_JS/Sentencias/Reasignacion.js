@@ -31,6 +31,14 @@ var Reasignacion = /** @class */ (function (_super) {
             entorno.addError("Constante: " + this.id, "No se puede modificar el valor de una constante", this.fila, this.columna);
             return "";
         }
+        var tmp = entorno.getTemp();
+        var tmpValor = this.expresion.getTraduccion(entorno);
+        entorno.addComentario("==== guardando valor ==========");
+        var posicion = entorno.getValor(this.id, this.fila, this.columna);
+        entorno.addValorOperacion(tmp, "P", "+", posicion);
+        entorno.addValorEnStack(tmp, tmpValor);
+        entorno.addTempUsed(tmp);
+        entorno.addTempUsed(tmpValor);
         entorno.addComentario("============== FIN REASIGNACION VARIABLE =================");
         return "";
     };

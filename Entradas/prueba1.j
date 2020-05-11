@@ -17,7 +17,12 @@ void Principal(){
 }
 
 void Principal(){
-    const i := 56;
+    print(30)
+    var i := 56;
+    print(i)
+    i = 40;
+    print(i)
+    i = 71;
     print(i)
 }
 

@@ -115,7 +115,7 @@ case 7:
         this.$ = $$[$0-2];
     
 break;
-case 8: case 9: case 10: case 30: case 31: case 85: case 86: case 87: case 88:
+case 8: case 9: case 10: case 31: case 85: case 86: case 87: case 88:
 
 
     
@@ -201,6 +201,11 @@ break;
 case 28:
 
         this.$ = Expresion.State.BOOLEAN;
+    
+break;
+case 30:
+
+        this.$ = new Reasignacion($$[$0-2],$$[$0],_$[$0-1].first_line,_$[$0-1].first_column)
     
 break;
 case 37: case 41:
@@ -582,6 +587,7 @@ parse: function parse(input) {
     const { Continue } = require("./AST_JS/Sentencias/Continue");
     const { Break } = require("./AST_JS/Sentencias/Break");
     const { Declaracion } = require("./AST_JS/Sentencias/Declaracion");
+    const { Reasignacion } = require("./AST_JS/Sentencias/Reasignacion");
 
 
 

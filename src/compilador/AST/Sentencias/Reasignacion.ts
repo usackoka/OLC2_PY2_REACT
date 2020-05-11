@@ -23,6 +23,16 @@ export class Reasignacion extends Sentencia{
             entorno.addError("Constante: "+this.id, "No se puede modificar el valor de una constante",this.fila,this.columna)
             return "";
         }
+
+        let tmp:string = entorno.getTemp()
+        let tmpValor = this.expresion.getTraduccion(entorno)
+        entorno.addComentario("==== guardando valor ==========");
+        let posicion = entorno.getValor(this.id, this.fila, this.columna);
+        entorno.addValorOperacion(tmp, "P", "+", posicion);
+        entorno.addValorEnStack(tmp, tmpValor);
+        entorno.addTempUsed(tmp);
+        entorno.addTempUsed(tmpValor);
+
         entorno.addComentario("============== FIN REASIGNACION VARIABLE =================");
         return "";
     }

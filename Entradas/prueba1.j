@@ -24,11 +24,16 @@ void Principal(){
     print(i)
     i = 71;
     print(i)
-    func1()
+    func2()
+    //func1("Con mensaje personalizado")
 }
 
-void func1(){
-    print("Desde func1() ya puedes ir a dormir :v")
+void func2(){
+    print("Desde func2")
+}
+
+void func1(String mensaje){
+    print("Desde func1() ya puedes ir a dormir :v"+mensaje)
 }
 
 void f1(Integer n1){

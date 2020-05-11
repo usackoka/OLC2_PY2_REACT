@@ -93,7 +93,7 @@ case 2: case 3:
         exports.principal.nodos.push($$[$0]);
     
 break;
-case 4: case 24: case 29: case 36: case 40: case 44: case 47: case 48: case 49: case 50: case 51: case 52: case 56: case 57: case 59: case 66: case 83: case 91: case 92: case 93: case 95: case 96: case 97: case 102: case 104: case 116: case 117: case 118:
+case 4: case 24: case 36: case 40: case 44: case 47: case 48: case 49: case 50: case 51: case 52: case 56: case 57: case 59: case 66: case 83: case 91: case 92: case 93: case 95: case 96: case 97: case 102: case 104: case 116: case 117: case 118:
 
         this.$ = $$[$0];
     
@@ -201,6 +201,15 @@ break;
 case 28:
 
         this.$ = Expresion.State.BOOLEAN;
+    
+break;
+case 29:
+
+        if($$[$0].toLowerCase() === "string"){
+            this.$ = Expresion.State.STRING;
+        }else{
+            this.$ = $$[$0];
+        }
     
 break;
 case 30:

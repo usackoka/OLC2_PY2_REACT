@@ -2,6 +2,7 @@ import { Entorno } from "../Entorno";
 import { Expresion } from "../Expresion";
 import { Parametro } from "./Parametro";
 import { Nodo } from "../Nodo";
+import { Simbolo } from "../Simbolo";
 
 export class Funcion extends Expresion{
 
@@ -38,17 +39,12 @@ export class Funcion extends Expresion{
         entorno.size = 2;
 
         //guardo los ids de los parámetros
-            /*
         let i:number = 2;
-        for (let parametro in this.parametros)
-        {
-            Simbolo s = new Simbolo(fila, columna);
-            s.posicion = i;
-            s.tipo = parametro.getTipoDato();
+        this.parametros.forEach(parametro=>{
+            let s:Simbolo = new Simbolo(parametro.TIPO,parametro.id,i,false,this.fila,this.columna);
             i++;
-            entorno.entorno.addSimbolo(idParametro, s, entorno, fila, columna);
-        }
-             */
+            entorno.addSimbolo(s);
+        });
 
         //temporal bandera
         entorno.primerTemporal = entorno.getContadorTemporales();

@@ -20,6 +20,7 @@ var ParametroLlamada = /** @class */ (function (_super) {
         var _this = _super.call(this) || this;
         _this.fila = expresion.fila;
         _this.columna = expresion.columna;
+        _this.expresion = expresion;
         _this.porReferencia = porReferencia;
         return _this;
     }

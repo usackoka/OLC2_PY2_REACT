@@ -10,6 +10,7 @@ export class ParametroLlamada extends Expresion{
         super();
         this.fila = expresion.fila;
         this.columna = expresion.columna;
+        this.expresion = expresion;
         this.porReferencia = porReferencia;
     }
 

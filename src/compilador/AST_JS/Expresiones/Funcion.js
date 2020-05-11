@@ -15,6 +15,7 @@ var __extends = (this && this.__extends) || (function () {
 exports.__esModule = true;
 var Entorno_1 = require("../Entorno");
 var Expresion_1 = require("../Expresion");
+var Simbolo_1 = require("../Simbolo");
 var Funcion = /** @class */ (function (_super) {
     __extends(Funcion, _super);
     function Funcion(TIPO, idFuncion, parametros, instrucciones, fila, columna) {
@@ -42,17 +43,12 @@ var Funcion = /** @class */ (function (_super) {
         entorno = new Entorno_1.Entorno(entorno);
         entorno.size = 2;
         //guardo los ids de los parámetros
-        /*
-    let i:number = 2;
-    for (let parametro in this.parametros)
-    {
-        Simbolo s = new Simbolo(fila, columna);
-        s.posicion = i;
-        s.tipo = parametro.getTipoDato();
-        i++;
-        entorno.entorno.addSimbolo(idParametro, s, entorno, fila, columna);
-    }
-         */
+        var i = 2;
+        this.parametros.forEach(function (parametro) {
+            var s = new Simbolo_1.Simbolo(parametro.TIPO, parametro.id, i, false, _this.fila, _this.columna);
+            i++;
+            entorno.addSimbolo(s);
+        });
         //temporal bandera
         entorno.primerTemporal = entorno.getContadorTemporales();
         entorno.temporalesUsados = [];

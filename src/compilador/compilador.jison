@@ -312,7 +312,11 @@ TYPE : res_integer
     }
     | id
     {
-        $$ = $1;
+        if($1.toLowerCase() === "string"){
+            $$ = Expresion.State.STRING;
+        }else{
+            $$ = $1;
+        }
     }
 ;
 

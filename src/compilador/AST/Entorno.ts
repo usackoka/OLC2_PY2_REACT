@@ -59,11 +59,28 @@ export class Entorno {
         }
         else {
             if (this.padre==null) {
-                this.addError("GetValor","No existe la variable: "+id,fila,columna);
+                this.addError("getTipo","No existe la variable: "+id,fila,columna);
                 return "-1";
             }
             else {
-                return this.padre.getValor(id,fila,columna);
+                return this.padre.getTipo(id,fila,columna);
+            }
+        }
+    }
+
+    public isConst(id:string,fila:number,columna:number):boolean{
+        id = id.toLowerCase();
+        if (this.tbs.has(id))
+        {
+            return this.tbs.get(id).constante;
+        }
+        else {
+            if (this.padre==null) {
+                this.addError("isConst","No existe la variable: "+id,fila,columna);
+                return true;
+            }
+            else {
+                return this.padre.isConst(id,fila,columna);
             }
         }
     }

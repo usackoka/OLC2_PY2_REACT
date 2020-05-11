@@ -142,6 +142,7 @@ digito = [0-9]
     const { Continue } = require("./AST_JS/Sentencias/Continue");
     const { Break } = require("./AST_JS/Sentencias/Break");
     const { Declaracion } = require("./AST_JS/Sentencias/Declaracion");
+    const { Reasignacion } = require("./AST_JS/Sentencias/Reasignacion");
 
 %}
 
@@ -315,7 +316,7 @@ TYPE : res_integer
 
 ASIGNACION_VARIABLE : id '=' E
     {
-
+        $$ = new Reasignacion($1,$3,@2.first_line,@2.first_column)
     }
     | id LIST_ACCESO1 '=' E
     {

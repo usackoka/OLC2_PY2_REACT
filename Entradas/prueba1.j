@@ -17,11 +17,8 @@ void Principal(){
 }
 
 void Principal(){
-    print(c2)
-    f1(5)
-    print(c2)
-    f1(4)
-    print(c2)
+    const i := 56;
+    print(i)
 }
 
 void f1(Integer n1){

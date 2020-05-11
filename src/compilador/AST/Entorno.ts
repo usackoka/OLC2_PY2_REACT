@@ -34,14 +34,44 @@ export class Entorno {
         }
     }
 
-    public addSimbolo(id:string, s:Simbolo, entorno:Entorno, fila:number, columna:number) {
+    public getValor(id:string,fila:number,columna:number):string{
         id = id.toLowerCase();
-        s.posicion = this.size;
-        s.fila = fila;
-        s.columna = columna;
-        if (!this.tbs.has(id))
+        if (this.tbs.has(id))
         {
-            this.tbs.set(id, s);
+            return this.tbs.get(id).posicion.toString();
+        }
+        else {
+            if (this.padre==null) {
+                this.addError("GetValor","No existe la variable: "+id,fila,columna);
+                return "-1";
+            }
+            else {
+                return this.padre.getValor(id,fila,columna);
+            }
+        }
+    }
+
+    public getTipo(id:string,fila:number,columna:number):string{
+        id = id.toLowerCase();
+        if (this.tbs.has(id))
+        {
+            return this.tbs.get(id).tipo.toString();
+        }
+        else {
+            if (this.padre==null) {
+                this.addError("GetValor","No existe la variable: "+id,fila,columna);
+                return "-1";
+            }
+            else {
+                return this.padre.getValor(id,fila,columna);
+            }
+        }
+    }
+
+    public addSimbolo(s:Simbolo) {
+        if (!this.tbs.has(s.id))
+        {
+            this.tbs.set(s.id, s);
             this.size++;
         }
     }

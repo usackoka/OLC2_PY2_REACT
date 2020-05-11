@@ -10,8 +10,10 @@ export class Declaracion extends Sentencia{
     TIPO_VAR:Declaracion.State;
     constante:boolean;
     expresion:Expresion;
+    isGlobal:boolean;
 
-    public constructor(TIPO:Object, listaids:Array<string>, TIPO_VAR:Declaracion.State, expresion:Expresion, fila:number, columna:number){
+    public constructor(TIPO:Object, listaids:Array<string>, TIPO_VAR:Declaracion.State, 
+        expresion:Expresion, fila:number, columna:number){
         super();
         this.TIPO_VAR = TIPO_VAR;
         this.TIPO = TIPO;
@@ -19,35 +21,48 @@ export class Declaracion extends Sentencia{
         this.expresion = expresion;
         this.fila = fila;
         this.columna = columna;
+        this.isGlobal = false;
     }   
 
     public getTraduccion(entorno:Entorno):string{
-        let tmpValor;
+        entorno.addComentario("=================== DECLARACION DE VARIABLES ===================");
         this.listaids.forEach(id=>{
-            entorno.addComentario("=================== DECLARACION DE VARIABLE: "+id+" ===================");
+            entorno.addComentario("================ DECLARANDO VARIABLE: "+id+" TIPO: "+this.TIPO_VAR)
+
+            //sacando el valor a ingresar
+            let tmpValor;
+            var tipoValor;
             if (this.expresion != null)
             {
-                tmpValor = this.expresion.getTraduccion(entorno).toString();
-                //validar que sea del mismo tipo al que se la asigno
+                tmpValor = this.expresion.getTraduccion(entorno);
+                tipoValor = this.expresion.getTipo(entorno)
             }
             else{
                 tmpValor = entorno.getTemp();
+                tipoValor = this.TIPO;
                 entorno.addValor(tmpValor, Expresion.getDefecto(this.TIPO,entorno));
             }
-            
-            //============== Posicion del entorno en la que se guardará la variable ===================
-            let temp = entorno.getTemp();
-            //su tamEntorno será el tamaño que hay actualmente
-            let tamEntorno:number = entorno.tbs.size;
-            
-            entorno.addValorOperacion(temp, "P", "+",tamEntorno);
-            entorno.addValorEnStack(temp, tmpValor);
-            
-            entorno.addTempUsed(temp);
-            entorno.addTempUsed(tmpValor);
-            
-            let s:Simbolo = new Simbolo();
-            entorno.addSimbolo(id.toLowerCase(), s, entorno, this.fila, this.columna);
+
+            //Pregunto si la variable es global o no
+            if(this.isGlobal){
+                //si es global, tengo que preguntar la posición en stack que la voy a meter :'v
+            }else{
+                //============== Posicion del entorno en la que se guardará la variable ===================
+                let temp = entorno.getTemp();
+                //obtengo la posición en la que tengo que guardar la variable
+                entorno.addValorOperacion(temp, "P", "+", entorno.tbs.size);
+                //guardo la variable
+                entorno.addValorEnStack(temp, tmpValor);
+
+                entorno.addTempUsed(temp);
+                entorno.addTempUsed(tmpValor);
+
+                let s:Simbolo = new Simbolo(tipoValor,id.toLowerCase(),entorno.tbs.size,
+                this.TIPO_VAR==Declaracion.State.CONST,
+                this.fila, this.columna);
+
+                entorno.addSimbolo(s);
+            }
         });
         
         entorno.addComentario("============== FIN DECLARACION VARIABLES =================");

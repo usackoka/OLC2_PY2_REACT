@@ -141,6 +141,7 @@ digito = [0-9]
     const { Else } = require("./AST_JS/Sentencias/Else");
     const { Continue } = require("./AST_JS/Sentencias/Continue");
     const { Break } = require("./AST_JS/Sentencias/Break");
+    const { Declaracion } = require("./AST_JS/Sentencias/Declaracion");
 
 %}
 
@@ -186,7 +187,9 @@ DECLARACION : FUNCION
     }
     | DECLARACION_VARIABLE PUEDE_SEMICOLON
     {
-        $$ = $1;
+        let dec = $1;
+        dec.isGlobal = true;
+        $$ = dec;
     }
     | DECLARACION_STRUCT PUEDE_SEMICOLON
     {
@@ -238,36 +241,43 @@ FUNCION : TIPO_DATO id '(' PARAMETROS ')' '{' BLOQUES '}'
 
 DECLARACION_VARIABLE : TIPO_VAR id ':' '=' E
     {
-
+        $$ = new Declaracion(null,[$2],$1,$5,@2.first_line,@2.first_column);
     }
     | TIPO_DATO LISTA_ID '=' E
     {
-
+        $$ = new Declaracion($1,$2,Declaracion.State.NONE,$4,@3.first_line,@3.first_column);
     }
     | TIPO_DATO LISTA_ID
     {
-
+        $$ = new Declaracion($1,$2,Declaracion.State.NONE,null,@1.first_line,@1.first_column);
     }
 ;
 
 LISTA_ID : LISTA_ID ',' id 
     {
-
+        var list = $1;
+        list.push($3)
+        $$ = list;
     }
     | id
     {
-
+        var list = [];
+        list.push($1)
+        $$ = list;
     }
 ;
 
 TIPO_VAR : res_var
     {
+        $$ = Declaracion.State.VAR;
     }
     | res_const
     {
+        $$ = Declaracion.State.CONST;
     }
     | res_global
     {
+        $$ = Declaracion.State.GLOBAL;
     }
 ;
 
@@ -395,18 +405,23 @@ SENTENCIA : IF
     }
     | SWITCH
     {
+        $$ = $1;
     }
     | WHILE
     {
+        $$ = $1;
     }
     | DOWHILE
     {
+        $$ = $1;
     }
     | FOR
     {
+        $$ = $1;
     }
     | TRY_CATCH
     {
+        $$ = $1;
     }
 ;
 
@@ -563,9 +578,15 @@ PAR : '$' E
 
 LISTA_E : LISTA_E ',' E
     {
+        var list = $1;
+        list.push($3)
+        $$ = list;
     }
     | E
     {
+        var list = [];
+        list.push($1)
+        $$ = list;
     }
 ;
 
@@ -615,13 +636,18 @@ E_ARREGLO : res_strc TYPE '[' E ']'
 //============================= ACCESOS DEL LADO DE LA EXPRESION
 LIST_ACCESO : LIST_ACCESO '.' ACCESO 
     | ACCESO
+    {
+        $$ = $1;
+    }
 ;
 
 ACCESO : id
     {
+        $$ = new Primitivo($1,Expresion.State.ID,@1.first_line,@1.first_column);
     }
     | LLAMADA
     {
+        $$ = $1;
     }
     | id '[' E ']'
     {

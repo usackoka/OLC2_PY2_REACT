@@ -43,6 +43,7 @@ export namespace Expresion
         BOOLEAN,
         CHAR,
         NULL,
-        VOID
+        VOID,
+        ID
     }
 }

@@ -93,12 +93,19 @@ case 2: case 3:
         exports.principal.nodos.push($$[$0]);
     
 break;
-case 4: case 24: case 29: case 36: case 40: case 44: case 47: case 56: case 57: case 59: case 66: case 91: case 92: case 93: case 95: case 96: case 97: case 116: case 117: case 118:
+case 4: case 24: case 29: case 36: case 40: case 44: case 47: case 48: case 49: case 50: case 51: case 52: case 56: case 57: case 59: case 66: case 91: case 92: case 93: case 95: case 96: case 97: case 102: case 104: case 116: case 117: case 118:
 
         this.$ = $$[$0];
     
 break;
-case 5: case 6: case 45: case 46: case 58: case 94:
+case 5:
+
+        let dec = $$[$0-1];
+        dec.isGlobal = true;
+        this.$ = dec;
+    
+break;
+case 6: case 45: case 46: case 58: case 94:
 
         this.$ = $$[$0-1];
     
@@ -108,12 +115,12 @@ case 7:
         this.$ = $$[$0-2];
     
 break;
-case 8: case 9: case 10: case 15: case 16: case 17: case 18: case 19: case 30: case 31: case 85: case 86: case 87: case 88:
+case 8: case 9: case 10: case 30: case 31: case 85: case 86: case 87: case 88:
 
 
     
 break;
-case 11: case 12: case 20: case 21: case 22: case 32: case 33: case 34: case 35: case 48: case 49: case 50: case 51: case 52: case 54: case 55: case 60: case 61: case 62: case 63: case 68: case 69: case 70: case 71: case 72: case 73: case 78: case 79: case 80: case 81: case 82: case 83: case 84: case 89: case 90: case 98: case 99: case 100: case 103: case 104: case 105: case 106: case 107: case 108:
+case 11: case 12: case 32: case 33: case 34: case 35: case 60: case 61: case 62: case 63: case 68: case 69: case 70: case 71: case 72: case 73: case 78: case 79: case 80: case 81: case 82: case 83: case 84: case 98: case 99: case 100: case 105: case 106: case 107: case 108:
 
     
 break;
@@ -125,6 +132,50 @@ break;
 case 14:
 
         this.$ = new Funcion(Expresion.State.VOID, $$[$0-6], $$[$0-4], $$[$0-1], _$[$0-6].first_line,_$[$0-6].first_column);
+    
+break;
+case 15:
+
+        this.$ = new Declaracion(null,[$$[$0-3]],$$[$0-4],$$[$0],_$[$0-3].first_line,_$[$0-3].first_column);
+    
+break;
+case 16:
+
+        this.$ = new Declaracion($$[$0-3],$$[$0-2],Declaracion.State.NONE,$$[$0],_$[$0-1].first_line,_$[$0-1].first_column);
+    
+break;
+case 17:
+
+        this.$ = new Declaracion($$[$0-1],$$[$0],Declaracion.State.NONE,null,_$[$0-1].first_line,_$[$0-1].first_column);
+    
+break;
+case 18: case 89:
+
+        var list = $$[$0-2];
+        list.push($$[$0])
+        this.$ = list;
+    
+break;
+case 19: case 90:
+
+        var list = [];
+        list.push($$[$0])
+        this.$ = list;
+    
+break;
+case 20:
+
+        this.$ = Declaracion.State.VAR;
+    
+break;
+case 21:
+
+        this.$ = Declaracion.State.CONST;
+    
+break;
+case 22:
+
+        this.$ = Declaracion.State.GLOBAL;
     
 break;
 case 23:
@@ -190,6 +241,16 @@ case 53:
         this.$ = new Print($$[$0-1],_$[$0-3].first_line,_$[$0-3].first_column);
     
 break;
+case 54:
+
+        this.$ = new Break(_$[$0].first_line,_$[$0].first_column);
+    
+break;
+case 55:
+
+        this.$ = new Continue(_$[$0].first_line,_$[$0].first_column);
+    
+break;
 case 64:
 
         this.$ = new If($$[$0-4],$$[$0-1],null,_$[$0-6].first_line,_$[$0-6].first_column);
@@ -203,6 +264,11 @@ break;
 case 67:
 
         this.$ = new Else($$[$0-1],_$[$0-3].first_line,_$[$0-3].first_column);
+    
+break;
+case 103:
+
+        this.$ = new Primitivo($$[$0],Expresion.State.ID,_$[$0].first_line,_$[$0].first_column);
     
 break;
 case 109:
@@ -513,6 +579,9 @@ parse: function parse(input) {
     const { Print } = require("./AST_JS/Sentencias/Print");
     const { If } = require("./AST_JS/Sentencias/If");
     const { Else } = require("./AST_JS/Sentencias/Else");
+    const { Continue } = require("./AST_JS/Sentencias/Continue");
+    const { Break } = require("./AST_JS/Sentencias/Break");
+    const { Declaracion } = require("./AST_JS/Sentencias/Declaracion");
 
 
 

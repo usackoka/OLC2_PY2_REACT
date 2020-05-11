@@ -6,6 +6,7 @@ var Entorno = /** @class */ (function () {
         this.padre = padre;
         this.primerTemporal = 0;
         this.temporalesUsados = [];
+        this.tbs = new Map();
         //guardo principal en el padre, para poder hacer uso de los métodos de traducción.
         this.principal = principal ? principal : null;
         //si existe el padre, sumo el tamaño al entorno
@@ -18,6 +19,42 @@ var Entorno = /** @class */ (function () {
     Entorno.prototype.addTempUsed = function (id) {
         if (!this.temporalesUsados.includes(id)) {
             this.temporalesUsados.push(id);
+        }
+    };
+    Entorno.prototype.getValor = function (id, fila, columna) {
+        id = id.toLowerCase();
+        if (this.tbs.has(id)) {
+            return this.tbs.get(id).posicion.toString();
+        }
+        else {
+            if (this.padre == null) {
+                this.addError("GetValor", "No existe la variable: " + id, fila, columna);
+                return "-1";
+            }
+            else {
+                return this.padre.getValor(id, fila, columna);
+            }
+        }
+    };
+    Entorno.prototype.getTipo = function (id, fila, columna) {
+        id = id.toLowerCase();
+        if (this.tbs.has(id)) {
+            return this.tbs.get(id).tipo.toString();
+        }
+        else {
+            if (this.padre == null) {
+                this.addError("GetValor", "No existe la variable: " + id, fila, columna);
+                return "-1";
+            }
+            else {
+                return this.padre.getValor(id, fila, columna);
+            }
+        }
+    };
+    Entorno.prototype.addSimbolo = function (s) {
+        if (!this.tbs.has(s.id)) {
+            this.tbs.set(s.id, s);
+            this.size++;
         }
     };
     /**

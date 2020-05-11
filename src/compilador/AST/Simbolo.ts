@@ -7,7 +7,8 @@ export class Simbolo{
     columna:number;
     constante:boolean;
 
-    public constructor(tipo:Object,id:string,posicion:number,constante:boolean,fila:number,columna:number){
+    public constructor(tipo:Object,id:string,posicion:number,
+        constante:boolean,fila:number,columna:number){
         this.tipo = tipo;
         this.constante = constante;
         this.id = id;

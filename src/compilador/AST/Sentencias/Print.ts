@@ -20,6 +20,8 @@ export class Print extends Sentencia{
         var TIPO:Object = this.expresion.getTipo(entorno);
         var tImpresion:string = this.expresion.getTraduccion(entorno);
 
+        console.log("print con tipo: "+TIPO)
+
         switch(TIPO){
             case Expresion.State.STRING:
             case Expresion.State.CHAR:
@@ -46,7 +48,7 @@ export class Print extends Sentencia{
                 entorno.addTempUsed(t0);
                 entorno.addTempUsed(t2);
                 entorno.addTempUsed(t3);
-                break;
+                return;
             case Expresion.State.BOOLEAN:
                 var l1 = entorno.getETQ();
                 var l2 = entorno.getETQ();
@@ -65,24 +67,24 @@ export class Print extends Sentencia{
                 p2.getTraduccion(entorno);
                 entorno.addETQ(l3);
                 entorno.addComentario("================= fin impresion boolean ================");
-                break;
+                return;
             case Expresion.State.INTEGER:
                 entorno.addPrint(Print.State.INTEGER,tImpresion);
                 if(this.salto){
                     entorno.addPrint(Print.State.CHAR,10);
                 }
-                break; 
+                return; 
             case Expresion.State.DOUBLE:
                 entorno.addPrint(Print.State.DOUBLE,tImpresion);
                 if(this.salto){
                     entorno.addPrint(Print.State.CHAR,10);
                 }
-                break;
+                return;
             default:
+                console.log("default: "+TIPO)
                 entorno.addError("Print","No soportado TIPO: "+TIPO,this.fila,this.columna);
+                return;
         }
-
-        return "";
     }
 }
 

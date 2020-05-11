@@ -67,12 +67,28 @@ var Primitivo = /** @class */ (function (_super) {
                 entorno.incH();
                 entorno.addComentario("==============================================================");
                 return retorno;
+            case Expresion_1.Expresion.State.ID:
+                //sólo cuando la varia
+                var temp = entorno.getTemp();
+                var tretorno = entorno.getTemp();
+                var posicion = entorno.getValor(this.value.toString(), this.fila, this.columna);
+                entorno.addComentario("========= Obteniendo valor ID: " + this.value + " ===========");
+                entorno.addValorOperacion(temp, "P", "+", posicion);
+                entorno.addGetStack(tretorno, temp);
+                entorno.addComentario("============================================================");
+                //guardo los temporales usados
+                entorno.addTempUsed(temp);
+                return tretorno;
             default:
-                console.log('DEBUGEAR PRIMITIVO: ' + this.TIPO + " fila: " + this.fila);
-                return "NULL";
+                console.log('No soportado en primitivo TIPO: ' + this.TIPO + " fila: " + this.fila);
+                return "-1";
         }
     };
     Primitivo.prototype.getTipo = function (entorno) {
+        if (this.TIPO == Expresion_1.Expresion.State.ID) {
+            var vari = entorno.getTipo(this.value.toString(), this.fila, this.columna);
+            return vari;
+        }
         return this.TIPO;
     };
     Primitivo.prototype.trimComillas = function (cadena) {

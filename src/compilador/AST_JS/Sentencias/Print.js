@@ -29,6 +29,7 @@ var Print = /** @class */ (function (_super) {
     Print.prototype.getTraduccion = function (entorno) {
         var TIPO = this.expresion.getTipo(entorno);
         var tImpresion = this.expresion.getTraduccion(entorno);
+        console.log("print con tipo: " + TIPO);
         switch (TIPO) {
             case Expresion_1.Expresion.State.STRING:
             case Expresion_1.Expresion.State.CHAR:
@@ -56,7 +57,7 @@ var Print = /** @class */ (function (_super) {
                 entorno.addTempUsed(t0);
                 entorno.addTempUsed(t2);
                 entorno.addTempUsed(t3);
-                break;
+                return;
             case Expresion_1.Expresion.State.BOOLEAN:
                 var l1 = entorno.getETQ();
                 var l2 = entorno.getETQ();
@@ -75,23 +76,24 @@ var Print = /** @class */ (function (_super) {
                 p2.getTraduccion(entorno);
                 entorno.addETQ(l3);
                 entorno.addComentario("================= fin impresion boolean ================");
-                break;
+                return;
             case Expresion_1.Expresion.State.INTEGER:
                 entorno.addPrint(Print.State.INTEGER, tImpresion);
                 if (this.salto) {
                     entorno.addPrint(Print.State.CHAR, 10);
                 }
-                break;
+                return;
             case Expresion_1.Expresion.State.DOUBLE:
                 entorno.addPrint(Print.State.DOUBLE, tImpresion);
                 if (this.salto) {
                     entorno.addPrint(Print.State.CHAR, 10);
                 }
-                break;
+                return;
             default:
+                console.log("default: " + TIPO);
                 entorno.addError("Print", "No soportado TIPO: " + TIPO, this.fila, this.columna);
+                return;
         }
-        return "";
     };
     return Print;
 }(Sentencia_1.Sentencia));

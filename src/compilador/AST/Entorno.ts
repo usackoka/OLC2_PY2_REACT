@@ -1,6 +1,8 @@
 import { Principal } from "./Principal";
 import { Print } from "./Sentencias/Print";
 import { Simbolo } from "./Simbolo";
+import { Funcion } from "./Expresiones/Funcion";
+import { Expresion } from "./Expresion";
 
 export class Entorno {
     principal:Principal;
@@ -32,6 +34,25 @@ export class Entorno {
         {
             this.temporalesUsados.push(id);
         }
+    }
+
+    public getTipoFuncion(id:string,fila:number,columna:number):Object{
+        id = id.toLowerCase();
+        if(this.padre!=null){
+            return this.padre.getTipoFuncion(id,fila,columna)
+        }
+
+        //busco la función
+        for(let nodo of this.principal.nodos){
+            if(nodo instanceof Funcion){
+                if(nodo.getNombreTraduccion(this).toString() == id.toString()){
+                    return nodo.TIPO;
+                }
+            }
+        }
+        
+        this.addError("getTipoFuncion","No existe la funcion: "+id,fila,columna);
+        return Expresion.State.STRING;
     }
 
     public getValor(id:string,fila:number,columna:number):string{

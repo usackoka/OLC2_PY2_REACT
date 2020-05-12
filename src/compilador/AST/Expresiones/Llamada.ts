@@ -1,8 +1,8 @@
 import { Entorno } from "../Entorno";
-import { Sentencia } from "../Sentencia";
+import { Expresion } from "../Expresion";
 import { ParametroLlamada } from "./ParametroLlamada";
 
-export class Llamada extends Sentencia{
+export class Llamada extends Expresion{
 
     id:string;
     parametros:Array<ParametroLlamada>
@@ -90,6 +90,10 @@ export class Llamada extends Sentencia{
         });
         entorno.addComentario("=======================================================");
         return temporalRetorno;
+    }
+
+    public getTipo(entorno:Entorno){
+        return entorno.getTipoFuncion(this.id+this.getFirma(entorno),this.fila,this.columna)
     }
 
     public getFirma(entorno:Entorno) {

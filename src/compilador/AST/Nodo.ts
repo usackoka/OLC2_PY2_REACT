@@ -3,7 +3,7 @@ import { Entorno } from "./Entorno";
 export abstract class Nodo {
     fila:number;
     columna:number;
-    etqRetorno:String;
+    etqRetorno:string;
     etqSalidaIf:string;
     etqContinue:string;
     etqBreak:string;

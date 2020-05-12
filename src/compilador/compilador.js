@@ -120,7 +120,7 @@ case 8: case 9: case 10: case 31:
 
     
 break;
-case 11: case 12: case 32: case 33: case 34: case 35: case 60: case 61: case 62: case 63: case 68: case 69: case 70: case 71: case 72: case 73: case 78: case 79: case 80: case 81: case 82: case 98: case 99: case 100: case 105: case 106: case 108:
+case 11: case 12: case 32: case 33: case 34: case 35: case 62: case 63: case 68: case 69: case 70: case 71: case 72: case 73: case 78: case 79: case 80: case 81: case 82: case 98: case 99: case 100: case 105: case 106: case 108:
 
     
 break;
@@ -268,6 +268,16 @@ break;
 case 55:
 
         this.$ = new Continue(_$[$0].first_line,_$[$0].first_column);
+    
+break;
+case 60:
+
+        this.$ = new Return($$[$0],_$[$0-1].first_line,_$[$0-1].first_column)
+    
+break;
+case 61:
+
+        this.$ = new Return(null,_$[$0].first_line,_$[$0].first_column)
     
 break;
 case 64:
@@ -619,6 +629,7 @@ parse: function parse(input) {
     const { Break } = require("./AST_JS/Sentencias/Break");
     const { Declaracion } = require("./AST_JS/Sentencias/Declaracion");
     const { Reasignacion } = require("./AST_JS/Sentencias/Reasignacion");
+    const { Return } = require("./AST_JS/Sentencias/Return");
 
 
 

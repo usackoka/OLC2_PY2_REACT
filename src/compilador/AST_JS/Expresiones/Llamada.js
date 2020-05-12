@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
-var Sentencia_1 = require("../Sentencia");
+var Expresion_1 = require("../Expresion");
 var Llamada = /** @class */ (function (_super) {
     __extends(Llamada, _super);
     function Llamada(id, parametros, fila, columna) {
@@ -91,6 +91,9 @@ var Llamada = /** @class */ (function (_super) {
         entorno.addComentario("=======================================================");
         return temporalRetorno;
     };
+    Llamada.prototype.getTipo = function (entorno) {
+        return entorno.getTipoFuncion(this.id + this.getFirma(entorno), this.fila, this.columna);
+    };
     Llamada.prototype.getFirma = function (entorno) {
         var firma = "";
         this.parametros.forEach(function (p) {
@@ -99,5 +102,5 @@ var Llamada = /** @class */ (function (_super) {
         return firma;
     };
     return Llamada;
-}(Sentencia_1.Sentencia));
+}(Expresion_1.Expresion));
 exports.Llamada = Llamada;

@@ -17,19 +17,22 @@ void Principal(){
 }
 
 void Principal(){
-    print(30)
-    const i := 56;
-    print(i)
-    i = 40;
-    print(i)
-    i = 71;
-    print(i)
-    func2()
-    func1("Con mensaje personalizado")
+    print(ackermann(3,4))
 }
 
-void func1(String mensaje){
+Integer ackermann(Integer m,Integer n){
+    if (m == 0) {
+         return n + 1;
+    } else if (n == 0) {
+        return ackermann(m - 1, 1);
+    } else {
+        return ackermann(m - 1, ackermann(m, n - 1));
+    }
+}
+
+String func1(String mensaje){
     print("Desde func1() ya puedes ir a dormir :v"+mensaje)
+    return "retorno";
 }
 
 String dato(){

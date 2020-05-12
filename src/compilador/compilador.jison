@@ -145,6 +145,7 @@ digito = [0-9]
     const { Break } = require("./AST_JS/Sentencias/Break");
     const { Declaracion } = require("./AST_JS/Sentencias/Declaracion");
     const { Reasignacion } = require("./AST_JS/Sentencias/Reasignacion");
+    const { Return } = require("./AST_JS/Sentencias/Return");
 
 %}
 
@@ -466,9 +467,11 @@ INSTRUCCION : res_break
 
 RETURN : res_return E
     {
+        $$ = new Return($2,@1.first_line,@1.first_column)
     }
     | res_return
     {
+        $$ = new Return(null,@1.first_line,@1.first_column)
     }
     | res_throw NEW_EXCEPTION
     {

@@ -1,5 +1,7 @@
 "use strict";
 exports.__esModule = true;
+var Funcion_1 = require("./Expresiones/Funcion");
+var Expresion_1 = require("./Expresion");
 var Entorno = /** @class */ (function () {
     function Entorno(padre, principal) {
         this.size = 0;
@@ -20,6 +22,23 @@ var Entorno = /** @class */ (function () {
         if (!this.temporalesUsados.includes(id)) {
             this.temporalesUsados.push(id);
         }
+    };
+    Entorno.prototype.getTipoFuncion = function (id, fila, columna) {
+        id = id.toLowerCase();
+        if (this.padre != null) {
+            return this.padre.getTipoFuncion(id, fila, columna);
+        }
+        //busco la función
+        for (var _i = 0, _a = this.principal.nodos; _i < _a.length; _i++) {
+            var nodo = _a[_i];
+            if (nodo instanceof Funcion_1.Funcion) {
+                if (nodo.getNombreTraduccion(this).toString() == id.toString()) {
+                    return nodo.TIPO;
+                }
+            }
+        }
+        this.addError("getTipoFuncion", "No existe la funcion: " + id, fila, columna);
+        return Expresion_1.Expresion.State.STRING;
     };
     Entorno.prototype.getValor = function (id, fila, columna) {
         id = id.toLowerCase();

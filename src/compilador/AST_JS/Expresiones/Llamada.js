@@ -60,7 +60,7 @@ var Llamada = /** @class */ (function (_super) {
         entorno.addValorOperacion(t1, t1, "+", 2);
         this.parametros.forEach(function (exp) {
             entorno.addComentario("================== parametro ==========================");
-            var tValor = exp.getTraduccion(entorno).toString();
+            var tValor = exp.getTraduccion(entorno);
             entorno.addValorEnStack(t1, tValor);
             entorno.addValorOperacion(t1, t1, "+", 1);
             entorno.addTempUsed(tValor);

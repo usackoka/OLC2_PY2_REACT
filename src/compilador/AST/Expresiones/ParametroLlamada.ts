@@ -19,7 +19,7 @@ export class ParametroLlamada extends Expresion{
             //pendiente
             return "-1";
         }else{
-            this.expresion.getTraduccion(entorno);
+            return this.expresion.getTraduccion(entorno);
         }
     }
 

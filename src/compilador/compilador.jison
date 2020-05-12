@@ -135,6 +135,7 @@ digito = [0-9]
     const { Logica } = require("./AST_JS/Expresiones/Logica")
     const { Unario } = require("./AST_JS/Expresiones/Unario")
     const { Llamada } = require("./AST_JS/Expresiones/Llamada")
+    const { ParametroLlamada } = require("./AST_JS/Expresiones/ParametroLlamada");
 
     //sentencias
     const { Print } = require("./AST_JS/Sentencias/Print");
@@ -144,7 +145,6 @@ digito = [0-9]
     const { Break } = require("./AST_JS/Sentencias/Break");
     const { Declaracion } = require("./AST_JS/Sentencias/Declaracion");
     const { Reasignacion } = require("./AST_JS/Sentencias/Reasignacion");
-    const { ParametroLlamada } = require("./AST_JS/Sentencias/ParametroLlamada");
 
 %}
 

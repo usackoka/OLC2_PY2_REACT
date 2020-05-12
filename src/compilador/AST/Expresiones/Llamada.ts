@@ -1,6 +1,6 @@
 import { Entorno } from "../Entorno";
 import { Sentencia } from "../Sentencia";
-import { ParametroLlamada } from "../Sentencias/ParametroLlamada";
+import { ParametroLlamada } from "./ParametroLlamada";
 
 export class Llamada extends Sentencia{
 
@@ -57,7 +57,7 @@ export class Llamada extends Sentencia{
 
         this.parametros.forEach(exp=>{
             entorno.addComentario("================== parametro ==========================");
-            let tValor = exp.getTraduccion(entorno).toString();
+            let tValor = exp.getTraduccion(entorno)
             entorno.addValorEnStack(t1, tValor);
             entorno.addValorOperacion(t1, t1, "+", 1);
             entorno.addTempUsed(tValor);

@@ -13,10 +13,9 @@ const Index = (props) => {
     value:''
   });
 
-  var valoresSimbolos = [
-  ]
-  var valoresErrores = [
-  ]
+  const [valoresSimbolos,setValoresSimbolos] = useState([]);
+  const [valoresErrores,setValoresErrores] = useState([]);
+  const [valoresFunciones,setValoresFunciones] = useState([]);
 
   const columnsSimbolos = [
     {
@@ -74,17 +73,24 @@ const Index = (props) => {
 
   const clickEjecutar = async e => {
     var compilador = require("../../compilador/compilador")
-    console.log("Ejecutando compilador")
     if(!txtEntrada){
       console.log("No se encontró la instancia de codeMirror")
       return null;
     }
     compilador.principal = new Principal();
-    let ast = compilador.parser.parse(txtEntrada.getValue())
-    let salida = ast.run();
+    let principal = compilador.parser.parse(txtEntrada.getValue())
+    let salida = principal.run();
 
     if(!txtSalida) return null;
     setTxtSalida({value:salida});
+
+    setValoresSimbolos(principal.getSimbolosJSON())
+    //cargo las variables
+    setValoresSimbolos(principal.getSimbolosJSON())
+    //cargo las funciones
+    setValoresFunciones(principal.getFuncionesJSON());
+    //seteo los errores
+    setValoresErrores(principal.getErroresJSON())
   };
 
   return (
@@ -137,9 +143,18 @@ const Index = (props) => {
           >
             <Tab eventKey="tabla" title="Tabla de Símbolos">
               <br></br>
+              <h2>Tabla de Variables</h2>
+              <br></br>
               <BootstrapTable
                 keyField="tbSimbolos"
                 data={valoresSimbolos}
+                columns={columnsSimbolos}
+              ></BootstrapTable>
+              <h2>Tabla de Funciones</h2>
+              <br></br>
+              <BootstrapTable
+                keyField="tbFunciones"
+                data={valoresFunciones}
                 columns={columnsSimbolos}
               ></BootstrapTable>
             </Tab>

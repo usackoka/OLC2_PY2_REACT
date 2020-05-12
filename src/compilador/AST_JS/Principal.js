@@ -64,6 +64,53 @@ var Principal = /** @class */ (function () {
         trad += ";\n\n";
         return trad + "\n" + this.traduccion;
     };
+    Principal.prototype.getErroresJSON = function () {
+        var json = [];
+        var cont = 0;
+        this.erroresSemanticos.forEach(function (value) {
+            json.push({
+                index: cont++,
+                lex: value.lexema,
+                type: value.tipo,
+                desc: value.descripcion,
+                line: value.fila,
+                column: value.columna
+            });
+        });
+        return json;
+    };
+    Principal.prototype.getFuncionesJSON = function () {
+        var json = [];
+        var cont = 0;
+        this.nodos.forEach(function (nodo) {
+            if (nodo instanceof Funcion_1.Funcion) {
+                json.push({
+                    index: cont++,
+                    lex: nodo.idFuncion,
+                    type: "Funcion",
+                    dataType: nodo.TIPO,
+                    line: nodo.fila,
+                    column: nodo.columna
+                });
+            }
+        });
+        return json;
+    };
+    Principal.prototype.getSimbolosJSON = function () {
+        var json = [];
+        var cont = 0;
+        this.entorno.tbs.forEach(function (nodo) {
+            json.push({
+                index: cont++,
+                lex: nodo.id,
+                type: "Variable",
+                dataType: nodo.tipo,
+                line: nodo.fila,
+                column: nodo.columna
+            });
+        });
+        return json;
+    };
     //=================================== METODOS DE TRADUCCIÓN
     Principal.prototype.addComentario = function (cadena) {
         this.traduccion += "#* //" + cadena + "*#\n";

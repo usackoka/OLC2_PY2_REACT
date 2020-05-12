@@ -84,6 +84,56 @@ export class Principal {
         return trad+"\n"+this.traduccion;
     }
 
+    public getErroresJSON():Array<Object>{
+        let json:Array<Object> = [];
+        let cont = 0;
+        this.erroresSemanticos.forEach((value)=>{
+            json.push({
+                index:cont++,
+                lex:value.lexema,
+                type:value.tipo,
+                desc:value.descripcion,
+                line:value.fila,
+                column:value.columna,
+            });
+        });
+        return json;
+    }
+
+    public getFuncionesJSON():Array<Object>{
+        let json:Array<Object> = [];
+        let cont = 0;
+        this.nodos.forEach(nodo=>{
+            if(nodo instanceof Funcion){
+                json.push({
+                    index:cont++,
+                    lex:nodo.idFuncion,
+                    type:"Funcion",
+                    dataType:nodo.TIPO,
+                    line:nodo.fila,
+                    column:nodo.columna,
+                });
+            }
+        })
+        return json;
+    }
+
+    public getSimbolosJSON():Array<Object>{
+        let json:Array<Object> = [];
+        let cont = 0;
+        this.entorno.tbs.forEach(nodo=>{
+            json.push({
+                index:cont++,
+                lex:nodo.id,
+                type:"Variable",
+                dataType:nodo.tipo,
+                line:nodo.fila,
+                column:nodo.columna,
+            });
+        })
+        return json;
+    }
+
     //=================================== METODOS DE TRADUCCIÓN
     public addComentario(cadena:string){
         this.traduccion += "#* //"+cadena+"*#\n";

@@ -18,7 +18,7 @@ void Principal(){
 
 void Principal(){
     print(30)
-    var i := 56;
+    const i := 56;
     print(i)
     i = 40;
     print(i)

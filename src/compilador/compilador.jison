@@ -681,9 +681,11 @@ NEW_STRUCT : res_strc id '(' ')'
 
 E_ARREGLO : res_strc TYPE '[' E ']'
     {
+        $$ = new Arreglo($2,$4,null,@1.first_line,@1.first_column)
     }
     | '{' LISTA_E '}'
     {
+        $$ = new Arreglo(null,null,$2,@1.first_line,@1.first_column)
     }
 ;
 

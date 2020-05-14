@@ -90,6 +90,9 @@ var Print = /** @class */ (function (_super) {
                 return;
             default:
                 entorno.addError("Print", "No soportado TIPO: " + TIPO, this.fila, this.columna);
+                var p = new Primitivo_1.Primitivo("null", Expresion_1.Expresion.State.STRING, this.fila, this.columna);
+                var p2 = new Print(p, this.fila, this.columna);
+                p2.getTraduccion(entorno);
                 return;
         }
     };

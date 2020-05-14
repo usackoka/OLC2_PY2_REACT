@@ -20,16 +20,25 @@ void Principal(){
     print(ackermann(3,4))
 }
 
+Integer global1 := 45;
+var global2 := "Hola soy global"
+global global3 := "Hola soy global3"
+
+void callBack(){
+    print(global3)
+}
+
 void Principal(){
     var n := 0;
     while(n<10){
         print("n: "+n)
         n++;
     }
+    callBack()
 }
 
 void Principal(){
-    Integer[] var1 = {1,2,3,4};
+    Integer[] var1 = {5,6,7,8};
     Integer num = 3;
     print("Valor de var1["+num+"] = "+var1[num])
 }

@@ -58,13 +58,16 @@ export class Primitivo extends Expresion{
                 entorno.addComentario("==============================================================");
                 return retorno;
             case Expresion.State.ID:
-                //sólo cuando la varia
                 let temp = entorno.getTemp();
                 let tretorno = entorno.getTemp();
                 let posicion = entorno.getValor(this.value.toString(), this.fila, this.columna);
                 entorno.addComentario("========= Obteniendo valor ID: " + this.value+" ===========");
-                entorno.addValorOperacion(temp, "P", "+", posicion);
-                entorno.addGetStack(tretorno, temp);
+                if(entorno.isGlobal(this.value.toString(), this.fila, this.columna)){
+                    entorno.addGetHeap(tretorno, posicion);
+                }else{
+                    entorno.addValorOperacion(temp, "P", "+", posicion);
+                    entorno.addGetStack(tretorno, temp);
+                }
                 entorno.addComentario("============================================================");
                 //guardo los temporales usados
                 entorno.addTempUsed(temp);

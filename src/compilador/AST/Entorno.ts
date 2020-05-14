@@ -72,6 +72,23 @@ export class Entorno {
         }
     }
 
+    public isGlobal(id:string,fila:number,columna:number):boolean{
+        id = id.toLowerCase();
+        if (this.tbs.has(id))
+        {
+            return this.tbs.get(id).global;
+        }
+        else {
+            if (this.padre==null) {
+                this.addError("isGlobal","No existe la variable: "+id,fila,columna);
+                return false;
+            }
+            else {
+                return this.padre.isGlobal(id,fila,columna);
+            }
+        }
+    }
+
     public getTipo(id:string,fila:number,columna:number):Object{
         id = id.toLowerCase();
         if (this.tbs.has(id))
@@ -107,6 +124,19 @@ export class Entorno {
     }
 
     public addSimbolo(s:Simbolo) {
+        if (!this.tbs.has(s.id))
+        {
+            this.tbs.set(s.id, s);
+            this.size++;
+        }
+    }
+
+    public addSimboloGlobal(s:Simbolo) {
+        if(this.padre!=null){
+            this.padre.addSimboloGlobal(s)
+            return;
+        }
+
         if (!this.tbs.has(s.id))
         {
             this.tbs.set(s.id, s);

@@ -55,6 +55,21 @@ var Entorno = /** @class */ (function () {
             }
         }
     };
+    Entorno.prototype.isGlobal = function (id, fila, columna) {
+        id = id.toLowerCase();
+        if (this.tbs.has(id)) {
+            return this.tbs.get(id).global;
+        }
+        else {
+            if (this.padre == null) {
+                this.addError("isGlobal", "No existe la variable: " + id, fila, columna);
+                return false;
+            }
+            else {
+                return this.padre.isGlobal(id, fila, columna);
+            }
+        }
+    };
     Entorno.prototype.getTipo = function (id, fila, columna) {
         id = id.toLowerCase();
         if (this.tbs.has(id)) {

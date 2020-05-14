@@ -80,6 +80,9 @@ export class Print extends Sentencia{
                 return;
             default:
                 entorno.addError("Print","No soportado TIPO: "+TIPO,this.fila,this.columna);
+                var p:Primitivo = new Primitivo("null",Expresion.State.STRING, this.fila, this.columna);
+                var p2:Print = new Print(p,this.fila, this.columna);
+                p2.getTraduccion(entorno);
                 return;
         }
     }

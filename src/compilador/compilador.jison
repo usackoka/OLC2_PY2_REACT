@@ -148,6 +148,7 @@ digito = [0-9]
     const { Reasignacion } = require("./AST_JS/Sentencias/Reasignacion");
     const { Return } = require("./AST_JS/Sentencias/Return");
     const { While } = require("./AST_JS/Sentencias/While");
+    const { For } = require("./AST_JS/Sentencias/For");
 
 %}
 
@@ -528,26 +529,42 @@ DOWHILE : res_do '{' BLOQUES '}' res_while '(' E ')' PUEDE_SEMICOLON
 
 FOR : res_for '(' INICIO_FOR ';' CONDICION_FOR ';' FIN_FOR ')' '{' BLOQUES '}'
     {
+        $$ = new For($3,$5,$7,$10,@1.first_line,@1.first_column)
     }
 ;
 
 INICIO_FOR : id '=' E
     {
+        $$ = new Reasignacion($1,$3,@2.first_line,@2.first_column)
     }
     | TIPO_DATO id '=' E
     {
+        $$ = new Declaracion($1,[$2],Declaracion.State.NONE,$4,@2.first_line,@2.first_column);
     }
     |
     {
+        $$ = null;
     }
 ;
 
 CONDICION_FOR : E
+    {
+        $$ = $1;
+    }
     |
+    {
+        $$ = new Primitivo(true,Expresion.State.BOOLEAN,@1.first_line,@1.first_column);
+    }
 ;
 
 FIN_FOR : E
+    {
+        $$ = $1;
+    }
     |
+    {
+        $$ = null;
+    }
 ;
 
 SWITCH : res_switch '(' E ')' '{' LISTA_CASOS DEFAULT '}'

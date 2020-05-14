@@ -93,7 +93,7 @@ case 2: case 3:
         exports.principal.nodos.push($$[$0]);
     
 break;
-case 4: case 24: case 36: case 40: case 44: case 47: case 48: case 49: case 50: case 51: case 52: case 56: case 57: case 59: case 68: case 85: case 93: case 94: case 95: case 97: case 98: case 99: case 104: case 106: case 118: case 119: case 120:
+case 4: case 24: case 36: case 40: case 44: case 47: case 48: case 49: case 50: case 51: case 52: case 56: case 57: case 59: case 68: case 76: case 78: case 85: case 93: case 94: case 95: case 97: case 98: case 99: case 104: case 106: case 118: case 119: case 120:
 
         this.$ = $$[$0];
     
@@ -115,7 +115,7 @@ case 7:
         this.$ = $$[$0-2];
     
 break;
-case 8: case 11: case 12: case 32: case 33: case 34: case 35: case 64: case 65: case 72: case 73: case 74: case 75: case 100: case 101: case 102: case 107: case 108: case 110:
+case 8: case 11: case 12: case 32: case 33: case 34: case 35: case 64: case 65: case 100: case 101: case 102: case 107: case 108: case 110:
 
     
 break;
@@ -212,7 +212,7 @@ case 29:
         }
     
 break;
-case 30:
+case 30: case 73:
 
         this.$ = new Reasignacion($$[$0-2],$$[$0],_$[$0-1].first_line,_$[$0-1].first_column)
     
@@ -236,7 +236,7 @@ case 39:
         this.$ = lista;
     
 break;
-case 41: case 84:
+case 41: case 75: case 79: case 84:
 
         this.$ = null;
     
@@ -317,6 +317,21 @@ case 71:
         this.$ = new While($$[$0-2],$$[$0-6],true,_$[$0-8].first_line,_$[$0-8].first_column)
     
 break;
+case 72:
+
+        this.$ = new For($$[$0-8],$$[$0-6],$$[$0-4],$$[$0-1],_$[$0-10].first_line,_$[$0-10].first_column)
+    
+break;
+case 74:
+
+        this.$ = new Declaracion($$[$0-3],[$$[$0-2]],Declaracion.State.NONE,$$[$0],_$[$0-2].first_line,_$[$0-2].first_column);
+    
+break;
+case 77: case 112:
+
+        this.$ = new Primitivo(true,Expresion.State.BOOLEAN,_$[$0].first_line,_$[$0].first_column);
+    
+break;
 case 80:
 
         this.$ = $$[$0-2];
@@ -363,11 +378,6 @@ break;
 case 111:
 
         this.$ = new Primitivo(Number($$[$0]),Expresion.State.INTEGER,_$[$0].first_line,_$[$0].first_column);
-    
-break;
-case 112:
-
-        this.$ = new Primitivo(true,Expresion.State.BOOLEAN,_$[$0].first_line,_$[$0].first_column);
     
 break;
 case 113:
@@ -682,6 +692,7 @@ parse: function parse(input) {
     const { Reasignacion } = require("./AST_JS/Sentencias/Reasignacion");
     const { Return } = require("./AST_JS/Sentencias/Return");
     const { While } = require("./AST_JS/Sentencias/While");
+    const { For } = require("./AST_JS/Sentencias/For");
 
 
 

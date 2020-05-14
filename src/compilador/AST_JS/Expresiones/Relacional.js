@@ -28,7 +28,7 @@ var Relacional = /** @class */ (function (_super) {
     Relacional.prototype.getTraduccion = function (entorno) {
         switch (this.TIPO_OPERACION) {
             case Relacional.TYPE.IGUAL_REFERENCIA:
-                return this.IGUAL_REFERENCIA(entorno);
+                return this.IGUALIGUAL(entorno);
             case Relacional.TYPE.IGUAL:
                 return this.IGUALIGUAL(entorno);
             case Relacional.TYPE.DIFERENTE:

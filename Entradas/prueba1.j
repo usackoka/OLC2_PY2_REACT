@@ -23,8 +23,15 @@ void Principal(){
 void Principal(){
     var n := 0;
     while(n<10){
-        
+        print("n: "+n)
+        n++;
     }
+}
+
+void Principal(){
+    Integer[] var1 = {1,2,3,4};
+    Integer num = 3;
+    print("Valor de var1["+num+"] = "+var1[num])
 }
 
 Integer ackermann(Integer m,Integer n){

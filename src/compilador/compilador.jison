@@ -136,6 +136,7 @@ digito = [0-9]
     const { Unario } = require("./AST_JS/Expresiones/Unario")
     const { Llamada } = require("./AST_JS/Expresiones/Llamada")
     const { ParametroLlamada } = require("./AST_JS/Expresiones/ParametroLlamada");
+    const { Casteo } = require("./AST_JS/Expresiones/Casteo")
 
     //sentencias
     const { Print } = require("./AST_JS/Sentencias/Print");
@@ -210,7 +211,6 @@ DECLARACION : FUNCION
 
 DECLARACION_STRUCT : res_define id res_as '[' LISTA_ATRIBUTOS ']'
     {
-
     }
 ;
 
@@ -463,6 +463,16 @@ INSTRUCCION : res_break
     | NATIVAS
     {
         $$ = $1;
+    }
+    | id '++'
+    {
+        $$ = new Unario(Unario.TYPE.MASMAS, new Primitivo($1,Expresion.State.ID,@1.first_line,@1.first_column)
+        ,@2.first_line,@2.first_column);
+    }
+    | id '--'
+    {
+        $$ = new Unario(Unario.TYPE.MENOSMENOS, new Primitivo($1,Expresion.State.ID,@1.first_line,@1.first_column)
+        ,@2.first_line,@2.first_column);
     }
 ;
 

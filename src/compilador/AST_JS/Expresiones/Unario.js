@@ -14,6 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var Expresion_1 = require("../Expresion");
+var Primitivo_1 = require("./Primitivo");
 var Unario = /** @class */ (function (_super) {
     __extends(Unario, _super);
     function Unario(TIPO_OPERACION, unario, fila, columna) {
@@ -32,6 +33,10 @@ var Unario = /** @class */ (function (_super) {
                 return this.MAS(entorno);
             case Unario.TYPE.NOT:
                 return this.NOT(entorno);
+            case Unario.TYPE.MASMAS:
+                return this.MASMAS(entorno);
+            case Unario.TYPE.MENOSMENOS:
+                return this.MENOSMENOS(entorno);
             default:
                 entorno.addError("UNARIO-TRAD:" + this.TIPO_OPERACION, "No se encontró este tipo de Operación", this.fila, this.columna);
                 return "0";
@@ -62,6 +67,26 @@ var Unario = /** @class */ (function (_super) {
         entorno.addValor(ret, 1);
         entorno.addETQ(etq2);
         entorno.addComentario("============= FIN UNARIO NOT ==========");
+        return ret;
+    };
+    Unario.prototype.MASMAS = function (entorno) {
+        entorno.addComentario("============= UNARIO MASMAS ============");
+        var ret = entorno.getTemp();
+        if (this.unario instanceof Primitivo_1.Primitivo && this.unario.TIPO == Expresion_1.Expresion.State.ID) {
+            return this.unario.incrementar(entorno);
+        }
+        entorno.addValorOperacion(ret, this.unario.getTraduccion(entorno), "+", 1);
+        entorno.addComentario("============= FIN UNARIO MASMAS ==========");
+        return ret;
+    };
+    Unario.prototype.MENOSMENOS = function (entorno) {
+        entorno.addComentario("============= UNARIO MENOSMENOS ============");
+        var ret = entorno.getTemp();
+        if (this.unario instanceof Primitivo_1.Primitivo && this.unario.TIPO == Expresion_1.Expresion.State.ID) {
+            this.unario.decrementar(entorno);
+        }
+        entorno.addValorOperacion(ret, this.unario.getTraduccion(entorno), "-", 1);
+        entorno.addComentario("============= FIN UNARIO MENOSMENOS ==========");
         return ret;
     };
     Unario.prototype.getTipo = function (entorno) {

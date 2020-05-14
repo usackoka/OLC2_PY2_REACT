@@ -91,6 +91,34 @@ var Primitivo = /** @class */ (function (_super) {
         }
         return this.TIPO;
     };
+    Primitivo.prototype.incrementar = function (entorno) {
+        var temp = entorno.getTemp();
+        var tretorno = entorno.getTemp();
+        var posicion = entorno.getValor(this.value.toString(), this.fila, this.columna);
+        entorno.addComentario("========= Aumentando valor ID: " + this.value + " ===========");
+        entorno.addValorOperacion(temp, "P", "+", posicion);
+        entorno.addGetStack(tretorno, temp);
+        entorno.addValorOperacion(tretorno, tretorno, "+", 1);
+        entorno.addValorEnStack(temp, tretorno);
+        entorno.addComentario("============================================================");
+        //guardo los temporales usados
+        entorno.addTempUsed(temp);
+        return tretorno;
+    };
+    Primitivo.prototype.decrementar = function (entorno) {
+        var temp = entorno.getTemp();
+        var tretorno = entorno.getTemp();
+        var posicion = entorno.getValor(this.value.toString(), this.fila, this.columna);
+        entorno.addComentario("========= Aumentando valor ID: " + this.value + " ===========");
+        entorno.addValorOperacion(temp, "P", "+", posicion);
+        entorno.addGetStack(tretorno, temp);
+        entorno.addValorOperacion(tretorno, tretorno, "-", 1);
+        entorno.addValorEnStack(temp, tretorno);
+        entorno.addComentario("============================================================");
+        //guardo los temporales usados
+        entorno.addTempUsed(temp);
+        return tretorno;
+    };
     Primitivo.prototype.trimComillas = function (cadena) {
         if (cadena.length > 1) {
             if (cadena.charAt(0) == '\"') {

@@ -41,7 +41,7 @@ export class Funcion extends Expresion{
         //guardo los ids de los parámetros
         let i:number = 2;
         this.parametros.forEach(parametro=>{
-            let s:Simbolo = new Simbolo(parametro.TIPO,parametro.id,i,false,this.fila,this.columna);
+            let s:Simbolo = new Simbolo(parametro.TIPO,parametro.id,i,false,false,this.fila,this.columna);
             i++;
             entorno.addSimbolo(s);
         });

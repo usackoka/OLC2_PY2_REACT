@@ -2,13 +2,14 @@ export class Simbolo{
 
     tipo:Object;
     id:string;
-    posicion:number;
+    posicion:Object;
     fila:number;
     columna:number;
     constante:boolean;
+    global:boolean;
 
-    public constructor(tipo:Object,id:string,posicion:number,
-        constante:boolean,fila:number,columna:number){
+    public constructor(tipo:Object,id:string,posicion:Object,
+        constante:boolean,global:boolean,fila:number,columna:number){
         this.tipo = tipo;
         this.constante = constante;
         this.id = id;
@@ -16,6 +17,7 @@ export class Simbolo{
         this.fila = fila;
         this.columna = columna;
         this.tipo = tipo;
+        this.global = global;
     }
 
     public toString():string{

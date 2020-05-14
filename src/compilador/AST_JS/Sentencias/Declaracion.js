@@ -49,6 +49,16 @@ var Declaracion = /** @class */ (function (_super) {
             //Pregunto si la variable es global o no
             if (_this.isGlobal) {
                 //si es global, tengo que preguntar la posición en stack que la voy a meter :'v
+                //si es global, tengo que preguntar la posición en heap que la voy a meter :'v
+                var temp = entorno.getTemp();
+                entorno.addValor(temp, "H");
+                //guardo la variable
+                entorno.addValorEnHeap(temp, tmpValor);
+                entorno.incH();
+                entorno.addTempUsed(temp);
+                entorno.addTempUsed(tmpValor);
+                var s = new Simbolo_1.Simbolo(tipoValor, id.toLowerCase(), temp, _this.TIPO_VAR == Declaracion.State.CONST, true, _this.fila, _this.columna);
+                entorno.addSimboloGlobal(s);
             }
             else {
                 //============== Posicion del entorno en la que se guardará la variable ===================
@@ -59,7 +69,7 @@ var Declaracion = /** @class */ (function (_super) {
                 entorno.addValorEnStack(temp, tmpValor);
                 entorno.addTempUsed(temp);
                 entorno.addTempUsed(tmpValor);
-                var s = new Simbolo_1.Simbolo(tipoValor, id.toLowerCase(), entorno.tbs.size, _this.TIPO_VAR == Declaracion.State.CONST, _this.fila, _this.columna);
+                var s = new Simbolo_1.Simbolo(tipoValor, id.toLowerCase(), entorno.tbs.size, _this.TIPO_VAR == Declaracion.State.CONST, false, _this.fila, _this.columna);
                 entorno.addSimbolo(s);
             }
         });

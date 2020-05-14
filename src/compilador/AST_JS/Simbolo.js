@@ -1,7 +1,7 @@
 "use strict";
 exports.__esModule = true;
 var Simbolo = /** @class */ (function () {
-    function Simbolo(tipo, id, posicion, constante, fila, columna) {
+    function Simbolo(tipo, id, posicion, constante, global, fila, columna) {
         this.tipo = tipo;
         this.constante = constante;
         this.id = id;
@@ -9,6 +9,7 @@ var Simbolo = /** @class */ (function () {
         this.fila = fila;
         this.columna = columna;
         this.tipo = tipo;
+        this.global = global;
     }
     Simbolo.prototype.toString = function () {
         return "{\n" +

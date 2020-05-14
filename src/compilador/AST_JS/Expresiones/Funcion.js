@@ -45,7 +45,7 @@ var Funcion = /** @class */ (function (_super) {
         //guardo los ids de los parámetros
         var i = 2;
         this.parametros.forEach(function (parametro) {
-            var s = new Simbolo_1.Simbolo(parametro.TIPO, parametro.id, i, false, _this.fila, _this.columna);
+            var s = new Simbolo_1.Simbolo(parametro.TIPO, parametro.id, i, false, false, _this.fila, _this.columna);
             i++;
             entorno.addSimbolo(s);
         });

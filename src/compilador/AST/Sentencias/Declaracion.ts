@@ -46,6 +46,21 @@ export class Declaracion extends Sentencia{
             //Pregunto si la variable es global o no
             if(this.isGlobal){
                 //si es global, tengo que preguntar la posición en stack que la voy a meter :'v
+                //si es global, tengo que preguntar la posición en heap que la voy a meter :'v
+                let temp = entorno.getTemp();
+                entorno.addValor(temp,"H")
+                //guardo la variable
+                entorno.addValorEnHeap(temp, tmpValor);
+                entorno.incH();
+
+                entorno.addTempUsed(temp);
+                entorno.addTempUsed(tmpValor);
+
+                let s:Simbolo = new Simbolo(tipoValor,id.toLowerCase(),temp,
+                this.TIPO_VAR==Declaracion.State.CONST,true,
+                this.fila, this.columna);
+
+                entorno.addSimboloGlobal(s);
             }else{
                 //============== Posicion del entorno en la que se guardará la variable ===================
                 let temp = entorno.getTemp();
@@ -58,7 +73,7 @@ export class Declaracion extends Sentencia{
                 entorno.addTempUsed(tmpValor);
 
                 let s:Simbolo = new Simbolo(tipoValor,id.toLowerCase(),entorno.tbs.size,
-                this.TIPO_VAR==Declaracion.State.CONST,
+                this.TIPO_VAR==Declaracion.State.CONST,false,
                 this.fila, this.columna);
 
                 entorno.addSimbolo(s);

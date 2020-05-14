@@ -91,6 +91,16 @@ var Entorno = /** @class */ (function () {
             this.size++;
         }
     };
+    Entorno.prototype.addSimboloGlobal = function (s) {
+        if (this.padre != null) {
+            this.padre.addSimboloGlobal(s);
+            return;
+        }
+        if (!this.tbs.has(s.id)) {
+            this.tbs.set(s.id, s);
+            this.size++;
+        }
+    };
     /**
      * ===============================================================================================================
      * ===============================================================================================================

@@ -49,13 +49,13 @@ var For = /** @class */ (function (_super) {
             nodo.copiarEtiquetas(_this);
             nodo.getTraduccion(entorno);
         });
-        //regreso a mi entorno
-        entorno = entorno.padre;
         entorno.addComentario("============== EXPRESION FOR");
         if (this.fin_for != null)
             this.fin_for.getTraduccion(entorno);
         entorno.addGoto(this.etqContinue);
         entorno.addETQ(this.etqBreak);
+        //regreso a mi entorno
+        entorno = entorno.padre;
         entorno.addComentario("=============== FIN FOR =================");
         return "";
     };

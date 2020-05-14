@@ -26,7 +26,7 @@ export class For extends Sentencia{
         let etqTrue = entorno.getETQ()
         this.etqBreak = entorno.getETQ();
         this.etqContinue = entorno.getETQ();
-        
+
         entorno.addComentario("=============== FOR =================");
         //paso 4,nuevo entorno
         entorno = new Entorno(entorno);
@@ -42,12 +42,12 @@ export class For extends Sentencia{
             nodo.copiarEtiquetas(this);
             nodo.getTraduccion(entorno);
         });
-        //regreso a mi entorno
-        entorno = entorno.padre;
         entorno.addComentario("============== EXPRESION FOR")
         if(this.fin_for!=null) this.fin_for.getTraduccion(entorno);
         entorno.addGoto(this.etqContinue);
         entorno.addETQ(this.etqBreak);
+        //regreso a mi entorno
+        entorno = entorno.padre;
         entorno.addComentario("=============== FIN FOR =================");
 
         return "";

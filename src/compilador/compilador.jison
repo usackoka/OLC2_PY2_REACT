@@ -552,22 +552,30 @@ FIN_FOR : E
 
 SWITCH : res_switch '(' E ')' '{' LISTA_CASOS DEFAULT '}'
     {
+        $$ = $6;
+        $$.elseif = $7;
+        $$.setExpresionSwitch($3)
     }
 ;
 
 LISTA_CASOS : LISTA_CASOS res_case E ':' BLOQUES
     {
+        $$ = $1;
+        $$.elseif = new If($3,$5,null,@1.first_line,@1.first_column);
     }
     | res_case E ':' BLOQUES
     {
+        $$ = new If($2,$4,null,@1.first_line,@1.first_column);
     }
 ;
 
 DEFAULT : res_default ':' BLOQUES
     {
+        $$ = new Else($3,@1.first_line,@1.first_column);
     }
     | /*empty*/
     {
+        $$ = null;
     }
 ;
 

@@ -20,11 +20,12 @@ void Principal(){
     print(ackermann(3,4))
 }
 
-Integer global1 := 45;
+Integer global1 = 45;
 var global2 := "Hola soy global"
 global global3 := "Hola soy global3"
 
 void callBack(){
+    print(n)
     print(global3)
 }
 
@@ -73,4 +74,17 @@ void func2(){
 
 void f1(Integer n1){
     global c2 := n1;
+}
+
+void Principal(){
+    switch("Hola"){
+        case "Hola1":
+            print("Aquí no")
+        case "Hola2":
+            print("Aquí tampoco")
+        case "Hola":
+            print("aquí sí ")
+        default:
+            print("Aquí tampoco x2")
+    }
 }

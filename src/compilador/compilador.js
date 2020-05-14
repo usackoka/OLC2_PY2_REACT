@@ -115,7 +115,7 @@ case 7:
         this.$ = $$[$0-2];
     
 break;
-case 8: case 11: case 12: case 32: case 33: case 34: case 35: case 64: case 65: case 72: case 73: case 74: case 75: case 80: case 81: case 82: case 83: case 84: case 100: case 101: case 102: case 107: case 108: case 110:
+case 8: case 11: case 12: case 32: case 33: case 34: case 35: case 64: case 65: case 72: case 73: case 74: case 75: case 100: case 101: case 102: case 107: case 108: case 110:
 
     
 break;
@@ -236,7 +236,7 @@ case 39:
         this.$ = lista;
     
 break;
-case 41:
+case 41: case 84:
 
         this.$ = null;
     
@@ -315,6 +315,29 @@ break;
 case 71:
 
         this.$ = new While($$[$0-2],$$[$0-6],true,_$[$0-8].first_line,_$[$0-8].first_column)
+    
+break;
+case 80:
+
+        this.$ = $$[$0-2];
+        this.$.elseif = $$[$0-1];
+        this.$.setExpresionSwitch($$[$0-5])
+    
+break;
+case 81:
+
+        this.$ = $$[$0-4];
+        this.$.elseif = new If($$[$0-2],$$[$0],null,_$[$0-4].first_line,_$[$0-4].first_column);
+    
+break;
+case 82:
+
+        this.$ = new If($$[$0-2],$$[$0],null,_$[$0-3].first_line,_$[$0-3].first_column);
+    
+break;
+case 83:
+
+        this.$ = new Else($$[$0],_$[$0-2].first_line,_$[$0-2].first_column);
     
 break;
 case 89:

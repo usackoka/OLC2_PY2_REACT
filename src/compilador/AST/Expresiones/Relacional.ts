@@ -19,7 +19,7 @@ export class Relacional extends Expresion{
     public getTraduccion(entorno:Entorno):string{
         switch(this.TIPO_OPERACION){
             case Relacional.TYPE.IGUAL_REFERENCIA:
-                return this.IGUAL_REFERENCIA(entorno);
+                return this.IGUALIGUAL(entorno);
             case Relacional.TYPE.IGUAL:
                 return this.IGUALIGUAL(entorno);
             case Relacional.TYPE.DIFERENTE:

@@ -2,6 +2,7 @@ import { Entorno } from "../Entorno";
 import { Expresion } from "../Expresion";
 import { Sentencia } from "../Sentencia";
 import { Nodo } from "../Nodo";
+import { Relacional } from "../Expresiones/Relacional";
 
 export class If extends Sentencia{
 
@@ -16,6 +17,13 @@ export class If extends Sentencia{
         this.columna = columna;
         this.instrucciones = instrucciones;
         this.elseif = elseif;
+    }
+
+    public setExpresionSwitch(expresion:Expresion){
+        this.condicion = new Relacional(Relacional.TYPE.IGUAL,this.condicion,expresion,this.fila,this.columna);
+        if(this.elseif != null && this.elseif instanceof If){
+            this.elseif.setExpresionSwitch(expresion);
+        }
     }
 
     public getTraduccion(entorno:Entorno):string{

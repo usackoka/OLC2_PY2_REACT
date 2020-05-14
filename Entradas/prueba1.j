@@ -20,6 +20,13 @@ void Principal(){
     print(ackermann(3,4))
 }
 
+void Principal(){
+    var n := 0;
+    while(n<10){
+        
+    }
+}
+
 Integer ackermann(Integer m,Integer n){
     if (m == 0) {
          return n + 1;

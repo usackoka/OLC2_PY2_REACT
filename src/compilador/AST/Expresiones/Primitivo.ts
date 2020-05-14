@@ -83,6 +83,36 @@ export class Primitivo extends Expresion{
         return this.TIPO;
     }
 
+    public incrementar(entorno:Entorno):string{
+        let temp = entorno.getTemp();
+        let tretorno = entorno.getTemp();
+        let posicion = entorno.getValor(this.value.toString(), this.fila, this.columna);
+        entorno.addComentario("========= Aumentando valor ID: " + this.value+" ===========");
+        entorno.addValorOperacion(temp, "P", "+", posicion);
+        entorno.addGetStack(tretorno, temp);
+        entorno.addValorOperacion(tretorno,tretorno,"+",1);
+        entorno.addValorEnStack(temp,tretorno);
+        entorno.addComentario("============================================================");
+        //guardo los temporales usados
+        entorno.addTempUsed(temp);
+        return tretorno;
+    }
+
+    public decrementar(entorno:Entorno):string{
+        let temp = entorno.getTemp();
+        let tretorno = entorno.getTemp();
+        let posicion = entorno.getValor(this.value.toString(), this.fila, this.columna);
+        entorno.addComentario("========= Aumentando valor ID: " + this.value+" ===========");
+        entorno.addValorOperacion(temp, "P", "+", posicion);
+        entorno.addGetStack(tretorno, temp);
+        entorno.addValorOperacion(tretorno,tretorno,"-",1);
+        entorno.addValorEnStack(temp,tretorno);
+        entorno.addComentario("============================================================");
+        //guardo los temporales usados
+        entorno.addTempUsed(temp);
+        return tretorno;
+    }
+
     public trimComillas(cadena:string):string{
         if(cadena.length>1){
             if(cadena.charAt(0) == '\"'){

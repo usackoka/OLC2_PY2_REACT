@@ -146,6 +146,7 @@ digito = [0-9]
     const { Declaracion } = require("./AST_JS/Sentencias/Declaracion");
     const { Reasignacion } = require("./AST_JS/Sentencias/Reasignacion");
     const { Return } = require("./AST_JS/Sentencias/Return");
+    const { While } = require("./AST_JS/Sentencias/While");
 
 %}
 
@@ -505,11 +506,13 @@ ELSE : res_else IF
 
 WHILE : res_while '(' E ')' '{' BLOQUES '}'
     {
+        $$ = new While($3,$6,false,@1.first_line,@1.first_column)
     }
 ;
 
 DOWHILE : res_do '{' BLOQUES '}' res_while '(' E ')' PUEDE_SEMICOLON
     {
+        $$ = new While($7,$3,true,@1.first_line,@1.first_column)
     }
 ;
 
@@ -634,7 +637,7 @@ E : CONSTANTE
     {
         $$ = $1;
     }
-; 
+;
 
 NEW_STRUCT : res_strc id '(' ')'
     {
@@ -728,7 +731,25 @@ BINARIA : ARITMETICA
     }
 ;
 
-UNARIA: '-' E %prec UTmenos
+TIPO_CASTEO : res_integer
+    {
+        $$ = Expresion.State.INTEGER;
+    }
+    | res_char
+    {
+        $$ = Expresion.State.CHAR;
+    }
+    | res_double
+    {
+        $$ = Expresion.State.DOUBLE;
+    }
+;
+
+UNARIA: '(' TIPO_CASTEO ')' E %prec Ttypecast
+    {
+        $$ = new Casteo($2,$4,@1.first_line,@2.first_column);
+    }
+    | '-' E %prec UTmenos
     {
         $$ = new Unario(Unario.TYPE.MENOS,$2,@1.first_line,@1.first_column);
     }

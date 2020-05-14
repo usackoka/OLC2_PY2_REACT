@@ -1,6 +1,6 @@
 import { Entorno } from "../Entorno";
 import { Expresion } from "../Expresion";
-
+import { Primitivo } from "./Primitivo";
 export class Unario extends Expresion{
 
     unario:Expresion;
@@ -22,6 +22,10 @@ export class Unario extends Expresion{
                 return this.MAS(entorno);
             case Unario.TYPE.NOT:
                 return this.NOT(entorno);
+            case Unario.TYPE.MASMAS:
+                return this.MASMAS(entorno);
+            case Unario.TYPE.MENOSMENOS:
+                return this.MENOSMENOS(entorno);
             default:
                 entorno.addError("UNARIO-TRAD:"+this.TIPO_OPERACION,"No se encontró este tipo de Operación",this.fila,this.columna);
                 return "0";
@@ -55,6 +59,28 @@ export class Unario extends Expresion{
         entorno.addValor(ret, 1);
         entorno.addETQ(etq2);
         entorno.addComentario("============= FIN UNARIO NOT ==========");
+        return ret;
+    }
+
+    public MASMAS(entorno:Entorno):string{
+        entorno.addComentario("============= UNARIO MASMAS ============");
+        let ret = entorno.getTemp()
+        if(this.unario instanceof Primitivo && this.unario.TIPO == Expresion.State.ID){
+            return this.unario.incrementar(entorno);
+        }
+        entorno.addValorOperacion(ret,this.unario.getTraduccion(entorno),"+",1);
+        entorno.addComentario("============= FIN UNARIO MASMAS ==========");
+        return ret;
+    }
+
+    public MENOSMENOS(entorno:Entorno):string{
+        entorno.addComentario("============= UNARIO MENOSMENOS ============");
+        let ret = entorno.getTemp()
+        if(this.unario instanceof Primitivo && this.unario.TIPO == Expresion.State.ID){
+            this.unario.decrementar(entorno);
+        }
+        entorno.addValorOperacion(ret,this.unario.getTraduccion(entorno),"-",1);
+        entorno.addComentario("============= FIN UNARIO MENOSMENOS ==========");
         return ret;
     }
 

@@ -76,15 +76,17 @@ void f1(Integer n1){
     global c2 := n1;
 }
 
+var mensaje := "Mi amor :*"
+
 void Principal(){
-    switch("Hola"){
-        case "Hola1":
-            print("Aquí no")
-        case "Hola2":
-            print("Aquí tampoco")
-        case "Hola":
-            print("aquí sí ")
-        default:
-            print("Aquí tampoco x2")
+    for(Integer i=0; i<100; i++){
+        print(mensaje+" te amo mucho!! :3")
     }
+}
+
+void Principal(){
+    Integer[] var1 = {5,6,7,8};
+    Integer[] var2 = strc Integer[5];
+    print(var1[2])
+    print(var2[4])
 }

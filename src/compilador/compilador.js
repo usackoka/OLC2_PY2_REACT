@@ -115,7 +115,7 @@ case 7:
         this.$ = $$[$0-2];
     
 break;
-case 8: case 11: case 12: case 32: case 33: case 34: case 35: case 64: case 65: case 100: case 101: case 102: case 107: case 108: case 110:
+case 8: case 11: case 12: case 32: case 33: case 34: case 35: case 64: case 65: case 100: case 108: case 110:
 
     
 break;
@@ -365,9 +365,24 @@ case 90:
         this.$ = new ParametroLlamada($$[$0],false)
     
 break;
+case 101:
+
+        this.$ = new Arreglo($$[$0-3],$$[$0-1],null,_$[$0-4].first_line,_$[$0-4].first_column)
+    
+break;
+case 102:
+
+        this.$ = new Arreglo(null,null,$$[$0-1],_$[$0-2].first_line,_$[$0-2].first_column)
+    
+break;
 case 105:
 
         this.$ = new Primitivo($$[$0],Expresion.State.ID,_$[$0].first_line,_$[$0].first_column);
+    
+break;
+case 107:
+
+        this.$ = new AccesoArreglo($$[$0-3],$$[$0-1],_$[$0-3].first_line,_$[$0-3].first_column)
     
 break;
 case 109:
@@ -681,6 +696,8 @@ parse: function parse(input) {
     const { Llamada } = require("./AST_JS/Expresiones/Llamada")
     const { ParametroLlamada } = require("./AST_JS/Expresiones/ParametroLlamada");
     const { Casteo } = require("./AST_JS/Expresiones/Casteo")
+    const { Arreglo } = require("./AST_JS/Expresiones/Arreglo")
+    const { AccesoArreglo } = require("./AST_JS/Expresiones/AccesoArreglo")
 
     //sentencias
     const { Print } = require("./AST_JS/Sentencias/Print");

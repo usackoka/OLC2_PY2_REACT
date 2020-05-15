@@ -137,6 +137,8 @@ digito = [0-9]
     const { Llamada } = require("./AST_JS/Expresiones/Llamada")
     const { ParametroLlamada } = require("./AST_JS/Expresiones/ParametroLlamada");
     const { Casteo } = require("./AST_JS/Expresiones/Casteo")
+    const { Arreglo } = require("./AST_JS/Expresiones/Arreglo")
+    const { AccesoArreglo } = require("./AST_JS/Expresiones/AccesoArreglo")
 
     //sentencias
     const { Print } = require("./AST_JS/Sentencias/Print");
@@ -707,6 +709,7 @@ ACCESO : id
     }
     | id '[' E ']'
     {
+        $$ = new AccesoArreglo($1,$3,@1.first_line,@1.first_column)
     }
     | LLAMADA '[' E ']'
     {

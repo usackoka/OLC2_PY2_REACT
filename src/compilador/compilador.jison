@@ -116,7 +116,9 @@ digito = [0-9]
 //-----------------------------------------------------------------------
 //-----------------------------------------------------------------------
 <<EOF>>                                           return 'EOF'
-. %{console.log("FILA: " + (yylloc.first_line) + " COL: " + (yylloc.first_column) + " Lexico " + "Caracter Invalido cerca de: \""+ yytext + "\""); %}
+. %{
+    exports.principal.addErrorSintacticoLexico(yytext,"Caracter Invalido cerca de: \""+ yytext + "\"", "Lexico",yylloc.first_line,yylloc.first_column)
+    %}
 //-----------------------------------------------------------------------
 //---------------------------SINTACTICO----------------------------------
 //-----------------------------------------------------------------------
@@ -151,6 +153,9 @@ digito = [0-9]
     const { Return } = require("./AST_JS/Sentencias/Return");
     const { While } = require("./AST_JS/Sentencias/While");
     const { For } = require("./AST_JS/Sentencias/For");
+    const { Struct } = require("./AST_JS/Sentencias/Struct");
+    const { Atributo } = require("./AST_JS/Sentencias/Atributo");
+
 
 %}
 
@@ -214,24 +219,29 @@ DECLARACION : FUNCION
 
 DECLARACION_STRUCT : res_define id res_as '[' LISTA_ATRIBUTOS ']'
     {
+        $$ = new Struct($2,$5,@1.first_line,@2.first_column)
     }
 ;
 
 LISTA_ATRIBUTOS : LISTA_ATRIBUTOS ',' ATRIBUTO 
     {
-
+        $$ = $1;
+        $$.push($3)
     }
     | ATRIBUTO
     {
-
+        $$ = [];
+        $$.push($1)
     }
 ;
 
 ATRIBUTO : TIPO_DATO id 
     {
+        $$ = new Atributo($1,$2,null,@2.first_line,@2.first_column)
     }
     | TIPO_DATO id '=' E
     {
+        $$ = new Atributo($1,$2,$4,@2.first_line,@2.first_column)
     }
 ;
 
@@ -325,27 +335,9 @@ TYPE : res_integer
     }
 ;
 
-ASIGNACION_VARIABLE : id '=' E
+ASIGNACION_VARIABLE : LIST_ACCESO '=' E
     {
         $$ = new Reasignacion($1,$3,@2.first_line,@2.first_column)
-    }
-    | id LIST_ACCESO1 '=' E
-    {
-
-    }
-;
-
-LIST_ACCESO1: '.' id
-    {
-    }
-    | '.' id '[' E ']'
-    {
-    }
-    | LIST_ACCESO1 '.' id '[' E ']'
-    {
-    }
-    | LIST_ACCESO1 '.' id 
-    {
     }
 ;
 
@@ -710,9 +702,6 @@ ACCESO : id
     | id '[' E ']'
     {
         $$ = new AccesoArreglo($1,$3,@1.first_line,@1.first_column)
-    }
-    | LLAMADA '[' E ']'
-    {
     }
 ;
 

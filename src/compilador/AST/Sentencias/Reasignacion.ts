@@ -5,6 +5,7 @@ import { Expresion } from "../Expresion";
 export class Reasignacion extends Sentencia{
 
     id:string;
+    
     expresion:Expresion;
 
     public constructor(id:string, expresion:Expresion, fila:number, columna:number){
@@ -27,11 +28,14 @@ export class Reasignacion extends Sentencia{
         let tmpValor = this.expresion.getTraduccion(entorno)
         entorno.addComentario("==== guardando valor ==========");
         let posicion = entorno.getValor(this.id, this.fila, this.columna);
-        entorno.addValorOperacion(tmp, "P", "+", posicion);
-        entorno.addValorEnStack(tmp, tmpValor);
+        if(entorno.isGlobal(this.id, this.fila, this.columna)){
+            entorno.addValorEnHeap(posicion,tmpValor);
+        }else{
+            entorno.addValorOperacion(tmp, "P", "+", posicion);
+            entorno.addValorEnStack(tmp, tmpValor);
+        }
         entorno.addTempUsed(tmp);
         entorno.addTempUsed(tmpValor);
-
         entorno.addComentario("============== FIN REASIGNACION VARIABLE =================");
         return "";
     }

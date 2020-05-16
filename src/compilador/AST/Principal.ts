@@ -138,6 +138,11 @@ export class Principal {
     public addComentario(cadena:string){
         this.traduccion += "#* //"+cadena+"*#\n";
     }
+
+    public addErrorSintacticoLexico(lexema:string,mensaje:string,tipo:string,fila:number, columna:number){
+        this.erroresSemanticos.push(new Token(lexema,tipo,mensaje,fila,columna));
+        console.log(lexema+"-"+mensaje+"-"+fila+"-"+columna);
+    }
     
     public addError(lexema:string,mensaje:string, fila:number, columna:number){
         this.erroresSemanticos.push(new Token(lexema,"Error Semántico",mensaje,fila,columna));

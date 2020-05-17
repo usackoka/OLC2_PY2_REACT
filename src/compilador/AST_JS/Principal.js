@@ -4,6 +4,7 @@ var Entorno_1 = require("./Entorno");
 var Token_1 = require("./Token");
 var Print_1 = require("./Sentencias/Print");
 var Funcion_1 = require("./Expresiones/Funcion");
+var Struct_1 = require("./Sentencias/Struct");
 var Principal = /** @class */ (function () {
     function Principal() {
         this.entorno = new Entorno_1.Entorno(null, this);
@@ -103,7 +104,7 @@ var Principal = /** @class */ (function () {
             json.push({
                 index: cont++,
                 lex: nodo.id,
-                type: "Variable",
+                type: nodo instanceof Struct_1.Struct ? "Struct" : "Variable",
                 dataType: nodo.tipo,
                 line: nodo.fila,
                 column: nodo.columna
@@ -111,9 +112,26 @@ var Principal = /** @class */ (function () {
         });
         return json;
     };
+    //busqueda de la struct
+    Principal.prototype.getStruct = function (id, fila, columna) {
+        for (var _i = 0, _a = this.nodos; _i < _a.length; _i++) {
+            var nodo = _a[_i];
+            if (nodo instanceof Struct_1.Struct) {
+                if (nodo.id.toLowerCase() === id) {
+                    return nodo;
+                }
+            }
+        }
+        this.addError(id, "No se econtró el struct: " + id, fila, columna);
+        return null;
+    };
     //=================================== METODOS DE TRADUCCIÓN
     Principal.prototype.addComentario = function (cadena) {
         this.traduccion += "#* //" + cadena + "*#\n";
+    };
+    Principal.prototype.addErrorSintacticoLexico = function (lexema, mensaje, tipo, fila, columna) {
+        this.erroresSemanticos.push(new Token_1.Token(lexema, tipo, mensaje, fila, columna));
+        console.log(lexema + "-" + mensaje + "-" + fila + "-" + columna);
     };
     Principal.prototype.addError = function (lexema, mensaje, fila, columna) {
         this.erroresSemanticos.push(new Token_1.Token(lexema, "Error Semántico", mensaje, fila, columna));

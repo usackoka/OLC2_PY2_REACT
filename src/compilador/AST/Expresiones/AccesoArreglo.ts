@@ -2,8 +2,9 @@ import { Entorno } from "../Entorno";
 import { Expresion } from "../Expresion";
 import { TipoArreglo } from "./TipoArreglo";
 import { Primitivo } from "./Primitivo";
+import { InterfazAcceso } from "../IntefazAcceso";
 
-export class AccesoArreglo extends Expresion{
+export class AccesoArreglo extends Expresion implements InterfazAcceso{
 
     index:Expresion;
     id:string;
@@ -14,6 +15,14 @@ export class AccesoArreglo extends Expresion{
         this.id = id;
         this.fila = fila;
         this.columna = columna;
+    }
+
+    public getPosicion(entorno:Entorno):string{
+        return "";
+    }
+
+    public isInHeap(entorno:Entorno):boolean{
+        return entorno.isGlobal(this.id,this.fila,this.columna);
     }
 
     public getTraduccion(entorno:Entorno):string{

@@ -85,6 +85,9 @@ var Entorno = /** @class */ (function () {
             }
         }
     };
+    Entorno.prototype.getStruct = function (id, fila, columna) {
+        return this.getEntornoGlobal().principal.getStruct(id, fila, columna);
+    };
     Entorno.prototype.isConst = function (id, fila, columna) {
         id = id.toLowerCase();
         if (this.tbs.has(id)) {

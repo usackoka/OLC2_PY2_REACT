@@ -1,5 +1,4 @@
 import { Entorno } from "../Entorno";
-import { Sentencia } from "../Sentencia";
 import { Expresion } from "../Expresion";
 
 export class Atributo extends Expresion{
@@ -9,15 +8,15 @@ export class Atributo extends Expresion{
 
     public constructor(TIPO:Object,id:string,expresion:Expresion,fila:number, columna:number){
         super();
+        this.id = id;
         this.fila = fila;
         this.columna = columna;
         this.expresion = expresion;
         this.TIPO = TIPO;
-
     }
 
     public getTraduccion(entorno:Entorno):string{
-        return "";
+        return this.expresion!=null?this.expresion.getTraduccion(entorno):Expresion.getDefecto(this.TIPO,entorno);
     }
 
     public getTipo(entorno:Entorno):Object{

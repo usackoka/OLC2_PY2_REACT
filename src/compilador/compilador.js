@@ -93,7 +93,7 @@ case 2: case 3:
         exports.principal.nodos.push($$[$0]);
     
 break;
-case 4: case 24: case 31: case 35: case 39: case 42: case 43: case 44: case 45: case 46: case 47: case 51: case 52: case 54: case 63: case 71: case 73: case 80: case 88: case 89: case 90: case 92: case 93: case 94: case 99: case 101: case 112: case 113: case 114:
+case 4: case 24: case 31: case 35: case 39: case 42: case 43: case 44: case 45: case 46: case 47: case 51: case 52: case 54: case 63: case 71: case 73: case 80: case 88: case 89: case 90: case 92: case 93: case 94: case 101: case 112: case 113: case 114:
 
         this.$ = $$[$0];
     
@@ -310,7 +310,7 @@ case 58:
         this.$ = new Return(null,_$[$0].first_line,_$[$0].first_column)
     
 break;
-case 59: case 60: case 95: case 104:
+case 59: case 60: case 104:
 
     
 break;
@@ -387,6 +387,11 @@ case 85:
         this.$ = new ParametroLlamada($$[$0],false)
     
 break;
+case 95:
+
+        this.$ = new InstanciaStruct($$[$0-2],_$[$0-3].first_line,_$[$0-3].first_column)
+    
+break;
 case 96:
 
         this.$ = new Arreglo($$[$0-3],$$[$0-1],null,_$[$0-4].first_line,_$[$0-4].first_column)
@@ -395,6 +400,16 @@ break;
 case 97:
 
         this.$ = new Arreglo(null,null,$$[$0-1],_$[$0-2].first_line,_$[$0-2].first_column)
+    
+break;
+case 98:
+
+        this.$ = new ListAcceso($$[$0-2],$$[$0],_$[$0-1].first_line,_$[$0-1].first_column)
+    
+break;
+case 99:
+
+        this.$ = new ListAcceso($$[$0],null,$$[$0].fila,$$[$0].columna);
     
 break;
 case 100:
@@ -720,6 +735,8 @@ parse: function parse(input) {
     const { Casteo } = require("./AST_JS/Expresiones/Casteo")
     const { Arreglo } = require("./AST_JS/Expresiones/Arreglo")
     const { AccesoArreglo } = require("./AST_JS/Expresiones/AccesoArreglo")
+    const { ListAcceso } = require("./AST_JS/Expresiones/ListAcceso")
+    const { InstanciaStruct } = require("./AST_JS/Expresiones/InstanciaStruct")
 
     //sentencias
     const { Print } = require("./AST_JS/Sentencias/Print");
@@ -732,6 +749,9 @@ parse: function parse(input) {
     const { Return } = require("./AST_JS/Sentencias/Return");
     const { While } = require("./AST_JS/Sentencias/While");
     const { For } = require("./AST_JS/Sentencias/For");
+    const { Struct } = require("./AST_JS/Sentencias/Struct");
+    const { Atributo } = require("./AST_JS/Sentencias/Atributo");
+
 
 
 

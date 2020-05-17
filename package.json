@@ -10,6 +10,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.1.2",
+    "@types/codemirror": "0.0.93",
     "bootstrap": "^4.4.1",
     "codemirror": "^5.52.2",
     "gulp": "^4.0.2",
@@ -37,7 +38,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "jisonint":"jison src/interprete/interprete.jison && move .\\interprete.js .\\src\\interprete\\",
+    "jisonint": "jison src/interprete/interprete.jison && move .\\interprete.js .\\src\\interprete\\",
     "jison": "jison src/compilador/compilador.jison &&  move .\\compilador.js .\\src\\compilador\\"
   },
   "eslintConfig": {

@@ -141,6 +141,8 @@ digito = [0-9]
     const { Casteo } = require("./AST_JS/Expresiones/Casteo")
     const { Arreglo } = require("./AST_JS/Expresiones/Arreglo")
     const { AccesoArreglo } = require("./AST_JS/Expresiones/AccesoArreglo")
+    const { ListAcceso } = require("./AST_JS/Expresiones/ListAcceso")
+    const { InstanciaStruct } = require("./AST_JS/Expresiones/InstanciaStruct")
 
     //sentencias
     const { Print } = require("./AST_JS/Sentencias/Print");
@@ -670,6 +672,7 @@ E : CONSTANTE
 
 NEW_STRUCT : res_strc id '(' ')'
     {
+        $$ = new InstanciaStruct($2,@1.first_line,@1.first_column)
     }
 ;
 
@@ -685,9 +688,12 @@ E_ARREGLO : res_strc TYPE '[' E ']'
 
 //============================= ACCESOS DEL LADO DE LA EXPRESION
 LIST_ACCESO : LIST_ACCESO '.' ACCESO 
+    {
+        $$ = new ListAcceso($1,$3,@2.first_line,@2.first_column)
+    }
     | ACCESO
     {
-        $$ = $1;
+        $$ = new ListAcceso($1,null,$1.fila,$1.columna);
     }
 ;
 

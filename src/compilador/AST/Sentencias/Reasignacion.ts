@@ -1,16 +1,16 @@
 import { Entorno } from "../Entorno";
 import { Sentencia } from "../Sentencia";
 import { Expresion } from "../Expresion";
+import { ListAcceso } from "../Expresiones/ListAcceso";
 
 export class Reasignacion extends Sentencia{
 
-    id:string;
-    
+    acceso:ListAcceso;
     expresion:Expresion;
 
-    public constructor(id:string, expresion:Expresion, fila:number, columna:number){
+    public constructor(acceso:ListAcceso, expresion:Expresion, fila:number, columna:number){
         super();
-        this.id = id;
+        this.acceso = acceso;
         this.expresion = expresion;
         this.fila = fila;
         this.columna = columna;
@@ -19,16 +19,15 @@ export class Reasignacion extends Sentencia{
     public getTraduccion(entorno:Entorno):string{
         entorno.addComentario("=================== REASIGNACION DE VARIABLE ===================");
         //validar si es constante
-        if(entorno.isConst(this.id.toLowerCase(),this.fila,this.columna)){
-            entorno.addError("Constante: "+this.id, "No se puede modificar el valor de una constante",this.fila,this.columna)
+        if(this.acceso.isConst(entorno)){
             return "";
         }
 
         let tmp:string = entorno.getTemp()
         let tmpValor = this.expresion.getTraduccion(entorno)
         entorno.addComentario("==== guardando valor ==========");
-        let posicion = entorno.getValor(this.id, this.fila, this.columna);
-        if(entorno.isGlobal(this.id, this.fila, this.columna)){
+        let posicion = this.acceso.getPosicion(entorno);
+        if(this.acceso.isInHeap(entorno)){
             entorno.addValorEnHeap(posicion,tmpValor);
         }else{
             entorno.addValorOperacion(tmp, "P", "+", posicion);

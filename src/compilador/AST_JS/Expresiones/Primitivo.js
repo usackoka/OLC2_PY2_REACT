@@ -95,6 +95,12 @@ var Primitivo = /** @class */ (function (_super) {
         }
         return this.TIPO;
     };
+    Primitivo.prototype.getPosicion = function (entorno) {
+        return entorno.getValor(this.value.toString(), this.fila, this.columna);
+    };
+    Primitivo.prototype.isInHeap = function (entorno) {
+        return entorno.isGlobal(this.value.toString(), this.fila, this.columna);
+    };
     Primitivo.prototype.incrementar = function (entorno) {
         var temp = entorno.getTemp();
         var tretorno = entorno.getTemp();

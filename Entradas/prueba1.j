@@ -89,4 +89,15 @@ void Principal(){
     Integer[] var2 = strc Integer[5];
     print(var1[2])
     print(var2[4])
+    var2[4] = 90;
+}
+
+define Nodo as [
+    String nombre = "Nombre del nodo",
+    integer numero = 40
+];
+
+void Principal(){
+    Nodo nodo = strc Nodo();
+    print("Nombre del nodo: "+nodo.nombre)
 }

@@ -16,9 +16,9 @@ exports.__esModule = true;
 var Sentencia_1 = require("../Sentencia");
 var Reasignacion = /** @class */ (function (_super) {
     __extends(Reasignacion, _super);
-    function Reasignacion(id, expresion, fila, columna) {
+    function Reasignacion(acceso, expresion, fila, columna) {
         var _this = _super.call(this) || this;
-        _this.id = id;
+        _this.acceso = acceso;
         _this.expresion = expresion;
         _this.fila = fila;
         _this.columna = columna;
@@ -27,16 +27,20 @@ var Reasignacion = /** @class */ (function (_super) {
     Reasignacion.prototype.getTraduccion = function (entorno) {
         entorno.addComentario("=================== REASIGNACION DE VARIABLE ===================");
         //validar si es constante
-        if (entorno.isConst(this.id.toLowerCase(), this.fila, this.columna)) {
-            entorno.addError("Constante: " + this.id, "No se puede modificar el valor de una constante", this.fila, this.columna);
+        if (this.acceso.isConst(entorno)) {
             return "";
         }
         var tmp = entorno.getTemp();
         var tmpValor = this.expresion.getTraduccion(entorno);
         entorno.addComentario("==== guardando valor ==========");
-        var posicion = entorno.getValor(this.id, this.fila, this.columna);
-        entorno.addValorOperacion(tmp, "P", "+", posicion);
-        entorno.addValorEnStack(tmp, tmpValor);
+        var posicion = this.acceso.getPosicion(entorno);
+        if (this.acceso.isInHeap(entorno)) {
+            entorno.addValorEnHeap(posicion, tmpValor);
+        }
+        else {
+            entorno.addValorOperacion(tmp, "P", "+", posicion);
+            entorno.addValorEnStack(tmp, tmpValor);
+        }
         entorno.addTempUsed(tmp);
         entorno.addTempUsed(tmpValor);
         entorno.addComentario("============== FIN REASIGNACION VARIABLE =================");

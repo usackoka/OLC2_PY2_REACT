@@ -3,6 +3,7 @@ import { Print } from "./Sentencias/Print";
 import { Simbolo } from "./Simbolo";
 import { Funcion } from "./Expresiones/Funcion";
 import { Expresion } from "./Expresion";
+import { Struct } from "./Sentencias/Struct";
 
 export class Entorno {
     principal:Principal;
@@ -105,6 +106,10 @@ export class Entorno {
             }
         }
     }
+
+    public getStruct(id:string,fila:number,columna:number):Struct{
+        return this.getEntornoGlobal().principal.getStruct(id,fila,columna)
+    }   
 
     public isConst(id:string,fila:number,columna:number):boolean{
         id = id.toLowerCase();

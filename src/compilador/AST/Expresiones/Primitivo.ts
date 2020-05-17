@@ -1,7 +1,8 @@
 import { Entorno } from "../Entorno";
 import { Expresion } from "../Expresion";
+import { InterfazAcceso } from "../IntefazAcceso";
 
-export class Primitivo extends Expresion{
+export class Primitivo extends Expresion implements InterfazAcceso{
 
     value:Object;
 
@@ -84,6 +85,14 @@ export class Primitivo extends Expresion{
             return vari;
         }
         return this.TIPO;
+    }
+    
+    public getPosicion(entorno:Entorno):string{
+        return entorno.getValor(this.value.toString(), this.fila, this.columna);
+    }
+
+    public isInHeap(entorno:Entorno):boolean{
+        return entorno.isGlobal(this.value.toString(),this.fila,this.columna)
     }
 
     public incrementar(entorno:Entorno):string{

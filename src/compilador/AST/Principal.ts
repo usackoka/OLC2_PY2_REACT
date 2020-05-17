@@ -3,6 +3,8 @@ import { Entorno } from './Entorno';
 import { Token } from './Token';
 import { Print } from './Sentencias/Print';
 import { Funcion } from './Expresiones/Funcion';
+import { Struct } from './Sentencias/Struct';
+import { UnControlled } from 'react-codemirror2';
 
 export class Principal {
     nodos: Array<Nodo>;
@@ -125,13 +127,26 @@ export class Principal {
             json.push({
                 index:cont++,
                 lex:nodo.id,
-                type:"Variable",
+                type:nodo instanceof Struct?"Struct":"Variable",
                 dataType:nodo.tipo,
                 line:nodo.fila,
                 column:nodo.columna,
             });
         })
         return json;
+    }
+
+    //busqueda de la struct
+    public getStruct(id:string,fila:number,columna:number):Struct{
+        for (const nodo of this.nodos) {
+            if(nodo instanceof Struct){
+                if(nodo.id.toLowerCase() === id){
+                    return nodo;
+                }
+            }
+        }
+        this.addError(id,"No se econtró el struct: "+id,fila,columna);
+        return null;
     }
 
     //=================================== METODOS DE TRADUCCIÓN

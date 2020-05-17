@@ -26,6 +26,12 @@ var AccesoArreglo = /** @class */ (function (_super) {
         _this.columna = columna;
         return _this;
     }
+    AccesoArreglo.prototype.getPosicion = function (entorno) {
+        return "";
+    };
+    AccesoArreglo.prototype.isInHeap = function (entorno) {
+        return entorno.isGlobal(this.id, this.fila, this.columna);
+    };
     AccesoArreglo.prototype.getTraduccion = function (entorno) {
         entorno.addComentario("===== acceso a arreglo");
         var ret = entorno.getTemp();

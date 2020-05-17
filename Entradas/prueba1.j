@@ -121,10 +121,10 @@ void Principal(){
 }
 
 void Principal(){
-    print(false)
-    boolean iguales = false
-    print(false)
+    boolean iguales = true
     if(iguales){
-
+        print(iguales)
     }
+
+    print(2^^4)
 }

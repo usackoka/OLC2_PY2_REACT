@@ -351,12 +351,12 @@ ASIGNACION_VARIABLE : TIPO_DATO '=' E
     }
     | TIPO_DATO LIST_ACCESO1 '=' E
     {
-        acc = new ListAcceso($1,null,@2.first_line,@2.first_column);
+        acc = new ListAcceso($1,$2,@3.first_line,@3.first_column);
         if(!($1 instanceof AccesoArreglo)){
-            acc = new ListAcceso(new Primitivo(Expresion.State.ID,$1,@2.first_line,@2.first_column),
-                @2.first_line,@2.first_column);
+            acc = new ListAcceso(new Primitivo(Expresion.State.ID,$1,@3.first_line,@3.first_column),$2,
+                @3.first_line,@3.first_column);
         }
-        $$ = new Reasignacion($2,$3,@2.first_line,@2.first_column)
+        $$ = new Reasignacion(acc,$3,@3.first_line,@3.first_column)
     }
 ;
 

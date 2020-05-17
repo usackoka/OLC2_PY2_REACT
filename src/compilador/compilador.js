@@ -247,12 +247,12 @@ case 31:
 break;
 case 32:
 
-        acc = new ListAcceso($$[$0-3],null,_$[$0-2].first_line,_$[$0-2].first_column);
+        acc = new ListAcceso($$[$0-3],$$[$0-2],_$[$0-1].first_line,_$[$0-1].first_column);
         if(!($$[$0-3] instanceof AccesoArreglo)){
-            acc = new ListAcceso(new Primitivo(Expresion.State.ID,$$[$0-3],_$[$0-2].first_line,_$[$0-2].first_column),
-                _$[$0-2].first_line,_$[$0-2].first_column);
+            acc = new ListAcceso(new Primitivo(Expresion.State.ID,$$[$0-3],_$[$0-1].first_line,_$[$0-1].first_column),$$[$0-2],
+                _$[$0-1].first_line,_$[$0-1].first_column);
         }
-        this.$ = new Reasignacion($$[$0-2],$$[$0-1],_$[$0-2].first_line,_$[$0-2].first_column)
+        this.$ = new Reasignacion(acc,$$[$0-1],_$[$0-1].first_line,_$[$0-1].first_column)
     
 break;
 case 33:

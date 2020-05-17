@@ -4,7 +4,6 @@ import { Token } from './Token';
 import { Print } from './Sentencias/Print';
 import { Funcion } from './Expresiones/Funcion';
 import { Struct } from './Sentencias/Struct';
-import { UnControlled } from 'react-codemirror2';
 
 export class Principal {
     nodos: Array<Nodo>;

@@ -28,7 +28,7 @@ export abstract class Expresion extends Nodo{
                 return retorno;
         }
         
-        entorno.addError("Expresion-ABS-getDefecto","No se econtró un valor por defecto para el tipo: "+tipoDato, 0,0)
+        //entorno.addError("Expresion-ABS-getDefecto","No se econtró un valor por defecto para el tipo: "+tipoDato, 0,0)
         return "-1";
     }
 }

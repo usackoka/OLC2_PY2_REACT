@@ -302,8 +302,7 @@ TIPO_VAR : res_var
 
 TIPO_DATO : TYPE '[' E ']' 
     {
-        $$ = new AccesoArreglo(new Primitivo($1,Expresion.State.ID,@1.first_line,@1.first_column),$3,
-            @2.first_line,@2.first_column);
+        $$ = new AccesoArreglo($1,$3,@2.first_line,@2.first_column);
     }
     | TYPE '[' ']' 
     {
@@ -357,18 +356,22 @@ ASIGNACION_VARIABLE : TIPO_DATO '=' E
             acc = new ListAcceso(new Primitivo(Expresion.State.ID,$1,@2.first_line,@2.first_column),
                 @2.first_line,@2.first_column);
         }
-        $$ = new Reasignacion(acc,$3,@2.first_line,@2.first_column)
+        $$ = new Reasignacion($2,$3,@2.first_line,@2.first_column)
     }
 ;
 
 LIST_ACCESO1: LIST_ACCESO1 '.' id '[' E ']'
     {
+        $$ = new ListAcceso($1,new AccesoArreglo($3,$5,@2.first_line,@2.first_column),@2.first_line,@2.first_column)
     }
     | LIST_ACCESO1 '.' id 
     {
+        $$ = new ListAcceso($1,new Primitivo(Expresion.State.ID,$3,@2.first_line,@2.first_column),
+            @2.first_line,@2.first_column)
     }
     | LIST_ACCESO1 '.' LLAMADA
     {
+        $$ = new ListAcceso($1,$2,@2.first_line,@2.first_column)
     }
     | '.' id
     {

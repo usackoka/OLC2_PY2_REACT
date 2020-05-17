@@ -60,5 +60,4 @@ export class ListAcceso extends Expresion implements InterfazAcceso{
         
         return false;
     }
-
 }

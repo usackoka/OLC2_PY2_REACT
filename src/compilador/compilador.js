@@ -198,8 +198,7 @@ case 22:
 break;
 case 23:
 
-        this.$ = new AccesoArreglo(new Primitivo($$[$0-3],Expresion.State.ID,_$[$0-3].first_line,_$[$0-3].first_column),$$[$0-1],
-            _$[$0-2].first_line,_$[$0-2].first_column);
+        this.$ = new AccesoArreglo($$[$0-3],$$[$0-1],_$[$0-2].first_line,_$[$0-2].first_column);
     
 break;
 case 24:
@@ -253,11 +252,23 @@ case 32:
             acc = new ListAcceso(new Primitivo(Expresion.State.ID,$$[$0-3],_$[$0-2].first_line,_$[$0-2].first_column),
                 _$[$0-2].first_line,_$[$0-2].first_column);
         }
-        this.$ = new Reasignacion(acc,$$[$0-1],_$[$0-2].first_line,_$[$0-2].first_column)
+        this.$ = new Reasignacion($$[$0-2],$$[$0-1],_$[$0-2].first_line,_$[$0-2].first_column)
     
 break;
-case 33: case 34: case 35: case 66: case 67: case 111:
+case 33:
 
+        this.$ = new ListAcceso($$[$0-5],new AccesoArreglo($$[$0-3],$$[$0-1],_$[$0-4].first_line,_$[$0-4].first_column),_$[$0-4].first_line,_$[$0-4].first_column)
+    
+break;
+case 34:
+
+        this.$ = new ListAcceso($$[$0-2],new Primitivo(Expresion.State.ID,$$[$0],_$[$0-1].first_line,_$[$0-1].first_column),
+            _$[$0-1].first_line,_$[$0-1].first_column)
+    
+break;
+case 35:
+
+        this.$ = new ListAcceso($$[$0-2],$$[$0-1],_$[$0-1].first_line,_$[$0-1].first_column)
     
 break;
 case 36:
@@ -343,6 +354,10 @@ break;
 case 65:
 
         this.$ = new Return(null,_$[$0].first_line,_$[$0].first_column)
+    
+break;
+case 66: case 67: case 111:
+
     
 break;
 case 68:

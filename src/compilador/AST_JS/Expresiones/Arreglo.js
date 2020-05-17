@@ -51,18 +51,18 @@ var Arreglo = /** @class */ (function (_super) {
         }
         else {
             //declaracion con expresiones
-            var t1 = entorno.getTemp();
+            var t1_1 = entorno.getTemp();
             entorno.addComentario("=== en la primera posición guardo la dimensión");
             entorno.addValorEnHeap("H", this.valores.length);
             entorno.incH();
+            entorno.addValor(t1_1, "H");
+            entorno.addValorOperacion("H", "H", "+", this.valores.length);
             this.valores.forEach(function (valor) {
-                entorno.addValorEnHeap("H", valor.getTraduccion(entorno));
-                entorno.incH();
+                entorno.addValorEnHeap(t1_1, valor.getTraduccion(entorno));
+                entorno.addValorOperacion(t1_1, t1_1, "+", 1);
             });
         }
         entorno.addComentario("=========== fin arreglo");
-        entorno.addValorEnHeap("H", 3);
-        entorno.incH();
         entorno.addETQ(etq1);
         entorno.addComentario("======= fin instancia arreglo");
         return ret;

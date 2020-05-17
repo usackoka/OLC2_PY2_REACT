@@ -45,15 +45,15 @@ export class Arreglo extends Expresion{
             entorno.addComentario("=== en la primera posición guardo la dimensión");
             entorno.addValorEnHeap("H",this.valores.length);
             entorno.incH();
+            entorno.addValor(t1,"H")
+            entorno.addValorOperacion("H","H","+",this.valores.length);
             this.valores.forEach(valor=>{
-                entorno.addValorEnHeap("H",valor.getTraduccion(entorno));
-                entorno.incH();
+                entorno.addValorEnHeap(t1,valor.getTraduccion(entorno));
+                entorno.addValorOperacion(t1,t1,"+",1)
             })
         }
 
         entorno.addComentario("=========== fin arreglo")
-        entorno.addValorEnHeap("H",3)
-        entorno.incH()
         entorno.addETQ(etq1)
         entorno.addComentario("======= fin instancia arreglo")
         return ret

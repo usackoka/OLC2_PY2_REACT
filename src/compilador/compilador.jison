@@ -300,7 +300,12 @@ TIPO_VAR : res_var
     }
 ;
 
-TIPO_DATO : TYPE '[' ']' 
+TIPO_DATO : TYPE '[' E ']' 
+    {
+        $$ = new AccesoArreglo(new Primitivo($1,Expresion.State.ID,@1.first_line,@1.first_column),$3,
+            @2.first_line,@2.first_column);
+    }
+    | TYPE '[' ']' 
     {
         $$ = new TipoArreglo($1,@2.first_line,@2.first_column);
     }
@@ -336,27 +341,42 @@ TYPE : res_integer
     }
 ;
 
-ASIGNACION_VARIABLE : id '=' E
+ASIGNACION_VARIABLE : TIPO_DATO '=' E
     {
-        $$ = new Reasignacion($1,$3,@2.first_line,@2.first_column)
+        let acc = new ListAcceso($1,null,@2.first_line,@2.first_column);
+        if(!($1 instanceof AccesoArreglo)){
+            acc = new ListAcceso(new Primitivo(Expresion.State.ID,$1,@2.first_line,@2.first_column),
+                @2.first_line,@2.first_column);
+        }
+        $$ = new Reasignacion(acc,$3,@2.first_line,@2.first_column);
     }
-    | id LIST_ACCESO1 '=' E
+    | TIPO_DATO LIST_ACCESO1 '=' E
     {
-        $$ = new Reasignacion($1,$3,@2.first_line,@2.first_column)
+        acc = new ListAcceso($1,null,@2.first_line,@2.first_column);
+        if(!($1 instanceof AccesoArreglo)){
+            acc = new ListAcceso(new Primitivo(Expresion.State.ID,$1,@2.first_line,@2.first_column),
+                @2.first_line,@2.first_column);
+        }
+        $$ = new Reasignacion(acc,$3,@2.first_line,@2.first_column)
     }
 ;
 
-LIST_ACCESO1: '.' id
-    {
-    }
-    | '.' id '[' E ']'
-    {
-    }
-    | LIST_ACCESO1 '.' id '[' E ']'
+LIST_ACCESO1: LIST_ACCESO1 '.' id '[' E ']'
     {
     }
     | LIST_ACCESO1 '.' id 
     {
+    }
+    | LIST_ACCESO1 '.' LLAMADA
+    {
+    }
+    | '.' id
+    {
+        $$ = new Primitivo(Expresion.State.ID,$1,@2.first_line,@2.first_column)
+    }
+    | '.' id '[' E ']'
+    {
+        $$ = new AccesoArreglo($1,$3,@1.first_line,@1.first_column)
     }
 ;
 

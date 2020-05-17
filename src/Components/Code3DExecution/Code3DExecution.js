@@ -3,9 +3,7 @@ import { UnControlled as CodeMirror } from "react-codemirror2";
 import { Row, Col, Button, Container } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import "./Code3DExecution.css";
-import { AST } from "../../interprete/AST/AST";
 import TextField from '@material-ui/core/TextField';
-var interprete = require('../../interprete/interprete')
 
 const Index = (props) => {
   var txtEntrada;
@@ -16,46 +14,26 @@ const Index = (props) => {
   var valoresStack = [
   ];
 
-  var valoresHeap = [
-  ];
-
   const columnsStack = [
     {
       dataField: "index",
-      text: "No.",
+      text: "No. Regla",
     },
     {
-      dataField: "value",
-      text: "Valor",
-    },
-  ];
-
-  const columnsHeap = [
-    {
-      dataField: "index",
-      text: "No.",
+      dataField: "ins",
+      text: "Instrucción",
     },
     {
-      dataField: "value",
-      text: "Valor",
-    },
-    {
-      dataField: "ascii",
-      text: "Ascii",
+      dataField: "opt",
+      text: "Optimización",
     },
   ];
 
   const clickEjecutar = async e => {
-    console.log("Ejecutando interprete")
+    console.log("Ejecutando optimizacion")
     if(!txtEntrada) return null;
 
-    interprete.ast = new AST();
-    let ast = interprete.parser.parse(txtEntrada.getValue())
-    ast.ejecutar();
     let salida = "";
-    ast.mensajes.forEach(element => {
-      salida += element.toString();
-    });
 
     if(!txtSalida) return null;
     setTxtSalida({value:salida});
@@ -92,19 +70,11 @@ const Index = (props) => {
         </Col>
         {/*=================== tablas heap y stack ======================*/}
         <Col>
-          <h3>Stack</h3>
+          <h3>Optimizaciones</h3>
           <BootstrapTable
             keyField="tbStack"
             data={valoresStack}
             columns={columnsStack}
-          ></BootstrapTable>
-        </Col>
-        <Col>
-          <h3>Heap</h3>
-          <BootstrapTable
-            keyField="tbStack"
-            data={valoresHeap}
-            columns={columnsHeap}
           ></BootstrapTable>
         </Col>
       </Row>
@@ -115,7 +85,7 @@ const Index = (props) => {
           <TextField
               id="txtSalida"
               value={txtSalida.value}
-              label="Salida 3D"
+              label="Optimizaciones"
               multiline
               rows={10}
               fullWidth

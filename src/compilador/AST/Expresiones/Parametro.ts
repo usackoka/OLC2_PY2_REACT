@@ -1,5 +1,6 @@
 import { Entorno } from "../Entorno";
 import { Expresion } from "../Expresion";
+import { TipoArreglo } from "./TipoArreglo";
 
 export class Parametro extends Expresion{
 
@@ -20,6 +21,6 @@ export class Parametro extends Expresion{
     }
 
     public getTipo(entorno:Entorno):Object{
-        return this.TIPO;
+        return this.TIPO instanceof TipoArreglo ? this.TIPO.getTipo(entorno) : this.TIPO;
     }
 }

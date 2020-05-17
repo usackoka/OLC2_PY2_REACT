@@ -22,13 +22,23 @@ export class Casteo extends Expresion{
             case Expresion.State.STRING:
                 switch(tipoExpresion){
                     case Expresion.State.CHAR:
+                        let tretorno = entorno.getTemp();
+                        entorno.addValor(tretorno,"H");
+                        entorno.addComentario("ascii: "+trad);
+                        entorno.addValorEnHeap("H",trad);
+                        entorno.incH();
+                        entorno.addComentario("ascii: eos");
+                        entorno.addValorEnHeap("H","3");
+                        entorno.incH();
+                        entorno.addComentario("==============================================================");
+                        return tretorno;
                     case Expresion.State.STRING:
                         return trad;
                     case Expresion.State.DOUBLE:
                         let t0:string = entorno.getTemp();
                         let t2:string = entorno.getTemp();
                         let t3:string = entorno.getTemp();
-                        let tretorno:string = entorno.getTemp();
+                        tretorno = entorno.getTemp();
                         entorno.addComentario("======= llamada double a string =======");
                         entorno.addValor(tretorno, "H");
                         entorno.addValorEnHeap("H", 1);

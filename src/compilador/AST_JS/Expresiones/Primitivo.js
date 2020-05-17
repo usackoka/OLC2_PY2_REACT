@@ -54,19 +54,7 @@ var Primitivo = /** @class */ (function (_super) {
                 entorno.addComentario("==============================================================");
                 return retorno;
             case Expresion_1.Expresion.State.CHAR:
-                entorno.addComentario("============== Guardando valor en heap char ======================");
-                var charac = this.value.toString().charAt(1);
-                retorno = entorno.getTemp();
-                entorno.addValor(retorno, "H");
-                var ascii = charac.charCodeAt(0);
-                entorno.addComentario("ascii: " + charac);
-                entorno.addValorEnHeap("H", ascii);
-                entorno.incH();
-                entorno.addComentario("ascii: eos");
-                entorno.addValorEnHeap("H", "3");
-                entorno.incH();
-                entorno.addComentario("==============================================================");
-                return retorno;
+                return this.value.toString().charCodeAt(1).toString();
             case Expresion_1.Expresion.State.ID:
                 var temp = entorno.getTemp();
                 var tretorno = entorno.getTemp();

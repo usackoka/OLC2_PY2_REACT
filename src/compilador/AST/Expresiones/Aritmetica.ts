@@ -56,7 +56,7 @@ export class Aritmetica extends Expresion{
             }
             else if(tipIzq == Expresion.State.CHAR && tipDer == Expresion.State.CHAR)
             {
-                return Expresion.State.CHAR;
+                return Expresion.State.STRING;
             }
             else if (tipIzq == Expresion.State.BOOLEAN && tipDer == Expresion.State.BOOLEAN)
             {
@@ -94,14 +94,16 @@ export class Aritmetica extends Expresion{
         let tipIzq:Object = this.izquierda.getTipo(entorno);
         let tipDer:Object = this.derecha.getTipo(entorno);
 
-        if (tipIzq == Expresion.State.STRING || tipDer == Expresion.State.STRING)
+        if ((tipIzq == Expresion.State.STRING || tipDer == Expresion.State.STRING)
+            || (tipIzq == Expresion.State.CHAR && tipDer == Expresion.State.CHAR))
         {
-            if (tipIzq == Expresion.State.STRING  && tipDer != Expresion.State.STRING)
+            if (tipDer != Expresion.State.STRING)
             {
                 let n:Casteo = new Casteo(Expresion.State.STRING, this.derecha, this.fila, this.columna);
                 der = n.getTraduccion(entorno).toString();
             }
-            else if (tipDer == Expresion.State.STRING && tipIzq != Expresion.State.STRING)
+            
+            if (tipIzq != Expresion.State.STRING)
             {
                 let n:Casteo = new Casteo(Expresion.State.STRING, this.izquierda, this.fila, this.columna);
                 izq = n.getTraduccion(entorno).toString();

@@ -27,7 +27,7 @@ var TipoArreglo = /** @class */ (function (_super) {
         return "";
     };
     TipoArreglo.prototype.getTipo = function (entorno) {
-        return this;
+        return "array_" + this.TIPO;
     };
     return TipoArreglo;
 }(Expresion_1.Expresion));

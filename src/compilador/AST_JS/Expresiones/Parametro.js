@@ -14,6 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var Expresion_1 = require("../Expresion");
+var TipoArreglo_1 = require("./TipoArreglo");
 var Parametro = /** @class */ (function (_super) {
     __extends(Parametro, _super);
     function Parametro(TIPO, id, fila, columna) {
@@ -29,7 +30,7 @@ var Parametro = /** @class */ (function (_super) {
         return "";
     };
     Parametro.prototype.getTipo = function (entorno) {
-        return this.TIPO;
+        return this.TIPO instanceof TipoArreglo_1.TipoArreglo ? this.TIPO.getTipo(entorno) : this.TIPO;
     };
     return Parametro;
 }(Expresion_1.Expresion));

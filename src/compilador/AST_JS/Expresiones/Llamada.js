@@ -14,6 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var Expresion_1 = require("../Expresion");
+var TipoArreglo_1 = require("./TipoArreglo");
 var Llamada = /** @class */ (function (_super) {
     __extends(Llamada, _super);
     function Llamada(id, parametros, fila, columna) {
@@ -97,7 +98,8 @@ var Llamada = /** @class */ (function (_super) {
     Llamada.prototype.getFirma = function (entorno) {
         var firma = "";
         this.parametros.forEach(function (p) {
-            firma += "_" + p.getTipo(entorno);
+            var tip = p.getTipo(entorno);
+            firma += "_" + (tip instanceof TipoArreglo_1.TipoArreglo ? tip.getTipo(entorno) : tip);
         });
         return firma;
     };

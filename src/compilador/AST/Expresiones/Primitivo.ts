@@ -45,19 +45,7 @@ export class Primitivo extends Expresion implements InterfazAcceso{
                 entorno.addComentario("==============================================================");
                 return retorno;
             case Expresion.State.CHAR:
-                entorno.addComentario("============== Guardando valor en heap char ======================");
-                let charac:string = this.value.toString().charAt(1);
-                retorno = entorno.getTemp();
-                entorno.addValor(retorno,"H");
-                let ascii:number = charac.charCodeAt(0);
-                entorno.addComentario("ascii: "+charac);
-                entorno.addValorEnHeap("H",ascii);
-                entorno.incH();
-                entorno.addComentario("ascii: eos");
-                entorno.addValorEnHeap("H","3");
-                entorno.incH();
-                entorno.addComentario("==============================================================");
-                return retorno;
+                return this.value.toString().charCodeAt(1).toString();
             case Expresion.State.ID:
                 let temp = entorno.getTemp();
                 let tretorno = entorno.getTemp();

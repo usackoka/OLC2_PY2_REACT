@@ -16,6 +16,7 @@ exports.__esModule = true;
 var Expresion_1 = require("../Expresion");
 var Primitivo_1 = require("./Primitivo");
 var AccesoArreglo_1 = require("./AccesoArreglo");
+var TipoArreglo_1 = require("./TipoArreglo");
 var ListAcceso = /** @class */ (function (_super) {
     __extends(ListAcceso, _super);
     function ListAcceso(subAcceso, acceso, fila, columna) {
@@ -31,11 +32,34 @@ var ListAcceso = /** @class */ (function (_super) {
         var valorSub = this.subAcceso.getTraduccion(entorno);
         if (this.acceso == null)
             return valorSub;
+        if (this.subAcceso.getTipo(entorno) instanceof TipoArreglo_1.TipoArreglo) {
+            //si es arreglo sólo se le puede aplicar el atributo length
+            if (this.acceso instanceof Primitivo_1.Primitivo) {
+                if (this.acceso.value.toString().toLowerCase() != "length") {
+                    entorno.addError("Arreglo-Atributo", "El arreglo no posee el atributo: " + this.acceso.value.toString(), this.fila, this.columna);
+                    return "0";
+                }
+                var ret = entorno.getTemp();
+                entorno.addComentario("========== get length of array");
+                entorno.addGetHeap(ret, valorSub);
+                return ret;
+            }
+        }
     };
     ListAcceso.prototype.getTipo = function (entorno) {
         var tipoSub = this.subAcceso.getTipo(entorno);
         if (this.acceso == null)
             return tipoSub;
+        if (this.subAcceso.getTipo(entorno) instanceof TipoArreglo_1.TipoArreglo) {
+            //si es arreglo sólo se le puede aplicar el atributo length
+            if (this.acceso instanceof Primitivo_1.Primitivo) {
+                if (this.acceso.value.toString().toLowerCase() != "length") {
+                    entorno.addError("Arreglo-Atributo", "El arreglo no posee el atributo: " + this.acceso.value.toString(), this.fila, this.columna);
+                    return Expresion_1.Expresion.State.INTEGER;
+                }
+                return Expresion_1.Expresion.State.INTEGER;
+            }
+        }
     };
     ListAcceso.prototype.getPosicion = function (entorno) {
         if (this.subAcceso instanceof Primitivo_1.Primitivo || this.subAcceso instanceof AccesoArreglo_1.AccesoArreglo) {

@@ -59,7 +59,7 @@ var Aritmetica = /** @class */ (function (_super) {
                 return Expresion_1.Expresion.State.INTEGER;
             }
             else if (tipIzq == Expresion_1.Expresion.State.CHAR && tipDer == Expresion_1.Expresion.State.CHAR) {
-                return Expresion_1.Expresion.State.CHAR;
+                return Expresion_1.Expresion.State.STRING;
             }
             else if (tipIzq == Expresion_1.Expresion.State.BOOLEAN && tipDer == Expresion_1.Expresion.State.BOOLEAN) {
                 return Expresion_1.Expresion.State.BOOLEAN;
@@ -90,12 +90,13 @@ var Aritmetica = /** @class */ (function (_super) {
         var der = this.derecha.getTraduccion(entorno).toString();
         var tipIzq = this.izquierda.getTipo(entorno);
         var tipDer = this.derecha.getTipo(entorno);
-        if (tipIzq == Expresion_1.Expresion.State.STRING || tipDer == Expresion_1.Expresion.State.STRING) {
-            if (tipIzq == Expresion_1.Expresion.State.STRING && tipDer != Expresion_1.Expresion.State.STRING) {
+        if ((tipIzq == Expresion_1.Expresion.State.STRING || tipDer == Expresion_1.Expresion.State.STRING)
+            || (tipIzq == Expresion_1.Expresion.State.CHAR && tipDer == Expresion_1.Expresion.State.CHAR)) {
+            if (tipDer != Expresion_1.Expresion.State.STRING) {
                 var n = new Casteo_1.Casteo(Expresion_1.Expresion.State.STRING, this.derecha, this.fila, this.columna);
                 der = n.getTraduccion(entorno).toString();
             }
-            else if (tipDer == Expresion_1.Expresion.State.STRING && tipIzq != Expresion_1.Expresion.State.STRING) {
+            if (tipIzq != Expresion_1.Expresion.State.STRING) {
                 var n = new Casteo_1.Casteo(Expresion_1.Expresion.State.STRING, this.izquierda, this.fila, this.columna);
                 izq = n.getTraduccion(entorno).toString();
             }

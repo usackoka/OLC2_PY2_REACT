@@ -104,10 +104,10 @@ digito = [0-9]
 "=="                                              return '=='
 "="                                               return '='
 "!="                                                return '!='
-">"                                                 return '>'
 ">="                                                 return '>='
-"<"                                                 return '<'
+">"                                                 return '>'
 "<="                                                 return '<='
+"<"                                                 return '<'
 "&&"                        return '&&'
 "||"                        return '||'
 "!"                         return '!'
@@ -597,7 +597,7 @@ FIN_FOR : E
     {
         $$ = $1;
     }
-    |
+    | 
     {
         $$ = null;
     }

@@ -30,13 +30,22 @@ var Print = /** @class */ (function (_super) {
         var TIPO = this.expresion.getTipo(entorno);
         var tImpresion = this.expresion.getTraduccion(entorno);
         switch (TIPO) {
-            case Expresion_1.Expresion.State.STRING:
             case Expresion_1.Expresion.State.CHAR:
+                var tretorno = entorno.getTemp();
+                entorno.addValor(tretorno, "H");
+                entorno.addComentario("ascii: " + tImpresion);
+                entorno.addValorEnHeap("H", tImpresion);
+                entorno.incH();
+                entorno.addComentario("ascii: eos");
+                entorno.addValorEnHeap("H", "3");
+                entorno.incH();
+                tImpresion = tretorno;
+            case Expresion_1.Expresion.State.STRING:
                 var t0 = entorno.getTemp();
                 var t2 = entorno.getTemp();
                 var t3 = entorno.getTemp();
                 entorno.addComentario("======= llamada impresion cadena =======");
-                entorno.addComentario("posicion el heap");
+                entorno.addComentario("posicion en heap");
                 entorno.addValor(t0, tImpresion);
                 entorno.addComentario("//cambio simulado de entorno");
                 entorno.addValorOperacion(t2, "P", "+", String(entorno.size));

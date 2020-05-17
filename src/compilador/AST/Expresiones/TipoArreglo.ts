@@ -15,6 +15,6 @@ export class TipoArreglo extends Expresion{
     }
 
     public getTipo(entorno:Entorno):Object{
-        return this;
+        return "array_"+this.TIPO;
     }
 }

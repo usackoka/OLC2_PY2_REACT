@@ -17,7 +17,17 @@ void Principal(){
 }
 
 void Principal(){
-    print(ackermann(3,4))
+    print(ackermann(3,6))
+}
+
+Integer ackermann(Integer m,Integer n){
+    if (m == 0) {
+         return n + 1;
+    } else if (n == 0) {
+        return ackermann(m - 1, 1);
+    } else {
+        return ackermann(m - 1, ackermann(m, n - 1));
+    }
 }
 
 Integer global1 = 45;
@@ -44,15 +54,6 @@ void Principal(){
     print("Valor de var1["+num+"] = "+var1[num])
 }
 
-Integer ackermann(Integer m,Integer n){
-    if (m == 0) {
-         return n + 1;
-    } else if (n == 0) {
-        return ackermann(m - 1, 1);
-    } else {
-        return ackermann(m - 1, ackermann(m, n - 1));
-    }
-}
 
 String func1(String mensaje){
     print("Desde func1() ya puedes ir a dormir :v"+mensaje)
@@ -88,16 +89,12 @@ void Principal(){
     String[] test = {"Hola","Mundo","Prueba","Arreglos"}
     print(test[2])
     test[2] = "Nuevo valor";
-    print(test[4])
+    print(test[2])
 }
 
 void Principal(){
-    print("test")
-    Char[] chars = strc Char[8]
     String[] test = {"Hola","Mundo","Prueba","Arreglos"}
-    print(test[2])
-    test[2] = "Nuevo valor";
-    print(test[4])
+    print("size: "+test.length)
 }
 
 define Nodo as [
@@ -108,4 +105,26 @@ define Nodo as [
 void Principal(){
     Nodo nodo = strc Nodo();
     print("Nombre del nodo: "+nodo.nombre)
+}
+
+void Principal(){
+    String n1 = 'H'+'O'+'L'+'A';
+    print(n1)
+}
+
+void Principal(){
+    print('a')
+    print("Hola")
+    print('a'+3);
+    print('a'+'a')
+    print('a'+"Hola")
+}
+
+void Principal(){
+    print(false)
+    boolean iguales = false
+    print(false)
+    if(iguales){
+
+    }
 }

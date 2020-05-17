@@ -32,13 +32,23 @@ var Casteo = /** @class */ (function (_super) {
             case Expresion_1.Expresion.State.STRING:
                 switch (tipoExpresion) {
                     case Expresion_1.Expresion.State.CHAR:
+                        var tretorno = entorno.getTemp();
+                        entorno.addValor(tretorno, "H");
+                        entorno.addComentario("ascii: " + trad);
+                        entorno.addValorEnHeap("H", trad);
+                        entorno.incH();
+                        entorno.addComentario("ascii: eos");
+                        entorno.addValorEnHeap("H", "3");
+                        entorno.incH();
+                        entorno.addComentario("==============================================================");
+                        return tretorno;
                     case Expresion_1.Expresion.State.STRING:
                         return trad;
                     case Expresion_1.Expresion.State.DOUBLE:
                         var t0 = entorno.getTemp();
                         var t2 = entorno.getTemp();
                         var t3 = entorno.getTemp();
-                        var tretorno = entorno.getTemp();
+                        tretorno = entorno.getTemp();
                         entorno.addComentario("======= llamada double a string =======");
                         entorno.addValor(tretorno, "H");
                         entorno.addValorEnHeap("H", 1);

@@ -120,7 +120,7 @@ export class Entorno {
         else {
             if (this.padre==null) {
                 this.addError("isConst","No existe la variable: "+id,fila,columna);
-                return true;
+                return false;
             }
             else {
                 return this.padre.isConst(id,fila,columna);

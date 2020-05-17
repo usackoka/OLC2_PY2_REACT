@@ -2,6 +2,7 @@ import { Entorno } from "../Entorno";
 import { Expresion } from "../Expresion";
 import { Sentencia } from "../Sentencia";
 import { Primitivo } from "../Expresiones/Primitivo";
+import { Casteo } from "../Expresiones/Casteo";
 
 export class Print extends Sentencia{
 
@@ -21,13 +22,22 @@ export class Print extends Sentencia{
         var tImpresion:string = this.expresion.getTraduccion(entorno);
 
         switch(TIPO){
-            case Expresion.State.STRING:
             case Expresion.State.CHAR:
+                let tretorno = entorno.getTemp();
+                entorno.addValor(tretorno,"H");
+                entorno.addComentario("ascii: "+tImpresion);
+                entorno.addValorEnHeap("H",tImpresion);
+                entorno.incH();
+                entorno.addComentario("ascii: eos");
+                entorno.addValorEnHeap("H","3");
+                entorno.incH();
+                tImpresion = tretorno;
+            case Expresion.State.STRING:
                 var t0:string = entorno.getTemp();
                 var t2:string = entorno.getTemp();
                 var t3:string = entorno.getTemp();
                 entorno.addComentario("======= llamada impresion cadena =======");
-                entorno.addComentario("posicion el heap");
+                entorno.addComentario("posicion en heap");
                 entorno.addValor(t0,tImpresion);
                 entorno.addComentario("//cambio simulado de entorno");
                 entorno.addValorOperacion(t2, "P","+", String(entorno.size));

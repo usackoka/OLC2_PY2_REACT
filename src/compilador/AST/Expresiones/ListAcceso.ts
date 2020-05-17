@@ -3,6 +3,7 @@ import { Expresion } from "../Expresion";
 import { InterfazAcceso } from "../IntefazAcceso";
 import { Primitivo } from "./Primitivo";
 import { AccesoArreglo } from "./AccesoArreglo";
+import { TipoArreglo } from "./TipoArreglo";
 
 export class ListAcceso extends Expresion implements InterfazAcceso{
 
@@ -21,11 +22,36 @@ export class ListAcceso extends Expresion implements InterfazAcceso{
     public getTraduccion(entorno:Entorno):string{
         let valorSub = this.subAcceso.getTraduccion(entorno)
         if(this.acceso==null) return valorSub;
+
+        if(this.subAcceso.getTipo(entorno) instanceof TipoArreglo){
+            //si es arreglo sólo se le puede aplicar el atributo length
+            if(this.acceso instanceof Primitivo){
+                if(this.acceso.value.toString().toLowerCase() != "length"){
+                    entorno.addError("Arreglo-Atributo","El arreglo no posee el atributo: "+this.acceso.value.toString(),this.fila,this.columna);
+                    return "0";
+                }
+                let ret = entorno.getTemp()
+                entorno.addComentario("========== get length of array")
+                entorno.addGetHeap(ret,valorSub)
+                return ret
+            }
+        }
     }
 
     public getTipo(entorno:Entorno):Object{
         let tipoSub = this.subAcceso.getTipo(entorno)
         if(this.acceso==null) return tipoSub;
+
+        if(this.subAcceso.getTipo(entorno) instanceof TipoArreglo){
+            //si es arreglo sólo se le puede aplicar el atributo length
+            if(this.acceso instanceof Primitivo){
+                if(this.acceso.value.toString().toLowerCase() != "length"){
+                    entorno.addError("Arreglo-Atributo","El arreglo no posee el atributo: "+this.acceso.value.toString(),this.fila,this.columna);
+                    return Expresion.State.INTEGER;
+                }
+                return Expresion.State.INTEGER;
+            }
+        }
     }
 
     public getPosicion(entorno:Entorno):string{

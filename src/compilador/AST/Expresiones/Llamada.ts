@@ -1,6 +1,7 @@
 import { Entorno } from "../Entorno";
 import { Expresion } from "../Expresion";
 import { ParametroLlamada } from "./ParametroLlamada";
+import { TipoArreglo } from "./TipoArreglo";
 
 export class Llamada extends Expresion{
 
@@ -99,7 +100,8 @@ export class Llamada extends Expresion{
     public getFirma(entorno:Entorno) {
         let firma = "";
         this.parametros.forEach(p=>{
-            firma += "_" + p.getTipo(entorno);
+            let tip = p.getTipo(entorno);
+            firma += "_" + (tip instanceof TipoArreglo ? tip.getTipo(entorno) : tip);
         })
         return firma;
     }

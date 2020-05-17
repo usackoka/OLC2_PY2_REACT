@@ -1284,13 +1284,13 @@ case 73:return 22
 break;
 case 74:return 124
 break;
-case 75:return 120
+case 75:return 121
 break;
-case 76:return 121
+case 76:return 120
 break;
-case 77:return 118
+case 77:return 119
 break;
-case 78:return 119
+case 78:return 118
 break;
 case 79:return 116
 break;
@@ -1310,7 +1310,7 @@ case 85:
 break;
 }
 },
-rules: [/^(?:\s+)/i,/^(?:\/\*)/i,/^(?:\*\/)/i,/^(?:.)/i,/^(?:[\t\r\n\f])/i,/^(?:\/\/)/i,/^(?:[\r\n])/i,/^(?:.)/i,/^(?:[\t\f])/i,/^(?:import\b)/i,/^(?:private\b)/i,/^(?:public\b)/i,/^(?:void\b)/i,/^(?:var\b)/i,/^(?:const\b)/i,/^(?:global\b)/i,/^(?:define\b)/i,/^(?:as\b)/i,/^(?:integer\b)/i,/^(?:double\b)/i,/^(?:char\b)/i,/^(?:boolean\b)/i,/^(?:true\b)/i,/^(?:false\b)/i,/^(?:if\b)/i,/^(?:else\b)/i,/^(?:case\b)/i,/^(?:default\b)/i,/^(?:switch\b)/i,/^(?:while\b)/i,/^(?:do\b)/i,/^(?:for\b)/i,/^(?:break\b)/i,/^(?:continue\b)/i,/^(?:return\b)/i,/^(?:strc\b)/i,/^(?:print\b)/i,/^(?:ArithmeticException\b)/i,/^(?:IndexOutOfBoundException\b)/i,/^(?:UncaughtException\b)/i,/^(?:NullPointerException\b)/i,/^(?:InvalidCastingException\b)/i,/^(?:HeapOverflowError\b)/i,/^(?:StackOverflowError\b)/i,/^(?:throw\b)/i,/^(?:try\b)/i,/^(?:catch\b)/i,/^(?:null\b)/i,/^(?:(([A-Za-zÑñ])|_)(([A-Za-zÑñ])+|([0-9])*|_)*)/i,/^(?:"([^\"\n\\\\]|\\"|\\)*")/i,/^(?:'([^'\n\t]|\\n|\\t|\\0|\\")?')/i,/^(?:([0-9])+\.([0-9])+)/i,/^(?:([0-9])+)/i,/^(?:\$)/i,/^(?:\.)/i,/^(?:\[)/i,/^(?:\])/i,/^(?:\()/i,/^(?:\))/i,/^(?:\{)/i,/^(?:\})/i,/^(?:,)/i,/^(?::)/i,/^(?:;)/i,/^(?:%)/i,/^(?:\+\+)/i,/^(?:\+)/i,/^(?:--)/i,/^(?:-)/i,/^(?:\*)/i,/^(?:\/)/i,/^(?:===)/i,/^(?:==)/i,/^(?:=)/i,/^(?:!=)/i,/^(?:>)/i,/^(?:>=)/i,/^(?:<)/i,/^(?:<=)/i,/^(?:&&)/i,/^(?:\|\|)/i,/^(?:!)/i,/^(?:\^\^)/i,/^(?:\^)/i,/^(?:$)/i,/^(?:.)/i],
+rules: [/^(?:\s+)/i,/^(?:\/\*)/i,/^(?:\*\/)/i,/^(?:.)/i,/^(?:[\t\r\n\f])/i,/^(?:\/\/)/i,/^(?:[\r\n])/i,/^(?:.)/i,/^(?:[\t\f])/i,/^(?:import\b)/i,/^(?:private\b)/i,/^(?:public\b)/i,/^(?:void\b)/i,/^(?:var\b)/i,/^(?:const\b)/i,/^(?:global\b)/i,/^(?:define\b)/i,/^(?:as\b)/i,/^(?:integer\b)/i,/^(?:double\b)/i,/^(?:char\b)/i,/^(?:boolean\b)/i,/^(?:true\b)/i,/^(?:false\b)/i,/^(?:if\b)/i,/^(?:else\b)/i,/^(?:case\b)/i,/^(?:default\b)/i,/^(?:switch\b)/i,/^(?:while\b)/i,/^(?:do\b)/i,/^(?:for\b)/i,/^(?:break\b)/i,/^(?:continue\b)/i,/^(?:return\b)/i,/^(?:strc\b)/i,/^(?:print\b)/i,/^(?:ArithmeticException\b)/i,/^(?:IndexOutOfBoundException\b)/i,/^(?:UncaughtException\b)/i,/^(?:NullPointerException\b)/i,/^(?:InvalidCastingException\b)/i,/^(?:HeapOverflowError\b)/i,/^(?:StackOverflowError\b)/i,/^(?:throw\b)/i,/^(?:try\b)/i,/^(?:catch\b)/i,/^(?:null\b)/i,/^(?:(([A-Za-zÑñ])|_)(([A-Za-zÑñ])+|([0-9])*|_)*)/i,/^(?:"([^\"\n\\\\]|\\"|\\)*")/i,/^(?:'([^'\n\t]|\\n|\\t|\\0|\\")?')/i,/^(?:([0-9])+\.([0-9])+)/i,/^(?:([0-9])+)/i,/^(?:\$)/i,/^(?:\.)/i,/^(?:\[)/i,/^(?:\])/i,/^(?:\()/i,/^(?:\))/i,/^(?:\{)/i,/^(?:\})/i,/^(?:,)/i,/^(?::)/i,/^(?:;)/i,/^(?:%)/i,/^(?:\+\+)/i,/^(?:\+)/i,/^(?:--)/i,/^(?:-)/i,/^(?:\*)/i,/^(?:\/)/i,/^(?:===)/i,/^(?:==)/i,/^(?:=)/i,/^(?:!=)/i,/^(?:>=)/i,/^(?:>)/i,/^(?:<=)/i,/^(?:<)/i,/^(?:&&)/i,/^(?:\|\|)/i,/^(?:!)/i,/^(?:\^\^)/i,/^(?:\^)/i,/^(?:$)/i,/^(?:.)/i],
 conditions: {"COMENT_SIMPLE":{"rules":[6,7,8],"inclusive":false},"COMENT_MULTI":{"rules":[0,1,2,3,4,5,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85],"inclusive":true},"INITIAL":{"rules":[0,1,5,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85],"inclusive":true}}
 });
 return lexer;

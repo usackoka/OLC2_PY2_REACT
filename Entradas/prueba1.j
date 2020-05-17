@@ -85,11 +85,19 @@ void Principal(){
 }
 
 void Principal(){
-    Integer[] var1 = {5,6,7,8};
-    Integer[] var2 = strc Integer[5];
-    print(var1[2])
-    print(var2[4])
-    var2[4] = 90;
+    String[] test = {"Hola","Mundo","Prueba","Arreglos"}
+    print(test[2])
+    test[2] = "Nuevo valor";
+    print(test[4])
+}
+
+void Principal(){
+    print("test")
+    Char[] chars = strc Char[8]
+    String[] test = {"Hola","Mundo","Prueba","Arreglos"}
+    print(test[2])
+    test[2] = "Nuevo valor";
+    print(test[4])
 }
 
 define Nodo as [

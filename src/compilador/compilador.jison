@@ -248,7 +248,6 @@ ATRIBUTO : TIPO_DATO id
 ;
 
 ///============================================================
-
 FUNCION : TIPO_DATO id '(' PARAMETROS ')' '{' BLOQUES '}' 
     {
         $$ = new Funcion($1, $2, $4, $7, @2.first_line,@2.first_column);
@@ -337,9 +336,27 @@ TYPE : res_integer
     }
 ;
 
-ASIGNACION_VARIABLE : LIST_ACCESO '=' E
+ASIGNACION_VARIABLE : id '=' E
     {
         $$ = new Reasignacion($1,$3,@2.first_line,@2.first_column)
+    }
+    | id LIST_ACCESO1 '=' E
+    {
+        $$ = new Reasignacion($1,$3,@2.first_line,@2.first_column)
+    }
+;
+
+LIST_ACCESO1: '.' id
+    {
+    }
+    | '.' id '[' E ']'
+    {
+    }
+    | LIST_ACCESO1 '.' id '[' E ']'
+    {
+    }
+    | LIST_ACCESO1 '.' id 
+    {
     }
 ;
 

@@ -27,16 +27,36 @@ var AccesoArreglo = /** @class */ (function (_super) {
         return _this;
     }
     AccesoArreglo.prototype.getPosicion = function (entorno) {
-        return "";
+        entorno.addComentario("===== get posicion de arreglo");
+        var ret = entorno.getTemp();
+        var punteroArreglo = entorno.getTemp();
+        var index = entorno.getTemp();
+        var indexofbound = entorno.getETQ();
+        var fin = entorno.getETQ();
+        entorno.addComentario("===== index a obtener del arreglo");
+        entorno.addValor(index, this.index.getTraduccion(entorno));
+        entorno.addComentario("==== obtengo la posición en heap del arreglo");
+        var prim = new Primitivo_1.Primitivo(this.id, Expresion_1.Expresion.State.ID, this.fila, this.columna);
+        entorno.addValor(punteroArreglo, prim.getTraduccion(entorno));
+        entorno.addComentario("==== pregunto si el index es mayor al tamaño del arreglo");
+        entorno.addGetHeap(ret, punteroArreglo);
+        entorno.addMayorIgual(index, ret, indexofbound);
+        entorno.addValorOperacion(punteroArreglo, punteroArreglo, "+", 1);
+        entorno.addValorOperacion(punteroArreglo, punteroArreglo, "+", index);
+        entorno.addGoto(fin);
+        entorno.addComentario("=== etiqueta indexoutofbounds");
+        entorno.addETQ(indexofbound);
+        entorno.addComentario("===== fin acceso arreglo");
+        entorno.addETQ(fin);
+        return punteroArreglo;
     };
     AccesoArreglo.prototype.isInHeap = function (entorno) {
-        return entorno.isGlobal(this.id, this.fila, this.columna);
+        return true;
     };
     AccesoArreglo.prototype.getTraduccion = function (entorno) {
         entorno.addComentario("===== acceso a arreglo");
         var ret = entorno.getTemp();
         var punteroArreglo = entorno.getTemp();
-        var t1 = entorno.getTemp();
         var index = entorno.getTemp();
         var indexofbound = entorno.getETQ();
         var fin = entorno.getETQ();

@@ -1,4 +1,5 @@
 import { Nodo } from "./Nodo";
+import { Asignacion } from './Asignacion'
 
 export class Entorno {
 
@@ -28,7 +29,7 @@ export class Entorno {
         this.optimizaciones.push({
             no: this.contadorOptimizaciones++, 
             regla: opt.regla, 
-            descripcion: this.getDescripcionMirilla(opt.regla), 
+            descripcion: this.getDescripcion(opt.regla), 
             fila: opt.fila, 
             columna: opt.columna
         })
@@ -45,26 +46,29 @@ export class Entorno {
 
     
     public getMirilla(){
-        //obtengo la mirilla de cada nodo
+        let nuevalistaNodos:Array<Nodo> = []
+
+        //primer recorrido para guardar los usados de lado derecho
         this.instrucciones.forEach(nodo=>{
-            this.optimizacion += nodo.getMirrilla(this)+"\n"
+            nodo.getMirrilla(this)+"\n"
         })
 
         //busco todos los que cumplan con la regla 23
-
+        this.instrucciones.forEach(nodo=>{
+            if(nodo instanceof Asignacion){
+                //pregunto si la direccion está entre las que se usaron
+                if(this.listUtilizadas.includes(nodo.direccion)){
+                    this.addOptimizacion({regla:23,fila:nodo.fila,columna:nodo.columna})
+                    return;
+                }
+            }
+            nuevalistaNodos.push(nodo)
+        })
 
         return this.optimizacion
     }
 
-    public getDescripcionBloques(regla:number):string{
-        switch(regla){
-            case 23:
-                return "Redundancia parcial - variables inutilizadas"
-        }
-        return "Optimización sin descripción"
-    }
-
-    public getDescripcionMirilla(regla:number):string{
+    public getDescripcion(regla:number):string{
         switch(regla){
             case 1:
                 return "Eliminación de instrucciones redundantes de carga y  almacenamiento "
@@ -88,6 +92,8 @@ export class Entorno {
             case 17:
             case 18:
                 return "Simplificación algebraica y por fuerza"
+            case 23:
+                return "Redundancia parcial - variables inutilizadas"
         }
         return "Optimización sin descripción"
     }

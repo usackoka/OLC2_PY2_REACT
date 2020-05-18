@@ -106,6 +106,27 @@ const Index = (props) => {
     setTxtSalida({value:salida});
   };
 
+  function saveTextAsFile() {
+      var textFileAsBlob = new Blob([txtEntrada.getValue()], { type: 'text/plain' });
+      var downloadLink = document.createElement("a");
+      downloadLink.download = prompt("Nombre del archivo");
+      downloadLink.innerHTML = "Guardar Como";
+      if (window.webkitURL != null) {
+          //Chrome allows the link to be clicked
+          //without actually adding it to the DOM.
+          downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+      }
+      else {
+          //Firefox requires the link to be added to the DOM
+          //before it can be clicked.
+          downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+          //downloadLink.onclick = destroyClickedElement;
+          downloadLink.style.display = "none";
+          document.body.appendChild(downloadLink);
+      }
+      downloadLink.click();
+  }
+
   return (
     <Fragment>
       <Row>
@@ -134,6 +155,11 @@ const Index = (props) => {
           <br></br>
           <Button variant="success" fixed="bottom" onClick={clickEjecutar2}>
             {"Graficar AST"}
+          </Button>
+          <br></br>
+          <br></br>
+          <Button variant="success" fixed="bottom" onClick={saveTextAsFile}>
+            {"Guardar"}
           </Button>
         </Col>
 

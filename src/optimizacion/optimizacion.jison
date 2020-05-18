@@ -64,10 +64,10 @@
 
 /lex
 %{
-    const { Aritmetica, TiposAritmetica } = require('./AST_JS/Aritmetica');
-    const { Primitiva } = require('./AST_JS/Primitiva');
+    const { Aritmetica, Aritmetica } = require('./AST_JS/Aritmetica');
+    const { Primitivo } = require('./AST_JS/Primitivo');
     const { Asignacion } = require('./AST_JS/Asignacion');
-    const { Arbol3D } = require('./AST_JS/Arbol');
+    const { Entorno } = require('./AST_JS/Arbol');
     const { Tipo } = require('./AST_JS/Tipo');
 %}
 
@@ -220,23 +220,23 @@ E : PRIMITIVO '<' PRIMITIVO
 
 ARITMETICA : PRIMITIVO '+' PRIMITIVO
         {
-            $$ = new Aritmetica($1, $3, TiposAritmetica.OperadorAritmetico.SUMA, @2.first_line, @2.first_column + 1);
+            $$ = new Aritmetica($1, $3, Aritmetica.TYPE.SUMA, @2.first_line, @2.first_column + 1);
         }
     | PRIMITIVO '-' PRIMITIVO
         {
-            $$ = new Aritmetica($1, $3, TiposAritmetica.OperadorAritmetico.RESTA, @2.first_line, @2.first_column + 1);
+            $$ = new Aritmetica($1, $3, Aritmetica.TYPE.RESTA, @2.first_line, @2.first_column + 1);
         }
     | PRIMITIVO '*' PRIMITIVO
         {
-            $$ = new Aritmetica($1, $3, TiposAritmetica.OperadorAritmetico.MULTIPLICACION, @2.first_line, @2.first_column + 1);
+            $$ = new Aritmetica($1, $3, Aritmetica.TYPE.MULTIPLICACION, @2.first_line, @2.first_column + 1);
         }
     | PRIMITIVO '/' PRIMITIVO
         {
-            $$ = new Aritmetica($1, $3, TiposAritmetica.OperadorAritmetico.DIVISION, @2.first_line, @2.first_column + 1);
+            $$ = new Aritmetica($1, $3, Aritmetica.TYPE.DIVISION, @2.first_line, @2.first_column + 1);
         }
     | PRIMITIVO '%' PRIMITIVO
         {
-            $$ = new Aritmetica($1, $3, TiposAritmetica.OperadorAritmetico.MODULO, @2.first_line, @2.first_column + 1);
+            $$ = new Aritmetica($1, $3, Aritmetica.TYPE.MODULO, @2.first_line, @2.first_column + 1);
         }
     | PRIMITIVO
         {
@@ -250,32 +250,32 @@ PRIMITIVO : CONSTANTE
         }
     | '-' CONSTANTE
         {
-            $$ = new Aritmetica($2, null, TiposAritmetica.OperadorAritmetico.RESTA, @1.first_line, @1.first_column + 1);
+            $$ = new Aritmetica($2, null, Aritmetica.TYPE.RESTA, @1.first_line, @1.first_column + 1);
         }
 ;
 
 CONSTANTE : id
         {
-            $$ = new Primitiva(Tipo.Tipos.IDENTIFICADOR, $1, @1.first_line, @1.first_column + 1);
+            $$ = new Primitivo(Primitivo.TYPE.IDENTIFICADOR, $1, @1.first_line, @1.first_column + 1);
         }
     | int
         {
-            $$ = new Primitiva(Tipo.Tipos.INTEGER, $1, @1.first_line, @1.first_column + 1);
+            $$ = new Primitivo(Primitivo.TYPE.INTEGER, $1, @1.first_line, @1.first_column + 1);
         }
     | double
         {
-            $$ = new Primitiva(Tipo.Tipos.DOUBLE, $1, @1.first_line, @1.first_column + 1);
+            $$ = new Primitivo(Primitivo.TYPE.DOUBLE, $1, @1.first_line, @1.first_column + 1);
         }
     | res_stack '[' E ']'
         {
-            $$ = new Primitiva(Tipo.Tipos.STACK, $3, @1.first_line, @1.first_column + 1);
+            $$ = new Primitivo(Primitivo.TYPE.STACK, $3, @1.first_line, @1.first_column + 1);
         }
     | res_heap '[' E ']'
         {
-            $$ = new Primitiva(Tipo.Tipos.HEAP, $3, @1.first_line, @1.first_column + 1);
+            $$ = new Primitivo(Primitivo.TYPE.HEAP, $3, @1.first_line, @1.first_column + 1);
         }
 ;
 
 %%
 
-exports.ast = new Arbol3D();
+exports.ast = new Entorno();

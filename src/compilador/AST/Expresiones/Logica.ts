@@ -106,7 +106,11 @@ export class Logica extends Expresion{
         let etq3 = entorno.getETQ();
         let etq4 = entorno.getETQ();
 
-        entorno.addIgualQue(izq, 1, etq2);
+        entorno.addIgualQue(izq, 1, etq1);
+        entorno.addIgualQue(der, 1, etq3);
+        entorno.addGoto(etq2);
+        entorno.addETQ(etq1);
+        entorno.addIgualQue(der, 1, etq2);
         entorno.addGoto(etq3);
         entorno.addETQ(etq3);
         entorno.addValor(retorno, 1);

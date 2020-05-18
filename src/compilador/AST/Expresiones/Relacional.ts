@@ -39,22 +39,6 @@ export class Relacional extends Expresion{
     }
 
     public getTipo(entorno:Entorno):Object{
-        let tipIzq:Object = this.izquierda.getTipo(entorno);
-        let tipDer:Object = this.derecha.getTipo(entorno);
-
-        //aquí sólo se pueden comparar strings y arreglos
-        if(this.TIPO_OPERACION==Relacional.TYPE.IGUAL_REFERENCIA){
-            if(!(
-                (tipIzq == Expresion.State.STRING && tipDer == Expresion.State.STRING)
-            )){
-                entorno.addError("RELACIONAL-GETTIPO:"+this.TIPO_OPERACION,"Operando no aplicable a tipos tipIzq:"+tipIzq+" , Tipo tipDer:"+tipDer,this.fila,this.columna);
-            }
-        }else{
-            if (!(this.relacionable(tipIzq) && this.relacionable(tipDer))){
-                entorno.addError("RELACIONAL-GETTIPO:"+this.TIPO_OPERACION,"Tipo tipIzq:"+tipIzq+" , Tipo tipDer:"+tipDer,this.fila,this.columna);
-            }
-        }
-        //siempre voy a retornar un boolean, únicamente comparo los tipos para saber si marcar error o no
         return Expresion.State.BOOLEAN;
     }
 

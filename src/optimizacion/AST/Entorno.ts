@@ -1,6 +1,6 @@
 import { AST } from './AST';
 
-export class Arbol3D {
+export class Entorno {
     instrucciones: Array<AST>;
     optimizacionMirilla: string;
     optimizacionBloque: string;

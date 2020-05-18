@@ -1,52 +1,40 @@
 import { AST } from './AST';
-import { Arbol3D } from './Arbol';
-
-export namespace TiposAritmetica {
-
-    export enum OperadorAritmetico {
-        SUMA,
-        RESTA,
-        MULTIPLICACION,
-        DIVISION,
-        MODULO
-    }
-    
-}
+import { Entorno } from './Entorno';
 
 export class Aritmetica extends AST {
 
     private operando1: AST;
     private operando2: AST;
-    private operador: TiposAritmetica.OperadorAritmetico;
+    private operador: Aritmetica.TYPE;
 
-    constructor(operando1: AST, operando2: AST, operador: TiposAritmetica.OperadorAritmetico, fila: number, columna: number) {
+    constructor(operando1: AST, operando2: AST, operador: Aritmetica.TYPE, fila: number, columna: number) {
         super(fila, columna);
         this.operando1 = operando1;
         this.operando2 = operando2;
         this.operador = operador;
     }
 
-    public getOptimizacionMirilla(numero: number, tree: Arbol3D): {optimizacion: number, result: string} {
+    public getOptimizacionMirilla(numero: number, entorno: Entorno): {optimizacion: number, result: string} {
         if(this.operando2 != null) {
-            const op1 = this.operando1.getOptimizacionMirilla(numero, tree).result;
-            const op2 = this.operando2.getOptimizacionMirilla(numero, tree).result;
+            const op1 = this.operando1.getOptimizacionMirilla(numero, entorno).result;
+            const op2 = this.operando2.getOptimizacionMirilla(numero, entorno).result;
 
             switch(this.operador) {
-                case TiposAritmetica.OperadorAritmetico.SUMA:
+                case Aritmetica.TYPE.SUMA:
                     if(Number(op1) == 0) {
                         return {optimizacion: 12, result: op2};
                     } else if(Number(op2) == 0) {
                         return {optimizacion: 12, result: op1};
                     } else {
-                        return {optimizacion: 0, result: this.aritmeticaToString(numero, tree)};
+                        return {optimizacion: 0, result: this.aritmeticaToString(numero, entorno)};
                     }
-                case TiposAritmetica.OperadorAritmetico.RESTA:
+                case Aritmetica.TYPE.RESTA:
                     if(Number(op2) == 0) {
                         return {optimizacion: 13, result: op1};
                     } else {
-                        return {optimizacion: 0, result: this.aritmeticaToString(numero, tree)};
+                        return {optimizacion: 0, result: this.aritmeticaToString(numero, entorno)};
                     }
-                case TiposAritmetica.OperadorAritmetico.MULTIPLICACION:
+                case Aritmetica.TYPE.MULTIPLICACION:
                     if(Number(op1) == 0) {
                         return {optimizacion: 17, result: op1};
                     } else if(Number(op2) == 0) {
@@ -60,49 +48,61 @@ export class Aritmetica extends AST {
                     } else if(Number(op2) == 2) {
                         return {optimizacion: 16, result: op1 + ' + ' + op1};
                     } else {
-                        return {optimizacion: 0, result: this.aritmeticaToString(numero, tree)};
+                        return {optimizacion: 0, result: this.aritmeticaToString(numero, entorno)};
                     }
-                case TiposAritmetica.OperadorAritmetico.DIVISION:
+                case Aritmetica.TYPE.DIVISION:
                     if(Number(op1) == 0) {
                         return {optimizacion: 18, result: op1};
                     } else if(Number(op2) == 1) {
                         return {optimizacion: 15, result: op1};
                     } else {
-                        return {optimizacion: 0, result: this.aritmeticaToString(numero, tree)};
+                        return {optimizacion: 0, result: this.aritmeticaToString(numero, entorno)};
                     }
                 default:
-                    return {optimizacion: 0, result: this.aritmeticaToString(numero, tree)};
+                    return {optimizacion: 0, result: this.aritmeticaToString(numero, entorno)};
             }
         } else {
-            return {optimizacion: 0, result: this.aritmeticaToString(numero, tree)};
+            return {optimizacion: 0, result: this.aritmeticaToString(numero, entorno)};
         }
     }
 
-    public getOptimizacionBloque(tree: Arbol3D): string {
+    public getOptimizacionBloque(entorno: Entorno): string {
         throw new Error("Method not implemented.");
     }
 
-    private aritmeticaToString(numero: number, tree: Arbol3D):string {
+    private aritmeticaToString(numero: number, entorno: Entorno):string {
         if(this.operando2 != null) {
-            return this.operando1.getOptimizacionMirilla(numero, tree).result + ' ' + this.operadorToString() + ' ' + this.operando2.getOptimizacionMirilla(numero, tree).result;
+            return this.operando1.getOptimizacionMirilla(numero, entorno).result + ' ' + this.operadorToString() + ' ' + this.operando2.getOptimizacionMirilla(numero, entorno).result;
         } else {
-            return this.operadorToString() + this.operando1.getOptimizacionMirilla(numero, tree).result;
+            return this.operadorToString() + this.operando1.getOptimizacionMirilla(numero, entorno).result;
         }
     }
 
     private operadorToString():string {
         switch(this.operador) {
-            case TiposAritmetica.OperadorAritmetico.SUMA:
+            case Aritmetica.TYPE.SUMA:
                 return '+';
-            case TiposAritmetica.OperadorAritmetico.RESTA:
+            case Aritmetica.TYPE.RESTA:
                 return '-';
-            case TiposAritmetica.OperadorAritmetico.MULTIPLICACION:
+            case Aritmetica.TYPE.MULTIPLICACION:
                 return '*';
-            case TiposAritmetica.OperadorAritmetico.DIVISION:
+            case Aritmetica.TYPE.DIVISION:
                 return '/';
-            case TiposAritmetica.OperadorAritmetico.MODULO:
+            case Aritmetica.TYPE.MODULO:
                 return '%';
         }
+    }
+    
+}
+
+export namespace Aritmetica {
+
+    export enum TYPE {
+        SUMA,
+        RESTA,
+        MULTIPLICACION,
+        DIVISION,
+        MODULO
     }
     
 }

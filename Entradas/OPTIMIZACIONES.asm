@@ -25,5 +25,7 @@ proc Principal begin
     x = y * 2;
     x = y * 0;
     x = 0 / y;
+
+    
 end
 #* //==================== FIN DEL PROGRAMA =========================*#

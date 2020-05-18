@@ -21,6 +21,10 @@ export class Funcion extends Expresion{
         this.idFuncion = idFuncion;
     }
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     public getTipo(entorno:Entorno):Object{
         return this.TIPO;
     }

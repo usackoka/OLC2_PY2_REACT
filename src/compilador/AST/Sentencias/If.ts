@@ -19,6 +19,10 @@ export class If extends Sentencia{
         this.elseif = elseif;
     }
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     public setExpresionSwitch(expresion:Expresion){
         this.condicion = new Relacional(Relacional.TYPE.IGUAL,this.condicion,expresion,this.fila,this.columna);
         if(this.elseif != null && this.elseif instanceof If){

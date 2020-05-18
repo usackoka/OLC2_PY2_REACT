@@ -16,6 +16,10 @@ export class Arreglo extends Expresion{
         this.columna = columna;
     }
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     public getTraduccion(entorno:Entorno):string{
         //guardo el H de dónde se guardará mi arreglo
         entorno.addComentario("====== instanciando arreglo")

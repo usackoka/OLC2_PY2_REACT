@@ -85,6 +85,15 @@ export class Principal {
         return trad+"\n"+this.traduccion;
     }
 
+    public getGraficaAST():string{
+        this.nodos.forEach(nodo => {
+            nodo.getGrafica(this.entorno)
+        });
+        return "digraph G {node[shape=box, style=filled, color=Gray95]; edge[color=blue];rankdir=UD \n" +
+            this.entorno.recorridoArbol +
+            "\n}"
+    }
+
     public getErroresJSON():Array<Object>{
         let json:Array<Object> = [];
         let cont = 0;

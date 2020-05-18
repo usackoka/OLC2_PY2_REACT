@@ -14,6 +14,10 @@ export class ParametroLlamada extends Expresion{
         this.porReferencia = porReferencia;
     }
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     public getTraduccion(entorno:Entorno):string{
         if(this.porReferencia){
             //pendiente

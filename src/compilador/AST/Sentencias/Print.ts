@@ -17,6 +17,10 @@ export class Print extends Sentencia{
         this.salto = true;
     }
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     public getTraduccion(entorno:Entorno):string{
         var TIPO:Object = this.expresion.getTipo(entorno);
         var tImpresion:string = this.expresion.getTraduccion(entorno);

@@ -16,6 +16,10 @@ export class Logica extends Expresion{
         this.columna = columna;
     }
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     public getTraduccion(entorno:Entorno):string{
         switch(this.TIPO_OPERACION){
             case Logica.TYPE.AND:

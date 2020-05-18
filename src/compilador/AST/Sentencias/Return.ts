@@ -13,6 +13,10 @@ export class Return extends Sentencia{
         this.expresion = expresion;
     }
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     public getTraduccion(entorno:Entorno):string{
         entorno.addComentario("======== return =================");
         if(this.expresion!=null){

@@ -9,6 +9,10 @@ export class Continue extends Sentencia{
         this.columna = columna;
     }
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     public getTraduccion(entorno:Entorno):string{
         entorno.addComentario("======== continue =================");
         entorno.addGoto(this.etqContinue);

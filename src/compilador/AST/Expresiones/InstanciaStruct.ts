@@ -13,6 +13,10 @@ export class InstanciaStruct extends Expresion{
         this.TIPO = this.id;
     }
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     public getTraduccion(entorno:Entorno):string{
         entorno.addComentario("==== instanciando struct: "+this.id)
 

@@ -16,6 +16,10 @@ export class Parametro extends Expresion{
         this.value = null;
     }
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     public getTraduccion(entorno:Entorno):string{
         return "";
     }

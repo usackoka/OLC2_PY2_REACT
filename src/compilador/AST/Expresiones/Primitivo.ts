@@ -19,6 +19,10 @@ export class Primitivo extends Expresion implements InterfazAcceso{
         }
     }
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     public getTraduccion(entorno:Entorno):string{
         switch (this.TIPO) {
             case Expresion.State.NULL:

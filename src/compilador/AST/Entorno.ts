@@ -19,6 +19,8 @@ export class Entorno {
         this.primerTemporal = 0;
         this.temporalesUsados = [];
         this.tbs = new Map();
+        this.contGraph=0;
+        this.recorridoArbol="";
         //guardo principal en el padre, para poder hacer uso de los métodos de traducción.
         this.principal=principal?principal:null;
 
@@ -264,5 +266,21 @@ export class Entorno {
     
     public addEnd(idProc:string){
         this.getEntornoGlobal().principal.addEnd(idProc);
+    }
+
+    //================================= VARIABLES PARA LA GRAFICACION DEL AST
+    contGraph:number;
+    recorridoArbol:string;
+
+    public getNextContGraph():number{
+        return this.contGraph++;
+    }
+
+    public addNodoGraph(nodo1:string, label:string) {
+        this.recorridoArbol += "id_"+nodo1+"[label=\""+label.replace("\"", "")+"\"]"+"\n";
+    }
+    
+    public addRelacion(nodo1:string, nodo2:string){
+        this.recorridoArbol += "id_"+nodo1+" -> "+"id_"+nodo2+"\n";
     }
 }

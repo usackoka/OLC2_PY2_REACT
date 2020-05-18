@@ -15,6 +15,10 @@ export class Unario extends Expresion{
         this.columna = columna;
     }
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     public getTraduccion(entorno:Entorno):string{
         switch(this.TIPO_OPERACION){
             case Unario.TYPE.MENOS:

@@ -21,6 +21,10 @@ export class For extends Sentencia{
         this.instrucciones = instrucciones;
     }
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     public getTraduccion(entorno:Entorno):string{
         //paso 3
         let etqTrue = entorno.getETQ()

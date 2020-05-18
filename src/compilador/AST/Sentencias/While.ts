@@ -18,6 +18,10 @@ export class While extends Sentencia{
         this.dowhile = dowhile;
     }
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     public getTraduccion(entorno:Entorno):string{
         //paso 2
         let etq1 = entorno.getETQ();

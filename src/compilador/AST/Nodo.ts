@@ -22,4 +22,6 @@ export abstract class Nodo {
     }
 
     public abstract getTraduccion(entorno:Entorno): string;
+
+    public abstract getGrafica(entorno:Entorno): string;
 }

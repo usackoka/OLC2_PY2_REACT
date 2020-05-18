@@ -18,6 +18,10 @@ export class Llamada extends Expresion{
         this.temporalesGuardados = new Map();
     }   
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     public getTraduccion(entorno:Entorno):string{
         let firmaLlamada = this.getFirma(entorno);
         entorno.addComentario("============================================================================================");

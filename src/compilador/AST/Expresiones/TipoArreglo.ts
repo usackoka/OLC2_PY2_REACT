@@ -10,6 +10,10 @@ export class TipoArreglo extends Expresion{
         this.columna = columna;
     }
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     public getTraduccion(entorno:Entorno):string{
         return "";
     }

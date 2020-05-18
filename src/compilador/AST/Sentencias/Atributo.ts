@@ -15,6 +15,10 @@ export class Atributo extends Expresion{
         this.TIPO = TIPO;
     }
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     public getTraduccion(entorno:Entorno):string{
         return this.expresion!=null?this.expresion.getTraduccion(entorno):Expresion.getDefecto(this.TIPO,entorno);
     }

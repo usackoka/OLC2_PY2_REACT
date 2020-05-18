@@ -24,6 +24,10 @@ export class Declaracion extends Sentencia{
         this.isGlobal = false;
     }   
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     public getTraduccion(entorno:Entorno):string{
         entorno.addComentario("=================== DECLARACION DE VARIABLES ===================");
         this.listaids.forEach(id=>{

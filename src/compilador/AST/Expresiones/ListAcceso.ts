@@ -18,6 +18,10 @@ export class ListAcceso extends Expresion implements InterfazAcceso{
         this.columna = columna;
     }
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     //getValor
     public getTraduccion(entorno:Entorno):string{
         let valorSub = this.subAcceso.getTraduccion(entorno)

@@ -17,6 +17,10 @@ export class AccesoArreglo extends Expresion implements InterfazAcceso{
         this.columna = columna;
     }
 
+    public getGrafica(entorno:Entorno){
+        return "0";
+    }
+
     public getPosicion(entorno:Entorno):string{
         entorno.addComentario("===== get posicion de arreglo")
         let ret = entorno.getTemp()

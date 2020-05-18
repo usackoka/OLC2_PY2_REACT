@@ -10,7 +10,9 @@ export class Continue extends Sentencia{
     }
 
     public getGrafica(entorno:Entorno):string{
-        return "0";
+        let cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "Continue");
+        return cont_raiz.toString();
     }
 
     public getTraduccion(entorno:Entorno):string{

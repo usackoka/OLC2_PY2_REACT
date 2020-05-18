@@ -20,7 +20,15 @@ export class If extends Sentencia{
     }
 
     public getGrafica(entorno:Entorno):string{
-        return "0";
+        let cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "If");
+        
+        for(let nodo of this.instrucciones){
+            let cont_hijo = nodo.getGrafica(entorno);
+            entorno.addRelacion(cont_raiz,cont_hijo);
+        }
+        
+        return cont_raiz.toString();
     }
 
     public setExpresionSwitch(expresion:Expresion){

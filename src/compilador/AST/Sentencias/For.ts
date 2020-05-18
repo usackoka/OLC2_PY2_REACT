@@ -22,7 +22,15 @@ export class For extends Sentencia{
     }
 
     public getGrafica(entorno:Entorno):string{
-        return "0";
+        let cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "For");
+        
+        for(let nodo of this.instrucciones){
+            let cont_hijo = nodo.getGrafica(entorno);
+            entorno.addRelacion(cont_raiz,cont_hijo);
+        }
+        
+        return cont_raiz.toString();
     }
 
     public getTraduccion(entorno:Entorno):string{

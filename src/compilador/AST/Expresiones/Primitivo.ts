@@ -20,7 +20,9 @@ export class Primitivo extends Expresion implements InterfazAcceso{
     }
 
     public getGrafica(entorno:Entorno):string{
-        return "0";
+        let cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, this.value.toString());
+        return cont_raiz.toString();
     }
 
     public getTraduccion(entorno:Entorno):string{

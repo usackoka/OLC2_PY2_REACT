@@ -15,7 +15,7 @@ export class ETQ extends Nodo {
     };
 
     public getBloque(entorno:Entorno): string{
-        return "";
+        return this.etiqueta+":";
     };
     
 }

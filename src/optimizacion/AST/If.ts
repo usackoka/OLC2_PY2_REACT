@@ -17,7 +17,7 @@ export class If extends Nodo {
     };
 
     public getBloque(entorno:Entorno): string{
-        return "";
+        return "if ("+this.condicion.getMirrilla(entorno)+" ) goto "+this.etiqueta+";";
     };
     
 }

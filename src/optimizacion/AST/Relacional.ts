@@ -20,7 +20,7 @@ export class Relacional extends Nodo {
     };
 
     public getBloque(entorno:Entorno): string{
-        return "";
+        return this.valor1.getBloque(entorno)+this.operador+this.valor2.getBloque(entorno);
     };
     
 }

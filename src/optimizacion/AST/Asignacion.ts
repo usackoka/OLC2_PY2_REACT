@@ -39,7 +39,9 @@ export class Asignacion extends Nodo {
     }
 
     public getBloque(entorno:Entorno): string{
-        return "";
+        let subOpt = this.expresion.getBloque(entorno)
+
+        return this.direccion+" = "+subOpt + ';';
     };
     
 }

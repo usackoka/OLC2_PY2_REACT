@@ -17,7 +17,7 @@ export class Primitivo extends Nodo {
     };
 
     public getBloque(entorno:Entorno): string{
-        return "";
+        return this.value.toString();
     };
 
     public isZero():boolean{

@@ -24,6 +24,16 @@ export class Entorno {
             columna: opt.columna
         })
     }
+
+    public getBloques(){
+        //obtengo la mirilla de cada nodo
+        this.instrucciones.forEach(nodo=>{
+            this.optimizacion += nodo.getBloque(this)+"\n"
+        })
+
+        return this.optimizacion
+    }
+
     
     public getMirilla(){
         //obtengo la mirilla de cada nodo

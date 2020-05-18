@@ -15,7 +15,7 @@ export class Goto extends Nodo {
     };
 
     public getBloque(entorno:Entorno): string{
-        return "";
+        return "goto "+this.etiqueta+";";
     };
     
 }

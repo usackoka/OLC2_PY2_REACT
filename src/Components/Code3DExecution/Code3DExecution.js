@@ -49,12 +49,30 @@ const Index = (props) => {
     setTxtSalida({value:salida});
   };
 
+  const clickEjecutar2 = async e => {
+    console.log("Ejecutando optimizacion")
+    if(!txtEntrada) return null;
+    
+    var optimizador = require("../../optimizacion/optimizacion")
+    let entorno = optimizador.parser.parse(txtEntrada.getValue())
+    let salida = entorno.getBloques();
+    setValoresSimbolos(entorno.optimizaciones)
+
+    if(!txtSalida) return null;
+    setTxtSalida({value:salida});
+  };
+
   return (
     <Container fluid>
       <Row>
         <Col xs="auto">
           <Button variant="success" fixed="bottom" onClick={clickEjecutar}>
-            {"Ejecutar"}
+            {"Optimizar Mirilla"}
+          </Button>
+        </Col>
+        <Col xs="auto">
+          <Button variant="success" fixed="bottom" onClick={clickEjecutar2}>
+            {"Optimizar Bloques"}
           </Button>
         </Col>
       </Row>

@@ -47,7 +47,8 @@ var Asignacion = /** @class */ (function (_super) {
         }
     };
     Asignacion.prototype.getBloque = function (entorno) {
-        return "";
+        var subOpt = this.expresion.getBloque(entorno);
+        return this.direccion + " = " + subOpt + ';';
     };
     ;
     return Asignacion;

@@ -22,6 +22,9 @@ var Break = /** @class */ (function (_super) {
         _this.columna = columna;
         return _this;
     }
+    Break.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     Break.prototype.getTraduccion = function (entorno) {
         entorno.addComentario("======== break =================");
         entorno.addGoto(this.etqBreak);

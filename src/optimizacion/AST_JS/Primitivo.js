@@ -27,7 +27,7 @@ var Primitivo = /** @class */ (function (_super) {
     };
     ;
     Primitivo.prototype.getBloque = function (entorno) {
-        return "";
+        return this.value.toString();
     };
     ;
     Primitivo.prototype.isZero = function () {

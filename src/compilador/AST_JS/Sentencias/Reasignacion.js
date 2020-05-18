@@ -24,6 +24,9 @@ var Reasignacion = /** @class */ (function (_super) {
         _this.columna = columna;
         return _this;
     }
+    Reasignacion.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     Reasignacion.prototype.getTraduccion = function (entorno) {
         entorno.addComentario("=================== REASIGNACION DE VARIABLE ===================");
         //validar si es constante

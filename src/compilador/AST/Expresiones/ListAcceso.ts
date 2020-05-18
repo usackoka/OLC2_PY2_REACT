@@ -18,8 +18,10 @@ export class ListAcceso extends Expresion implements InterfazAcceso{
         this.columna = columna;
     }
 
-    public getGrafica(entorno:Entorno){
-        return "0";
+    public getGrafica(entorno:Entorno):string{
+        let cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "LIST_ACCESOS");
+        return cont_raiz.toString();
     }
 
     //getValor

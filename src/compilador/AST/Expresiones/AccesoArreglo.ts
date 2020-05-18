@@ -17,8 +17,10 @@ export class AccesoArreglo extends Expresion implements InterfazAcceso{
         this.columna = columna;
     }
 
-    public getGrafica(entorno:Entorno){
-        return "0";
+    public getGrafica(entorno:Entorno):string{
+        let cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, this.id+"[E]");
+        return cont_raiz.toString();
     }
 
     public getPosicion(entorno:Entorno):string{

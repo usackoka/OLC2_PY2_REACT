@@ -276,11 +276,11 @@ export class Entorno {
         return this.contGraph++;
     }
 
-    public addNodoGraph(nodo1:string, label:string) {
+    public addNodoGraph(nodo1:Object, label:string) {
         this.recorridoArbol += "id_"+nodo1+"[label=\""+label.replace("\"", "")+"\"]"+"\n";
     }
     
-    public addRelacion(nodo1:string, nodo2:string){
+    public addRelacion(nodo1:Object, nodo2:string){
         this.recorridoArbol += "id_"+nodo1+" -> "+"id_"+nodo2+"\n";
     }
 }

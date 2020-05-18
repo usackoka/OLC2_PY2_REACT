@@ -9,6 +9,8 @@ var Entorno = /** @class */ (function () {
         this.primerTemporal = 0;
         this.temporalesUsados = [];
         this.tbs = new Map();
+        this.contGraph = 0;
+        this.recorridoArbol = "";
         //guardo principal en el padre, para poder hacer uso de los métodos de traducción.
         this.principal = principal ? principal : null;
         //si existe el padre, sumo el tamaño al entorno
@@ -207,6 +209,15 @@ var Entorno = /** @class */ (function () {
     };
     Entorno.prototype.addEnd = function (idProc) {
         this.getEntornoGlobal().principal.addEnd(idProc);
+    };
+    Entorno.prototype.getNextContGraph = function () {
+        return this.contGraph++;
+    };
+    Entorno.prototype.addNodoGraph = function (nodo1, label) {
+        this.recorridoArbol += "id_" + nodo1 + "[label=\"" + label.replace("\"", "") + "\"]" + "\n";
+    };
+    Entorno.prototype.addRelacion = function (nodo1, nodo2) {
+        this.recorridoArbol += "id_" + nodo1 + " -> " + "id_" + nodo2 + "\n";
     };
     return Entorno;
 }());

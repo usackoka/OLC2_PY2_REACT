@@ -27,6 +27,9 @@ var ListAcceso = /** @class */ (function (_super) {
         _this.columna = columna;
         return _this;
     }
+    ListAcceso.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     //getValor
     ListAcceso.prototype.getTraduccion = function (entorno) {
         var valorSub = this.subAcceso.getTraduccion(entorno);

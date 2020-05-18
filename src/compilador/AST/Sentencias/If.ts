@@ -19,7 +19,7 @@ export class If extends Sentencia{
         this.elseif = elseif;
     }
 
-    public getGrafica(entorno:Entorno){
+    public getGrafica(entorno:Entorno):string{
         return "0";
     }
 

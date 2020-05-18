@@ -15,8 +15,10 @@ export class Atributo extends Expresion{
         this.TIPO = TIPO;
     }
 
-    public getGrafica(entorno:Entorno){
-        return "0";
+    public getGrafica(entorno:Entorno):string{
+        let cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "Atributo");
+        return cont_raiz.toString();
     }
 
     public getTraduccion(entorno:Entorno):string{

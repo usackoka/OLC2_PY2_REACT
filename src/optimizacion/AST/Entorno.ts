@@ -7,12 +7,21 @@ export class Entorno {
     optimizaciones:[{no: number, regla: number, descripcion: string, fila: number, columna: number}]
     contadorOptimizaciones:number;
 
+    listUtilizadas:Array<string>;
+
     constructor () {
         this.instrucciones = [];
         this.optimizacion = "";
         this.optimizaciones = [{no: 0, regla: 0, descripcion: '', fila: 0, columna: 0}];
         this.optimizaciones.pop()
         this.contadorOptimizaciones = 0;
+        
+        this.listUtilizadas = [];
+    }
+    
+    //variables y métodos --- para optimización de bloques
+    public addUtilizadas(variable:string){
+        this.listUtilizadas.push(variable)
     }
 
     public addOptimizacion(opt:{regla:number,fila:number,columna:number}){
@@ -41,7 +50,18 @@ export class Entorno {
             this.optimizacion += nodo.getMirrilla(this)+"\n"
         })
 
+        //busco todos los que cumplan con la regla 23
+
+
         return this.optimizacion
+    }
+
+    public getDescripcionBloques(regla:number):string{
+        switch(regla){
+            case 23:
+                return "Redundancia parcial - variables inutilizadas"
+        }
+        return "Optimización sin descripción"
     }
 
     public getDescripcionMirilla(regla:number):string{

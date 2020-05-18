@@ -21,8 +21,16 @@ export class Funcion extends Expresion{
         this.idFuncion = idFuncion;
     }
 
-    public getGrafica(entorno:Entorno){
-        return "0";
+    public getGrafica(entorno:Entorno):string{
+        let cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, this.idFuncion);
+        
+        for(let nodo of this.instrucciones){
+            let cont_hijo = nodo.getGrafica(entorno);
+            entorno.addRelacion(cont_raiz,cont_hijo);
+        }
+        
+        return cont_raiz.toString();
     }
 
     public getTipo(entorno:Entorno):Object{

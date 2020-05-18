@@ -15,7 +15,7 @@ export class Struct extends Sentencia{
         this.atributos = atributos;
     }
 
-    public getGrafica(entorno:Entorno){
+    public getGrafica(entorno:Entorno):string{
         return "0";
     }
 

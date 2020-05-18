@@ -25,6 +25,9 @@ var Casteo = /** @class */ (function (_super) {
         _this.columna = columna;
         return _this;
     }
+    Casteo.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     Casteo.prototype.getTraduccion = function (entorno) {
         var trad = this.expresion.getTraduccion(entorno);
         var tipoExpresion = this.expresion.getTipo(entorno);

@@ -7,7 +7,12 @@ var Entorno = /** @class */ (function () {
         this.optimizaciones = [{ no: 0, regla: 0, descripcion: '', fila: 0, columna: 0 }];
         this.optimizaciones.pop();
         this.contadorOptimizaciones = 0;
+        this.listUtilizadas = [];
     }
+    //variables y métodos --- para optimización de bloques
+    Entorno.prototype.addUtilizadas = function (variable) {
+        this.listUtilizadas.push(variable);
+    };
     Entorno.prototype.addOptimizacion = function (opt) {
         this.optimizaciones.push({
             no: this.contadorOptimizaciones++,
@@ -17,13 +22,29 @@ var Entorno = /** @class */ (function () {
             columna: opt.columna
         });
     };
+    Entorno.prototype.getBloques = function () {
+        var _this = this;
+        //obtengo la mirilla de cada nodo
+        this.instrucciones.forEach(function (nodo) {
+            _this.optimizacion += nodo.getBloque(_this) + "\n";
+        });
+        return this.optimizacion;
+    };
     Entorno.prototype.getMirilla = function () {
         var _this = this;
         //obtengo la mirilla de cada nodo
         this.instrucciones.forEach(function (nodo) {
             _this.optimizacion += nodo.getMirrilla(_this) + "\n";
         });
+        //busco todos los que cumplan con la regla 23
         return this.optimizacion;
+    };
+    Entorno.prototype.getDescripcionBloques = function (regla) {
+        switch (regla) {
+            case 23:
+                return "Redundancia parcial - variables inutilizadas";
+        }
+        return "Optimización sin descripción";
     };
     Entorno.prototype.getDescripcionMirilla = function (regla) {
         switch (regla) {

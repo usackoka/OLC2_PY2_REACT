@@ -24,6 +24,9 @@ var Else = /** @class */ (function (_super) {
         _this.instrucciones = instrucciones;
         return _this;
     }
+    Else.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     Else.prototype.getTraduccion = function (entorno) {
         var _this = this;
         //paso 3

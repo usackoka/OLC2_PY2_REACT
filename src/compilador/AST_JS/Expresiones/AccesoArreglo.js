@@ -26,6 +26,9 @@ var AccesoArreglo = /** @class */ (function (_super) {
         _this.columna = columna;
         return _this;
     }
+    AccesoArreglo.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     AccesoArreglo.prototype.getPosicion = function (entorno) {
         entorno.addComentario("===== get posicion de arreglo");
         var ret = entorno.getTemp();

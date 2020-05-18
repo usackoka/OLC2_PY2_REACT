@@ -25,6 +25,9 @@ var Atributo = /** @class */ (function (_super) {
         _this.TIPO = TIPO;
         return _this;
     }
+    Atributo.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     Atributo.prototype.getTraduccion = function (entorno) {
         return this.expresion != null ? this.expresion.getTraduccion(entorno) : Expresion_1.Expresion.getDefecto(this.TIPO, entorno);
     };

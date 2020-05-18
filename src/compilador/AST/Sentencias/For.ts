@@ -21,7 +21,7 @@ export class For extends Sentencia{
         this.instrucciones = instrucciones;
     }
 
-    public getGrafica(entorno:Entorno){
+    public getGrafica(entorno:Entorno):string{
         return "0";
     }
 

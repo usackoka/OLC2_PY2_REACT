@@ -14,7 +14,7 @@ export class ParametroLlamada extends Expresion{
         this.porReferencia = porReferencia;
     }
 
-    public getGrafica(entorno:Entorno){
+    public getGrafica(entorno:Entorno):string{
         return "0";
     }
 

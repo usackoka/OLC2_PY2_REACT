@@ -26,6 +26,9 @@ var Print = /** @class */ (function (_super) {
         _this.salto = true;
         return _this;
     }
+    Print.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     Print.prototype.getTraduccion = function (entorno) {
         var TIPO = this.expresion.getTipo(entorno);
         var tImpresion = this.expresion.getTraduccion(entorno);

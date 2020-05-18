@@ -26,6 +26,9 @@ var While = /** @class */ (function (_super) {
         _this.dowhile = dowhile;
         return _this;
     }
+    While.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     While.prototype.getTraduccion = function (entorno) {
         //paso 2
         var etq1 = entorno.getETQ();

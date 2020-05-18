@@ -15,7 +15,7 @@ export class Unario extends Expresion{
         this.columna = columna;
     }
 
-    public getGrafica(entorno:Entorno){
+    public getGrafica(entorno:Entorno):string{
         return "0";
     }
 

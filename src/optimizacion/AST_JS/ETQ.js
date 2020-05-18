@@ -26,7 +26,7 @@ var ETQ = /** @class */ (function (_super) {
     };
     ;
     ETQ.prototype.getBloque = function (entorno) {
-        return "";
+        return this.etiqueta + ":";
     };
     ;
     return ETQ;

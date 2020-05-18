@@ -16,7 +16,7 @@ export class Parametro extends Expresion{
         this.value = null;
     }
 
-    public getGrafica(entorno:Entorno){
+    public getGrafica(entorno:Entorno):string{
         return "0";
     }
 

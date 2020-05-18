@@ -24,6 +24,9 @@ var ParametroLlamada = /** @class */ (function (_super) {
         _this.porReferencia = porReferencia;
         return _this;
     }
+    ParametroLlamada.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     ParametroLlamada.prototype.getTraduccion = function (entorno) {
         if (this.porReferencia) {
             //pendiente

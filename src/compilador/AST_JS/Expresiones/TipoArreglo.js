@@ -23,6 +23,9 @@ var TipoArreglo = /** @class */ (function (_super) {
         _this.columna = columna;
         return _this;
     }
+    TipoArreglo.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     TipoArreglo.prototype.getTraduccion = function (entorno) {
         return "";
     };

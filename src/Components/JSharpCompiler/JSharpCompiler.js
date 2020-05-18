@@ -92,6 +92,20 @@ const Index = (props) => {
     setValoresErrores(principal.getErroresJSON())
   };
 
+  const clickEjecutar2 = async e => {
+    var compilador = require("../../compilador/compilador")
+    if(!txtEntrada){
+      console.log("No se encontró la instancia de codeMirror")
+      return null;
+    }
+    compilador.principal = new Principal();
+    let principal = compilador.parser.parse(txtEntrada.getValue())
+    let salida = principal.getGraficaAST();
+
+    if(!txtSalida) return null;
+    setTxtSalida({value:salida});
+  };
+
   return (
     <Fragment>
       <Row>
@@ -115,6 +129,11 @@ const Index = (props) => {
         <Col xs="auto">
           <Button variant="success" fixed="bottom" onClick={clickEjecutar}>
             {"Traducir"}
+          </Button>
+        </Col>
+        <Col xs="auto">
+          <Button variant="success" fixed="bottom" onClick={clickEjecutar2}>
+            {"Graficar AST"}
           </Button>
         </Col>
 

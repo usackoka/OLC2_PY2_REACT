@@ -65,6 +65,15 @@ var Principal = /** @class */ (function () {
         trad += ";\n\n";
         return trad + "\n" + this.traduccion;
     };
+    Principal.prototype.getGraficaAST = function () {
+        var _this = this;
+        this.nodos.forEach(function (nodo) {
+            nodo.getGrafica(_this.entorno);
+        });
+        return "digraph G {node[shape=box, style=filled, color=Gray95]; edge[color=blue];rankdir=UD \n" +
+            this.entorno.recorridoArbol +
+            "\n}";
+    };
     Principal.prototype.getErroresJSON = function () {
         var json = [];
         var cont = 0;

@@ -18,7 +18,7 @@ export class Llamada extends Expresion{
         this.temporalesGuardados = new Map();
     }   
 
-    public getGrafica(entorno:Entorno){
+    public getGrafica(entorno:Entorno):string{
         return "0";
     }
 

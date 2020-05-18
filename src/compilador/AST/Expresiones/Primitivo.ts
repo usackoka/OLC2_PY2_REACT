@@ -19,7 +19,7 @@ export class Primitivo extends Expresion implements InterfazAcceso{
         }
     }
 
-    public getGrafica(entorno:Entorno){
+    public getGrafica(entorno:Entorno):string{
         return "0";
     }
 

@@ -27,6 +27,9 @@ var If = /** @class */ (function (_super) {
         _this.elseif = elseif;
         return _this;
     }
+    If.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     If.prototype.setExpresionSwitch = function (expresion) {
         this.condicion = new Relacional_1.Relacional(Relacional_1.Relacional.TYPE.IGUAL, this.condicion, expresion, this.fila, this.columna);
         if (this.elseif != null && this.elseif instanceof If) {

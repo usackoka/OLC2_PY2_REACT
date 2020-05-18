@@ -26,7 +26,7 @@ var Goto = /** @class */ (function (_super) {
     };
     ;
     Goto.prototype.getBloque = function (entorno) {
-        return "";
+        return "goto " + this.etiqueta + ";";
     };
     ;
     return Goto;

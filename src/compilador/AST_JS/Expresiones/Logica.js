@@ -25,6 +25,9 @@ var Logica = /** @class */ (function (_super) {
         _this.columna = columna;
         return _this;
     }
+    Logica.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     Logica.prototype.getTraduccion = function (entorno) {
         switch (this.TIPO_OPERACION) {
             case Logica.TYPE.AND:

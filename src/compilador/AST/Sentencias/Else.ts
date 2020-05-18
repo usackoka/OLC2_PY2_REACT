@@ -14,7 +14,7 @@ export class Else extends Sentencia{
         this.instrucciones = instrucciones;
     }
 
-    public getGrafica(entorno:Entorno){
+    public getGrafica(entorno:Entorno):string{
         return "0";
     }
 

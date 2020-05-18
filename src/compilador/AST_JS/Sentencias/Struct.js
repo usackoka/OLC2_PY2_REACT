@@ -24,6 +24,9 @@ var Struct = /** @class */ (function (_super) {
         _this.atributos = atributos;
         return _this;
     }
+    Struct.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     Struct.prototype.getTraduccion = function (entorno) {
         return "";
     };

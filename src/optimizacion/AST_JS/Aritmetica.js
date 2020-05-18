@@ -91,7 +91,11 @@ var Aritmetica = /** @class */ (function (_super) {
     };
     ;
     Aritmetica.prototype.getBloque = function (entorno) {
-        return "";
+        //agrego las variables utilizadas a una lista, para luego buscar si no se encuentra en ella
+        //y eliminar las no usadas
+        entorno.addUtilizadas(this.valor1.getBloque(entorno));
+        entorno.addUtilizadas(this.valor2.getBloque(entorno));
+        return this.valor1.getBloque(entorno) + this.operador + this.valor2.getBloque(entorno);
     };
     ;
     return Aritmetica;

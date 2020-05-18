@@ -27,7 +27,7 @@ var If = /** @class */ (function (_super) {
     };
     ;
     If.prototype.getBloque = function (entorno) {
-        return "";
+        return "if (" + this.condicion.getMirrilla(entorno) + " ) goto " + this.etiqueta + ";";
     };
     ;
     return If;

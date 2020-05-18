@@ -26,6 +26,9 @@ var Parametro = /** @class */ (function (_super) {
         _this.value = null;
         return _this;
     }
+    Parametro.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     Parametro.prototype.getTraduccion = function (entorno) {
         return "";
     };

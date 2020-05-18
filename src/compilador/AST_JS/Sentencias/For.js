@@ -27,6 +27,9 @@ var For = /** @class */ (function (_super) {
         _this.instrucciones = instrucciones;
         return _this;
     }
+    For.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     For.prototype.getTraduccion = function (entorno) {
         var _this = this;
         //paso 3

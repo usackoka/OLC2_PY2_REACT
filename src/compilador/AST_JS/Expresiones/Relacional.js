@@ -25,6 +25,9 @@ var Relacional = /** @class */ (function (_super) {
         _this.columna = columna;
         return _this;
     }
+    Relacional.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     Relacional.prototype.getTraduccion = function (entorno) {
         switch (this.TIPO_OPERACION) {
             case Relacional.TYPE.IGUAL_REFERENCIA:

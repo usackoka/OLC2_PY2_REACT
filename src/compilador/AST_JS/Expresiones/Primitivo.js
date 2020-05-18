@@ -28,6 +28,9 @@ var Primitivo = /** @class */ (function (_super) {
         }
         return _this;
     }
+    Primitivo.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     Primitivo.prototype.getTraduccion = function (entorno) {
         switch (this.TIPO) {
             case Expresion_1.Expresion.State.NULL:

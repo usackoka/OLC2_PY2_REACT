@@ -28,7 +28,7 @@ var Relacional = /** @class */ (function (_super) {
     };
     ;
     Relacional.prototype.getBloque = function (entorno) {
-        return "";
+        return this.valor1.getBloque(entorno) + this.operador + this.valor2.getBloque(entorno);
     };
     ;
     return Relacional;

@@ -13,7 +13,7 @@ export class Return extends Sentencia{
         this.expresion = expresion;
     }
 
-    public getGrafica(entorno:Entorno){
+    public getGrafica(entorno:Entorno):string{
         return "0";
     }
 

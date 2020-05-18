@@ -22,6 +22,9 @@ var Continue = /** @class */ (function (_super) {
         _this.columna = columna;
         return _this;
     }
+    Continue.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     Continue.prototype.getTraduccion = function (entorno) {
         entorno.addComentario("======== continue =================");
         entorno.addGoto(this.etqContinue);

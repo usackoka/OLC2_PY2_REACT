@@ -16,8 +16,10 @@ export class Arreglo extends Expresion{
         this.columna = columna;
     }
 
-    public getGrafica(entorno:Entorno){
-        return "0";
+    public getGrafica(entorno:Entorno):string{
+        let cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "new Array");
+        return cont_raiz.toString();
     }
 
     public getTraduccion(entorno:Entorno):string{

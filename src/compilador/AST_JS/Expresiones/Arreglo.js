@@ -26,6 +26,9 @@ var Arreglo = /** @class */ (function (_super) {
         _this.columna = columna;
         return _this;
     }
+    Arreglo.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     Arreglo.prototype.getTraduccion = function (entorno) {
         //guardo el H de dónde se guardará mi arreglo
         entorno.addComentario("====== instanciando arreglo");

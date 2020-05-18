@@ -26,6 +26,9 @@ var Llamada = /** @class */ (function (_super) {
         _this.temporalesGuardados = new Map();
         return _this;
     }
+    Llamada.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     Llamada.prototype.getTraduccion = function (entorno) {
         var firmaLlamada = this.getFirma(entorno);
         entorno.addComentario("============================================================================================");

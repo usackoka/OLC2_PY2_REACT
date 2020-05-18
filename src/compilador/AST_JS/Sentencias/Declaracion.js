@@ -29,6 +29,9 @@ var Declaracion = /** @class */ (function (_super) {
         _this.isGlobal = false;
         return _this;
     }
+    Declaracion.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     Declaracion.prototype.getTraduccion = function (entorno) {
         var _this = this;
         entorno.addComentario("=================== DECLARACION DE VARIABLES ===================");

@@ -28,6 +28,9 @@ var Funcion = /** @class */ (function (_super) {
         _this.idFuncion = idFuncion;
         return _this;
     }
+    Funcion.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     Funcion.prototype.getTipo = function (entorno) {
         return this.TIPO;
     };

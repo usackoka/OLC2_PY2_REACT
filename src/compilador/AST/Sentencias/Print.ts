@@ -17,7 +17,7 @@ export class Print extends Sentencia{
         this.salto = true;
     }
 
-    public getGrafica(entorno:Entorno){
+    public getGrafica(entorno:Entorno):string{
         return "0";
     }
 

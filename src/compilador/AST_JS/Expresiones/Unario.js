@@ -25,6 +25,9 @@ var Unario = /** @class */ (function (_super) {
         _this.columna = columna;
         return _this;
     }
+    Unario.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     Unario.prototype.getTraduccion = function (entorno) {
         switch (this.TIPO_OPERACION) {
             case Unario.TYPE.MENOS:

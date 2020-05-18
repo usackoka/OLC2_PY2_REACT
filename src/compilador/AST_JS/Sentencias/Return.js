@@ -23,6 +23,9 @@ var Return = /** @class */ (function (_super) {
         _this.expresion = expresion;
         return _this;
     }
+    Return.prototype.getGrafica = function (entorno) {
+        return "0";
+    };
     Return.prototype.getTraduccion = function (entorno) {
         entorno.addComentario("======== return =================");
         if (this.expresion != null) {

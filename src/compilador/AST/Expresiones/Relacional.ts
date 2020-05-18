@@ -16,8 +16,17 @@ export class Relacional extends Expresion{
         this.columna = columna;
     }
 
-    public getGrafica(entorno:Entorno){
-        return "0";
+    public getGrafica(entorno:Entorno):string{
+        let cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, this.TIPO_OPERACION.toString());
+        
+        let cont_hijo = this.izquierda.getGrafica(entorno);
+        entorno.addRelacion(cont_raiz,cont_hijo);
+        
+        cont_hijo = this.derecha.getGrafica(entorno);
+        entorno.addRelacion(cont_raiz,cont_hijo);
+        
+        return cont_raiz.toString();
     }
 
     public getTraduccion(entorno:Entorno):string{

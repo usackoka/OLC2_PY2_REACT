@@ -71,6 +71,8 @@
     const { Asignacion } = require('./AST_JS/Asignacion');
     const { If } = require('./AST_JS/If');
     const { Relacional } = require('./AST_JS/Relacional');
+    const { Goto } = require('./AST_JS/Goto');
+    const { ETQ } = require('./AST_JS/ETQ');
 %}
 
 %define parse.error verbose
@@ -121,9 +123,11 @@ GLOBAL :  DEC_VAR ';'
     }
     | id ':' 
     {
+        $$ = new ETQ($1,@1.first_line,@1.first_column)
     }
     | goto id ';'
     {
+        $$ = new Goto($2,@1.first_line,@1.first_column)
     }
     | if '(' RELACIONAL ')' goto id ';'
     {

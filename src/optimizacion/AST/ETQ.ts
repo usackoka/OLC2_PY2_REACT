@@ -1,19 +1,17 @@
 import { Nodo } from "./Nodo";
 import { Entorno } from "./Entorno";
 
-export class If extends Nodo {
+export class ETQ extends Nodo {
 
-    condicion: Nodo;
     etiqueta:string;
 
-    constructor (condicion: Nodo, etiqueta:string, fila:number, columna:number) {
+    constructor (etiqueta:string, fila:number, columna:number) {
         super(fila, columna);
-        this.condicion = condicion;
         this.etiqueta = etiqueta;
     }
 
     public getMirrilla(entorno:Entorno): string{
-        return "if ("+this.condicion.getMirrilla(entorno)+" ) goto "+this.etiqueta+";";
+        return this.etiqueta+":";
     };
 
     public getBloque(entorno:Entorno): string{

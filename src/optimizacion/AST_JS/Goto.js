@@ -14,22 +14,21 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var Nodo_1 = require("./Nodo");
-var If = /** @class */ (function (_super) {
-    __extends(If, _super);
-    function If(condicion, etiqueta, fila, columna) {
+var Goto = /** @class */ (function (_super) {
+    __extends(Goto, _super);
+    function Goto(etiqueta, fila, columna) {
         var _this = _super.call(this, fila, columna) || this;
-        _this.condicion = condicion;
         _this.etiqueta = etiqueta;
         return _this;
     }
-    If.prototype.getMirrilla = function (entorno) {
-        return "if (" + this.condicion.getMirrilla(entorno) + " ) goto " + this.etiqueta + ";";
+    Goto.prototype.getMirrilla = function (entorno) {
+        return "goto " + this.etiqueta + ";";
     };
     ;
-    If.prototype.getBloque = function (entorno) {
+    Goto.prototype.getBloque = function (entorno) {
         return "";
     };
     ;
-    return If;
+    return Goto;
 }(Nodo_1.Nodo));
-exports.If = If;
+exports.Goto = Goto;

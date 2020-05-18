@@ -26,7 +26,13 @@ var Relacional = /** @class */ (function (_super) {
         return _this;
     }
     Relacional.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, this.TIPO_OPERACION.toString());
+        var cont_hijo = this.izquierda.getGrafica(entorno);
+        entorno.addRelacion(cont_raiz, cont_hijo);
+        cont_hijo = this.derecha.getGrafica(entorno);
+        entorno.addRelacion(cont_raiz, cont_hijo);
+        return cont_raiz.toString();
     };
     Relacional.prototype.getTraduccion = function (entorno) {
         switch (this.TIPO_OPERACION) {

@@ -28,7 +28,14 @@ var If = /** @class */ (function (_super) {
         return _this;
     }
     If.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "If");
+        for (var _i = 0, _a = this.instrucciones; _i < _a.length; _i++) {
+            var nodo = _a[_i];
+            var cont_hijo = nodo.getGrafica(entorno);
+            entorno.addRelacion(cont_raiz, cont_hijo);
+        }
+        return cont_raiz.toString();
     };
     If.prototype.setExpresionSwitch = function (expresion) {
         this.condicion = new Relacional_1.Relacional(Relacional_1.Relacional.TYPE.IGUAL, this.condicion, expresion, this.fila, this.columna);

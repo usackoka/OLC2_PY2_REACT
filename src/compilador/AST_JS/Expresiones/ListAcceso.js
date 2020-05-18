@@ -28,7 +28,9 @@ var ListAcceso = /** @class */ (function (_super) {
         return _this;
     }
     ListAcceso.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "LIST_ACCESOS");
+        return cont_raiz.toString();
     };
     //getValor
     ListAcceso.prototype.getTraduccion = function (entorno) {

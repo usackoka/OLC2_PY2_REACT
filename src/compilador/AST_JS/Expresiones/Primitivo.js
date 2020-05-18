@@ -29,7 +29,9 @@ var Primitivo = /** @class */ (function (_super) {
         return _this;
     }
     Primitivo.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, this.value.toString());
+        return cont_raiz.toString();
     };
     Primitivo.prototype.getTraduccion = function (entorno) {
         switch (this.TIPO) {

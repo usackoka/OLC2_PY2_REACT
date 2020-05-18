@@ -27,7 +27,9 @@ var AccesoArreglo = /** @class */ (function (_super) {
         return _this;
     }
     AccesoArreglo.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, this.id + "[E]");
+        return cont_raiz.toString();
     };
     AccesoArreglo.prototype.getPosicion = function (entorno) {
         entorno.addComentario("===== get posicion de arreglo");

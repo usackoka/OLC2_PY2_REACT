@@ -24,7 +24,13 @@ var Return = /** @class */ (function (_super) {
         return _this;
     }
     Return.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "RETURN");
+        if (this.expresion != null) {
+            var cont_hijo = this.expresion.getGrafica(entorno);
+            entorno.addRelacion(cont_raiz, cont_hijo);
+        }
+        return cont_raiz.toString();
     };
     Return.prototype.getTraduccion = function (entorno) {
         entorno.addComentario("======== return =================");

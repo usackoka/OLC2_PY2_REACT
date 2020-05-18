@@ -130,8 +130,8 @@ const Index = (props) => {
           <Button variant="success" fixed="bottom" onClick={clickEjecutar}>
             {"Traducir"}
           </Button>
-        </Col>
-        <Col xs="auto">
+          <br></br>
+          <br></br>
           <Button variant="success" fixed="bottom" onClick={clickEjecutar2}>
             {"Graficar AST"}
           </Button>

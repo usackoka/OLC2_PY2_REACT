@@ -30,7 +30,9 @@ var Declaracion = /** @class */ (function (_super) {
         return _this;
     }
     Declaracion.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "DECLARACION");
+        return cont_raiz.toString();
     };
     Declaracion.prototype.getTraduccion = function (entorno) {
         var _this = this;

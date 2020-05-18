@@ -27,7 +27,9 @@ var Parametro = /** @class */ (function (_super) {
         return _this;
     }
     Parametro.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, this.id);
+        return cont_raiz.toString();
     };
     Parametro.prototype.getTraduccion = function (entorno) {
         return "";

@@ -26,7 +26,9 @@ var Casteo = /** @class */ (function (_super) {
         return _this;
     }
     Casteo.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "(Casteo)E");
+        return cont_raiz.toString();
     };
     Casteo.prototype.getTraduccion = function (entorno) {
         var trad = this.expresion.getTraduccion(entorno);

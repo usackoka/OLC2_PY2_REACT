@@ -27,7 +27,9 @@ var Arreglo = /** @class */ (function (_super) {
         return _this;
     }
     Arreglo.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "new Array");
+        return cont_raiz.toString();
     };
     Arreglo.prototype.getTraduccion = function (entorno) {
         //guardo el H de dónde se guardará mi arreglo

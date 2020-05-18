@@ -25,7 +25,14 @@ var Else = /** @class */ (function (_super) {
         return _this;
     }
     Else.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "Else");
+        for (var _i = 0, _a = this.instrucciones; _i < _a.length; _i++) {
+            var nodo = _a[_i];
+            var cont_hijo = nodo.getGrafica(entorno);
+            entorno.addRelacion(cont_raiz, cont_hijo);
+        }
+        return cont_raiz.toString();
     };
     Else.prototype.getTraduccion = function (entorno) {
         var _this = this;

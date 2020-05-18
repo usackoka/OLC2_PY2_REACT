@@ -25,7 +25,9 @@ var InstanciaStruct = /** @class */ (function (_super) {
         return _this;
     }
     InstanciaStruct.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "new " + this.id + "()");
+        return cont_raiz.toString();
     };
     InstanciaStruct.prototype.getTraduccion = function (entorno) {
         entorno.addComentario("==== instanciando struct: " + this.id);

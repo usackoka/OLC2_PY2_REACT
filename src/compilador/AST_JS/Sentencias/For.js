@@ -28,7 +28,14 @@ var For = /** @class */ (function (_super) {
         return _this;
     }
     For.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "For");
+        for (var _i = 0, _a = this.instrucciones; _i < _a.length; _i++) {
+            var nodo = _a[_i];
+            var cont_hijo = nodo.getGrafica(entorno);
+            entorno.addRelacion(cont_raiz, cont_hijo);
+        }
+        return cont_raiz.toString();
     };
     For.prototype.getTraduccion = function (entorno) {
         var _this = this;

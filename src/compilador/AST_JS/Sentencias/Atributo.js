@@ -26,7 +26,9 @@ var Atributo = /** @class */ (function (_super) {
         return _this;
     }
     Atributo.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "Atributo");
+        return cont_raiz.toString();
     };
     Atributo.prototype.getTraduccion = function (entorno) {
         return this.expresion != null ? this.expresion.getTraduccion(entorno) : Expresion_1.Expresion.getDefecto(this.TIPO, entorno);

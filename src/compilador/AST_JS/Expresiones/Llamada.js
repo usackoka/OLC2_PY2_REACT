@@ -27,7 +27,14 @@ var Llamada = /** @class */ (function (_super) {
         return _this;
     }
     Llamada.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, this.id + "()");
+        for (var _i = 0, _a = this.parametros; _i < _a.length; _i++) {
+            var nodo = _a[_i];
+            var cont_hijo = nodo.getGrafica(entorno);
+            entorno.addRelacion(cont_raiz, cont_hijo);
+        }
+        return cont_raiz.toString();
     };
     Llamada.prototype.getTraduccion = function (entorno) {
         var firmaLlamada = this.getFirma(entorno);

@@ -24,7 +24,9 @@ var TipoArreglo = /** @class */ (function (_super) {
         return _this;
     }
     TipoArreglo.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "TIPO_ARRAY");
+        return cont_raiz.toString();
     };
     TipoArreglo.prototype.getTraduccion = function (entorno) {
         return "";

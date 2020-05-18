@@ -23,7 +23,9 @@ var Break = /** @class */ (function (_super) {
         return _this;
     }
     Break.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "Break");
+        return cont_raiz.toString();
     };
     Break.prototype.getTraduccion = function (entorno) {
         entorno.addComentario("======== break =================");

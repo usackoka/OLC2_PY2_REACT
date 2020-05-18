@@ -23,7 +23,9 @@ var Continue = /** @class */ (function (_super) {
         return _this;
     }
     Continue.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "Continue");
+        return cont_raiz.toString();
     };
     Continue.prototype.getTraduccion = function (entorno) {
         entorno.addComentario("======== continue =================");

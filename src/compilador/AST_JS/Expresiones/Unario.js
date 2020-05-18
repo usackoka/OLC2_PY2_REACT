@@ -26,7 +26,9 @@ var Unario = /** @class */ (function (_super) {
         return _this;
     }
     Unario.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "UNARIO");
+        return cont_raiz.toString();
     };
     Unario.prototype.getTraduccion = function (entorno) {
         switch (this.TIPO_OPERACION) {

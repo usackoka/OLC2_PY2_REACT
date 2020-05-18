@@ -25,7 +25,9 @@ var Struct = /** @class */ (function (_super) {
         return _this;
     }
     Struct.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "DECLARACION_STRUCT");
+        return cont_raiz.toString();
     };
     Struct.prototype.getTraduccion = function (entorno) {
         return "";

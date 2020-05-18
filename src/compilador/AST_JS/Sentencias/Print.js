@@ -27,7 +27,11 @@ var Print = /** @class */ (function (_super) {
         return _this;
     }
     Print.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "PRINT");
+        var cont_hijo = this.expresion.getGrafica(entorno);
+        entorno.addRelacion(cont_raiz, cont_hijo);
+        return cont_raiz.toString();
     };
     Print.prototype.getTraduccion = function (entorno) {
         var TIPO = this.expresion.getTipo(entorno);

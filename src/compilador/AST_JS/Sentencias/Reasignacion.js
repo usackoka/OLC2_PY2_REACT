@@ -25,7 +25,9 @@ var Reasignacion = /** @class */ (function (_super) {
         return _this;
     }
     Reasignacion.prototype.getGrafica = function (entorno) {
-        return "0";
+        var cont_raiz = entorno.getNextContGraph();
+        entorno.addNodoGraph(cont_raiz, "REASIGNACION");
+        return cont_raiz.toString();
     };
     Reasignacion.prototype.getTraduccion = function (entorno) {
         entorno.addComentario("=================== REASIGNACION DE VARIABLE ===================");

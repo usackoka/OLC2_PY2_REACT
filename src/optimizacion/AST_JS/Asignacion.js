@@ -29,7 +29,7 @@ var Asignacion = /** @class */ (function (_super) {
                 fila: this.fila, columna: this.columna });
             return "";
         }
-        return this.direccion + " = " + subOpt;
+        return this.direccion + " = " + subOpt + ';';
     };
     ;
     Asignacion.prototype.getEquivalente = function (realizada) {

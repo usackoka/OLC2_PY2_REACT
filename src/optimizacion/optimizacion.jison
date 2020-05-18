@@ -147,7 +147,7 @@ GLOBAL :  DEC_VAR ';'
     }
     | print '(' string ',' CONSTANTE ')' ';'
     {
-        $$ = new NoOptimizados("print("+$3+","+$5+");")
+        $$ = new NoOptimizados("print("+$3+","+$5.value.toString()+");")
     }
 ;
 
@@ -189,11 +189,11 @@ ASIGNACION:  id '=' E
     }
     | id '=' stack '[' CONSTANTE ']'
     {
-        $$ = new Asignacion($1,"stack["+$5.value.toString()+"]",@2.first_line,@2.first_column+1)
+        $$ = new Asignacion($1,new Primitivo(Primitivo.TYPE.ID,"stack["+$5.value.toString()+"]",0,0),@2.first_line,@2.first_column+1)
     }
     | id '=' heap '[' CONSTANTE ']'
     {
-        $$ = new Asignacion($1,"heap["+$5.value.toString()+"]",@2.first_line,@2.first_column+1)
+        $$ = new Asignacion($1,new Primitivo(Primitivo.TYPE.ID,"heap["+$5.value.toString()+"]",0,0),@2.first_line,@2.first_column+1)
     }
     | stack '[' CONSTANTE ']' '=' E
     {

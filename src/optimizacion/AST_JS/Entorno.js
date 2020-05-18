@@ -21,6 +21,7 @@ var Entorno = /** @class */ (function () {
         var _this = this;
         //obtengo la mirilla de cada nodo
         this.instrucciones.forEach(function (nodo) {
+            console.log(nodo);
             _this.optimizacion += nodo.getMirrilla(_this) + "\n";
         });
         return this.optimizacion;

@@ -20,7 +20,7 @@ export class Asignacion extends Nodo {
             return "";
         }
 
-        return this.direccion+" = "+subOpt;
+        return this.direccion+" = "+subOpt + ';';
     };
 
     public getEquivalente(realizada:number):number{

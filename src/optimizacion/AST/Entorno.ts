@@ -28,6 +28,7 @@ export class Entorno {
     public getMirilla(){
         //obtengo la mirilla de cada nodo
         this.instrucciones.forEach(nodo=>{
+            console.log(nodo)
             this.optimizacion += nodo.getMirrilla(this)+"\n"
         })
 

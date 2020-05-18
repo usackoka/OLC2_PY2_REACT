@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 const Index = (props) => {
 
   var txtEntrada;
-  const [key, setKey] = useState("tabla");
+  const [key, setKey] = useState("errores");
   const [txtSalida, setTxtSalida] = useState({
     value:''
   });

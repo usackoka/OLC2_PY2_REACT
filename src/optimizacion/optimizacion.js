@@ -111,13 +111,19 @@ case 5:
         this.$ = $$[$0-1];
     
 break;
-case 6: case 7: case 21: case 22: case 23: case 24: case 25: case 26: case 27: case 28: case 29: case 30:
+case 6:
 
+        this.$ = new ETQ($$[$0-1],_$[$0-1].first_line,_$[$0-1].first_column)
+    
+break;
+case 7:
+
+        this.$ = new Goto($$[$0-1],_$[$0-2].first_line,_$[$0-2].first_column)
     
 break;
 case 8:
 
-
+        this.$ = new If($$[$0-4],$$[$0-1],_$[$0-6].first_line,_$[$0-6].first_column)
     
 break;
 case 9:
@@ -137,7 +143,7 @@ case 11:
 break;
 case 12:
 
-        this.$ = new NoOptimizados("print("+$$[$0-4]+","+$$[$0-2]+");")
+        this.$ = new NoOptimizados("print("+$$[$0-4]+","+$$[$0-2].value.toString()+");")
     
 break;
 case 13:
@@ -178,6 +184,56 @@ break;
 case 20:
 
         this.$ = new Asignacion($$[$0-2],$$[$0],_$[$0-1].first_line,_$[$0-1].first_column+1)
+    
+break;
+case 21:
+
+        this.$ = new Asignacion($$[$0-5],new Primitivo(Primitivo.TYPE.ID,"stack["+$$[$0-1].value.toString()+"]",0,0),_$[$0-4].first_line,_$[$0-4].first_column+1)
+    
+break;
+case 22:
+
+        this.$ = new Asignacion($$[$0-5],new Primitivo(Primitivo.TYPE.ID,"heap["+$$[$0-1].value.toString()+"]",0,0),_$[$0-4].first_line,_$[$0-4].first_column+1)
+    
+break;
+case 23:
+
+        this.$ = new Asignacion("stack["+$$[$0-3].value.toString()+"]",$$[$0],_$[$0-4].first_line,_$[$0-4].first_column+1)
+    
+break;
+case 24:
+
+        this.$ = new Asignacion("heap["+$$[$0-3].value.toString()+"]",$$[$0],_$[$0-4].first_line,_$[$0-4].first_column+1)
+    
+break;
+case 25:
+
+        this.$ = new Relacional($$[$0-2], $$[$0], '<', _$[$0-1].first_line, _$[$0-1].first_column + 1)
+    
+break;
+case 26:
+
+        this.$ = new Relacional($$[$0-2], $$[$0], '<=', _$[$0-1].first_line, _$[$0-1].first_column + 1)
+    
+break;
+case 27:
+
+        this.$ = new Relacional($$[$0-2], $$[$0], '>', _$[$0-1].first_line, _$[$0-1].first_column + 1)
+    
+break;
+case 28:
+
+        this.$ = new Relacional($$[$0-2], $$[$0], '>=', _$[$0-1].first_line, _$[$0-1].first_column + 1)
+    
+break;
+case 29:
+
+        this.$ = new Relacional($$[$0-2], $$[$0], '<>', _$[$0-1].first_line, _$[$0-1].first_column + 1)
+    
+break;
+case 30:
+
+        this.$ = new Relacional($$[$0-2], $$[$0], '==', _$[$0-1].first_line, _$[$0-1].first_column + 1)
     
 break;
 case 31:
@@ -376,6 +432,10 @@ parse: function parse(input) {
     const { Primitivo } = require('./AST_JS/Primitivo');
     const { Aritmetica } = require('./AST_JS/Aritmetica');
     const { Asignacion } = require('./AST_JS/Asignacion');
+    const { If } = require('./AST_JS/If');
+    const { Relacional } = require('./AST_JS/Relacional');
+    const { Goto } = require('./AST_JS/Goto');
+    const { ETQ } = require('./AST_JS/ETQ');
 
     
 

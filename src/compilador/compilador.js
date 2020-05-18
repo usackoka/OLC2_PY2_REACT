@@ -239,7 +239,7 @@ case 31:
 
         let acc = new ListAcceso($$[$0-2],null,_$[$0-1].first_line,_$[$0-1].first_column);
         if(!($$[$0-2] instanceof AccesoArreglo)){
-            acc = new ListAcceso(new Primitivo(Expresion.State.ID,$$[$0-2],_$[$0-1].first_line,_$[$0-1].first_column),
+            acc = new ListAcceso(new Primitivo($$[$0-2],Expresion.State.ID,_$[$0-1].first_line,_$[$0-1].first_column),null,
                 _$[$0-1].first_line,_$[$0-1].first_column);
         }
         this.$ = new Reasignacion(acc,$$[$0],_$[$0-1].first_line,_$[$0-1].first_column);

@@ -344,7 +344,7 @@ ASIGNACION_VARIABLE : TIPO_DATO '=' E
     {
         let acc = new ListAcceso($1,null,@2.first_line,@2.first_column);
         if(!($1 instanceof AccesoArreglo)){
-            acc = new ListAcceso(new Primitivo(Expresion.State.ID,$1,@2.first_line,@2.first_column),
+            acc = new ListAcceso(new Primitivo($1,Expresion.State.ID,@2.first_line,@2.first_column),null,
                 @2.first_line,@2.first_column);
         }
         $$ = new Reasignacion(acc,$3,@2.first_line,@2.first_column);

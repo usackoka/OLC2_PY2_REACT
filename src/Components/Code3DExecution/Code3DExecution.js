@@ -43,8 +43,7 @@ const Index = (props) => {
     var optimizador = require("../../optimizacion/optimizacion")
     let entorno = optimizador.parser.parse(txtEntrada.getValue())
     let salida = entorno.getMirilla();
-    //setValoresSimbolos(entorno.listaOptimizaciones)
-    console.log(entorno.getMirilla())
+    setValoresSimbolos(entorno.optimizaciones)
 
     if(!txtSalida) return null;
     setTxtSalida({value:salida});

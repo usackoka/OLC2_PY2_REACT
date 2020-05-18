@@ -21,12 +21,28 @@ export class Primitivo extends Nodo {
     };
 
     public isZero():boolean{
-        if(this.value===0 || this.value==="0" || this.value==='0'){
+        if(this.value===0 || this.value==="0" || this.value==='0'
+            || this.value===0.0 || this.value==="0.0" || this.value==='0.0'){
             return true;
         }
         return false;
     }
 
+    public isUno():boolean{
+        if(this.value===1 || this.value==="1" || this.value==='1'
+            || this.value===1.0 || this.value==="1.0" || this.value==='1.0'){
+            return true;
+        }
+        return false;
+    }
+
+    public isDos():boolean{
+        if(this.value===2 || this.value==="2" || this.value==='2'
+            || this.value===2.0 || this.value==="2.0" || this.value==='2.0'){
+            return true;
+        }
+        return false;
+    }
 }
 
 export namespace Primitivo{

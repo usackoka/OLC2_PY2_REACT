@@ -25,11 +25,27 @@ var Asignacion = /** @class */ (function (_super) {
     Asignacion.prototype.getMirrilla = function (entorno) {
         var subOpt = this.expresion.getMirrilla(entorno);
         if (this.direccion === subOpt) {
+            entorno.addOptimizacion({ regla: this.getEquivalente(this.expresion.optimizacionRealizada),
+                fila: this.fila, columna: this.columna });
             return "";
         }
         return this.direccion + " = " + subOpt;
     };
     ;
+    Asignacion.prototype.getEquivalente = function (realizada) {
+        switch (realizada) {
+            case 12:
+                return 8;
+            case 13:
+                return 9;
+            case 14:
+                return 10;
+            case 15:
+                return 11;
+            default:
+                return 1;
+        }
+    };
     Asignacion.prototype.getBloque = function (entorno) {
         return "";
     };

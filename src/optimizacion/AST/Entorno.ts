@@ -36,6 +36,16 @@ export class Entorno {
 
     public getDescripcionMirilla(regla:number):string{
         switch(regla){
+            case 1:
+                return "Eliminación de instrucciones redundantes de carga y  almacenamiento "
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+                return "Eliminación de código inalcanzable "
+            case 6:
+            case 7:
+                return "Optimizaciones de flujo de control "
             case 8:
             case 9:
             case 10:

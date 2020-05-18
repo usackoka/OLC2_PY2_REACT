@@ -17,7 +17,7 @@ var Nodo_1 = require("./Nodo");
 var Aritmetica = /** @class */ (function (_super) {
     __extends(Aritmetica, _super);
     function Aritmetica(valor1, valor2, operador, fila, columna) {
-        var _this = _super.call(this, 0, 0) || this;
+        var _this = _super.call(this, fila, columna) || this;
         _this.valor1 = valor1;
         _this.valor2 = valor2;
         _this.operador = operador;
@@ -26,11 +26,64 @@ var Aritmetica = /** @class */ (function (_super) {
     Aritmetica.prototype.getMirrilla = function (entorno) {
         if (this.operador === '+') {
             if (this.valor1.isZero()) {
-                entorno.addOptimizacion({ regla: 8, fila: this.fila, columna: this.columna });
+                entorno.addOptimizacion({ regla: 12, fila: this.fila, columna: this.columna });
+                this.optimizacionRealizada = 12;
                 return this.valor2.getMirrilla(entorno);
             }
             else if (this.valor2.isZero()) {
-                entorno.addOptimizacion({ regla: 8, fila: this.fila, columna: this.columna });
+                entorno.addOptimizacion({ regla: 12, fila: this.fila, columna: this.columna });
+                this.optimizacionRealizada = 12;
+                return this.valor1.getMirrilla(entorno);
+            }
+        }
+        else if (this.operador === '-') {
+            if (this.valor2.isZero()) {
+                entorno.addOptimizacion({ regla: 13, fila: this.fila, columna: this.columna });
+                this.optimizacionRealizada = 13;
+                return this.valor1.getMirrilla(entorno);
+            }
+        }
+        else if (this.operador === '*') {
+            if (this.valor1.isUno()) {
+                entorno.addOptimizacion({ regla: 14, fila: this.fila, columna: this.columna });
+                this.optimizacionRealizada = 14;
+                return this.valor2.getMirrilla(entorno);
+            }
+            else if (this.valor2.isUno()) {
+                entorno.addOptimizacion({ regla: 14, fila: this.fila, columna: this.columna });
+                this.optimizacionRealizada = 14;
+                return this.valor1.getMirrilla(entorno);
+            }
+            else if (this.valor1.isDos()) {
+                entorno.addOptimizacion({ regla: 16, fila: this.fila, columna: this.columna });
+                this.optimizacionRealizada = 16;
+                return this.valor2.getMirrilla(entorno) + "+" + this.valor2.getMirrilla(entorno);
+            }
+            else if (this.valor2.isDos()) {
+                entorno.addOptimizacion({ regla: 16, fila: this.fila, columna: this.columna });
+                this.optimizacionRealizada = 16;
+                return this.valor1.getMirrilla(entorno) + "+" + this.valor1.getMirrilla(entorno);
+            }
+            else if (this.valor1.isZero()) {
+                entorno.addOptimizacion({ regla: 17, fila: this.fila, columna: this.columna });
+                this.optimizacionRealizada = 17;
+                return this.valor2.getMirrilla(entorno);
+            }
+            else if (this.valor2.isZero()) {
+                entorno.addOptimizacion({ regla: 17, fila: this.fila, columna: this.columna });
+                this.optimizacionRealizada = 17;
+                return this.valor1.getMirrilla(entorno);
+            }
+        }
+        else if (this.operador === '/') {
+            if (this.valor2.isUno()) {
+                entorno.addOptimizacion({ regla: 15, fila: this.fila, columna: this.columna });
+                this.optimizacionRealizada = 15;
+                return this.valor1.getMirrilla(entorno);
+            }
+            else if (this.valor1.isZero()) {
+                entorno.addOptimizacion({ regla: 18, fila: this.fila, columna: this.columna });
+                this.optimizacionRealizada = 18;
                 return this.valor1.getMirrilla(entorno);
             }
         }

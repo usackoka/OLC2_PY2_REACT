@@ -4,6 +4,7 @@ var Nodo = /** @class */ (function () {
     function Nodo(fila, columna) {
         this.fila = fila;
         this.columna = columna;
+        this.optimizacionRealizada = 0;
     }
     return Nodo;
 }());

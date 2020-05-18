@@ -31,7 +31,22 @@ var Primitivo = /** @class */ (function (_super) {
     };
     ;
     Primitivo.prototype.isZero = function () {
-        if (this.value === 0 || this.value === "0" || this.value === '0') {
+        if (this.value === 0 || this.value === "0" || this.value === '0'
+            || this.value === 0.0 || this.value === "0.0" || this.value === '0.0') {
+            return true;
+        }
+        return false;
+    };
+    Primitivo.prototype.isUno = function () {
+        if (this.value === 1 || this.value === "1" || this.value === '1'
+            || this.value === 1.0 || this.value === "1.0" || this.value === '1.0') {
+            return true;
+        }
+        return false;
+    };
+    Primitivo.prototype.isDos = function () {
+        if (this.value === 2 || this.value === "2" || this.value === '2'
+            || this.value === 2.0 || this.value === "2.0" || this.value === '2.0') {
             return true;
         }
         return false;

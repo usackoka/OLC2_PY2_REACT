@@ -13,7 +13,17 @@ call Principal;
 #* //======== Funcion: Principal ============*#
 #* //====================================================*#
 proc Principal begin
-    t1 = x + 0;
+    ## OPTIMIZACIONES DE LA 8 A LA 18
     x = x + 0;
+    x = x - 0;
+    x = x * 1;
+    x = x / 1;
+    x = y + 0;
+    x = y - 0;
+    x = y * 1;
+    x = y / 1;
+    x = y * 2;
+    x = y * 0;
+    x = 0 / y;
 end
 #* //==================== FIN DEL PROGRAMA =========================*#

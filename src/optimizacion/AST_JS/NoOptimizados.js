@@ -13,21 +13,22 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
-var AST_1 = require("../abstractas/AST");
-var Primitiva = /** @class */ (function (_super) {
-    __extends(Primitiva, _super);
-    function Primitiva(tipo, valor, fila, columna) {
-        var _this = _super.call(this, fila, columna) || this;
-        _this.tipo = tipo;
-        _this.valor = valor;
+var Nodo_1 = require("./Nodo");
+var NoOptimizados = /** @class */ (function (_super) {
+    __extends(NoOptimizados, _super);
+    function NoOptimizados(cadena) {
+        var _this = _super.call(this, 0, 0) || this;
+        _this.cadena = cadena;
         return _this;
     }
-    Primitiva.prototype.getOptimizacionMirilla = function (numero, tree) {
-        return { optimizacion: 0, result: this.valor + '' };
+    NoOptimizados.prototype.getMirrilla = function (entorno) {
+        return this.cadena;
     };
-    Primitiva.prototype.getOptimizacionBloque = function (tree) {
-        throw new Error("Method not implemented.");
+    ;
+    NoOptimizados.prototype.getBloque = function (entorno) {
+        return this.cadena;
     };
-    return Primitiva;
-}(AST_1.AST));
-exports.Primitiva = Primitiva;
+    ;
+    return NoOptimizados;
+}(Nodo_1.Nodo));
+exports.NoOptimizados = NoOptimizados;

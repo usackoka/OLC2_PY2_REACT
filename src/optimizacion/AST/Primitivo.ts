@@ -1,0 +1,37 @@
+import { Entorno } from "./Entorno";
+import { Nodo } from "./Nodo";
+
+export class Primitivo extends Nodo {
+
+    value:Object;
+    TIPO:Primitivo.TYPE;
+
+    constructor(TIPO:Primitivo.TYPE, value:Object, fila: number, columna: number) {
+        super(fila,columna);
+        this.value = value;
+        this.TIPO = TIPO;
+    }
+
+    public getMirrilla(entorno:Entorno): string{
+        return this.value.toString();
+    };
+
+    public getBloque(entorno:Entorno): string{
+        return "";
+    };
+
+    public isZero():boolean{
+        if(this.value===0 || this.value==="0" || this.value==='0'){
+            return true;
+        }
+        return false;
+    }
+
+}
+
+export namespace Primitivo{
+    export enum TYPE{
+        NUMBER,
+        ID
+    }
+}

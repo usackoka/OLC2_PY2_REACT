@@ -1,0 +1,10 @@
+"use strict";
+exports.__esModule = true;
+var Nodo = /** @class */ (function () {
+    function Nodo(fila, columna) {
+        this.fila = fila;
+        this.columna = columna;
+    }
+    return Nodo;
+}());
+exports.Nodo = Nodo;

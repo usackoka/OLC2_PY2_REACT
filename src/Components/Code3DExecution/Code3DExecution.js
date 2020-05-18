@@ -40,10 +40,11 @@ const Index = (props) => {
     console.log("Ejecutando optimizacion")
     if(!txtEntrada) return null;
     
-    var optimizador = require("../../optimizacion/parser3D")
+    var optimizador = require("../../optimizacion/optimizacion")
     let entorno = optimizador.parser.parse(txtEntrada.getValue())
-    let salida = entorno.getOptimizacionMirilla(1);
-    setValoresSimbolos(entorno.listaOptimizaciones)
+    let salida = entorno.getMirilla();
+    //setValoresSimbolos(entorno.listaOptimizaciones)
+    console.log(entorno.getMirilla())
 
     if(!txtSalida) return null;
     setTxtSalida({value:salida});

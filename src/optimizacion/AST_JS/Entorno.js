@@ -1,5 +1,6 @@
 "use strict";
 exports.__esModule = true;
+var Asignacion_1 = require("./Asignacion");
 var Entorno = /** @class */ (function () {
     function Entorno() {
         this.instrucciones = [];
@@ -17,18 +18,10 @@ var Entorno = /** @class */ (function () {
         this.optimizaciones.push({
             no: this.contadorOptimizaciones++,
             regla: opt.regla,
-            descripcion: this.getDescripcionMirilla(opt.regla),
+            descripcion: this.getDescripcion(opt.regla),
             fila: opt.fila,
             columna: opt.columna
         });
-    };
-    Entorno.prototype.getBloques = function () {
-        var _this = this;
-        //obtengo la mirilla de cada nodo
-        this.instrucciones.forEach(function (nodo) {
-            _this.optimizacion += nodo.getBloque(_this) + "\n";
-        });
-        return this.optimizacion;
     };
     Entorno.prototype.getMirilla = function () {
         var _this = this;
@@ -36,17 +29,32 @@ var Entorno = /** @class */ (function () {
         this.instrucciones.forEach(function (nodo) {
             _this.optimizacion += nodo.getMirrilla(_this) + "\n";
         });
-        //busco todos los que cumplan con la regla 23
         return this.optimizacion;
     };
-    Entorno.prototype.getDescripcionBloques = function (regla) {
-        switch (regla) {
-            case 23:
-                return "Redundancia parcial - variables inutilizadas";
-        }
-        return "Optimización sin descripción";
+    Entorno.prototype.getBloques = function () {
+        var _this = this;
+        var nuevalistaNodos = [];
+        //primer recorrido para guardar los usados de lado derecho
+        this.instrucciones.forEach(function (nodo) {
+            nodo.getBloque(_this);
+        });
+        //busco todos los que cumplan con la regla 23
+        this.instrucciones.forEach(function (nodo) {
+            if (nodo instanceof Asignacion_1.Asignacion) {
+                //pregunto si la direccion está entre las que se usaron
+                if (!_this.listUtilizadas.includes(nodo.direccion)) {
+                    _this.addOptimizacion({ regla: 23, fila: nodo.fila, columna: nodo.columna });
+                    return;
+                }
+            }
+            nuevalistaNodos.push(nodo);
+        });
+        nuevalistaNodos.forEach(function (nodo) {
+            _this.optimizacion += nodo.getBloque(_this) + "\n";
+        });
+        return this.optimizacion;
     };
-    Entorno.prototype.getDescripcionMirilla = function (regla) {
+    Entorno.prototype.getDescripcion = function (regla) {
         switch (regla) {
             case 1:
                 return "Eliminación de instrucciones redundantes de carga y  almacenamiento ";
@@ -70,6 +78,8 @@ var Entorno = /** @class */ (function () {
             case 17:
             case 18:
                 return "Simplificación algebraica y por fuerza";
+            case 23:
+                return "Redundancia parcial - variables inutilizadas";
         }
         return "Optimización sin descripción";
     };

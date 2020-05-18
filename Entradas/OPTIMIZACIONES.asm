@@ -26,6 +26,14 @@ proc Principal begin
     x = y * 0;
     x = 0 / y;
 
+    ## OPTIMIZACIONES DE BLOQUES
+
+    ## OPTIMIZACION REGLA 23
+    t1=2+3; 
+    t2=3*t1; 
+    t3=4-2; 
+    t4=t4*t3; 
+    print("%e",t4);
     
 end
 #* //==================== FIN DEL PROGRAMA =========================*#

@@ -22,6 +22,7 @@ export class Entorno {
     
     //variables y métodos --- para optimización de bloques
     public addUtilizadas(variable:string){
+        
         this.listUtilizadas.push(variable)
     }
 
@@ -35,34 +36,38 @@ export class Entorno {
         })
     }
 
-    public getBloques(){
+    public getMirilla(){
         //obtengo la mirilla de cada nodo
         this.instrucciones.forEach(nodo=>{
-            this.optimizacion += nodo.getBloque(this)+"\n"
+            this.optimizacion += nodo.getMirrilla(this)+"\n"
         })
 
         return this.optimizacion
     }
 
     
-    public getMirilla(){
+    public getBloques(){
         let nuevalistaNodos:Array<Nodo> = []
 
         //primer recorrido para guardar los usados de lado derecho
         this.instrucciones.forEach(nodo=>{
-            nodo.getMirrilla(this)+"\n"
+            nodo.getBloque(this)
         })
 
         //busco todos los que cumplan con la regla 23
         this.instrucciones.forEach(nodo=>{
             if(nodo instanceof Asignacion){
                 //pregunto si la direccion está entre las que se usaron
-                if(this.listUtilizadas.includes(nodo.direccion)){
+                if(!this.listUtilizadas.includes(nodo.direccion)){
                     this.addOptimizacion({regla:23,fila:nodo.fila,columna:nodo.columna})
                     return;
                 }
             }
             nuevalistaNodos.push(nodo)
+        })
+
+        nuevalistaNodos.forEach(nodo=>{
+            this.optimizacion += nodo.getBloque(this)+"\n";
         })
 
         return this.optimizacion

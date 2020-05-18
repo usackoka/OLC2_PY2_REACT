@@ -28,6 +28,12 @@ var Relacional = /** @class */ (function (_super) {
     };
     ;
     Relacional.prototype.getBloque = function (entorno) {
+        //agrego las variables utilizadas a una lista, para luego buscar si no se encuentra en ella
+        //y eliminar las no usadas
+        if (!this.valor1.isNumeric())
+            entorno.addUtilizadas(this.valor1.getBloque(entorno));
+        if (!this.valor2.isNumeric())
+            entorno.addUtilizadas(this.valor2.getBloque(entorno));
         return this.valor1.getBloque(entorno) + this.operador + this.valor2.getBloque(entorno);
     };
     ;

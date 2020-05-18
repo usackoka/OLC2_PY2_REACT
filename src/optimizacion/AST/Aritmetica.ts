@@ -76,8 +76,9 @@ export class Aritmetica extends Nodo {
     public getBloque(entorno:Entorno): string{
         //agrego las variables utilizadas a una lista, para luego buscar si no se encuentra en ella
         //y eliminar las no usadas
-        entorno.addUtilizadas(this.valor1.getBloque(entorno))
-        entorno.addUtilizadas(this.valor2.getBloque(entorno))
+
+        if(!this.valor1.isNumeric()) entorno.addUtilizadas(this.valor1.getBloque(entorno))
+        if(!this.valor2.isNumeric()) entorno.addUtilizadas(this.valor2.getBloque(entorno))
 
         return this.valor1.getBloque(entorno)+this.operador+this.valor2.getBloque(entorno);
     };

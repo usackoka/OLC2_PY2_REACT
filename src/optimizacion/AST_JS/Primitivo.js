@@ -30,6 +30,12 @@ var Primitivo = /** @class */ (function (_super) {
         return this.value.toString();
     };
     ;
+    Primitivo.prototype.isNumeric = function () {
+        if (this.value === parseInt(this.value.toString(), 10))
+            return true;
+        else
+            return false;
+    };
     Primitivo.prototype.isZero = function () {
         if (this.value === 0 || this.value === "0" || this.value === '0'
             || this.value === 0.0 || this.value === "0.0" || this.value === '0.0') {

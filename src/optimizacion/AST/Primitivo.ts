@@ -20,6 +20,13 @@ export class Primitivo extends Nodo {
         return this.value.toString();
     };
 
+    public isNumeric():boolean{
+        if (this.value === parseInt(this.value.toString(), 10))
+            return true;
+        else
+            return false
+    }
+
     public isZero():boolean{
         if(this.value===0 || this.value==="0" || this.value==='0'
             || this.value===0.0 || this.value==="0.0" || this.value==='0.0'){

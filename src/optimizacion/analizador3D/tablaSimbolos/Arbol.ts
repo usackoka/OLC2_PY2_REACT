@@ -1,6 +1,6 @@
-import { AST } from './AST';
+import { AST } from '../abstractas/AST';
 
-export class Entorno {
+export class Arbol3D {
     instrucciones: Array<AST>;
     optimizacionMirilla: string;
     optimizacionBloque: string;
@@ -23,6 +23,30 @@ export class Entorno {
     }
 
     getOptimizacionBloque():string {
+        /*this.optimizacionMirilla += 'var Stack[];\n';
+        this.optimizacionMirilla += 'var Heap[];\n';
+        this.optimizacionMirilla += 'var P = 0;\n';
+        this.optimizacionMirilla += 'var H = 0;\n';
+        
+        this.instrucciones.forEach( inst => {
+            if(!(inst instanceof Funcion)) {
+                inst.getTranslate(this.tabla, this);
+            }
+        });
+
+        this.optimizacionMirilla += 'call Principal;\n';
+
+        const etiqueta = '';
+        this.optimizacionMirilla += 'goto ' + etiqueta + ';\n';
+
+        this.instrucciones.forEach( inst => {
+            if(inst instanceof Funcion) {
+                inst.getTranslate(this.tabla, this);
+            }
+        });
+
+        this.optimizacionMirilla += etiqueta + ':';*/
+
         return this.optimizacionBloque;
     }
 

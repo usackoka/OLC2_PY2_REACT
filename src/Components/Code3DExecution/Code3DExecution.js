@@ -11,29 +11,39 @@ const Index = (props) => {
     value:''
   });
 
-  var valoresStack = [
-  ];
+  const [valoresSimbolos,setValoresSimbolos] = useState([]);
 
   const columnsStack = [
     {
-      dataField: "index",
-      text: "No. Regla",
+      dataField: "no",
+      text: "No.",
     },
     {
-      dataField: "ins",
-      text: "Instrucción",
+      dataField: "regla",
+      text: "No de Regla",
     },
     {
-      dataField: "opt",
-      text: "Optimización",
+      dataField: "descripcion",
+      text: "Descripcion de Regla",
     },
+    {
+      dataField: "fila",
+      text: "Fila",
+    },
+    {
+      dataField: "columna",
+      text: "Columna",
+    }
   ];
 
   const clickEjecutar = async e => {
     console.log("Ejecutando optimizacion")
     if(!txtEntrada) return null;
-
-    let salida = "";
+    
+    var optimizador = require("../../optimizacion/parser3D")
+    let entorno = optimizador.parser.parse(txtEntrada.getValue())
+    let salida = entorno.getOptimizacionMirilla(1);
+    setValoresSimbolos(entorno.listaOptimizaciones)
 
     if(!txtSalida) return null;
     setTxtSalida({value:salida});
@@ -73,7 +83,7 @@ const Index = (props) => {
           <h3>Optimizaciones</h3>
           <BootstrapTable
             keyField="tbStack"
-            data={valoresStack}
+            data={valoresSimbolos}
             columns={columnsStack}
           ></BootstrapTable>
         </Col>

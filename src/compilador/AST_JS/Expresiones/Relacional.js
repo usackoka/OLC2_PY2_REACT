@@ -47,20 +47,6 @@ var Relacional = /** @class */ (function (_super) {
         }
     };
     Relacional.prototype.getTipo = function (entorno) {
-        var tipIzq = this.izquierda.getTipo(entorno);
-        var tipDer = this.derecha.getTipo(entorno);
-        //aquí sólo se pueden comparar strings y arreglos
-        if (this.TIPO_OPERACION == Relacional.TYPE.IGUAL_REFERENCIA) {
-            if (!((tipIzq == Expresion_1.Expresion.State.STRING && tipDer == Expresion_1.Expresion.State.STRING))) {
-                entorno.addError("RELACIONAL-GETTIPO:" + this.TIPO_OPERACION, "Operando no aplicable a tipos tipIzq:" + tipIzq + " , Tipo tipDer:" + tipDer, this.fila, this.columna);
-            }
-        }
-        else {
-            if (!(this.relacionable(tipIzq) && this.relacionable(tipDer))) {
-                entorno.addError("RELACIONAL-GETTIPO:" + this.TIPO_OPERACION, "Tipo tipIzq:" + tipIzq + " , Tipo tipDer:" + tipDer, this.fila, this.columna);
-            }
-        }
-        //siempre voy a retornar un boolean, únicamente comparo los tipos para saber si marcar error o no
         return Expresion_1.Expresion.State.BOOLEAN;
     };
     Relacional.prototype.relacionable = function (tipo) {

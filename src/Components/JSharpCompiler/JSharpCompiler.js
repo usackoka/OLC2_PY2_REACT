@@ -84,7 +84,6 @@ const Index = (props) => {
     if(!txtSalida) return null;
     setTxtSalida({value:salida});
 
-    setValoresSimbolos(principal.getSimbolosJSON())
     //cargo las variables
     setValoresSimbolos(principal.getSimbolosJSON())
     //cargo las funciones

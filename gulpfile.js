@@ -18,9 +18,14 @@ gulp.task('typescript', () => {
     .pipe(ts({
         noImplicitAny: true
     }));
+    var tsResult4 = gulp.src('./src/optimizacion/AST/*.ts')
+    .pipe(ts({
+        noImplicitAny: true
+    }));
     // Destino del proyecto compilado
     tsResult.js.pipe(gulp.dest('./src/compilador/AST_JS'));
     tsResult2.js.pipe(gulp.dest('./src/compilador/AST_JS/Expresiones'));
+    tsResult4.js.pipe(gulp.dest('./src/optimizacion/AST_JS'));
     return tsResult3.js.pipe(gulp.dest('./src/compilador/AST_JS/Sentencias'));
 });
 
@@ -30,6 +35,7 @@ gulp.task('watch', () => {
     gulp.watch('./src/compilador/AST/*.ts', gulp.series('typescript'));
     gulp.watch('./src/compilador/AST/Expresiones/*.ts', gulp.series('typescript'));
     gulp.watch('./src/compilador/AST/Sentencias/*.ts', gulp.series('typescript'));
+    gulp.watch('./src/optimizacion/AST/*.ts', gulp.series('typescript'));
 });
 
 // Trigger a los tasks

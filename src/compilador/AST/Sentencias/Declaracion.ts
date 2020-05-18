@@ -65,14 +65,14 @@ export class Declaracion extends Sentencia{
                 //============== Posicion del entorno en la que se guardará la variable ===================
                 let temp = entorno.getTemp();
                 //obtengo la posición en la que tengo que guardar la variable
-                entorno.addValorOperacion(temp, "P", "+", entorno.tbs.size);
+                entorno.addValorOperacion(temp, "P", "+", entorno.size);
                 //guardo la variable
                 entorno.addValorEnStack(temp, tmpValor);
 
                 entorno.addTempUsed(temp);
                 entorno.addTempUsed(tmpValor);
 
-                let s:Simbolo = new Simbolo(tipoValor,id.toLowerCase(),entorno.tbs.size,
+                let s:Simbolo = new Simbolo(tipoValor,id.toLowerCase(),entorno.size,
                 this.TIPO_VAR==Declaracion.State.CONST,false,
                 this.fila, this.columna);
 

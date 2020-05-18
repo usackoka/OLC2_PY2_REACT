@@ -93,6 +93,18 @@ var ListAcceso = /** @class */ (function (_super) {
         }
         return false;
     };
+    ListAcceso.prototype.incrementar = function (entorno) {
+        if (this.subAcceso instanceof Primitivo_1.Primitivo) {
+            return this.subAcceso.incrementar(entorno);
+        }
+        return this.subAcceso.getTraduccion(entorno);
+    };
+    ListAcceso.prototype.decrementar = function (entorno) {
+        if (this.subAcceso instanceof Primitivo_1.Primitivo) {
+            return this.subAcceso.decrementar(entorno);
+        }
+        return this.subAcceso.getTraduccion(entorno);
+    };
     return ListAcceso;
 }(Expresion_1.Expresion));
 exports.ListAcceso = ListAcceso;

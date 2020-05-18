@@ -1,6 +1,7 @@
 import { Entorno } from "../Entorno";
 import { Expresion } from "../Expresion";
 import { Primitivo } from "./Primitivo";
+import { ListAcceso } from "./ListAcceso";
 export class Unario extends Expresion{
 
     unario:Expresion;
@@ -65,7 +66,8 @@ export class Unario extends Expresion{
     public MASMAS(entorno:Entorno):string{
         entorno.addComentario("============= UNARIO MASMAS ============");
         let ret = entorno.getTemp()
-        if(this.unario instanceof Primitivo && this.unario.TIPO == Expresion.State.ID){
+        console.dir(this.unario)
+        if(this.unario instanceof ListAcceso){
             return this.unario.incrementar(entorno);
         }
         entorno.addValorOperacion(ret,this.unario.getTraduccion(entorno),"+",1);
@@ -76,7 +78,7 @@ export class Unario extends Expresion{
     public MENOSMENOS(entorno:Entorno):string{
         entorno.addComentario("============= UNARIO MENOSMENOS ============");
         let ret = entorno.getTemp()
-        if(this.unario instanceof Primitivo && this.unario.TIPO == Expresion.State.ID){
+        if(this.unario instanceof ListAcceso){
             this.unario.decrementar(entorno);
         }
         entorno.addValorOperacion(ret,this.unario.getTraduccion(entorno),"-",1);

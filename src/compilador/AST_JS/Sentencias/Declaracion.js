@@ -64,12 +64,12 @@ var Declaracion = /** @class */ (function (_super) {
                 //============== Posicion del entorno en la que se guardará la variable ===================
                 var temp = entorno.getTemp();
                 //obtengo la posición en la que tengo que guardar la variable
-                entorno.addValorOperacion(temp, "P", "+", entorno.tbs.size);
+                entorno.addValorOperacion(temp, "P", "+", entorno.size);
                 //guardo la variable
                 entorno.addValorEnStack(temp, tmpValor);
                 entorno.addTempUsed(temp);
                 entorno.addTempUsed(tmpValor);
-                var s = new Simbolo_1.Simbolo(tipoValor, id.toLowerCase(), entorno.tbs.size, _this.TIPO_VAR == Declaracion.State.CONST, false, _this.fila, _this.columna);
+                var s = new Simbolo_1.Simbolo(tipoValor, id.toLowerCase(), entorno.size, _this.TIPO_VAR == Declaracion.State.CONST, false, _this.fila, _this.columna);
                 entorno.addSimbolo(s);
             }
         });

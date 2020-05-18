@@ -90,6 +90,17 @@ void Principal(){
     print(test[2])
     test[2] = "Nuevo valor";
     print(test[2])
+    modArray(test)
+    print(test[2])
+}
+
+void modArray(String[] arr){
+    arr[2] = "Prueba de Nuevo"
+    Otro(arr)
+}
+
+void Otro(String[] arr2){
+    arr2[2] = arr2[1]
 }
 
 void Principal(){
@@ -127,4 +138,14 @@ void Principal(){
     }
 
     print(2^^4)
+}
+
+Integer[] getArray(Integer[] arr){
+
+}
+
+void Principal(){
+    for (integer i = 0; i < 5; i++) {
+        print(i)
+    }
 }

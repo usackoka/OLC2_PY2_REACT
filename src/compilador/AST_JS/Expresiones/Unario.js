@@ -14,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var Expresion_1 = require("../Expresion");
-var Primitivo_1 = require("./Primitivo");
+var ListAcceso_1 = require("./ListAcceso");
 var Unario = /** @class */ (function (_super) {
     __extends(Unario, _super);
     function Unario(TIPO_OPERACION, unario, fila, columna) {
@@ -72,7 +72,8 @@ var Unario = /** @class */ (function (_super) {
     Unario.prototype.MASMAS = function (entorno) {
         entorno.addComentario("============= UNARIO MASMAS ============");
         var ret = entorno.getTemp();
-        if (this.unario instanceof Primitivo_1.Primitivo && this.unario.TIPO == Expresion_1.Expresion.State.ID) {
+        console.dir(this.unario);
+        if (this.unario instanceof ListAcceso_1.ListAcceso) {
             return this.unario.incrementar(entorno);
         }
         entorno.addValorOperacion(ret, this.unario.getTraduccion(entorno), "+", 1);
@@ -82,7 +83,7 @@ var Unario = /** @class */ (function (_super) {
     Unario.prototype.MENOSMENOS = function (entorno) {
         entorno.addComentario("============= UNARIO MENOSMENOS ============");
         var ret = entorno.getTemp();
-        if (this.unario instanceof Primitivo_1.Primitivo && this.unario.TIPO == Expresion_1.Expresion.State.ID) {
+        if (this.unario instanceof ListAcceso_1.ListAcceso) {
             this.unario.decrementar(entorno);
         }
         entorno.addValorOperacion(ret, this.unario.getTraduccion(entorno), "-", 1);

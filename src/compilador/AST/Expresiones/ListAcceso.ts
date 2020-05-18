@@ -86,4 +86,18 @@ export class ListAcceso extends Expresion implements InterfazAcceso{
         
         return false;
     }
+
+    public incrementar(entorno:Entorno){
+        if(this.subAcceso instanceof Primitivo){
+            return this.subAcceso.incrementar(entorno)
+        }
+        return this.subAcceso.getTraduccion(entorno)
+    }
+
+    public decrementar(entorno:Entorno){
+        if(this.subAcceso instanceof Primitivo){
+            return this.subAcceso.decrementar(entorno)
+        }
+        return this.subAcceso.getTraduccion(entorno)
+    }
 }

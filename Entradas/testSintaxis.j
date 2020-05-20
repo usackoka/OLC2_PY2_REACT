@@ -1,118 +1,61 @@
-import prueba, prueba2;
-
-const PI := 3.1416
-Char n1 = 'c';
-char n1,n2,n3,n4;
-double n1,n2,n3 = 4;
-var id := 23;
-const id2 := 2;
-global varGlobal := "string";
-String varString = "String";
-Integer a = 5;
-Integer b = a++;  
-
-Define Estudiante as[
-    Integer edad,
-    String cadena = "Hola"
-]
-
-Define Nodo as[
-    String[] arregloValores = null,
-    Nodo siguiente = null,
-    Nodo anterior = null,
-    String valor
-];
-
-void sinParametros(){
-    //var n := n1.n2()[4];
-    //n1.n2.siguiente[0] = 9;
-    log("Hola");
-    hola = fun1(3)
-    hol = fun1($parametro1,$parametro2)
+/*
+	Ordenamiento Quicksort
+    Carnet: 201504100
+*/
+void principal()
+{
+	integer i;
+	integer[] array = {12,9,4,99,56,34,78,22,1,3,10,13,120}
+	print("\tQuick Sort\n");
+	print("Valores antes de Quicksort");
+	for(i = 0; i < array.length ; i++)
+	{
+		print(array[i] + "	");
+	}
+	print("-------------------------");
+	// Realizar Ordenamiento
+	quicksort(array,0,array.length-1);
+	print("\n\n\nValores despues de QuickSort:\n\n");
+	for(i = 0; i < array.length; i++)
+	{
+		print(array[i] + "	");
+	}
 }
 
-Double[] areaCirculo(Double radio) { 
-    log("calculando área de un círculo de rario " + radio)
-    return PI * radio ^ 2;
+void quicksort(integer[] array,integer low,integer n)
+{
+	integer lo = low;
+	integer hi = n
+	if ( lo >= n){
+		return ;
+	}
+	integer mid = array[(integer)((lo + hi) / 2)];
+	while ( lo < hi)
+	{
+		while(lo<hi && array[lo] < mid ){
+			lo++;
+		}
+		while(lo<hi && array[hi] > mid){
+			hi--;
+		}
+		if(lo < hi){
+			integer T = array[lo];
+			array[lo] = array[hi];
+			array[hi] = T
+		}
+	}
+	if(hi < lo){
+		integer T = hi;
+		hi = lo;
+		lo = T;
+	}
+	quicksort(array,low,lo);
+	integer cond = 0;
+	if ( lo == low)
+	{
+		cond = lo + 1
+	}else{
+		cond = lo
+	}
+	quicksort(array,cond,n);
 }
-
-void log(String msg, CHAR[] varchar1) {
-    print(msg);
-    try{
-        if(divisor === 0){
-            throw strc ArithmeticException()
-        }
-    }catch(ArithmeticException e){
-        print(e.message)
-    }
-    return;
-}
-
-eSTRUctura[] funcion1(eSTRUctura[] parametro1, Double[] parametro2){
-    Nodo siguiente = null;
-    String cadena = var1.toUpperCase().toLowerCase();
-    Global var1 := "Cadena";
-    return null;
-}
-
-void testSentencias(){
-    while(true){
-        print("while simple")
-    }
-
-    global c := '4'
-    c = '9'
-
-    for(Integer i=0; i<10; i++){
-        print(i)
-    }
-
-    for( ; ;){
-        // Valido, al no tener condición de salida esto genera un ciclo infinito
-        Print("Hola");
-        Break;
-    }
-
-    Integer a = 0;
-    for(;a<3;){
-        a = a+1;
-        print(a)
-    }
-
-    switch('a'){
-        case 'j':
-            print("J")
-            break;
-        case 'L':
-            print("L")
-        case 'm':
-            PRINT("M O L")
-        default:
-            print("def")
-    }
-}
-
-void test(){
-    charcad = var1.toUpperCase().toLowerCase().charAt(0); 
-
-    //forma de definir arreglos1
-    Double arreglo1 = {1.0,2.0,3.0,4.0,5.0,6.0}
-
-    //forma de definir arreglos2
-    Integer[] vale = strc Integer[6];
-
-    var nodo := strc Nodo();
-    nodo.siguiente = strc Nodo();
-    nodo.siguiente.valor = "Hola"
-    nodo.siguiente.arregloValores[5] = "Hola";
-
-    return strc Nodo[5];
-}
-
-Double func(){
-    print("func1()")
-}
-
-double n = 3.0
-
-Integer n2 = b++ + (-3);

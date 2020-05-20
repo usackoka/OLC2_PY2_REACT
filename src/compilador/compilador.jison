@@ -571,7 +571,9 @@ FOR : res_for '(' INICIO_FOR ';' CONDICION_FOR ';' FIN_FOR ')' '{' BLOQUES '}'
 
 INICIO_FOR : id '=' E
     {
-        $$ = new Reasignacion($1,$3,@2.first_line,@2.first_column)
+        let acc2 = new ListAcceso(new Primitivo($1,Expresion.State.ID,@2.first_line,@2.first_column),null,
+                @2.first_line,@2.first_column);
+        $$ = new Reasignacion(acc2,$3,@2.first_line,@2.first_column)
     }
     | TIPO_DATO id '=' E
     {

@@ -25,6 +25,7 @@ export class Reasignacion extends Sentencia{
     public getTraduccion(entorno:Entorno):string{
         entorno.addComentario("=================== REASIGNACION DE VARIABLE ===================");
         //validar si es constante
+        console.dir(this.acceso)
         if(this.acceso.isConst(entorno)){
             return "";
         }

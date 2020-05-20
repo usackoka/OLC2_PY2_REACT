@@ -392,7 +392,9 @@ case 74:
 break;
 case 75:
 
-        this.$ = new Reasignacion($$[$0-2],$$[$0],_$[$0-1].first_line,_$[$0-1].first_column)
+        let acc2 = new ListAcceso(new Primitivo($$[$0-2],Expresion.State.ID,_$[$0-1].first_line,_$[$0-1].first_column),null,
+                _$[$0-1].first_line,_$[$0-1].first_column);
+        this.$ = new Reasignacion(acc2,$$[$0],_$[$0-1].first_line,_$[$0-1].first_column)
     
 break;
 case 76:

@@ -32,6 +32,7 @@ var Reasignacion = /** @class */ (function (_super) {
     Reasignacion.prototype.getTraduccion = function (entorno) {
         entorno.addComentario("=================== REASIGNACION DE VARIABLE ===================");
         //validar si es constante
+        console.dir(this.acceso);
         if (this.acceso.isConst(entorno)) {
             return "";
         }

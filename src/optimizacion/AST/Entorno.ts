@@ -19,10 +19,13 @@ export class Entorno {
         
         this.listUtilizadas = [];
     }
+
+    public getGraficaBloques():string{
+        return "";
+    }
     
     //variables y métodos --- para optimización de bloques
     public addUtilizadas(variable:string){
-        
         this.listUtilizadas.push(variable)
     }
 

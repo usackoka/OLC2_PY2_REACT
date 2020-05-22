@@ -48,7 +48,7 @@ export class Entorno {
         //busco la función
         for(let nodo of this.principal.nodos){
             if(nodo instanceof Funcion){
-                if(nodo.getNombreTraduccion(this).toString() == id.toString()){
+                if(nodo.getNombreTraduccion(this).toString().toLowerCase() == id.toString()){
                     return nodo.TIPO;
                 }
             }

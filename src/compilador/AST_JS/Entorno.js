@@ -34,7 +34,7 @@ var Entorno = /** @class */ (function () {
         for (var _i = 0, _a = this.principal.nodos; _i < _a.length; _i++) {
             var nodo = _a[_i];
             if (nodo instanceof Funcion_1.Funcion) {
-                if (nodo.getNombreTraduccion(this).toString() == id.toString()) {
+                if (nodo.getNombreTraduccion(this).toString().toLowerCase() == id.toString()) {
                     return nodo.TIPO;
                 }
             }

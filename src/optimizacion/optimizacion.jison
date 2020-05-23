@@ -171,7 +171,7 @@ LIST_VAR:  LIST_VAR ',' id
     }
     | LIST_VAR ',' id '=' CONSTANTE
     {
-        $$ = $1+","+$3+" = "+$5;
+        $$ = $1+","+$3+" = "+$5.getVal0();
     }
     | id
     {
@@ -179,7 +179,7 @@ LIST_VAR:  LIST_VAR ',' id
     }
     | id '=' CONSTANTE
     {
-        $$ = $1+" = "+$3;
+        $$ = $1+" = "+$3.getVal0();
     }
 ;
 

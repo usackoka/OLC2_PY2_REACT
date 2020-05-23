@@ -15,4 +15,6 @@ export abstract class Nodo {
 
     public abstract getBloque(entorno:Entorno): string;
 
+    public abstract getBloqueGraf(entorno:Entorno): string;
+
 }

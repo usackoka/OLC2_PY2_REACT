@@ -12,7 +12,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var Nodo_1 = require("./Nodo");
 var Aritmetica = /** @class */ (function (_super) {
     __extends(Aritmetica, _super);
@@ -100,6 +100,9 @@ var Aritmetica = /** @class */ (function (_super) {
         return this.valor1.getBloque(entorno) + this.operador + this.valor2.getBloque(entorno);
     };
     ;
+    Aritmetica.prototype.getBloqueGraf = function (entorno) {
+        return this.valor1.getBloqueGraf(entorno) + this.operador + this.valor2.getBloqueGraf(entorno);
+    };
     return Aritmetica;
 }(Nodo_1.Nodo));
 exports.Aritmetica = Aritmetica;

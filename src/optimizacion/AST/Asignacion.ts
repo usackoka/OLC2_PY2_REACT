@@ -1,5 +1,6 @@
 import { Nodo } from "./Nodo";
 import { Entorno } from "./Entorno";
+import { Primitivo } from './Primitivo';
 
 export class Asignacion extends Nodo {
 
@@ -14,11 +15,33 @@ export class Asignacion extends Nodo {
 
     public getMirrilla(entorno:Entorno): string{
         let subOpt = this.expresion.getMirrilla(entorno)
+
+        //esto lo quitaria
         if(this.direccion === subOpt){
             entorno.addOptimizacion({regla:this.getEquivalente(this.expresion.optimizacionRealizada),
                 fila:this.fila,columna:this.columna})
             return "";
         }
+
+
+        //Regla 1
+            if (this.expresion instanceof (Primitivo)){
+                let exp1:Primitivo = <Primitivo> this.expresion;
+                if (exp1.TIPO==Primitivo.TYPE.ID) {
+                    if (entorno.getFirstRuleBuscarId(this.direccion,exp1.value.toString().toLowerCase())){
+                        entorno.addOptimizacion({regla:1,
+                            fila:this.fila,columna:this.columna})
+                        return "";
+    
+                    }else {
+                        entorno.addFirsRuleId(this.direccion,exp1.value.toString().toLowerCase());
+                        return this.direccion+" = "+subOpt + ';';
+                    }
+                }
+            }
+            //quitar de la lista regla1
+            entorno.removeFirsRuleId(this.direccion.toLocaleLowerCase());
+        
 
         return this.direccion+" = "+subOpt + ';';
     };
@@ -43,5 +66,10 @@ export class Asignacion extends Nodo {
 
         return this.direccion+" = "+subOpt + ';';
     };
+
+    public getBloqueGraf(entorno: Entorno): string {
+        let subOpt = this.expresion.getBloqueGraf(entorno)
+        return this.direccion+" = "+subOpt + ';';
+    }
     
 }

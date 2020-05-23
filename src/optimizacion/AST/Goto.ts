@@ -11,11 +11,16 @@ export class Goto extends Nodo {
     }
 
     public getMirrilla(entorno:Entorno): string{
+        entorno.setUltimaEtqRegla2(this.etiqueta.toLowerCase());
         return "goto "+this.etiqueta+";";
     };
 
     public getBloque(entorno:Entorno): string{
         return "goto "+this.etiqueta+";";
     };
+    public getBloqueGraf(entorno: Entorno): string {
+        return "goto "+this.etiqueta+";";
+    }
+    
     
 }

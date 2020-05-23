@@ -12,7 +12,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var Nodo_1 = require("./Nodo");
 var NoOptimizados = /** @class */ (function (_super) {
     __extends(NoOptimizados, _super);
@@ -29,6 +29,9 @@ var NoOptimizados = /** @class */ (function (_super) {
         return this.cadena;
     };
     ;
+    NoOptimizados.prototype.getBloqueGraf = function (entorno) {
+        return this.cadena.replace(/\"/g, "\\\"");
+    };
     return NoOptimizados;
 }(Nodo_1.Nodo));
 exports.NoOptimizados = NoOptimizados;

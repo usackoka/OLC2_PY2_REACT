@@ -12,7 +12,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var Nodo_1 = require("./Nodo");
 var ETQ = /** @class */ (function (_super) {
     __extends(ETQ, _super);
@@ -22,6 +22,11 @@ var ETQ = /** @class */ (function (_super) {
         return _this;
     }
     ETQ.prototype.getMirrilla = function (entorno) {
+        entorno.ClearListFirstRuleId();
+        if (this.etiqueta.toLowerCase() == entorno.idEtqRule2) {
+            entorno.addOptimizacion({ regla: 2,
+                fila: this.fila, columna: this.columna });
+        }
         return this.etiqueta + ":";
     };
     ;
@@ -29,6 +34,9 @@ var ETQ = /** @class */ (function (_super) {
         return this.etiqueta + ":";
     };
     ;
+    ETQ.prototype.getBloqueGraf = function (entorno) {
+        return this.etiqueta + ":";
+    };
     return ETQ;
 }(Nodo_1.Nodo));
 exports.ETQ = ETQ;

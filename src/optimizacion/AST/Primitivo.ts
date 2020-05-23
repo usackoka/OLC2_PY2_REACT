@@ -2,6 +2,10 @@ import { Entorno } from "./Entorno";
 import { Nodo } from "./Nodo";
 
 export class Primitivo extends Nodo {
+    isNumeric1():boolean {
+        if (this.TIPO==Primitivo.TYPE.NUMBER)return true;
+        else return false;
+    }
 
     value:Object;
     TIPO:Primitivo.TYPE;
@@ -19,6 +23,13 @@ export class Primitivo extends Nodo {
     public getBloque(entorno:Entorno): string{
         return this.value.toString();
     };
+    public getBloqueGraf(entorno: Entorno): string {
+        return this.value.toString();
+    }
+
+    public getVal0(): string {
+        return this.value.toString();
+    }
 
     public isNumeric():boolean{
         if (this.value === parseInt(this.value.toString(), 10))

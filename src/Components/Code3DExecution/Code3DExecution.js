@@ -36,6 +36,17 @@ const Index = (props) => {
     }
   ];
 
+  const graficarBloques= async e => {
+    if(!txtEntrada) return null;
+    
+    var optimizador = require("../../optimizacion/optimizacion")
+    let entorno = optimizador.parser.parse(txtEntrada.getValue())
+    let salida = entorno.getGraficaBloques();
+
+    if(!txtSalida) return null;
+    setTxtSalida({value:salida});
+  };
+
   const clickEjecutar = async e => {
     console.log("Ejecutando optimizacion")
     if(!txtEntrada) return null;
@@ -73,6 +84,11 @@ const Index = (props) => {
         <Col xs="auto">
           <Button variant="success" fixed="bottom" onClick={clickEjecutar2}>
             {"Optimizar Bloques"}
+          </Button>
+        </Col>
+        <Col xs="auto">
+          <Button variant="success" fixed="bottom" onClick={graficarBloques}>
+            {"Graficar Bloques"}
           </Button>
         </Col>
       </Row>

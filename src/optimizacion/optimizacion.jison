@@ -147,7 +147,8 @@ GLOBAL :  DEC_VAR ';'
     }
     | print '(' string ',' CONSTANTE ')' ';'
     {
-        $$ = new NoOptimizados("print("+$3+","+$5.value.toString()+");")
+        $$ = new NoOptimizados("print("+$3+","+$5.value.toString()+");");
+        $$.setValueExtra($5);
     }
 ;
 

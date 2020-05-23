@@ -144,7 +144,7 @@ break;
 case 12:
 
         this.$ = new NoOptimizados("print("+$$[$0-4]+","+$$[$0-2].value.toString()+");")
-    
+        this.$.setValueExtra($$[$0-2]);
 break;
 case 13:
 

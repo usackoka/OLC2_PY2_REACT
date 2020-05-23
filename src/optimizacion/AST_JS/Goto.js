@@ -33,6 +33,9 @@ var Goto = /** @class */ (function (_super) {
     Goto.prototype.getBloqueGraf = function (entorno) {
         return "goto " + this.etiqueta + ";";
     };
+    Goto.prototype.getNormal = function (entorno) {
+        return "goto " + this.etiqueta + ";";
+    };
     return Goto;
 }(Nodo_1.Nodo));
 exports.Goto = Goto;

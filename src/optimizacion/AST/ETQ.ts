@@ -27,5 +27,8 @@ export class ETQ extends Nodo {
     public getBloqueGraf(entorno: Entorno): string {
         return this.etiqueta+":";
     }
+    public getNormal(entorno: Entorno): string {
+        return this.etiqueta+":";
+    }
     
 }

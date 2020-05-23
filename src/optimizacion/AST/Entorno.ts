@@ -1,4 +1,4 @@
-import { Nodo } from "./Nodo";
+import { Nodo, lista_temporales_Usados } from "./Nodo";
 import { Asignacion } from './Asignacion'
 import { Goto } from "./Goto";
 import { ETQ } from "./ETQ";
@@ -39,7 +39,7 @@ export class Entorno {
         let bool_cabecera =true;
         let contOb = 0;
         let lista_bloques:Array<NodoBloque> = [];
-        let lastBLoque:NodoBloque;
+        let lastBLoque:NodoBloque = new NodoBloque("","");
         let enlaces_extra="";
 
         let lista_nodo_enlaces:Array<{dir1:string,dir2:string}> = [];
@@ -206,30 +206,25 @@ export class Entorno {
 
     
     public getBloques(){
-        let nuevalistaNodos:Array<Nodo> = []
+        this.optimizacion="";
+                //primer recorrido para guardar los usados de lado derecho
+                this.instrucciones.forEach(nodo=>{
+                    nodo.getBloque(this); 
+                }) 
+        
+                //busco todos los que cumplan con la regla 23
+                this.instrucciones.forEach(nodo=>{
+                    if(nodo instanceof Asignacion){
+                        //pregunto si la direccion está entre las que se usaron
+                        if(lista_temporales_Usados.includes(nodo.direccion)){
+                            this.addOptimizacion({regla:23,fila:nodo.fila,columna:nodo.columna})
+                            
+                        }else   this.optimizacion += nodo.getNormal(this)+"\n";
+                    }else   this.optimizacion += nodo.getNormal(this)+"\n";
+                  
+                })
 
-        //primer recorrido para guardar los usados de lado derecho
-        this.instrucciones.forEach(nodo=>{
-            nodo.getBloque(this)
-        })
-
-        //busco todos los que cumplan con la regla 23
-        this.instrucciones.forEach(nodo=>{
-            if(nodo instanceof Asignacion){
-                //pregunto si la direccion está entre las que se usaron
-                if(!this.listUtilizadas.includes(nodo.direccion)){
-                    this.addOptimizacion({regla:23,fila:nodo.fila,columna:nodo.columna})
-                    return;
-                }
-            }
-            nuevalistaNodos.push(nodo)
-        })
-
-        nuevalistaNodos.forEach(nodo=>{
-            this.optimizacion += nodo.getBloque(this)+"\n";
-        })
-
-        return this.optimizacion
+        return this.optimizacion;
     }
 
 

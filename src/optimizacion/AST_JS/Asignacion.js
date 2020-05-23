@@ -12,8 +12,9 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var Nodo_1 = require("./Nodo");
+var Primitivo_1 = require("./Primitivo");
 var Asignacion = /** @class */ (function (_super) {
     __extends(Asignacion, _super);
     function Asignacion(direccion, expresion, fila, columna) {
@@ -24,11 +25,29 @@ var Asignacion = /** @class */ (function (_super) {
     }
     Asignacion.prototype.getMirrilla = function (entorno) {
         var subOpt = this.expresion.getMirrilla(entorno);
+        //esto lo quitaria
         if (this.direccion === subOpt) {
             entorno.addOptimizacion({ regla: this.getEquivalente(this.expresion.optimizacionRealizada),
                 fila: this.fila, columna: this.columna });
             return "";
         }
+        //Regla 1
+        if (this.expresion instanceof (Primitivo_1.Primitivo)) {
+            var exp1 = this.expresion;
+            if (exp1.TIPO == Primitivo_1.Primitivo.TYPE.ID) {
+                if (entorno.getFirstRuleBuscarId(this.direccion, exp1.value.toString().toLowerCase())) {
+                    entorno.addOptimizacion({ regla: 1,
+                        fila: this.fila, columna: this.columna });
+                    return "";
+                }
+                else {
+                    entorno.addFirsRuleId(this.direccion, exp1.value.toString().toLowerCase());
+                    return this.direccion + " = " + subOpt + ';';
+                }
+            }
+        }
+        //quitar de la lista regla1
+        entorno.removeFirsRuleId(this.direccion.toLocaleLowerCase());
         return this.direccion + " = " + subOpt + ';';
     };
     ;
@@ -51,6 +70,10 @@ var Asignacion = /** @class */ (function (_super) {
         return this.direccion + " = " + subOpt + ';';
     };
     ;
+    Asignacion.prototype.getBloqueGraf = function (entorno) {
+        var subOpt = this.expresion.getBloqueGraf(entorno);
+        return this.direccion + " = " + subOpt + ';';
+    };
     return Asignacion;
 }(Nodo_1.Nodo));
 exports.Asignacion = Asignacion;

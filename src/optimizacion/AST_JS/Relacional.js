@@ -12,7 +12,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var Nodo_1 = require("./Nodo");
 var Relacional = /** @class */ (function (_super) {
     __extends(Relacional, _super);
@@ -23,6 +23,28 @@ var Relacional = /** @class */ (function (_super) {
         _this.operador = operador;
         return _this;
     }
+    Relacional.prototype.isTrue = function (Entorno1) {
+        if (this.valor1.isNumeric1() && this.valor2.isNumeric1()) {
+            var v1 = this.valor1.getMirrilla(Entorno1);
+            var v2 = this.valor2.getMirrilla(Entorno1);
+            if (v1 == v2 && this.operador == "==")
+                return true;
+            else if (v1 != v2 && this.operador == "<>")
+                return true;
+        }
+        return false;
+    };
+    Relacional.prototype.isFalse = function (Entorno1) {
+        if (this.valor1.isNumeric1() && this.valor2.isNumeric1()) {
+            var v1 = this.valor1.getMirrilla(Entorno1);
+            var v2 = this.valor2.getMirrilla(Entorno1);
+            if (v1 == v2 && this.operador == "<>")
+                return true;
+            else if (v1 != v2 && this.operador == "==")
+                return true;
+        }
+        return false;
+    };
     Relacional.prototype.getMirrilla = function (entorno) {
         return this.valor1.getMirrilla(entorno) + this.operador + this.valor2.getMirrilla(entorno);
     };
@@ -37,6 +59,9 @@ var Relacional = /** @class */ (function (_super) {
         return this.valor1.getBloque(entorno) + this.operador + this.valor2.getBloque(entorno);
     };
     ;
+    Relacional.prototype.getBloqueGraf = function (entorno) {
+        return this.valor1.getMirrilla(entorno) + this.operador + this.valor2.getMirrilla(entorno);
+    };
     return Relacional;
 }(Nodo_1.Nodo));
 exports.Relacional = Relacional;

@@ -12,7 +12,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var Nodo_1 = require("./Nodo");
 var Primitivo = /** @class */ (function (_super) {
     __extends(Primitivo, _super);
@@ -22,6 +22,12 @@ var Primitivo = /** @class */ (function (_super) {
         _this.TIPO = TIPO;
         return _this;
     }
+    Primitivo.prototype.isNumeric1 = function () {
+        if (this.TIPO == Primitivo.TYPE.NUMBER)
+            return true;
+        else
+            return false;
+    };
     Primitivo.prototype.getMirrilla = function (entorno) {
         return this.value.toString();
     };
@@ -30,6 +36,12 @@ var Primitivo = /** @class */ (function (_super) {
         return this.value.toString();
     };
     ;
+    Primitivo.prototype.getBloqueGraf = function (entorno) {
+        return this.value.toString();
+    };
+    Primitivo.prototype.getVal0 = function () {
+        return this.value.toString();
+    };
     Primitivo.prototype.isNumeric = function () {
         if (this.value === parseInt(this.value.toString(), 10))
             return true;

@@ -12,7 +12,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var Nodo_1 = require("./Nodo");
 var If = /** @class */ (function (_super) {
     __extends(If, _super);
@@ -22,6 +22,9 @@ var If = /** @class */ (function (_super) {
         _this.etiqueta = etiqueta;
         return _this;
     }
+    If.prototype.getGotoOnly = function () {
+        return "goto " + this.etiqueta + ";";
+    };
     If.prototype.getMirrilla = function (entorno) {
         return "if (" + this.condicion.getMirrilla(entorno) + " ) goto " + this.etiqueta + ";";
     };
@@ -30,6 +33,9 @@ var If = /** @class */ (function (_super) {
         return "if (" + this.condicion.getMirrilla(entorno) + " ) goto " + this.etiqueta + ";";
     };
     ;
+    If.prototype.getBloqueGraf = function (entorno) {
+        return "if (" + this.condicion.getBloqueGraf(entorno) + " ) goto " + this.etiqueta + ";";
+    };
     return If;
 }(Nodo_1.Nodo));
 exports.If = If;

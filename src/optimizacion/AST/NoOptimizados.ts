@@ -17,5 +17,7 @@ export class NoOptimizados extends Nodo {
     public getBloque(entorno:Entorno): string{
         return this.cadena;
     };
-    
+    public getBloqueGraf(entorno: Entorno): string {
+        return this.cadena.replace(/\"/g, "\\\"");
+    }
 }

@@ -3,6 +3,8 @@ import { Entorno } from "./Entorno";
 import { Primitivo } from "./Primitivo";
 
 export class Relacional extends Nodo {
+    
+    
 
     valor1: Primitivo;
     valor2: Primitivo;
@@ -15,6 +17,24 @@ export class Relacional extends Nodo {
         this.operador = operador;
     }
 
+    isTrue(Entorno1:Entorno):boolean {
+        if (this.valor1.isNumeric1()&& this.valor2.isNumeric1()){
+            let v1= this.valor1.getMirrilla(Entorno1);
+            let v2= this.valor2.getMirrilla(Entorno1);
+            if (v1==v2 && this.operador=="==")return true
+            else if (v1!=v2 && this.operador=="<>")return true
+        }
+        return false;
+    }
+    isFalse(Entorno1:Entorno):boolean {
+        if (this.valor1.isNumeric1()&& this.valor2.isNumeric1()){
+            let v1= this.valor1.getMirrilla(Entorno1);
+            let v2= this.valor2.getMirrilla(Entorno1);
+            if (v1==v2 && this.operador=="<>")return true
+            else if (v1!=v2 && this.operador=="==")return true
+        }
+        return false;
+    }
     public getMirrilla(entorno:Entorno): string{
         return this.valor1.getMirrilla(entorno)+this.operador+this.valor2.getMirrilla(entorno);
     };
@@ -27,5 +47,9 @@ export class Relacional extends Nodo {
         
         return this.valor1.getBloque(entorno)+this.operador+this.valor2.getBloque(entorno);
     };
+
+    public getBloqueGraf(entorno: Entorno): string {
+        return this.valor1.getMirrilla(entorno)+this.operador+this.valor2.getMirrilla(entorno);
+    }
     
 }

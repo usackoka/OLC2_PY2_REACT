@@ -12,7 +12,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var Nodo_1 = require("./Nodo");
 var Goto = /** @class */ (function (_super) {
     __extends(Goto, _super);
@@ -22,6 +22,7 @@ var Goto = /** @class */ (function (_super) {
         return _this;
     }
     Goto.prototype.getMirrilla = function (entorno) {
+        entorno.setUltimaEtqRegla2(this.etiqueta.toLowerCase());
         return "goto " + this.etiqueta + ";";
     };
     ;
@@ -29,6 +30,9 @@ var Goto = /** @class */ (function (_super) {
         return "goto " + this.etiqueta + ";";
     };
     ;
+    Goto.prototype.getBloqueGraf = function (entorno) {
+        return "goto " + this.etiqueta + ";";
+    };
     return Goto;
 }(Nodo_1.Nodo));
 exports.Goto = Goto;

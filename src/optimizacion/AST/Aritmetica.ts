@@ -3,6 +3,7 @@ import { Entorno } from "./Entorno";
 import { Primitivo } from "./Primitivo";
 
 export class Aritmetica extends Nodo {
+   
 
     valor1: Primitivo;
     valor2: Primitivo;
@@ -82,5 +83,9 @@ export class Aritmetica extends Nodo {
 
         return this.valor1.getBloque(entorno)+this.operador+this.valor2.getBloque(entorno);
     };
+
+    public getBloqueGraf(entorno: Entorno): string {
+        return this.valor1.getBloqueGraf(entorno)+this.operador+this.valor2.getBloqueGraf(entorno);
+    }
     
 }

@@ -25,6 +25,12 @@ export class Casteo extends Expresion{
         let tipoExpresion:Object = this.expresion.getTipo(entorno);
 
         switch(this.TIPO){
+            case Expresion.State.CHAR:
+                switch(tipoExpresion){
+                    case Expresion.State.DOUBLE:
+                    case Expresion.State.INTEGER:
+                        return trad;
+                }
             case Expresion.State.STRING:
                 switch(tipoExpresion){
                     case Expresion.State.CHAR:

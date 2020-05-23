@@ -34,6 +34,12 @@ var Casteo = /** @class */ (function (_super) {
         var trad = this.expresion.getTraduccion(entorno);
         var tipoExpresion = this.expresion.getTipo(entorno);
         switch (this.TIPO) {
+            case Expresion_1.Expresion.State.CHAR:
+                switch (tipoExpresion) {
+                    case Expresion_1.Expresion.State.DOUBLE:
+                    case Expresion_1.Expresion.State.INTEGER:
+                        return trad;
+                }
             case Expresion_1.Expresion.State.STRING:
                 switch (tipoExpresion) {
                     case Expresion_1.Expresion.State.CHAR:

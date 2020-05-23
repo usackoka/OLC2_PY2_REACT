@@ -45,6 +45,10 @@ var Declaracion = /** @class */ (function (_super) {
             if (_this.expresion != null) {
                 tmpValor = _this.expresion.getTraduccion(entorno);
                 tipoValor = _this.expresion.getTipo(entorno);
+                //valido casteo implícito
+                if (tipoValor === Expresion_1.Expresion.State.CHAR && (_this.TIPO === Expresion_1.Expresion.State.INTEGER || _this.TIPO === Expresion_1.Expresion.State.DOUBLE)) {
+                    tipoValor = _this.TIPO;
+                }
             }
             else {
                 tmpValor = entorno.getTemp();

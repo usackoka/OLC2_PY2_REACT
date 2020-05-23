@@ -42,6 +42,10 @@ export class Declaracion extends Sentencia{
             {
                 tmpValor = this.expresion.getTraduccion(entorno);
                 tipoValor = this.expresion.getTipo(entorno)
+                //valido casteo implícito
+                if(tipoValor === Expresion.State.CHAR && (this.TIPO === Expresion.State.INTEGER||this.TIPO === Expresion.State.DOUBLE)){
+                    tipoValor = this.TIPO;
+                }
             }
             else{
                 tmpValor = entorno.getTemp();

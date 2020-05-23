@@ -35,12 +35,15 @@ export class Asignacion extends Nodo {
     
                     }else {
                         entorno.addFirsRuleId(this.direccion,exp1.value.toString().toLowerCase());
+                        entorno.removeFirsRuleId1(this.direccion.toLocaleLowerCase());
                         return this.direccion+" = "+subOpt + ';';
                     }
                 }
+
             }
             //quitar de la lista regla1
             entorno.removeFirsRuleId(this.direccion.toLocaleLowerCase());
+            entorno.removeFirsRuleId1(this.direccion.toLocaleLowerCase());
         
 
         return this.direccion+" = "+subOpt + ';';

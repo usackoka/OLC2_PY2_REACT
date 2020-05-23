@@ -226,6 +226,9 @@ var Entorno = /** @class */ (function () {
     Entorno.prototype.removeFirsRuleId = function (v1) {
         this.listaFirsRuleId = this.listaFirsRuleId.filter(function (value, index, arr) { return value.id1 != v1; });
     };
+    Entorno.prototype.removeFirsRuleId1 = function (v1) {
+        this.listaFirsRuleId = this.listaFirsRuleId.filter(function (value, index, arr) { return value.id2 != v1; });
+    };
     Entorno.prototype.setUltimaEtqRegla2 = function (etiqueta) {
         this.idEtqRule2 = etiqueta;
     };

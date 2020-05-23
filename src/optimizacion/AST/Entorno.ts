@@ -7,6 +7,7 @@ import { NodoBloque, lista_nodos_Bloque_Guardados } from "./NodoBloque";
 import { NoOptimizados } from "./NoOptimizados";
 
 export class Entorno {
+   
     
  
 
@@ -256,6 +257,11 @@ export class Entorno {
     removeFirsRuleId(v1: string) {
 
         this.listaFirsRuleId= this.listaFirsRuleId.filter(function(value, index, arr){ return value.id1 != v1;});
+
+    }
+
+    removeFirsRuleId1(v1: string) {
+        this.listaFirsRuleId= this.listaFirsRuleId.filter(function(value, index, arr){ return value.id2 != v1;});
 
     }
 

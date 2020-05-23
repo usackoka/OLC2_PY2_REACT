@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var Nodo_1 = require("./Nodo");
 var Asignacion_1 = require("./Asignacion");
 var Goto_1 = require("./Goto");
 var ETQ_1 = require("./ETQ");
@@ -24,7 +25,7 @@ var Entorno = /** @class */ (function () {
         var bool_cabecera = true;
         var contOb = 0;
         var lista_bloques = [];
-        var lastBLoque;
+        var lastBLoque = new NodoBloque_1.NodoBloque("", "");
         var enlaces_extra = "";
         var lista_nodo_enlaces = [];
         for (var ii = 0; ii < this.instrucciones.length; ii++) {
@@ -186,7 +187,7 @@ var Entorno = /** @class */ (function () {
     };
     Entorno.prototype.getBloques = function () {
         var _this = this;
-        var nuevalistaNodos = [];
+        this.optimizacion = "";
         //primer recorrido para guardar los usados de lado derecho
         this.instrucciones.forEach(function (nodo) {
             nodo.getBloque(_this);
@@ -195,15 +196,14 @@ var Entorno = /** @class */ (function () {
         this.instrucciones.forEach(function (nodo) {
             if (nodo instanceof Asignacion_1.Asignacion) {
                 //pregunto si la direccion está entre las que se usaron
-                if (!_this.listUtilizadas.includes(nodo.direccion)) {
+                if (Nodo_1.lista_temporales_Usados.includes(nodo.direccion)) {
                     _this.addOptimizacion({ regla: 23, fila: nodo.fila, columna: nodo.columna });
-                    return;
                 }
+                else
+                    _this.optimizacion += nodo.getNormal(_this) + "\n";
             }
-            nuevalistaNodos.push(nodo);
-        });
-        nuevalistaNodos.forEach(function (nodo) {
-            _this.optimizacion += nodo.getBloque(_this) + "\n";
+            else
+                _this.optimizacion += nodo.getNormal(_this) + "\n";
         });
         return this.optimizacion;
     };

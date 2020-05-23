@@ -1,4 +1,4 @@
-import { Nodo } from "./Nodo";
+import { Nodo, lista_temporales_Usados } from "./Nodo";
 import { Entorno } from "./Entorno";
 import { Primitivo } from './Primitivo';
 
@@ -66,12 +66,17 @@ export class Asignacion extends Nodo {
 
     public getBloque(entorno:Entorno): string{
         let subOpt = this.expresion.getBloque(entorno)
-
+        if (!(this.direccion.startsWith("Heap")||this.direccion.startsWith("Stack")))
+            lista_temporales_Usados.push(this.direccion);
         return this.direccion+" = "+subOpt + ';';
     };
 
     public getBloqueGraf(entorno: Entorno): string {
         let subOpt = this.expresion.getBloqueGraf(entorno)
+        return this.direccion+" = "+subOpt + ';';
+    }
+    public getNormal(entorno: Entorno): string {
+        let subOpt = this.expresion.getNormal(entorno)
         return this.direccion+" = "+subOpt + ';';
     }
     

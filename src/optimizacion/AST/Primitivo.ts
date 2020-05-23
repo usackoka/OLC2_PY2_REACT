@@ -21,9 +21,14 @@ export class Primitivo extends Nodo {
     };
 
     public getBloque(entorno:Entorno): string{
+        if (this.TIPO==Primitivo.TYPE.ID)Nodo.popTemporal(this.value.toString().toLowerCase());
         return this.value.toString();
     };
     public getBloqueGraf(entorno: Entorno): string {
+        return this.value.toString();
+    }
+
+    public getNormal(entorno: Entorno): string {
         return this.value.toString();
     }
 

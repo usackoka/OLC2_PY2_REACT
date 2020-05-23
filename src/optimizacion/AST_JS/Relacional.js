@@ -14,6 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var Nodo_1 = require("./Nodo");
+var Primitivo_1 = require("./Primitivo");
 var Relacional = /** @class */ (function (_super) {
     __extends(Relacional, _super);
     function Relacional(valor1, valor2, operador, fila, columna) {
@@ -50,17 +51,18 @@ var Relacional = /** @class */ (function (_super) {
     };
     ;
     Relacional.prototype.getBloque = function (entorno) {
-        //agrego las variables utilizadas a una lista, para luego buscar si no se encuentra en ella
-        //y eliminar las no usadas
-        if (!this.valor1.isNumeric())
-            entorno.addUtilizadas(this.valor1.getBloque(entorno));
-        if (!this.valor2.isNumeric())
-            entorno.addUtilizadas(this.valor2.getBloque(entorno));
-        return this.valor1.getBloque(entorno) + this.operador + this.valor2.getBloque(entorno);
+        if (this.valor1.TIPO == Primitivo_1.Primitivo.TYPE.ID)
+            Nodo_1.Nodo.popTemporal(this.valor1.getMirrilla(entorno).toLowerCase());
+        if (this.valor2.TIPO == Primitivo_1.Primitivo.TYPE.ID)
+            Nodo_1.Nodo.popTemporal(this.valor2.getMirrilla(entorno).toLowerCase());
+        return this.valor1.getMirrilla(entorno) + this.operador + this.valor2.getMirrilla(entorno);
     };
     ;
     Relacional.prototype.getBloqueGraf = function (entorno) {
         return this.valor1.getMirrilla(entorno) + this.operador + this.valor2.getMirrilla(entorno);
+    };
+    Relacional.prototype.getNormal = function (entorno) {
+        return this.valor1.getNormal(entorno) + this.operador + this.valor2.getNormal(entorno);
     };
     return Relacional;
 }(Nodo_1.Nodo));

@@ -69,8 +69,12 @@ const Index = (props) => {
     let salida = entorno.getBloques();
     setValoresSimbolos(entorno.optimizaciones)
 
+    let entorno1 = optimizador.parser.parse(salida)
+    let salida1 = entorno1.getBloques();
+    setValoresSimbolos(entorno1.optimizaciones)
+
     if(!txtSalida) return null;
-    setTxtSalida({value:salida});
+    setTxtSalida({value:salida1});
   };
 
   return (

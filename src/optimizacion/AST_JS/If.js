@@ -36,6 +36,9 @@ var If = /** @class */ (function (_super) {
     If.prototype.getBloqueGraf = function (entorno) {
         return "if (" + this.condicion.getBloqueGraf(entorno) + " ) goto " + this.etiqueta + ";";
     };
+    If.prototype.getNormal = function (entorno) {
+        return "if (" + this.condicion.getNormal(entorno) + " ) goto " + this.etiqueta + ";";
+    };
     return If;
 }(Nodo_1.Nodo));
 exports.If = If;

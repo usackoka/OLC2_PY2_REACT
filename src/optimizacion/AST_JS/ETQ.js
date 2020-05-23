@@ -37,6 +37,9 @@ var ETQ = /** @class */ (function (_super) {
     ETQ.prototype.getBloqueGraf = function (entorno) {
         return this.etiqueta + ":";
     };
+    ETQ.prototype.getNormal = function (entorno) {
+        return this.etiqueta + ":";
+    };
     return ETQ;
 }(Nodo_1.Nodo));
 exports.ETQ = ETQ;

@@ -27,5 +27,9 @@ export class If extends Nodo {
     public getBloqueGraf(entorno: Entorno): string {
         return "if ("+this.condicion.getBloqueGraf(entorno)+" ) goto "+this.etiqueta+";";
     }
+
+    public getNormal(entorno: Entorno): string {
+        return "if ("+this.condicion.getNormal(entorno)+" ) goto "+this.etiqueta+";";
+    }
     
 }

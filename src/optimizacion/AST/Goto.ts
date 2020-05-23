@@ -21,6 +21,10 @@ export class Goto extends Nodo {
     public getBloqueGraf(entorno: Entorno): string {
         return "goto "+this.etiqueta+";";
     }
+
+    public getNormal(entorno: Entorno): string {
+        return "goto "+this.etiqueta+";";
+    }
     
     
 }

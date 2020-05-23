@@ -33,10 +33,15 @@ var Primitivo = /** @class */ (function (_super) {
     };
     ;
     Primitivo.prototype.getBloque = function (entorno) {
+        if (this.TIPO == Primitivo.TYPE.ID)
+            Nodo_1.Nodo.popTemporal(this.value.toString().toLowerCase());
         return this.value.toString();
     };
     ;
     Primitivo.prototype.getBloqueGraf = function (entorno) {
+        return this.value.toString();
+    };
+    Primitivo.prototype.getNormal = function (entorno) {
         return this.value.toString();
     };
     Primitivo.prototype.getVal0 = function () {

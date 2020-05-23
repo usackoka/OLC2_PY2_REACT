@@ -19,6 +19,7 @@ var NoOptimizados = /** @class */ (function (_super) {
     function NoOptimizados(cadena) {
         var _this = _super.call(this, 0, 0) || this;
         _this.cadena = cadena;
+        _this.valExtra = null;
         return _this;
     }
     NoOptimizados.prototype.getMirrilla = function (entorno) {
@@ -26,12 +27,22 @@ var NoOptimizados = /** @class */ (function (_super) {
     };
     ;
     NoOptimizados.prototype.getBloque = function (entorno) {
+        if (this.valExtra != null) {
+            Nodo_1.Nodo.popTemporal(this.valExtra.value.toString().toLowerCase());
+        }
         return this.cadena;
     };
     ;
     NoOptimizados.prototype.getBloqueGraf = function (entorno) {
         return this.cadena.replace(/\"/g, "\\\"");
     };
+    NoOptimizados.prototype.getNormal = function (entorno) {
+        return this.cadena;
+    };
+    NoOptimizados.prototype.setValueExtra = function (en) {
+        this.valExtra = en;
+    };
+    ;
     return NoOptimizados;
 }(Nodo_1.Nodo));
 exports.NoOptimizados = NoOptimizados;

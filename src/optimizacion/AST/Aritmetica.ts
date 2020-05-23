@@ -3,7 +3,7 @@ import { Entorno } from "./Entorno";
 import { Primitivo } from "./Primitivo";
 
 export class Aritmetica extends Nodo {
-   
+
 
     valor1: Primitivo;
     valor2: Primitivo;
@@ -75,17 +75,18 @@ export class Aritmetica extends Nodo {
     };
 
     public getBloque(entorno:Entorno): string{
-        //agrego las variables utilizadas a una lista, para luego buscar si no se encuentra en ella
-        //y eliminar las no usadas
-
-        if(!this.valor1.isNumeric()) entorno.addUtilizadas(this.valor1.getBloque(entorno))
-        if(!this.valor2.isNumeric()) entorno.addUtilizadas(this.valor2.getBloque(entorno))
-
-        return this.valor1.getBloque(entorno)+this.operador+this.valor2.getBloque(entorno);
+        if (this.valor1.TIPO==Primitivo.TYPE.ID)Nodo.popTemporal(this.valor1.getMirrilla(entorno).toLowerCase());
+        if (this.valor2.TIPO==Primitivo.TYPE.ID)Nodo.popTemporal(this.valor2.getMirrilla(entorno).toLowerCase());
+        return this.valor1.getMirrilla(entorno)+this.operador+this.valor2.getMirrilla(entorno);
     };
 
     public getBloqueGraf(entorno: Entorno): string {
         return this.valor1.getBloqueGraf(entorno)+this.operador+this.valor2.getBloqueGraf(entorno);
     }
+
+    public getNormal(entorno: Entorno): string {
+        return this.valor1.getNormal(entorno)+this.operador+this.valor2.getNormal(entorno);
+    }
+   
     
 }

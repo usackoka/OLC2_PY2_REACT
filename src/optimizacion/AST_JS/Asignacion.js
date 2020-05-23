@@ -69,11 +69,17 @@ var Asignacion = /** @class */ (function (_super) {
     };
     Asignacion.prototype.getBloque = function (entorno) {
         var subOpt = this.expresion.getBloque(entorno);
+        if (!(this.direccion.startsWith("Heap") || this.direccion.startsWith("Stack")))
+            Nodo_1.lista_temporales_Usados.push(this.direccion);
         return this.direccion + " = " + subOpt + ';';
     };
     ;
     Asignacion.prototype.getBloqueGraf = function (entorno) {
         var subOpt = this.expresion.getBloqueGraf(entorno);
+        return this.direccion + " = " + subOpt + ';';
+    };
+    Asignacion.prototype.getNormal = function (entorno) {
+        var subOpt = this.expresion.getNormal(entorno);
         return this.direccion + " = " + subOpt + ';';
     };
     return Asignacion;
